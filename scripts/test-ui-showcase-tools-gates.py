@@ -34,7 +34,7 @@ def main():
         ("test", False),
         ("test", True),
     ):
-        binary = (proof / f"tools-{mode}").resolve(strict=True)
+        binary = (proof / "build" / f"tools-{mode}").resolve(strict=True)
         record = None
         try:
             # Use the already freshly linked physical kit binary. Only the

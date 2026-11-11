@@ -13,12 +13,12 @@
 | Files / роль | Источник/version | License/notices и pin |
 |---|---|---|
 | resources/font.ttf, fallback.ttf; runtime только если явно выбраны | Nerd Fonts v3.5.1, DejaVu2.37; изменённые семейства Slyx UI / Slyx Rich Fallback | DejaVu-LICENSE.txt + Nerd-Fonts-NOTICE.txt + Octicons-LICENSE.txt в resources; embedded license names сохранены |
-| primary font | subset по preparation/assets/fonts/source.json, icons.json и preparation/assets/text | SHA256 `79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf` |
+| primary font | subset по preparation/assets/fonts/source.json, icons.json и scalar-only preparation/assets/text/codepoints.txt | SHA256 `79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf` |
 | fallback font | explicit U+0020/0301/03B1/03A9/03AC/221E, тот же source | SHA256 `8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf` |
 | primary icon oct-play U+F500 | Octicons18.3.0, только этот glyph; не весь Nerd Fonts набор | MIT Octicons-LICENSE + Nerd-Fonts-NOTICE; не общий MIT code scope |
 | kit/unicode_graphemes/data и tables_generated.odin; optional tests/preparation, generated tables runtime | Unicode15.1.0, UAX29rev43; https://www.unicode.org/Public/15.1.0/ucd/ | Unicode License v3, полный kit/unicode_graphemes/data/LICENSE.txt; original headers сохранены, tables derived, не MIT |
 | resources/atlas/a,b/manifest.json,geometry.png; selected runtime/demo | existing synthetic geometry A/B, manifest1 | полный resources/notices/atlas-LICENSE (CC0-1.0), не relicense fonts/codecs/code |
-| preparation/assets/text и font metadata; preparation/test | точные собственные subset inputs, не обязательные строки обычной игры | MIT; копии source, не новая maintained версия |
+| preparation/assets/text/codepoints.txt и font metadata; preparation/test | точный прежний scalar set (168 codepoints), без игровых фраз; воспроизводит прежние bytes | MIT; deterministic preparation input, не runtime text catalog |
 | preparation/scripts и Unicode generate.py; preparation | existing deterministic scripts, не runtime/build dependency | MIT helpers; Unicode output/data отдельно Unicode-v3 |
 | consumer/atlas_catalog/loader; selected showcase build/runtime | существующий consumer loader, не UI core PNG parser | MIT source + внешние libpng/zlib notices ниже |
 
@@ -107,8 +107,9 @@ DejaVuSansMNerdFontMono-Regular.ttf SHA256
 FontTools wheel SHA256
 `4304f03ed7f4ba000a8dcc941ad854bfa52e2f3b6112b8f099b6f431cf98e701`.
 Для явного regeneration опустите `--check`; output —
-`preparation/resources/font.ttf`/`slyx-rich-fallback.ttf` в выбранной копии
-kit. Просмотрите diff/notices и лишь затем явно замените runtime font. Ни check,
+`resources/font.ttf`/`resources/fallback.ttf` в выбранной authoring-копии
+kit. Это явная замена runtime resources, не дополнительная maintained TTF copy;
+просмотрите diff/notices. Ни check,
 ни build не делает download/retry/upgrade/rebuild font автоматически.
 
 ## Unicode regeneration/conformance

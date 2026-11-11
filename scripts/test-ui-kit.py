@@ -103,6 +103,8 @@ done
             for p in ROOT.rglob("*")
             if p.is_file()
             and p.name != "inventory.json"
+            and ".git" not in p.relative_to(ROOT).parts
+            and "__pycache__" not in p.relative_to(ROOT).parts
             and "build" not in p.relative_to(ROOT).parts
         }
         self.assertEqual(files, set(inventory["files"]))

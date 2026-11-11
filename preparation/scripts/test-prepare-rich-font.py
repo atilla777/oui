@@ -22,7 +22,7 @@ class RichFontTests(unittest.TestCase):
             self.assertTrue(rich.POINTS <= set(font.getBestCmap()))
             self.assertEqual(font["name"].getDebugName(1), "Slyx Rich Fallback")
             self.assertIsNotNone(font["name"].getDebugName(13))
-        with TTFont(rich.primary.FONT_DIR / "slyx-ui.ttf") as primary:
+        with TTFont(rich.primary.FONT_TARGET) as primary:
             self.assertTrue({0x3B1, 0x3A9, 0x3AC}.isdisjoint(primary.getBestCmap()))
 
 

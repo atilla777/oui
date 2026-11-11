@@ -15,6 +15,7 @@ from fontTools.ttLib import TTFont
 
 ROOT = Path(__file__).resolve().parent.parent
 FONT_DIR = ROOT / "assets/fonts"
+FONT_TARGET = ROOT.parent / "resources/font.ttf"
 
 
 def settings():
@@ -111,7 +112,7 @@ def main():
             "a rebuild requires --archive; use --check for offline coverage validation"
         )
     points = required_codepoints(config)
-    target = FONT_DIR / "slyx-ui.ttf"
+    target = FONT_TARGET
     if args.archive:
         result = build(config, args.archive, points)
         if args.check:

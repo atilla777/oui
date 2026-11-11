@@ -32,7 +32,7 @@ if __name__ == "__main__":
     if primary.fontTools.__version__ != primary.settings()["fonttools_version"]:
         raise ValueError("use pinned FontTools")
     data = build(args.archive)
-    target = primary.FONT_DIR / "slyx-rich-fallback.ttf"
+    target = primary.ROOT.parent / "resources/fallback.ttf"
     if args.check:
         if target.read_bytes() != data:
             raise ValueError("fallback subset is not reproducible")

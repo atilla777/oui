@@ -9408,7 +9408,7 @@
         "sha256": "928a23f44ed8579a769f1e7df782328b3b50e409307fc3c428126ddc34d90923",
         "mode": "100644"
       },
-      "sha256": "77c6ee708244f8338e6273ce2226ded901942d41a0894fdc79d0f5ea57474aa5",
+      "sha256": "9cd4dc8cb89b4942f165bec797e30c247ed60619dc4965a499690fc9f8e5ecb0",
       "mode": "0o644",
       "role": "documentation",
       "license": "LICENSE",
@@ -9719,11 +9719,12 @@
         "sha256": "0324ad8d6486dcc21f8e8c9f728a4f0ca7f804d51954751cd6f9fa69b445165b",
         "mode": "100644"
       },
-      "sha256": "0324ad8d6486dcc21f8e8c9f728a4f0ca7f804d51954751cd6f9fa69b445165b",
+      "sha256": "86aea45b28621cb40456d4b4bc4fa1fde7ed6f04bdb520d8f44de55dd844b49d",
       "mode": "0o644",
       "role": "preparation",
       "license": "LICENSE",
-      "transformation": "exact bytes"
+      "transformation": "exact bytes",
+      "transformation_diff": "--- scripts/prepare-font.py@8c55d0da6a28fe7d15f58f828b10a25a2851fea7\n+++ preparation/scripts/prepare-font.py\n@@ -15,6 +15,7 @@\n \n ROOT = Path(__file__).resolve().parent.parent\n FONT_DIR = ROOT / \"assets/fonts\"\n+FONT_TARGET = ROOT.parent / \"resources/font.ttf\"\n \n \n def settings():\n@@ -111,7 +112,7 @@\n             \"a rebuild requires --archive; use --check for offline coverage validation\"\n         )\n     points = required_codepoints(config)\n-    target = FONT_DIR / \"slyx-ui.ttf\"\n+    target = FONT_TARGET\n     if args.archive:\n         result = build(config, args.archive, points)\n         if args.check:\n"
     },
     "preparation/scripts/prepare-rich-font.py": {
       "source": "scripts/prepare-rich-font.py",
@@ -9735,11 +9736,12 @@
         "sha256": "adea26932c28208aa5815a4e7c95a2d1d7878f9d74e0af5829e64cf4857cd10f",
         "mode": "100644"
       },
-      "sha256": "adea26932c28208aa5815a4e7c95a2d1d7878f9d74e0af5829e64cf4857cd10f",
+      "sha256": "020599618f1c3ff4548c357a0b07583d74ece5a8b48e5e7507645e4e179c5a2b",
       "mode": "0o644",
       "role": "preparation",
       "license": "LICENSE",
-      "transformation": "exact bytes"
+      "transformation": "exact bytes",
+      "transformation_diff": "--- scripts/prepare-rich-font.py@8c55d0da6a28fe7d15f58f828b10a25a2851fea7\n+++ preparation/scripts/prepare-rich-font.py\n@@ -32,7 +32,7 @@\n     if primary.fontTools.__version__ != primary.settings()[\"fonttools_version\"]:\n         raise ValueError(\"use pinned FontTools\")\n     data = build(args.archive)\n-    target = primary.FONT_DIR / \"slyx-rich-fallback.ttf\"\n+    target = primary.ROOT.parent / \"resources/fallback.ttf\"\n     if args.check:\n         if target.read_bytes() != data:\n             raise ValueError(\"fallback subset is not reproducible\")\n"
     },
     "preparation/scripts/test-prepare-font.py": {
       "source": "scripts/test-prepare-font.py",
@@ -9751,11 +9753,12 @@
         "sha256": "9da1bc42f0c37ccdd79858e6686d1dfe772d2b1079061f25f423263179fbecab",
         "mode": "100644"
       },
-      "sha256": "9da1bc42f0c37ccdd79858e6686d1dfe772d2b1079061f25f423263179fbecab",
+      "sha256": "9bd18569ef8d0632f0eb5ab7bc8a3729aaca27df7517ccd94f21068e6bf7e46e",
       "mode": "0o644",
       "role": "preparation",
       "license": "LICENSE",
-      "transformation": "exact bytes"
+      "transformation": "exact bytes",
+      "transformation_diff": "--- scripts/test-prepare-font.py@8c55d0da6a28fe7d15f58f828b10a25a2851fea7\n+++ preparation/scripts/test-prepare-font.py\n@@ -15,7 +15,7 @@\n \n class FontTests(unittest.TestCase):\n     def test_shipped_font_covers_every_text_and_icon(self):\n-        with FONT.TTFont(FONT.FONT_DIR / \"slyx-ui.ttf\") as font:\n+        with FONT.TTFont(FONT.FONT_TARGET) as font:\n             FONT.check_coverage(font, FONT.required_codepoints(FONT.settings()))\n             self.assertEqual(font[\"name\"].getDebugName(1), \"Slyx UI\")\n             self.assertIn(0xF500, font.getBestCmap())\n@@ -25,7 +25,7 @@\n             path = Path(directory)\n             (path / \"new.ru.txt\").write_text(\"Новый текст \\U0001f40d\", encoding=\"utf-8\")\n             points = FONT.required_codepoints(FONT.settings(), text_dir=path)\n-            with FONT.TTFont(FONT.FONT_DIR / \"slyx-ui.ttf\") as font:\n+            with FONT.TTFont(FONT.FONT_TARGET) as font:\n                 with self.assertRaisesRegex(ValueError, \"U\\\\+1F40D\"):\n                     FONT.check_coverage(font, points)\n \n@@ -34,7 +34,7 @@\n             path = Path(directory) / \"icons.json\"\n             path.write_text('{\"unshipped\": \"F04B\"}', encoding=\"utf-8\")\n             points = FONT.required_codepoints(FONT.settings(), icons_path=path)\n-            with FONT.TTFont(FONT.FONT_DIR / \"slyx-ui.ttf\") as font:\n+            with FONT.TTFont(FONT.FONT_TARGET) as font:\n                 with self.assertRaisesRegex(ValueError, \"U\\\\+F04B\"):\n                     FONT.check_coverage(font, points)\n \n@@ -44,7 +44,7 @@\n             (path / \"spacing.en.txt\").write_text(\"A\\u2003B\", encoding=\"utf-8\")\n             points = FONT.required_codepoints(FONT.settings(), text_dir=path)\n             self.assertIn(0x2003, points)\n-            with FONT.TTFont(FONT.FONT_DIR / \"slyx-ui.ttf\") as font:\n+            with FONT.TTFont(FONT.FONT_TARGET) as font:\n                 with self.assertRaisesRegex(ValueError, \"U\\\\+2003\"):\n                     FONT.check_coverage(font, points)\n \n"
     },
     "preparation/scripts/test-prepare-rich-font.py": {
       "source": "scripts/test-prepare-rich-font.py",
@@ -9767,11 +9770,12 @@
         "sha256": "02def88d11b4d89bc1eb7c313f1b5ace76ce561f384828309da6929bf65ec4f1",
         "mode": "100644"
       },
-      "sha256": "02def88d11b4d89bc1eb7c313f1b5ace76ce561f384828309da6929bf65ec4f1",
+      "sha256": "2ca8303d306ab6a53980fcf63ed8b1fa377916cd38e4b443fce323887d5cd87b",
       "mode": "0o644",
       "role": "preparation",
       "license": "LICENSE",
-      "transformation": "exact bytes"
+      "transformation": "exact bytes",
+      "transformation_diff": "--- scripts/test-prepare-rich-font.py@8c55d0da6a28fe7d15f58f828b10a25a2851fea7\n+++ preparation/scripts/test-prepare-rich-font.py\n@@ -22,7 +22,7 @@\n             self.assertTrue(rich.POINTS <= set(font.getBestCmap()))\n             self.assertEqual(font[\"name\"].getDebugName(1), \"Slyx Rich Fallback\")\n             self.assertIsNotNone(font[\"name\"].getDebugName(13))\n-        with TTFont(rich.primary.FONT_DIR / \"slyx-ui.ttf\") as primary:\n+        with TTFont(rich.primary.FONT_TARGET) as primary:\n             self.assertTrue({0x3B1, 0x3A9, 0x3AC}.isdisjoint(primary.getBestCmap()))\n \n \n"
     },
     "scripts/test-ui-foundation": {
       "source": "scripts/test-ui-foundation",
@@ -9787,7 +9791,8 @@
       "mode": "0o644",
       "role": "test",
       "license": "LICENSE",
-      "transformation": "root/path relocation; semantic oracle remains original package/consumer tests"
+      "transformation": "root/path relocation; semantic oracle remains original package/consumer tests",
+      "transformation_diff": "--- scripts/test-ui-foundation@8c55d0da6a28fe7d15f58f828b10a25a2851fea7\n+++ scripts/test-ui-foundation\n@@ -12,7 +12,7 @@\n     unicode_text) packages+=(ui_style ui_text unicode_graphemes) ;;\n   esac\n   for package in \"${packages[@]}\"; do\n-    cp -R -- \"$root/libs/$package\" \"$target/kit/\"\n+    cp -R -- \"$root/kit/$package\" \"$target/kit/\"\n   done\n   cp -- \"$root/tests/ui_foundation/$scenario/main.odin\" \"$target/consumer/\"\n   (\n"
     },
     "scripts/test-ui-showcase": {
       "source": "scripts/test-ui-showcase",
@@ -9799,11 +9804,12 @@
         "sha256": "afb6fbb54aa4dc2b07bcbae799de575670ff6001adf102a0b9600b7741f15034",
         "mode": "100644"
       },
-      "sha256": "645b3a29be0ff4a8942c520108ec87200b8137bc74d95e172f74c642736331f5",
+      "sha256": "c0bec934399a01ee334de54cccac8bd1f1884fd7cd92aad30810ba1311e44b29",
       "mode": "0o644",
       "role": "test",
       "license": "LICENSE",
-      "transformation": "root/path relocation; semantic oracle remains original package/consumer tests"
+      "transformation": "root/path relocation; semantic oracle remains original package/consumer tests",
+      "transformation_diff": "--- scripts/test-ui-showcase@8c55d0da6a28fe7d15f58f828b10a25a2851fea7\n+++ scripts/test-ui-showcase\n@@ -1,6 +1,7 @@\n #!/usr/bin/env bash\n set -euo pipefail\n SOURCE=$(cd -- \"$(dirname -- \"${BASH_SOURCE[0]}\")/..\" && pwd -P)\n+if [[ $# == 0 ]]; then set -- --portable; fi\n if [[ ${1:-} == --portable ]]; then\n   PROOF=$(mktemp -d /tmp/opencode/slyx-portable-parent.XXXXXX)/kit\n   python3 -B \"$SOURCE/scripts/export-ui-kit.py\" \"$PROOF\"\n@@ -85,6 +86,14 @@\n     if \"build/$binary\" --font resources/font.ttf --scale 1.5 --pixel-perfect >> \"build/$binary-refusal.log\" 2>&1; then exit 1; fi\n   done\n   if build/tools-release --font resources/font.ttf --ui-debug --ui-profile showcase-v19 > build/release-gate.log 2>&1; then exit 1; fi\n+  for arg in '--unknown' '--section unknown' '--size 2147483648x600' '--scale 1.5 --pixel-perfect'; do\n+    if build/showcase --font resources/font.ttf $arg >> build/cli-errors.log 2>&1; then echo \"accepted invalid CLI: $arg\" >&2; exit 1; fi\n+  done\n+  if build/showcase --font missing.ttf >> build/cli-errors.log 2>&1; then exit 1; fi\n+  if build/showcase --font resources/font.ttf --fallback-font missing.ttf >> build/cli-errors.log 2>&1; then exit 1; fi\n+  printf 'not a font' > build/invalid.ttf\n+  if SDL_VIDEODRIVER=dummy build/showcase --font build/invalid.ttf > build/font-error.log 2>&1; then exit 1; fi\n+  grep -q 'Initial page/font/resource prepare' build/font-error.log\n   for p in consumer/standalone_menu/model consumer/ui_showcase/model kit/unicode_graphemes; do\n     odin test \"$p\" -collection:ui=kit \"${flags[@]}\" -out:build/model-tests > \"build/$(echo \"$p\" | tr / _)-test.log\" 2>&1\n   done\n@@ -162,53 +171,5 @@\n   printf 'Portable commands, six restricted recipe builds and consumer contracts passed: %s\\n' \"$SOURCE\"\n   exit\n fi\n-PROOF=$(mktemp -d /tmp/opencode/slyx-showcase-proof.XXXXXX)\n-printf 'Showcase proof: %s\\n' \"$PROOF\"\n-mkdir -p \"$PROOF/kit\" \"$PROOF/consumer/ui_showcase/model\" \"$PROOF/consumer/ui_showcase/sections\" \"$PROOF/consumer/atlas_catalog/loader\" \"$PROOF/consumer/controls_demo/model\" \"$PROOF/consumer/gestures_demo/model\" \"$PROOF/consumer/virtualized_collections_demo/model\" \"$PROOF/resources/atlas/a\" \"$PROOF/resources/atlas/b\" \"$PROOF/resources/notices\"\n-mkdir \"$PROOF/consumer/ui_showcase/app\"\n-for p in ui_base ui_layout ui_interaction ui_style ui_text unicode_graphemes ui_layers ui_scroll ui_controls ui_sdl ui_sdl_text ui_rich ui_editor ui_collections ui_gestures ui_hold ui_custom ui_composition ui_world ui_transitions ui_inspect ui_wire translations; do\n-  mkdir \"$PROOF/kit/$p\"\n-  find \"$SOURCE/libs/$p\" -maxdepth 1 -type f -name '*.odin' ! -name '*_test.odin' -exec cp -- {} \"$PROOF/kit/$p/\" \\;\n-done\n-mkdir -p \"$PROOF/kit/ui_accessibility/projection\" \"$PROOF/kit/ui_accessibility/inspect\" \"$PROOF/consumer/accessibility_demo/model\"\n-for p in projection inspect; do\n-  find \"$SOURCE/libs/ui_accessibility/$p\" -maxdepth 1 -type f -name '*.odin' ! -name '*_test.odin' -exec cp -- {} \"$PROOF/kit/ui_accessibility/$p/\" \\;\n-done\n-for p in ui_controls ui_rich ui_editor ui_collections ui_gestures ui_hold ui_custom; do\n-  mkdir \"$PROOF/kit/$p/sdl\"\n-  find \"$SOURCE/libs/$p/sdl\" -maxdepth 1 -type f -name '*.odin' ! -name '*_test.odin' -exec cp -- {} \"$PROOF/kit/$p/sdl/\" \\;\n-done\n-for p in ui_showcase ui_showcase/app ui_showcase/model ui_showcase/sections atlas_catalog/loader controls_demo/model gestures_demo/model virtualized_collections_demo/model accessibility_demo/model; do\n-  find \"$SOURCE/examples/$p\" -maxdepth 1 -type f -name '*.odin' ! -name '*_test.odin' -exec cp -- {} \"$PROOF/consumer/$p/\" \\;\n-done\n-mkdir \"$PROOF/kit/unicode_graphemes/data\"\n-cp -- \"$SOURCE/examples/ui_showcase/standalone.md\" \"$PROOF/README.md\"\n-cp -- \"$SOURCE/libs/unicode_graphemes/data/LICENSE.txt\" \"$PROOF/kit/unicode_graphemes/data/\"\n-cp -- \"$SOURCE/libs/unicode_graphemes/README.md\" \"$PROOF/kit/unicode_graphemes/\"\n-cp -- \"$SOURCE/assets/fonts/slyx-ui.ttf\" \"$PROOF/resources/font.ttf\"\n-cp -- \"$SOURCE/assets/fonts/slyx-rich-fallback.ttf\" \"$PROOF/resources/fallback.ttf\"\n-cp -- \"$SOURCE/assets/fonts/DejaVu-LICENSE.txt\" \"$SOURCE/assets/fonts/Nerd-Fonts-NOTICE.txt\" \"$SOURCE/assets/fonts/Octicons-LICENSE.txt\" \"$PROOF/resources/\"\n-cp -- \"$SOURCE/examples/atlas_catalog/assets/LICENSE\" \"$PROOF/resources/notices/atlas-LICENSE\"\n-cp -- \"${LIBPNG_LICENSE:-/usr/share/licenses/libpng/LICENSE}\" \"$PROOF/resources/notices/libpng-LICENSE.txt\"\n-cp -- \"${ZLIB_LICENSE:-/usr/share/licenses/zlib/LICENSE}\" \"$PROOF/resources/notices/zlib-LICENSE.txt\"\n-for set in a b; do cp -- \"$SOURCE/examples/atlas_catalog/assets/$set/manifest.json\" \"$SOURCE/examples/atlas_catalog/assets/$set/geometry.png\" \"$PROOF/resources/atlas/$set/\"; done\n-(\n-  cd \"$PROOF/consumer/ui_showcase\"\n-  odin version > \"$PROOF/environment.log\"\n-  pkg-config --modversion sdl3 sdl3-ttf libpng zlib >> \"$PROOF/environment.log\"\n-  odin check . -collection:ui=../../kit -vet -vet-style -vet-tabs -vet-semicolon > \"$PROOF/check.log\" 2>&1\n-  odin build . -collection:ui=../../kit -vet -vet-style -vet-tabs -vet-semicolon -show-import-graph -extra-linker-flags:\"$(pkg-config --libs libpng zlib)\" -out:../../showcase > \"$PROOF/import-graph.log\" 2>&1\n-  if grep -E '/(game|ui_debug|unported)/|/kit/ui/' \"$PROOF/import-graph.log\"; then echo 'Forbidden production import' >&2; exit 1; fi\n-  if find ../.. -type l | grep -q .; then echo 'Unexpected proof symlink' >&2; exit 1; fi\n-  for arg in '--unknown' '--section unknown' '--size 2147483648x600' '--scale 1.5 --pixel-perfect'; do\n-    # Deliberate word splitting: these fixed cases test independent CLI arguments.\n-    if ../../showcase --font ../../resources/font.ttf $arg >> \"$PROOF/cli-errors.log\" 2>&1; then echo \"accepted invalid CLI: $arg\" >&2; exit 1; fi\n-  done\n-  if ../../showcase --font missing.ttf >> \"$PROOF/cli-errors.log\" 2>&1; then exit 1; fi\n-  if ../../showcase --font ../../resources/font.ttf --fallback-font missing.ttf >> \"$PROOF/cli-errors.log\" 2>&1; then exit 1; fi\n-  printf 'not a font' > \"$PROOF/resources/invalid.ttf\"\n-  if SDL_VIDEODRIVER=dummy ../../showcase --font ../../resources/invalid.ttf > \"$PROOF/font-error.log\" 2>&1; then exit 1; fi\n-  grep -q 'Initial page/font/resource prepare' \"$PROOF/font-error.log\"\n-  find ../../consumer ../../kit ../../resources -type f -print0 | sort -z | xargs -0 sha256sum > \"$PROOF/sources.sha256\"\n-)\n-printf 'Standalone build/check/import closure and real invalid-font startup passed: %s\\n' \"$PROOF\"\n+echo 'Use --portable, --portable-check, or --portable-acquisition' >&2\n+exit 2\n"
     },
     "scripts/test-ui-showcase-tools-kit": {
       "source": "scripts/test-ui-showcase-tools-kit",
@@ -9819,7 +9825,8 @@
       "mode": "0o644",
       "role": "test",
       "license": "LICENSE",
-      "transformation": "root/path relocation; semantic oracle remains original package/consumer tests"
+      "transformation": "root/path relocation; semantic oracle remains original package/consumer tests",
+      "transformation_diff": "--- scripts/test-ui-showcase-tools-kit@8c55d0da6a28fe7d15f58f828b10a25a2851fea7\n+++ scripts/test-ui-showcase-tools-kit\n@@ -11,11 +11,11 @@\n test -d \"$PROOF/consumer/ui_showcase/app\"\n mkdir -p \"$PROOF/consumer/ui_showcase_tools/profile\" \"$PROOF/kit/ui_debug\"\n for p in ui_showcase_tools ui_showcase_tools/profile; do\n-  find \"$SOURCE/examples/$p\" -maxdepth 1 -type f -name '*.odin' ! -name '*_test.odin' -exec cp -- {} \"$PROOF/consumer/$p/\" \\;\n+  find \"$SOURCE/consumer/$p\" -maxdepth 1 -type f -name '*.odin' ! -name '*_test.odin' -exec cp -- {} \"$PROOF/consumer/$p/\" \\;\n done\n for p in ui_debug ui_text/inspect ui_style/inspect ui_rich/inspect; do\n   mkdir -p \"$PROOF/kit/$p\"\n-  find \"$SOURCE/libs/$p\" -maxdepth 1 -type f -name '*.odin' ! -name '*_test.odin' -exec cp -- {} \"$PROOF/kit/$p/\" \\;\n+  find \"$SOURCE/kit/$p\" -maxdepth 1 -type f -name '*.odin' ! -name '*_test.odin' -exec cp -- {} \"$PROOF/kit/$p/\" \\;\n done\n (\n  cd \"$PROOF/consumer/ui_showcase_tools\"\n"
     },
     "scripts/test-ui-kit.py": {
       "source": "scripts/test-ui-kit.py",
@@ -9831,11 +9838,11 @@
         "sha256": "4af30894f1582daee186945e4c13c020e5785d73ca16312988ce110564a21819",
         "mode": "100644"
       },
-      "sha256": "d690ba7f2b827ae79e7a7dc1fc470de8486ddc4120c92657e5268cf753c6ad22",
+      "sha256": "f9441524c515c3dc50919f7c450d971fb105e241ba9569199e4bf875cce341d3",
       "mode": "0o644",
       "role": "test",
       "license": "LICENSE",
-      "transformation_diff": "--- scripts/test-ui-kit.py@8c55d0da6a28fe7d15f58f828b10a25a2851fea7\n+++ scripts/test-ui-kit.py\n@@ -93,7 +93,7 @@\n             self.assertTrue((ROOT / \"docs\" / (name + \".md\")).is_file(), name)\n         skill = (ROOT / \"skills/odin-ui/SKILL.md\").read_text()\n         self.assertIn(\"name: odin-ui\", skill)\n-        self.assertNotIn(\"libs/ui/\", skill)\n+        self.assertNotIn(\"kit/ui/\", skill)\n         self.assertIn(\"Permission\", (ROOT / \"LICENSE\").read_text())\n \n     def test_inventory_covers_every_supplied_file(self):\n",
+      "transformation_diff": "--- scripts/test-ui-kit.py@8c55d0da6a28fe7d15f58f828b10a25a2851fea7\n+++ scripts/test-ui-kit.py\n@@ -93,7 +93,7 @@\n             self.assertTrue((ROOT / \"docs\" / (name + \".md\")).is_file(), name)\n         skill = (ROOT / \"skills/odin-ui/SKILL.md\").read_text()\n         self.assertIn(\"name: odin-ui\", skill)\n-        self.assertNotIn(\"libs/ui/\", skill)\n+        self.assertNotIn(\"kit/ui/\", skill)\n         self.assertIn(\"Permission\", (ROOT / \"LICENSE\").read_text())\n \n     def test_inventory_covers_every_supplied_file(self):\n@@ -103,6 +103,8 @@\n             for p in ROOT.rglob(\"*\")\n             if p.is_file()\n             and p.name != \"inventory.json\"\n+            and \".git\" not in p.relative_to(ROOT).parts\n+            and \"__pycache__\" not in p.relative_to(ROOT).parts\n             and \"build\" not in p.relative_to(ROOT).parts\n         }\n         self.assertEqual(files, set(inventory[\"files\"]))\n",
       "transformation": "root/path relocation; semantic oracle remains original package/consumer tests"
     },
     "scripts/ui-showcase-cli.py": {
@@ -9898,11 +9905,11 @@
         "sha256": "04719b9d26f10eae2754149508a132946b5c806f3d2a5ec4bca9697389f91ad3",
         "mode": "100644"
       },
-      "sha256": "fd331cd2320ceed90531204f956b960d506b67d605fbf45e2f234021771748ed",
+      "sha256": "83419d42c3a153c7698aa6ce68821b443022cf66a8e81cb5038da16760eac202",
       "mode": "0o644",
       "role": "test",
       "license": "LICENSE",
-      "transformation_diff": "--- scripts/test-ui-showcase-live.py@8c55d0da6a28fe7d15f58f828b10a25a2851fea7\n+++ scripts/test-ui-showcase-live.py\n@@ -12,7 +12,7 @@\n from PIL import Image\n \n PROJECT = Path(__file__).resolve().parents[1]\n-WRAPPER = PROJECT / \"scripts/slyx_isd.py\"\n+WRAPPER = PROJECT / \"scripts/ui_isd.py\"\n \n \n def call(*args):\n",
+      "transformation_diff": "--- scripts/test-ui-showcase-live.py@8c55d0da6a28fe7d15f58f828b10a25a2851fea7\n+++ scripts/test-ui-showcase-live.py\n@@ -12,7 +12,7 @@\n from PIL import Image\n \n PROJECT = Path(__file__).resolve().parents[1]\n-WRAPPER = PROJECT / \"scripts/slyx_isd.py\"\n+WRAPPER = PROJECT / \"scripts/ui_isd.py\"\n \n \n def call(*args):\n@@ -570,10 +570,7 @@\n         source_evidence = args.proof / \"inventory.json\"\n     (output / \"sources.sha256\").write_bytes(source_evidence.read_bytes())\n     (output / \"environment.log\").write_bytes(\n-        (\n-            args.proof\n-            / (\"build/environment.log\" if args.portable_smoke else \"environment.log\")\n-        ).read_bytes()\n+        (args.proof / \"build/environment.log\").read_bytes()\n     )\n     records = []\n     if args.lab_only:\n@@ -743,10 +740,10 @@\n     if not args.f2_only:\n         gallery(args, output, records)\n     (output / \"sources.sha256\").write_bytes(\n-        (args.proof / \"sources.sha256\").read_bytes()\n+        (args.proof / \"inventory.json\").read_bytes()\n     )\n     (output / \"environment.log\").write_bytes(\n-        (args.proof / \"environment.log\").read_bytes()\n+        (args.proof / \"build/environment.log\").read_bytes()\n     )\n     print(\n         f\"Display/native matrix passed; every PNG still requires visual inspection: {output}\"\n",
       "transformation": "root/path relocation; semantic oracle remains original package/consumer tests"
     },
     "scripts/test-ui-showcase-interaction-live.py": {
@@ -9932,11 +9939,11 @@
         "sha256": "287180398bf55fe8a5e75de0ea3e95ddb228864e87e9de78200857efdfad8d04",
         "mode": "100644"
       },
-      "sha256": "e23eb1a902b9df883d287206ce64c0037312b509426acb2c63320ebe57f3fe51",
+      "sha256": "7baeb1a7acd23134f5e3d0579a96387fc0fa3a519342ea7a646b260feacafe7c",
       "mode": "0o644",
       "role": "test",
       "license": "LICENSE",
-      "transformation_diff": "--- scripts/test-ui-showcase-tools-gates.py@8c55d0da6a28fe7d15f58f828b10a25a2851fea7\n+++ scripts/test-ui-showcase-tools-gates.py\n@@ -12,7 +12,7 @@\n \n ROOT = Path(__file__).resolve().parents[1]\n spec = importlib.util.spec_from_file_location(\n-    \"showcase_isd\", ROOT / \"scripts/slyx_isd.py\"\n+    \"showcase_isd\", ROOT / \"scripts/ui_isd.py\"\n )\n isd = importlib.util.module_from_spec(spec)\n spec.loader.exec_module(isd)\n@@ -88,7 +88,7 @@\n                 [\n                     sys.executable,\n                     \"-B\",\n-                    str(ROOT / \"scripts/slyx_isd.py\"),\n+                    str(ROOT / \"scripts/ui_isd.py\"),\n                     \"screenshot\",\n                     str(run),\n                     \"--output\",\n",
+      "transformation_diff": "--- scripts/test-ui-showcase-tools-gates.py@8c55d0da6a28fe7d15f58f828b10a25a2851fea7\n+++ scripts/test-ui-showcase-tools-gates.py\n@@ -12,7 +12,7 @@\n \n ROOT = Path(__file__).resolve().parents[1]\n spec = importlib.util.spec_from_file_location(\n-    \"showcase_isd\", ROOT / \"scripts/slyx_isd.py\"\n+    \"showcase_isd\", ROOT / \"scripts/ui_isd.py\"\n )\n isd = importlib.util.module_from_spec(spec)\n spec.loader.exec_module(isd)\n@@ -34,7 +34,7 @@\n         (\"test\", False),\n         (\"test\", True),\n     ):\n-        binary = (proof / f\"tools-{mode}\").resolve(strict=True)\n+        binary = (proof / \"build\" / f\"tools-{mode}\").resolve(strict=True)\n         record = None\n         try:\n             # Use the already freshly linked physical kit binary. Only the\n@@ -88,7 +88,7 @@\n                 [\n                     sys.executable,\n                     \"-B\",\n-                    str(ROOT / \"scripts/slyx_isd.py\"),\n+                    str(ROOT / \"scripts/ui_isd.py\"),\n                     \"screenshot\",\n                     str(run),\n                     \"--output\",\n",
       "transformation": "root/path relocation; semantic oracle remains original package/consumer tests"
     },
     "scripts/test-ui-showcase-tools-live.py": {
@@ -9968,7 +9975,281 @@
       "mode": "0o644",
       "role": "preparation",
       "license": "LICENSE",
-      "transformation": "new maintainer content; no byte parity claimed"
+      "transformation": "new maintainer content; no byte parity claimed",
+      "origins": [
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/fonts/source.json",
+          "sha256": "15bb68ae58cc94722fcff3d5adcbab2c6ad4f027f7529a84b91f3a3f2a948214",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/fonts/icons.json",
+          "sha256": "c6e1e71d591babc5692b528a4772b47954e66b4b17a2451993395ef972fbd663",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/controls-platform.en.txt",
+          "sha256": "bad936ce00032f2365ea5f24a8123d34cf7cca4334e9e13c5b3678fd795e8b89",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/controls-platform.ru.txt",
+          "sha256": "4dc7c1eb4805cb440f7e231d9c7d1f82c589f0992c067fb55de42fec51e5ff24",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/controls.en.txt",
+          "sha256": "c5762f347df44917cca8a32a57efa72da0a3c77668770c1739b86ebcbe143253",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/controls.ru.txt",
+          "sha256": "005d5b8b7effea7870349c4cde4de3bfb18fd67d07113d755e3f335d733a4666",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/custom-widgets.en.txt",
+          "sha256": "3ece04b2c5a710a943f6617ea236273d905f4906f9a96d409b58d5ac57e6d918",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/custom-widgets.ru.txt",
+          "sha256": "bc4e5964e2ef0216b19e7f2a0a0e0e43ef1f1071447730573ea756ae651303f1",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/editor.en.txt",
+          "sha256": "8aa430cfb7dc2b3ddb1e1d1100f37fa8c14455a3ce557982855be58ee45c751d",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/editor.ru.txt",
+          "sha256": "b61f03b62991be11aba979e0253b6d96f4ffb7f0c799d81c314fcfcf3ca6410a",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/end.en.txt",
+          "sha256": "dbf942e5321943516af9353f517f3a6f7816f1b1d0af97e1fb678bbbe869c13a",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/end.ru.txt",
+          "sha256": "435b3c1b79fca9cc528be4dbd28eaff6416e7cd7a005195f5fd770814470b97e",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/gestures.en.txt",
+          "sha256": "7b5322a52f1dfb0fdfc61417ab3db428606cb1418253906846e4b3280399f258",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/gestures.ru.txt",
+          "sha256": "6cfff400e63ea9fde6e9482412cc5ba09f5e0b2634bb5e1a7d5a336686faecaa",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/hud.en.txt",
+          "sha256": "0dfc248370ead3fed023a9e6ebf59d6436455450e391a391ae144d8e258faba7",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/hud.ru.txt",
+          "sha256": "60a3f4251414ccd884ac777cb74026bbea0e882f081ce065bf5f5c61cabe3c76",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/modal-menu.txt",
+          "sha256": "a70932ab1a0fc0ef416f8bc38dd76d23c53c44f452bfdc5851a046dc4dc86b19",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/nested.en.txt",
+          "sha256": "4aefc91f7620426db7c6a9b474360fb79378c901d50a4fee1d322d85f1df73db",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/nested.ru.txt",
+          "sha256": "fe25353bee41bc95e0e28bb34b15d81e74d51abbaf14dc3c1e0b1fe35b099167",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/performance.en.txt",
+          "sha256": "256376d3429c39098d82c41dae4150f4d67f35bffd98d61fbad018f93b425d26",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/performance.ru.txt",
+          "sha256": "3eec9942588d2f6098bd019ae344148d62d17c22940878bffd3d237b90ecc605",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/scroll-table.en.txt",
+          "sha256": "602296a5df0aa0ebccc2f8cce4cd85cae0235011bb3d5206939cccf4bf8d18e7",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/scroll-table.ru.txt",
+          "sha256": "7a9fd9f408e2bbd8a77bb3c9e7573c21b6af0799e6581660c42b4dcfbd7e55c2",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/text-controls.en.txt",
+          "sha256": "910b473423d514f35d128874ba331375f0fa8cf9af585983d8da83ca01dc67f3",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/text-controls.ru.txt",
+          "sha256": "b1c832427b50cbe0dc5ed603cead91fc1544f756b500e5d7040997921e373729",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/text-foundation.en.txt",
+          "sha256": "1de8d53b2e5591ece0a0f6ff9ed39335dd45019bef53b3fc22cefd6cf99dd049",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/text-foundation.ru.txt",
+          "sha256": "a49c210538698cd124ec77cf571be59afe98b802f4329b807beb17fa28a5b892",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/text-probe.en.txt",
+          "sha256": "44bc3f7e39502a95e5e86aa7e9c11d5b982894992292e7e7992cc5b96cf7dc57",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/text-probe.ru.txt",
+          "sha256": "31c2cc21e55131ad43f7aed44b450aca27670d9642e1360ddb7d3b8bc306c3ad",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/text-short.en.txt",
+          "sha256": "68321a924a040d98fad708c681423df43436475de6be7917a423b556eeed44bd",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/text-short.ru.txt",
+          "sha256": "dcdadf30831cd3d16809daff334e55d0808f69be609b444951f1eea06faa3cfc",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/ui-demo.txt",
+          "sha256": "08ed7cded75a3adfd5bbc0aa96738e83bfd971319cc0042d277931461445e501",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/world-anchors.en.txt",
+          "sha256": "5f01031544f6e1d0869f1b6260a76b7ea67072bc965018515360a36e87456005",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        },
+        {
+          "repository": "https://github.com/atilla777/slyx",
+          "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+          "path": "assets/text/world-anchors.ru.txt",
+          "sha256": "f14c0f20b771348afb9a6c0a6a0779e4ef9ea1bb1c2e93f86da8feb6ceafdfa5",
+          "mode": "100644",
+          "selection": "Unicode scalar set only, not text phrases"
+        }
+      ]
     },
     "resources/notices/libpng-LICENSE.txt": {
       "source": "external:libpng official archive notice",
@@ -9977,7 +10258,14 @@
       "mode": "0o644",
       "role": "documentation",
       "license": "resources/notices/libpng-LICENSE.txt",
-      "transformation": "exact archive notice bytes"
+      "transformation": "exact archive notice bytes",
+      "origin": {
+        "archive": "https://download.sourceforge.net/libpng/libpng-1.6.59.tar.xz",
+        "archive_sha256": "d80dd2a38a37f803cb9b6ac7b14bd6e74ddc3b654780a8380bdf93523fdb4389",
+        "member": "libpng-1.6.59/LICENSE",
+        "sha256": "bdb0a645ea18c60507d0368379b1ac5474b92255fcc2d115e07486a7672ba526",
+        "mode": "100644"
+      }
     },
     "resources/notices/zlib-LICENSE.txt": {
       "source": "external:zlib official archive notice",
@@ -9986,7 +10274,14 @@
       "mode": "0o644",
       "role": "documentation",
       "license": "resources/notices/zlib-LICENSE.txt",
-      "transformation": "exact archive notice bytes"
+      "transformation": "exact archive notice bytes",
+      "origin": {
+        "archive": "https://zlib.net/zlib-1.4.tar.xz",
+        "archive_sha256": "4f11c512053d7bab8d9e9b89bde3575add3e4c50a383b42ef6cb837035fc5a7c",
+        "member": "zlib-1.4/README",
+        "sha256": "5ba0fa00469b780503932c2967d34b857a15ba2354f4f86d6c747bc6646acb65",
+        "mode": "100644"
+      }
     },
     ".gitignore": {
       "source": "new:oui-maintainer",
@@ -10005,7 +10300,7 @@
         "path": "docs/ui-kit/qualification.md",
         "reason": "public historical summary only; private raw/session data excluded"
       },
-      "sha256": "3ac6f4acbff28e0e3390541ed4511636ede5b568e05b2bb129212d0451919e4a",
+      "sha256": "27b503829a1821d382ea2d511ac67958bf247fce7a796311541384f4b1abd967",
       "mode": "0o644",
       "role": "documentation",
       "license": "LICENSE",
@@ -10031,6 +10326,92 @@
       "license": "LICENSE",
       "transformation": "portable paths/links and current ownership; historical private/process narrative removed; original immutable source hash retained",
       "semantic_oracle": "relative link closure; API/lifecycle/resource/limitations comparison against immutable origin; no historical qualification transferred to the new tree"
+    },
+    "scripts/ui_isd.py": {
+      "source": "new:oui-maintainer/scripts/ui_isd.py",
+      "origin": null,
+      "role": "test",
+      "license": "LICENSE",
+      "transformation": "new standalone maintainer adaptation, no original byte parity claimed",
+      "method_origin": {
+        "repository": "https://github.com/atilla777/slyx",
+        "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+        "path": "scripts/slyx_isd.py",
+        "sha256": "2a28f5e1e1fd5696bb1e46bb55bb754598dc295fb2f13991af94784179f5b9d8",
+        "selection": "UI build/launch validation and call/save/load/settings/policy/readiness/stop/CLI routines only; game/bridge/legacy profiles and automatic ISD discovery excluded",
+        "reason": "UI-only port plus source identity and whole selected ISD preflight; wrapper tests and actual ISD are the semantic oracles"
+      },
+      "sha256": "2d6be653452de19d25bf45c5100fbffdbae97ba4413c9acdd53c418ed3faea14",
+      "mode": "0o644"
+    },
+    "scripts/test-ui-isd.py": {
+      "source": "new:oui-maintainer/scripts/test-ui-isd.py",
+      "origin": null,
+      "role": "test",
+      "license": "LICENSE",
+      "transformation": "new standalone maintainer adaptation, no original byte parity claimed",
+      "sha256": "c07a1c571e80453173c44b081aea1ca3bd0cb7bde5741c76bf65e4b6f71d8cea",
+      "mode": "0o644"
+    },
+    "scripts/export-ui-kit.py": {
+      "source": "new:oui-maintainer/scripts/export-ui-kit.py",
+      "origin": null,
+      "role": "preparation",
+      "license": "LICENSE",
+      "transformation": "new standalone maintainer adaptation, no original byte parity claimed",
+      "method_origin": {
+        "repository": "https://github.com/atilla777/slyx",
+        "commit": "8c55d0da6a28fe7d15f58f828b10a25a2851fea7",
+        "path": "scripts/export-ui-kit.py",
+        "sha256": "9fee9fec67963f3b04ec5f6f983291e18ad6b558332dd2cd956aa0fe4fb2fafd",
+        "reason": "same fresh-root regular-copy/mode/hash inventory method, now from complete maintained oui allowlist rather than bounded old Slyx exporter"
+      },
+      "sha256": "3ed109bd73e6b6462957ad415f923159a61a063208f911163da9ff15bd7be44f",
+      "mode": "0o644"
+    },
+    "docs/isd.md": {
+      "source": "new:oui-maintainer/docs/isd.md",
+      "origin": null,
+      "role": "documentation",
+      "license": "LICENSE",
+      "transformation": "new standalone maintainer adaptation, no original byte parity claimed",
+      "sha256": "13db33e761f60dd7e338e0536b1fcec8a6e155e7b6ea044f4bd57f1a7b3f6050",
+      "mode": "0o644"
+    },
+    "docs/scope.md": {
+      "source": "new:oui-maintainer/docs/scope.md",
+      "origin": null,
+      "role": "documentation",
+      "license": "LICENSE",
+      "transformation": "new standalone maintainer adaptation, no original byte parity claimed",
+      "method_origin": {
+        "repository": "https://github.com/atilla777/slyx",
+        "commit": "833d6ecead540fcd1dbd1d2da88985cff0552387",
+        "path": "docs/ui-kit/qualification.md",
+        "sha256": "deb597c03296bd161ed8dc93d6fb5b79988f58a3680a8ee390363bb108824bf3",
+        "selection": "Frozen UI-001–040 scope map",
+        "reason": "portable technical scope only; no process/private/raw narrative and no transferred qualification verdict"
+      },
+      "sha256": "89c94eb05080b7a0f308ea4a8d0073c75169f612a53f2dfc54dd888e70ae3e68",
+      "mode": "0o644"
+    },
+    "scripts/test-external-consumer.py": {
+      "source": "new:oui-maintainer/scripts/test-external-consumer.py",
+      "origin": null,
+      "role": "test",
+      "license": "LICENSE",
+      "transformation": "new standalone maintainer adaptation, no original byte parity claimed",
+      "sha256": "b01b257ae0901216bb10a0cbc49ace35984a6bea989239e441501671cfb4a0ef",
+      "mode": "0o644"
+    },
+    "tests/external_consumer/main.odin": {
+      "source": "new:oui-maintainer/tests/external_consumer/main.odin",
+      "origin": null,
+      "role": "test",
+      "license": "LICENSE",
+      "transformation": "new standalone maintainer adaptation, no original byte parity claimed",
+      "sha256": "b30fcde2d9a3a131d0544b6aed6b24290466e5e1db781fe5ff6ea79381240610",
+      "mode": "0o644"
     }
   }
 }

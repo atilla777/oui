@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 SOURCE=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)
+if [[ $# == 0 ]]; then set -- --portable; fi
 if [[ ${1:-} == --portable ]]; then
   PROOF=$(mktemp -d /tmp/opencode/slyx-portable-parent.XXXXXX)/kit
   python3 -B "$SOURCE/scripts/export-ui-kit.py" "$PROOF"
@@ -85,6 +86,14 @@ if [[ ${1:-} == --portable-check ]]; then
     if "build/$binary" --font resources/font.ttf --scale 1.5 --pixel-perfect >> "build/$binary-refusal.log" 2>&1; then exit 1; fi
   done
   if build/tools-release --font resources/font.ttf --ui-debug --ui-profile showcase-v19 > build/release-gate.log 2>&1; then exit 1; fi
+  for arg in '--unknown' '--section unknown' '--size 2147483648x600' '--scale 1.5 --pixel-perfect'; do
+    if build/showcase --font resources/font.ttf $arg >> build/cli-errors.log 2>&1; then echo "accepted invalid CLI: $arg" >&2; exit 1; fi
+  done
+  if build/showcase --font missing.ttf >> build/cli-errors.log 2>&1; then exit 1; fi
+  if build/showcase --font resources/font.ttf --fallback-font missing.ttf >> build/cli-errors.log 2>&1; then exit 1; fi
+  printf 'not a font' > build/invalid.ttf
+  if SDL_VIDEODRIVER=dummy build/showcase --font build/invalid.ttf > build/font-error.log 2>&1; then exit 1; fi
+  grep -q 'Initial page/font/resource prepare' build/font-error.log
   for p in consumer/standalone_menu/model consumer/ui_showcase/model kit/unicode_graphemes; do
     odin test "$p" -collection:ui=kit "${flags[@]}" -out:build/model-tests > "build/$(echo "$p" | tr / _)-test.log" 2>&1
   done
@@ -162,53 +171,5 @@ PY
   printf 'Portable commands, six restricted recipe builds and consumer contracts passed: %s\n' "$SOURCE"
   exit
 fi
-PROOF=$(mktemp -d /tmp/opencode/slyx-showcase-proof.XXXXXX)
-printf 'Showcase proof: %s\n' "$PROOF"
-mkdir -p "$PROOF/kit" "$PROOF/consumer/ui_showcase/model" "$PROOF/consumer/ui_showcase/sections" "$PROOF/consumer/atlas_catalog/loader" "$PROOF/consumer/controls_demo/model" "$PROOF/consumer/gestures_demo/model" "$PROOF/consumer/virtualized_collections_demo/model" "$PROOF/resources/atlas/a" "$PROOF/resources/atlas/b" "$PROOF/resources/notices"
-mkdir "$PROOF/consumer/ui_showcase/app"
-for p in ui_base ui_layout ui_interaction ui_style ui_text unicode_graphemes ui_layers ui_scroll ui_controls ui_sdl ui_sdl_text ui_rich ui_editor ui_collections ui_gestures ui_hold ui_custom ui_composition ui_world ui_transitions ui_inspect ui_wire translations; do
-  mkdir "$PROOF/kit/$p"
-  find "$SOURCE/kit/$p" -maxdepth 1 -type f -name '*.odin' ! -name '*_test.odin' -exec cp -- {} "$PROOF/kit/$p/" \;
-done
-mkdir -p "$PROOF/kit/ui_accessibility/projection" "$PROOF/kit/ui_accessibility/inspect" "$PROOF/consumer/accessibility_demo/model"
-for p in projection inspect; do
-  find "$SOURCE/kit/ui_accessibility/$p" -maxdepth 1 -type f -name '*.odin' ! -name '*_test.odin' -exec cp -- {} "$PROOF/kit/ui_accessibility/$p/" \;
-done
-for p in ui_controls ui_rich ui_editor ui_collections ui_gestures ui_hold ui_custom; do
-  mkdir "$PROOF/kit/$p/sdl"
-  find "$SOURCE/kit/$p/sdl" -maxdepth 1 -type f -name '*.odin' ! -name '*_test.odin' -exec cp -- {} "$PROOF/kit/$p/sdl/" \;
-done
-for p in ui_showcase ui_showcase/app ui_showcase/model ui_showcase/sections atlas_catalog/loader controls_demo/model gestures_demo/model virtualized_collections_demo/model accessibility_demo/model; do
-  find "$SOURCE/consumer/$p" -maxdepth 1 -type f -name '*.odin' ! -name '*_test.odin' -exec cp -- {} "$PROOF/consumer/$p/" \;
-done
-mkdir "$PROOF/kit/unicode_graphemes/data"
-cp -- "$SOURCE/consumer/ui_showcase/standalone.md" "$PROOF/README.md"
-cp -- "$SOURCE/kit/unicode_graphemes/data/LICENSE.txt" "$PROOF/kit/unicode_graphemes/data/"
-cp -- "$SOURCE/kit/unicode_graphemes/README.md" "$PROOF/kit/unicode_graphemes/"
-cp -- "$SOURCE/resources/font.ttf" "$PROOF/resources/font.ttf"
-cp -- "$SOURCE/resources/fallback.ttf" "$PROOF/resources/fallback.ttf"
-cp -- "$SOURCE/assets/fonts/DejaVu-LICENSE.txt" "$SOURCE/assets/fonts/Nerd-Fonts-NOTICE.txt" "$SOURCE/assets/fonts/Octicons-LICENSE.txt" "$PROOF/resources/"
-cp -- "$SOURCE/resources/atlas/LICENSE" "$PROOF/resources/notices/atlas-LICENSE"
-cp -- "${LIBPNG_LICENSE:-/usr/share/licenses/libpng/LICENSE}" "$PROOF/resources/notices/libpng-LICENSE.txt"
-cp -- "${ZLIB_LICENSE:-/usr/share/licenses/zlib/LICENSE}" "$PROOF/resources/notices/zlib-LICENSE.txt"
-for set in a b; do cp -- "$SOURCE/resources/atlas/$set/manifest.json" "$SOURCE/resources/atlas/$set/geometry.png" "$PROOF/resources/atlas/$set/"; done
-(
-  cd "$PROOF/consumer/ui_showcase"
-  odin version > "$PROOF/environment.log"
-  pkg-config --modversion sdl3 sdl3-ttf libpng zlib >> "$PROOF/environment.log"
-  odin check . -collection:ui=../../kit -vet -vet-style -vet-tabs -vet-semicolon > "$PROOF/check.log" 2>&1
-  odin build . -collection:ui=../../kit -vet -vet-style -vet-tabs -vet-semicolon -show-import-graph -extra-linker-flags:"$(pkg-config --libs libpng zlib)" -out:../../showcase > "$PROOF/import-graph.log" 2>&1
-  if grep -E '/(game|ui_debug|unported)/|/kit/ui/' "$PROOF/import-graph.log"; then echo 'Forbidden production import' >&2; exit 1; fi
-  if find ../.. -type l | grep -q .; then echo 'Unexpected proof symlink' >&2; exit 1; fi
-  for arg in '--unknown' '--section unknown' '--size 2147483648x600' '--scale 1.5 --pixel-perfect'; do
-    # Deliberate word splitting: these fixed cases test independent CLI arguments.
-    if ../../showcase --font ../../resources/font.ttf $arg >> "$PROOF/cli-errors.log" 2>&1; then echo "accepted invalid CLI: $arg" >&2; exit 1; fi
-  done
-  if ../../showcase --font missing.ttf >> "$PROOF/cli-errors.log" 2>&1; then exit 1; fi
-  if ../../showcase --font ../../resources/font.ttf --fallback-font missing.ttf >> "$PROOF/cli-errors.log" 2>&1; then exit 1; fi
-  printf 'not a font' > "$PROOF/resources/invalid.ttf"
-  if SDL_VIDEODRIVER=dummy ../../showcase --font ../../resources/invalid.ttf > "$PROOF/font-error.log" 2>&1; then exit 1; fi
-  grep -q 'Initial page/font/resource prepare' "$PROOF/font-error.log"
-  find ../../consumer ../../kit ../../resources -type f -print0 | sort -z | xargs -0 sha256sum > "$PROOF/sources.sha256"
-)
-printf 'Standalone build/check/import closure and real invalid-font startup passed: %s\n' "$PROOF"
+echo 'Use --portable, --portable-check, or --portable-acquisition' >&2
+exit 2

@@ -570,10 +570,7 @@ def main():
         source_evidence = args.proof / "inventory.json"
     (output / "sources.sha256").write_bytes(source_evidence.read_bytes())
     (output / "environment.log").write_bytes(
-        (
-            args.proof
-            / ("build/environment.log" if args.portable_smoke else "environment.log")
-        ).read_bytes()
+        (args.proof / "build/environment.log").read_bytes()
     )
     records = []
     if args.lab_only:
@@ -743,10 +740,10 @@ def main():
     if not args.f2_only:
         gallery(args, output, records)
     (output / "sources.sha256").write_bytes(
-        (args.proof / "sources.sha256").read_bytes()
+        (args.proof / "inventory.json").read_bytes()
     )
     (output / "environment.log").write_bytes(
-        (args.proof / "environment.log").read_bytes()
+        (args.proof / "build/environment.log").read_bytes()
     )
     print(
         f"Display/native matrix passed; every PNG still requires visual inspection: {output}"

@@ -1,0 +1,26 @@
+Slyx UI is a subset derived from DejaVuSansMNerdFontMono-Regular.ttf,
+Nerd Fonts v3.5.1, based on DejaVu 2.37.
+https://github.com/ryanoasis/nerd-fonts/releases/tag/v3.5.1
+
+Nerd Fonts project: Copyright (c) 2014 Ryan L McIntyre.
+The Nerd Fonts source code is MIT licensed; the DejaVu font directory has
+its own explicit license, preserved as DejaVu-LICENSE.txt.
+https://github.com/ryanoasis/nerd-fonts/blob/v3.5.1/LICENSE
+https://github.com/ryanoasis/nerd-fonts/blob/v3.5.1/patched-fonts/DejaVuSansMono/LICENSE.txt
+
+The only retained private-use icon is oct-play (U+F500), from Octicons 18.3.0.
+Copyright (c) 2023 GitHub Inc. MIT license: Octicons-LICENSE.txt.
+https://github.com/primer/octicons/tree/v18.3.0
+https://github.com/ryanoasis/nerd-fonts/blob/v3.5.1/glyphnames.json
+
+Modifications by the Slyx project: character subsetting and renaming the
+font family/PostScript name to Slyx UI / SlyxUI-Regular. Copyright/license
+metadata is retained. Other Nerd Fonts icon sets are not shipped.
+
+Slyx Rich Fallback / SlyxRichFallback-Regular is a second subset of the same
+pinned source, containing only space, combining acute, alpha, Omega, Greek alpha
+with tonos and infinity. Its original copyright/license metadata is retained;
+it does not include private-use icons or alter the primary Slyx UI subset.
+
+When distributing the game (including a binary with the embedded font),
+include DejaVu-LICENSE.txt, Octicons-LICENSE.txt and this notice.

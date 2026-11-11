@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
+proof=$(mktemp -d /tmp/opencode/slyx-foundation.XXXXXX)
+printf 'Physical kit evidence: %s\n' "$proof"
+for scenario in layout_only interaction_only unicode_text; do
+  target="$proof/$scenario"
+  mkdir -p "$target/kit" "$target/consumer"
+  packages=(ui_base ui_layout)
+  case "$scenario" in
+    interaction_only) packages+=(ui_interaction) ;;
+    unicode_text) packages+=(ui_style ui_text unicode_graphemes) ;;
+  esac
+  for package in "${packages[@]}"; do
+    cp -R -- "$root/kit/$package" "$target/kit/"
+  done
+  cp -- "$root/tests/ui_foundation/$scenario/main.odin" "$target/consumer/"
+  (
+    cd "$target/consumer"
+    odin build . -collection:ui=../kit -show-import-graph -vet -vet-style -vet-tabs -vet-semicolon -out:"$target/fixture" > "$target/imports.dot" 2> "$target/build.log"
+    "$target/fixture" > "$target/run.log" 2>&1
+  )
+  find "$target/kit" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort > "$target/packages.txt"
+  printf '%s PASS\n' "$scenario"
+done

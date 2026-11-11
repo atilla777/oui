@@ -1,0 +1,355 @@
+{
+  "version": 1,
+  "pages": [
+    {
+      "id": "geometry",
+      "file": "geometry.png"
+    }
+  ],
+  "regions": [
+    {
+      "id": "panel",
+      "page": "geometry",
+      "rect": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "nine_slice": {
+        "border": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "texture_scale": 1,
+        "edges": "stretch",
+        "center_x": "stretch",
+        "center_y": "stretch",
+        "omit_center": false,
+        "padding": {
+          "left": 6,
+          "top": 4,
+          "right": 6,
+          "bottom": 4
+        }
+      }
+    },
+    {
+      "id": "button",
+      "page": "geometry",
+      "rect": [
+        0,
+        40,
+        32,
+        20
+      ],
+      "nine_slice": {
+        "border": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "texture_scale": 1,
+        "edges": "stretch",
+        "center_x": "stretch",
+        "center_y": "stretch",
+        "omit_center": false,
+        "padding": {
+          "left": 6,
+          "top": 4,
+          "right": 6,
+          "bottom": 4
+        }
+      }
+    },
+    {
+      "id": "button-hovered",
+      "page": "geometry",
+      "rect": [
+        40,
+        40,
+        32,
+        20
+      ],
+      "nine_slice": {
+        "border": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "texture_scale": 1,
+        "edges": "stretch",
+        "center_x": "stretch",
+        "center_y": "stretch",
+        "omit_center": false,
+        "padding": {
+          "left": 6,
+          "top": 4,
+          "right": 6,
+          "bottom": 4
+        }
+      }
+    },
+    {
+      "id": "button-pressed",
+      "page": "geometry",
+      "rect": [
+        80,
+        40,
+        32,
+        20
+      ],
+      "nine_slice": {
+        "border": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "texture_scale": 1,
+        "edges": "stretch",
+        "center_x": "stretch",
+        "center_y": "stretch",
+        "omit_center": false,
+        "padding": {
+          "left": 6,
+          "top": 4,
+          "right": 6,
+          "bottom": 4
+        }
+      }
+    },
+    {
+      "id": "button-focused",
+      "page": "geometry",
+      "rect": [
+        120,
+        40,
+        32,
+        20
+      ],
+      "nine_slice": {
+        "border": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "texture_scale": 1,
+        "edges": "stretch",
+        "center_x": "stretch",
+        "center_y": "stretch",
+        "omit_center": false,
+        "padding": {
+          "left": 6,
+          "top": 4,
+          "right": 6,
+          "bottom": 4
+        }
+      }
+    },
+    {
+      "id": "button-disabled",
+      "page": "geometry",
+      "rect": [
+        160,
+        40,
+        32,
+        20
+      ],
+      "nine_slice": {
+        "border": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "texture_scale": 1,
+        "edges": "stretch",
+        "center_x": "stretch",
+        "center_y": "stretch",
+        "omit_center": false,
+        "padding": {
+          "left": 6,
+          "top": 4,
+          "right": 6,
+          "bottom": 4
+        }
+      }
+    },
+    {
+      "id": "button-selected",
+      "page": "geometry",
+      "rect": [
+        200,
+        40,
+        32,
+        20
+      ],
+      "nine_slice": {
+        "border": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "texture_scale": 1,
+        "edges": "stretch",
+        "center_x": "stretch",
+        "center_y": "stretch",
+        "omit_center": false,
+        "padding": {
+          "left": 6,
+          "top": 4,
+          "right": 6,
+          "bottom": 4
+        }
+      }
+    },
+    {
+      "id": "placeholder",
+      "page": "geometry",
+      "rect": [
+        0,
+        72,
+        24,
+        24
+      ]
+    },
+    {
+      "id": "close",
+      "page": "geometry",
+      "rect": [
+        40,
+        72,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "check",
+      "page": "geometry",
+      "rect": [
+        72,
+        72,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "info",
+      "page": "geometry",
+      "rect": [
+        104,
+        72,
+        16,
+        16
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "arrow",
+      "page": "geometry",
+      "rect": [
+        136,
+        72,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "slice-stretch",
+      "page": "geometry",
+      "rect": [
+        0,
+        40,
+        32,
+        20
+      ],
+      "nine_slice": {
+        "border": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "texture_scale": 1,
+        "edges": "stretch",
+        "center_x": "stretch",
+        "center_y": "stretch",
+        "omit_center": false,
+        "padding": {
+          "left": 6,
+          "top": 4,
+          "right": 6,
+          "bottom": 4
+        }
+      }
+    },
+    {
+      "id": "slice-repeat",
+      "page": "geometry",
+      "rect": [
+        0,
+        40,
+        32,
+        20
+      ],
+      "nine_slice": {
+        "border": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "texture_scale": 1,
+        "edges": "repeat",
+        "center_x": "repeat",
+        "center_y": "repeat",
+        "omit_center": false,
+        "padding": {
+          "left": 6,
+          "top": 4,
+          "right": 6,
+          "bottom": 4
+        }
+      }
+    },
+    {
+      "id": "slice-empty",
+      "page": "geometry",
+      "rect": [
+        0,
+        40,
+        32,
+        20
+      ],
+      "nine_slice": {
+        "border": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "texture_scale": 1,
+        "edges": "repeat",
+        "center_x": "repeat",
+        "center_y": "repeat",
+        "omit_center": true,
+        "padding": {
+          "left": 6,
+          "top": 4,
+          "right": 6,
+          "bottom": 4
+        }
+      }
+    }
+  ]
+}

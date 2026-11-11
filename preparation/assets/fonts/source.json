@@ -1,0 +1,12 @@
+{
+  "release": "v3.5.1",
+  "url": "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/DejaVuSansMono.tar.xz",
+  "archive_sha256": "9d3f2d60faa790b101903c2984b89c11397fc63b9ce43f2dcd25ffed4fb44e5f",
+  "member": "DejaVuSansMNerdFontMono-Regular.ttf",
+  "member_sha256": "9b55ade625f2d3f2a273ed16d9db2d924ad6236222920f9fd1324941cdc3c712",
+  "fonttools_version": "4.67.0",
+  "baseline_ranges": [[32, 126], [1040, 1103]],
+  "baseline_codepoints": [1025, 1105],
+  "family": "Slyx UI",
+  "postscript_name": "SlyxUI-Regular"
+}

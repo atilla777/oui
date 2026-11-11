@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Add optional tools to a previously checked physical ordinary kit. Never mutate source.
+set -euo pipefail
+SOURCE=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)
+PROOF=${1:?pass the proof directory printed by bash scripts/test-ui-showcase}
+if [[ -f "$PROOF/inventory.json" ]]; then
+  # A portable root already includes opt-in tools; preserve supplied inventory.
+  bash "$PROOF/scripts/test-ui-showcase" --portable-check
+  exit
+fi
+test -d "$PROOF/consumer/ui_showcase/app"
+mkdir -p "$PROOF/consumer/ui_showcase_tools/profile" "$PROOF/kit/ui_debug"
+for p in ui_showcase_tools ui_showcase_tools/profile; do
+  find "$SOURCE/consumer/$p" -maxdepth 1 -type f -name '*.odin' ! -name '*_test.odin' -exec cp -- {} "$PROOF/consumer/$p/" \;
+done
+for p in ui_debug ui_text/inspect ui_style/inspect ui_rich/inspect; do
+  mkdir -p "$PROOF/kit/$p"
+  find "$SOURCE/kit/$p" -maxdepth 1 -type f -name '*.odin' ! -name '*_test.odin' -exec cp -- {} "$PROOF/kit/$p/" \;
+done
+(
+ cd "$PROOF/consumer/ui_showcase_tools"
+ for mode in debug release test; do
+  flags=(-define:UI_SHOWCASE_TOOLS=true)
+  if [[ $mode == debug ]]; then flags+=(-debug); fi
+  if [[ $mode == test ]]; then flags+=(-define:UI_DEMO_TEST=true); fi
+  odin check . -collection:ui=../../kit "${flags[@]}" -vet -vet-style -vet-tabs -vet-semicolon > "$PROOF/tools-$mode-check.log" 2>&1
+  odin build . -collection:ui=../../kit "${flags[@]}" -vet -vet-style -vet-tabs -vet-semicolon -show-import-graph -extra-linker-flags:"$(pkg-config --libs libpng zlib)" -out:"../../tools-$mode" > "$PROOF/tools-$mode-imports.log" 2>&1
+  if grep -E '/core/testing|/unported/|/kit/ui/' "$PROOF/tools-$mode-imports.log"; then echo 'Forbidden tools runtime import' >&2; exit 1; fi
+  grep -q '/kit/ui_debug' "$PROOF/tools-$mode-imports.log"
+  for arg in '--ui-debug' '--ui-profile showcase-v19' '--ui-debug --ui-profile unknown' '--test-time'; do
+   if "../../tools-$mode" --font ../../resources/font.ttf $arg >> "$PROOF/tools-$mode-errors.log" 2>&1; then echo "accepted invalid tools flags: $arg" >&2; exit 1; fi
+  done
+ done
+ if ../../tools-release --font ../../resources/font.ttf --ui-debug --ui-profile showcase-v19 >> "$PROOF/tools-release-errors.log" 2>&1; then echo 'release opt-in accepted' >&2; exit 1; fi
+ for arg in '--ui-debug' '--ui-profile showcase-v19' '--test-time'; do
+  if ../../showcase --font ../../resources/font.ttf $arg >> "$PROOF/ordinary-tools-errors.log" 2>&1; then echo 'ordinary tools flag accepted' >&2; exit 1; fi
+ done
+ find ../../consumer ../../kit -type f -print0 | sort -z | xargs -0 sha256sum > "$PROOF/tools-sources.sha256"
+)
+test -z "$(find "$PROOF" -type l -print -quit)"
+printf 'Physical tools kit debug/release/test builds and pre-init CLI gates passed: %s\n' "$PROOF"

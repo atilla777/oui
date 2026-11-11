@@ -1,0 +1,214 @@
+#!/usr/bin/env bash
+set -euo pipefail
+SOURCE=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)
+if [[ ${1:-} == --portable ]]; then
+  PROOF=$(mktemp -d /tmp/opencode/slyx-portable-parent.XXXXXX)/kit
+  python3 -B "$SOURCE/scripts/export-ui-kit.py" "$PROOF"
+  UI_KIT_ROOT="$PROOF" python3 -B "$SOURCE/scripts/test-ui-kit.py" -v
+  bash "$PROOF/scripts/test-ui-showcase" --portable-check
+  printf 'Portable kit: %s\n' "$PROOF"
+  exit
+fi
+if [[ ${1:-} == --portable-acquisition ]]; then
+  cd "$SOURCE"
+  test -f inventory.json
+  FIXTURE=$(mktemp -d "${TMPDIR:-/tmp}/ui-acquisition.XXXXXX")
+  mkdir "$FIXTURE/remote"
+  python3 -B - "$SOURCE" "$FIXTURE/remote" <<'PY'
+import json, pathlib, shutil, sys
+root, output = map(pathlib.Path, sys.argv[1:])
+for name in list(json.loads((root / 'inventory.json').read_text())['files']) + ['inventory.json']:
+    target = output / name
+    target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(root / name, target)
+PY
+  git -C "$FIXTURE/remote" init -q -b main
+  git -C "$FIXTURE/remote" add .
+  git -C "$FIXTURE/remote" -c user.name='Local UI fixture' -c user.email='fixture@invalid' commit -qm 'Exact local portable fixture, not a remote release'
+  COMMIT=$(git -C "$FIXTURE/remote" rev-parse HEAD)
+  git clone --quiet --no-checkout "$FIXTURE/remote" "$FIXTURE/ui-source"
+  git -C "$FIXTURE/ui-source" checkout --quiet --detach "$COMMIT"
+  test "$(git -C "$FIXTURE/ui-source" rev-parse HEAD)" = "$COMMIT"
+  mkdir -p "$FIXTURE/vendor/odin-ui"
+  git -C "$FIXTURE/ui-source" archive "$COMMIT" | tar -x -C "$FIXTURE/vendor/odin-ui"
+  printf '%s\n' "$COMMIT" > "$FIXTURE/vendor/odin-ui/SOURCE_COMMIT"
+  mkdir "$FIXTURE/submodule-consumer"
+  git -C "$FIXTURE/submodule-consumer" init -q -b main
+  git -C "$FIXTURE/submodule-consumer" -c protocol.file.allow=always submodule add --quiet "$FIXTURE/remote" vendor/odin-ui
+  git -C "$FIXTURE/submodule-consumer/vendor/odin-ui" checkout --quiet --detach "$COMMIT"
+  git -C "$FIXTURE/submodule-consumer" add .gitmodules vendor/odin-ui
+  git -C "$FIXTURE/submodule-consumer" ls-files --stage vendor/odin-ui > "$FIXTURE/gitlink.log"
+  grep -q "160000 $COMMIT" "$FIXTURE/gitlink.log"
+  for variant in vendor submodule-consumer/vendor; do
+    target="$FIXTURE/$variant/odin-ui"
+    UI_KIT_ROOT="$target" python3 -B "$SOURCE/scripts/test-ui-kit.py" Distribution.test_portable_entry_and_skill Distribution.test_portable_links
+    python3 -B - "$SOURCE" "$target" <<'PY'
+import hashlib, json, pathlib, sys
+source, target = map(pathlib.Path, sys.argv[1:])
+for name, record in json.loads((source / 'inventory.json').read_text())['files'].items():
+    assert hashlib.sha256((target / name).read_bytes()).hexdigest() == record['sha256'], name
+PY
+    (
+      cd "$target"
+      mkdir build
+      odin build consumer/standalone_menu -collection:ui=kit -vet -vet-style -vet-tabs -vet-semicolon -show-import-graph -out:build/menu > build/menu-imports.log 2>&1
+      odin build consumer/ui_showcase -collection:ui=kit -vet -vet-style -vet-tabs -vet-semicolon -show-import-graph -extra-linker-flags:"$(pkg-config --libs libpng zlib)" -out:build/showcase > build/showcase-imports.log 2>&1
+    )
+  done
+  printf 'Local acquisition fixture (NOT publication): %s commit=%s\n' "$FIXTURE" "$COMMIT"
+  exit
+fi
+if [[ ${1:-} == --portable-check ]]; then
+  cd "$SOURCE"
+  test -f inventory.json
+  test -z "$(find kit consumer resources tests preparation -type l -print -quit)"
+  mkdir -p build
+  odin version > build/environment.log
+  pkg-config --modversion sdl3 sdl3-ttf libpng zlib >> build/environment.log
+  flags=(-vet -vet-style -vet-tabs -vet-semicolon)
+  odin build consumer/standalone_menu -collection:ui=kit "${flags[@]}" -show-import-graph -out:build/menu > build/menu-imports.log 2>&1
+  odin build consumer/ui_showcase -collection:ui=kit "${flags[@]}" -show-import-graph -extra-linker-flags:"$(pkg-config --libs libpng zlib)" -out:build/showcase > build/showcase-imports.log 2>&1
+  if grep -E '/(ui_debug|ui_testing|unported|game)/|/kit/ui/' build/{menu,showcase}-imports.log; then
+    echo 'Forbidden production import' >&2; exit 1
+  fi
+  if grep -E '/(ui_controls|ui_editor|ui_layers|ui_collections|translations|ui_inspect)/' build/menu-imports.log; then
+    echo 'Forbidden minimal import' >&2; exit 1
+  fi
+  for mode in debug release test; do
+    gate=(-define:UI_SHOWCASE_TOOLS=true)
+    if [[ $mode == debug ]]; then gate+=(-debug); fi
+    if [[ $mode == test ]]; then gate+=(-define:UI_DEMO_TEST=true); fi
+    odin build consumer/ui_showcase_tools -collection:ui=kit "${flags[@]}" "${gate[@]}" -show-import-graph -extra-linker-flags:"$(pkg-config --libs libpng zlib)" -out:"build/tools-$mode" > "build/tools-$mode-imports.log" 2>&1
+  done
+  for binary in menu showcase; do
+    if "build/$binary" --font resources/font.ttf --ui-debug > "build/$binary-refusal.log" 2>&1; then exit 1; fi
+    if "build/$binary" --font resources/font.ttf --scale 1.5 --pixel-perfect >> "build/$binary-refusal.log" 2>&1; then exit 1; fi
+  done
+  if build/tools-release --font resources/font.ttf --ui-debug --ui-profile showcase-v19 > build/release-gate.log 2>&1; then exit 1; fi
+  for p in consumer/standalone_menu/model consumer/ui_showcase/model kit/unicode_graphemes; do
+    odin test "$p" -collection:ui=kit "${flags[@]}" -out:build/model-tests > "build/$(echo "$p" | tr / _)-test.log" 2>&1
+  done
+  for p in consumer/standalone_menu consumer/ui_showcase/app consumer/ui_showcase_tools/profile; do
+    selected=()
+    if [[ $p == consumer/ui_showcase/app ]]; then
+      # Bounded F6 consumer contracts, not the full F3-F5 exhaustive allocation
+      # qualification walk. Library algorithms and publisher are unchanged here.
+      names=(
+        page_fixtures_and_namespaces publication_geometry_and_release
+        cold_sections_no_retained_history_or_old_sequence
+        software_matrix_failure_recovery_and_history
+        lab_inventory_current_requires_all_family_stamps
+        lab_hold_threshold_release_loss_and_no_replay
+        lab_failure_recovery_and_historical_readers
+        lab_settings_apply_is_confirmed_transaction lab_dirty_departure_guard
+        lab_inventory_drop_waits_for_confirm
+        lab_inventory_native_navigation_and_wheel_have_one_region
+        lab_hud_composes_popup_tooltip_and_hold
+        tools_hold_requires_explicit_test_clock_and_shared_threshold_without_replay
+        tools_refusal_preserves_real_family_reason_and_failed_rebuild_keeps_app_outcome
+        tools_launch_requires_explicit_profile_build_and_clock_permission
+        test_time_never_accumulates_wall_hold_or_visual_page_steps
+        lab_contract_named_unsupported_editor_scope_and_pan_refusals
+        lab_actual_regions_and_capture_claims_refuse_duplicates
+        lab_native_text_close_refusal_never_publishes_a_new_owner
+        c03_actual_region_and_second_offset_owner_guards_are_atomic
+        c08_and_c06_actual_geometry_reject_conflicting_activation_and_invalid_layers
+        one_owner_held_input_values_and_navigation
+      )
+      selection=""; for name in "${names[@]}"; do selection+="app.$name,"; done
+      selected=("-define:ODIN_TEST_NAMES=$selection")
+    fi
+    SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy odin test "$p" -collection:ui=kit "${flags[@]}" "${selected[@]}" -define:STANDALONE_MENU_TEST=true -define:UI_SHOWCASE_TEST=true -define:UI_DEMO_TEST=true -define:UI_SHOWCASE_TOOLS=true -define:ODIN_TEST_THREADS=1 -extra-linker-flags:"$(pkg-config --libs libpng zlib)" -out:build/consumer-tests > "build/$(echo "$p" | tr / _)-test.log" 2>&1
+  done
+  # Reuse the same copy/import boundary for six independently limited recipes.
+  python3 -B - "$SOURCE" <<'PY'
+from pathlib import Path
+import re, shutil, subprocess, sys, tempfile
+root = Path(sys.argv[1])
+recipes = {
+ 'layout': ('tests/ui_foundation/layout_only', 'ui_base ui_layout', 'ui_interaction ui_text unicode_graphemes ui_sdl ui_debug'),
+ 'menu': ('consumer/standalone_menu', 'ui_base ui_layout ui_interaction ui_style ui_text unicode_graphemes ui_sdl ui_sdl_text', 'ui_layers ui_controls ui_editor ui_collections ui_debug translations'),
+ 'hud': ('tests/ui_recipes/hud', 'ui_base ui_layout ui_interaction ui_style ui_text unicode_graphemes ui_sdl ui_sdl_text ui_layers ui_hold ui_hold/sdl', 'ui_controls ui_editor ui_collections ui_debug'),
+ 'settings': ('tests/ui_recipes/settings', 'ui_base ui_layout ui_interaction ui_style ui_text unicode_graphemes ui_sdl ui_sdl_text ui_layers ui_scroll ui_controls ui_editor ui_controls/sdl ui_editor/sdl', 'ui_collections ui_gestures ui_hold ui_debug'),
+ 'inventory': ('tests/ui_recipes/inventory', 'ui_base ui_layout ui_interaction ui_style ui_text unicode_graphemes ui_sdl ui_sdl_text ui_layers ui_scroll ui_collections ui_gestures ui_collections/sdl ui_gestures/sdl', 'ui_controls ui_editor ui_hold ui_debug'),
+ 'tools': ('tests/ui_recipes/tools', 'ui_base ui_layout ui_interaction ui_inspect ui_wire ui_debug ui_testing', 'ui_controls ui_editor ui_collections ui_sdl ui_text unicode_graphemes'),
+}
+for name, (consumer, packages, forbidden) in recipes.items():
+    dest = Path(tempfile.mkdtemp(prefix='recipe-' + name + '-', dir=root / 'build'))
+    for p in packages.split():
+        target = dest / 'kit' / p
+        target.mkdir(parents=True, exist_ok=True)
+        for f in (root / 'kit' / p).glob('*.odin'):
+            if not f.name.endswith('_test.odin'): shutil.copyfile(f, target / f.name)
+    shutil.copytree(root / consumer, dest / 'consumer')
+    with (dest / 'imports.log').open('w') as log:
+        subprocess.run(['odin','build','consumer','-collection:ui=kit','-show-import-graph','-vet','-vet-style','-vet-tabs','-vet-semicolon','-out:fixture'], cwd=dest, stdout=log, stderr=log, check=True)
+    graph = (dest / 'imports.log').read_text()
+    assert str(root / 'consumer') not in graph and str(root / 'kit') not in graph
+    for p in forbidden.split():
+        assert not (dest / 'kit' / p).exists(), (name, p)
+        assert '/kit/' + p + '"' not in graph, (name, p)
+    if name != 'menu':
+        result = subprocess.run([str(dest / 'fixture')], cwd=dest, check=True, capture_output=True, text=True)
+        (dest / 'run.log').write_text(result.stdout + result.stderr)
+        if name in ('hud', 'settings', 'inventory'):
+            assert result.stdout.strip() == f'recipe-{name} effects=1 conflicts=1 live=0', (name, result.stdout)
+        else:
+            print(result.stdout, end='')
+    (dest / 'packages.txt').write_text(packages + '\n')
+PY
+  python3 -B kit/unicode_graphemes/generate.py --check > build/unicode-generation.log 2>&1
+  UI_KIT_ROOT="$SOURCE" python3 -B scripts/test-ui-kit.py -v
+  printf 'Portable commands, six restricted recipe builds and consumer contracts passed: %s\n' "$SOURCE"
+  exit
+fi
+PROOF=$(mktemp -d /tmp/opencode/slyx-showcase-proof.XXXXXX)
+printf 'Showcase proof: %s\n' "$PROOF"
+mkdir -p "$PROOF/kit" "$PROOF/consumer/ui_showcase/model" "$PROOF/consumer/ui_showcase/sections" "$PROOF/consumer/atlas_catalog/loader" "$PROOF/consumer/controls_demo/model" "$PROOF/consumer/gestures_demo/model" "$PROOF/consumer/virtualized_collections_demo/model" "$PROOF/resources/atlas/a" "$PROOF/resources/atlas/b" "$PROOF/resources/notices"
+mkdir "$PROOF/consumer/ui_showcase/app"
+for p in ui_base ui_layout ui_interaction ui_style ui_text unicode_graphemes ui_layers ui_scroll ui_controls ui_sdl ui_sdl_text ui_rich ui_editor ui_collections ui_gestures ui_hold ui_custom ui_composition ui_world ui_transitions ui_inspect ui_wire translations; do
+  mkdir "$PROOF/kit/$p"
+  find "$SOURCE/kit/$p" -maxdepth 1 -type f -name '*.odin' ! -name '*_test.odin' -exec cp -- {} "$PROOF/kit/$p/" \;
+done
+mkdir -p "$PROOF/kit/ui_accessibility/projection" "$PROOF/kit/ui_accessibility/inspect" "$PROOF/consumer/accessibility_demo/model"
+for p in projection inspect; do
+  find "$SOURCE/kit/ui_accessibility/$p" -maxdepth 1 -type f -name '*.odin' ! -name '*_test.odin' -exec cp -- {} "$PROOF/kit/ui_accessibility/$p/" \;
+done
+for p in ui_controls ui_rich ui_editor ui_collections ui_gestures ui_hold ui_custom; do
+  mkdir "$PROOF/kit/$p/sdl"
+  find "$SOURCE/kit/$p/sdl" -maxdepth 1 -type f -name '*.odin' ! -name '*_test.odin' -exec cp -- {} "$PROOF/kit/$p/sdl/" \;
+done
+for p in ui_showcase ui_showcase/app ui_showcase/model ui_showcase/sections atlas_catalog/loader controls_demo/model gestures_demo/model virtualized_collections_demo/model accessibility_demo/model; do
+  find "$SOURCE/consumer/$p" -maxdepth 1 -type f -name '*.odin' ! -name '*_test.odin' -exec cp -- {} "$PROOF/consumer/$p/" \;
+done
+mkdir "$PROOF/kit/unicode_graphemes/data"
+cp -- "$SOURCE/consumer/ui_showcase/standalone.md" "$PROOF/README.md"
+cp -- "$SOURCE/kit/unicode_graphemes/data/LICENSE.txt" "$PROOF/kit/unicode_graphemes/data/"
+cp -- "$SOURCE/kit/unicode_graphemes/README.md" "$PROOF/kit/unicode_graphemes/"
+cp -- "$SOURCE/resources/font.ttf" "$PROOF/resources/font.ttf"
+cp -- "$SOURCE/resources/fallback.ttf" "$PROOF/resources/fallback.ttf"
+cp -- "$SOURCE/assets/fonts/DejaVu-LICENSE.txt" "$SOURCE/assets/fonts/Nerd-Fonts-NOTICE.txt" "$SOURCE/assets/fonts/Octicons-LICENSE.txt" "$PROOF/resources/"
+cp -- "$SOURCE/resources/atlas/LICENSE" "$PROOF/resources/notices/atlas-LICENSE"
+cp -- "${LIBPNG_LICENSE:-/usr/share/licenses/libpng/LICENSE}" "$PROOF/resources/notices/libpng-LICENSE.txt"
+cp -- "${ZLIB_LICENSE:-/usr/share/licenses/zlib/LICENSE}" "$PROOF/resources/notices/zlib-LICENSE.txt"
+for set in a b; do cp -- "$SOURCE/resources/atlas/$set/manifest.json" "$SOURCE/resources/atlas/$set/geometry.png" "$PROOF/resources/atlas/$set/"; done
+(
+  cd "$PROOF/consumer/ui_showcase"
+  odin version > "$PROOF/environment.log"
+  pkg-config --modversion sdl3 sdl3-ttf libpng zlib >> "$PROOF/environment.log"
+  odin check . -collection:ui=../../kit -vet -vet-style -vet-tabs -vet-semicolon > "$PROOF/check.log" 2>&1
+  odin build . -collection:ui=../../kit -vet -vet-style -vet-tabs -vet-semicolon -show-import-graph -extra-linker-flags:"$(pkg-config --libs libpng zlib)" -out:../../showcase > "$PROOF/import-graph.log" 2>&1
+  if grep -E '/(game|ui_debug|unported)/|/kit/ui/' "$PROOF/import-graph.log"; then echo 'Forbidden production import' >&2; exit 1; fi
+  if find ../.. -type l | grep -q .; then echo 'Unexpected proof symlink' >&2; exit 1; fi
+  for arg in '--unknown' '--section unknown' '--size 2147483648x600' '--scale 1.5 --pixel-perfect'; do
+    # Deliberate word splitting: these fixed cases test independent CLI arguments.
+    if ../../showcase --font ../../resources/font.ttf $arg >> "$PROOF/cli-errors.log" 2>&1; then echo "accepted invalid CLI: $arg" >&2; exit 1; fi
+  done
+  if ../../showcase --font missing.ttf >> "$PROOF/cli-errors.log" 2>&1; then exit 1; fi
+  if ../../showcase --font ../../resources/font.ttf --fallback-font missing.ttf >> "$PROOF/cli-errors.log" 2>&1; then exit 1; fi
+  printf 'not a font' > "$PROOF/resources/invalid.ttf"
+  if SDL_VIDEODRIVER=dummy ../../showcase --font ../../resources/invalid.ttf > "$PROOF/font-error.log" 2>&1; then exit 1; fi
+  grep -q 'Initial page/font/resource prepare' "$PROOF/font-error.log"
+  find ../../consumer ../../kit ../../resources -type f -print0 | sort -z | xargs -0 sha256sum > "$PROOF/sources.sha256"
+)
+printf 'Standalone build/check/import closure and real invalid-font startup passed: %s\n' "$PROOF"

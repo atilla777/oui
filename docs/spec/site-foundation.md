@@ -48,3 +48,43 @@ loopback-only статический preview. Исключение не озна
 стали поддерживаемыми или что audit-риски устранены, и не отменяет браузерную
 приёмку. Поиск, галерея, media, viewer и
 CI/deploy не входят в эту основу.
+
+## Руководство подключения и первого запуска
+
+Кандидат `oui-3no.18`, ожидающий интеграции: парные
+[EN](../../site/en/guide/using-oui.md) и [RU](../../site/ru/guide/using-oui.md)
+страницы дополнены предпосылками, различием maintained source и portable export,
+закреплением полного commit для vendor/submodule и командами существующего
+`standalone_menu` с явным путём шрифта. Публичный portable remote не обещается;
+экспорт не публикует Git-репозиторий, его commit отличен от исходного.
+
+Для исходной опубликованной ревизии
+`646dc817cd1b9e3149d6a018ef8bf83f5c87b3bb` проверены экспорт, оба способа
+получения локального portable Git fixture в отдельных каталогах, gitlink и
+сборка меню из обеих копий. Проверены parity/anchors, static build и HTTP routes.
+Это не проверка публичной поставки portable repository. Из обеих полученных
+копий проверен графический запуск меню EN/RU при 800x600, scale 1 через
+`scripts/ui_isd.py` с явно выбранной ISD ревизии
+`f8204c61615406ce5628b15692628e146476a008`: полные source fingerprints,
+`linux-abstract-v1` в create/status, собственные run/focus/input/PNG и stop
+в `finally`. Return на исходно сфокусированной Action меняет счётчик с 0 на 1
+и даёт ровно один effect; все восемь PNG до/после просмотрены. Это ограниченная
+X11/software проверка, не квалификация других платформ или полного меню.
+Новые native/API гарантии не добавлены; прежние браузерные наблюдения выше
+относятся к основе `oui-3no.1`, не к расширенному тексту этого кандидата.
+
+## Навигация по пакетам и lifecycle
+
+Кандидат `oui-3no.19`, ожидающий интеграции: парные EN/RU страницы
+`guide/using-oui` дают карту headless/family/backend/tools и ведут ко всем шести
+существующим recipes и их source/fixtures. Showcase обозначен как более широкий
+union, не минимальная зависимость. Сохранены прежние anchors; добавлены парные
+`package-map` и `compatibility`.
+
+Это объяснительная навигация, не новая спецификация API: авторитетными остаются
+[API](../api.md), [recipes](../recipes.md), [lifecycle](../lifecycle.md),
+[compatibility](../compatibility.md) и [scope](../scope.md). Сводка охватывает
+владение, подготовку до commit barrier, явное recovery без replay и lifetime.
+Текст сверен с этими контрактами, импортами и restricted recipe sets в
+`scripts/test-ui-showcase`; parity и ссылки проверены. Новый native запуск,
+браузерная аттестация расширенного текста и deployment этим не утверждаются.

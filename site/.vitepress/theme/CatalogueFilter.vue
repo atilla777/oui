@@ -7,7 +7,7 @@ const props = defineProps({ locale: { type: String, required: true } })
 const query = ref('')
 const category = ref('')
 const categories = [...new Set(catalogue.records.flatMap(item => item.categories))].sort()
-const categoryLabels = { en: { layout: 'Layout', geometry: 'Geometry', controls: 'Controls', styling: 'Styling' }, ru: { layout: 'Компоновка', geometry: 'Геометрия', controls: 'Элементы управления', styling: 'Оформление' } }
+const categoryLabels = { en: { layout: 'Layout', geometry: 'Geometry', controls: 'Controls', styling: 'Styling', state: 'State' }, ru: { layout: 'Компоновка', geometry: 'Геометрия', controls: 'Элементы управления', styling: 'Оформление', state: 'Состояние' } }
 const visible = computed(() => new Set(catalogue.records.filter(record => matchesRecord(record, props.locale, query.value, category.value)).map(record => record.id)))
 provide('catalogueVisible', visible)
 const labels = computed(() => props.locale === 'ru'

@@ -15,13 +15,15 @@ test('localized metadata query and category intersection', () => {
   assert.equal(matchesRecord(record, 'en', '   ', ''), true)
   assert.equal(matchesRecord(record, 'en', 'pages.odin', ''), true)
 })
-test('three sample records filter independently', () => {
+test('four sample records filter independently and share categories', () => {
   const ids = (locale, query, category = '') => records.filter(item => matchesRecord(item, locale, query, category)).map(item => item.id)
   assert.deepEqual(ids('en', 'slider'), ['controls'])
   assert.deepEqual(ids('ru', 'каскад'), ['styling'])
   assert.deepEqual(ids('en', '', 'geometry'), ['layout'])
-  assert.deepEqual(ids('ru', '', 'controls'), ['controls'])
+  assert.deepEqual(ids('ru', '', 'controls'), ['profiles', 'controls'])
   assert.deepEqual(ids('en', '', 'styling'), ['styling'])
   assert.deepEqual(ids('en', 'slider', 'styling'), [])
-  assert.deepEqual(ids('en', ''), ['layout', 'controls', 'styling'])
+  assert.deepEqual(ids('en', ''), ['layout', 'profiles', 'controls', 'styling'])
+  assert.deepEqual(ids('en', 'draft', 'state'), ['profiles'])
+  assert.deepEqual(ids('ru', 'черновик', 'state'), ['profiles'])
 })

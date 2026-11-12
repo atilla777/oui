@@ -197,6 +197,7 @@ try {
       assert.ok(await page.locator('#layout').isVisible())
       assert.equal(await page.locator('#controls').isVisible(), false)
       assert.equal(await page.locator('#styling').isVisible(), false)
+      assert.equal(await page.locator('#profiles').isVisible(), false)
       await select.selectOption('geometry')
       assert.equal(await select.locator('option:checked').innerText(), lang === 'en' ? 'Geometry' : 'Геометрия')
       assert.ok(await page.locator('#layout').isVisible())
@@ -212,6 +213,11 @@ try {
       await select.selectOption('styling')
       assert.ok(await page.locator('#styling').isVisible())
       assert.equal(await page.locator('#layout').isVisible(), false)
+      await query.fill(lang === 'en' ? 'draft' : 'черновик')
+      await select.selectOption('state')
+      assert.equal(await select.locator('option:checked').innerText(), lang === 'en' ? 'State' : 'Состояние')
+      assert.ok(await page.locator('#profiles').isVisible())
+      assert.equal(await page.locator('#controls').isVisible(), false)
       await query.fill('zzznomatch')
       assert.equal(await page.locator('#layout').isVisible(), false)
       assert.equal(await page.locator('.catalogue-filter [role=status]').innerText(), empty)
@@ -223,6 +229,7 @@ try {
       assert.ok(await page.locator('#layout').isVisible())
       assert.ok(await page.locator('#controls').isVisible())
       assert.ok(await page.locator('#styling').isVisible())
+      assert.ok(await page.locator('#profiles').isVisible())
       await select.selectOption('layout')
       await query.fill('ui_layout')
       assert.ok(await page.locator('#layout').isVisible())
@@ -346,7 +353,7 @@ try {
           assert.equal((await p.locator('h1').first().innerText()).replace(/\u200b/g, '').trim(), heading)
           assert.ok(await p.locator('main p').first().isVisible())
           if (path === 'catalogue.html') {
-            for (const id of ['layout', 'controls', 'styling']) {
+            for (const id of ['layout', 'controls', 'styling', 'profiles']) {
               const link = p.locator(`main a[href="./capabilities/${id}.html"]`)
               assert.ok(await link.isVisible())
               assert.equal(await link.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/capabilities/${id}.html`)

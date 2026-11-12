@@ -53,6 +53,14 @@ try {
       const bytes = Buffer.from(await response.arrayBuffer())
       assert.equal(bytes.subarray(0, 8).toString('hex'), '89504e470d0a1a0a')
       assert.equal(createHash('sha256').update(bytes).digest('hex'), record.sha256)
+      const small = media.records.find(item => item.id === `layout-small-${lang}`)
+      const smallPath = `/oui/${small.path}`
+      assert.ok(markup.includes(`src="${smallPath}"`))
+      assert.ok(markup.includes(`alt="${small.alt[lang]}"`))
+      const smallResponse = await get(smallPath)
+      assert.equal(smallResponse.status, 200)
+      assert.match(smallResponse.headers.get('content-type'), /^image\/png/)
+      assert.equal(createHash('sha256').update(Buffer.from(await smallResponse.arrayBuffer())).digest('hex'), small.sha256)
     }
     for (const [id, states] of [['atlas', ['initial', 'alternate', 'reload']], ['profiles', ['initial', 'dialog', 'applied']], ['controls', ['initial', 'changed']], ['styling', ['initial', 'changed']]]) if (path.includes(`capabilities/${id}`)) {
       for (const state of states) {

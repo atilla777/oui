@@ -71,6 +71,37 @@ URL с `/oui/en/capabilities/layout` либо `/oui/ru/capabilities/layout`.
 изолированную браузерную приёмку (Linux Chromium с sandbox).
 Остановить свой preview — Ctrl-C. Подробнее: [site README](../../site/README.md).
 
+## Просмотр двух состояний layout
+
+Локальный кандидат `oui-3no.4`, pending integration, добавляет viewer на обе
+layout-страницы. Это просмотр изображений, не браузерная реализация native UI.
+`viewerStates` записи layout связывает `large` (1280×960) и `small` (960×720)
+с соответствующими EN/RU media records. Проверка каталога отвергает несовпадение
+состояния, locale, window/drawable dimensions и scale. Настоящие новые 960×720
+captures получены на clean source revision
+`4da8d7a57bd2453227a4c37df6b0b4d171401681`, с прежними ресурсами и проверенной
+ISD `f8204c61615406ce5628b15692628e146476a008`. Это два начальных состояния
+разных размеров окна, без изменения модели и без анимации layout.
+
+Кнопка открытия появляется только после подключения JavaScript. Модальный
+`dialog` содержит локализованные заголовок, закрытие, selector, alt и подпись
+выбранного изображения. Tab/Shift+Tab удерживают фокус внутри; Escape и кнопка
+закрытия возвращают его к открывшему элементу. Автопереключения и анимации нет.
+Оба статических изображения и ссылки на оригинальные PNG доступны без JS.
+
+На этом кандидате пройдены Node/schema negative tests, build, loopback HTTP,
+свежий portable export/portable-check и отдельно разрешённый sandboxed headless
+Chromium: EN/RU на 360/1280, keyboard/pointer open, переключение изображения и
+подписи, focus containment, Escape/close/return, reduced motion и no-JS fallback.
+Оба новых native PNG просмотрены; ISD runs остановлены с проверкой отсутствия
+своих живых процессов. Это не полная проверка доступности, других браузеров,
+всей галереи или Pages deployment.
+
+Как увидеть: после build запустить указанный выше static preview, открыть
+layout-страницу EN или RU, нажать кнопку просмотра, выбрать 960×720, пройти
+controls клавишей Tab и закрыть Escape. Ожидаются другой настоящий capture
+и возврат фокуса на кнопку просмотра.
+
 ## Profiles: локальный кандидат oui-3no.6
 
 EN/RU страницы описывают consumer-owned draft/applied workflow: Apply, Cancel,

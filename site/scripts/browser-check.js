@@ -181,7 +181,7 @@ try {
   const sampleName = path => path.startsWith('capabilities/') ? path.split('/')[1].replace('.html', '') : 'catalogue'
   const checkImages = async (activePage, path, lang) => {
     for (const src of imagePaths(path, lang)) {
-      const image = activePage.locator(`main img[src="${src}"]`)
+      const image = activePage.locator(`main img[src="${src}"]`).first()
       assert.ok(await image.isVisible(), `missing image ${src}`)
       assert.ok(await image.evaluate(el => el.complete && el.naturalWidth === 1280 && el.naturalHeight === 960 && !!el.alt), `invalid image ${src}`)
     }
@@ -313,6 +313,40 @@ try {
       }
     }
   }
+  for (const width of [360, 1280]) {
+    await page.setViewportSize({ width, height: 900 })
+    for (const lang of ['en', 'ru']) {
+      await go(`/oui/${lang}/capabilities/layout.html`)
+      const open = page.locator('.viewer-open')
+      const dialog = page.locator('.layout-viewer dialog')
+      const close = dialog.locator('button')
+      const select = dialog.locator('select')
+      await focusByTab('.viewer-open')
+      await page.keyboard.press('Enter')
+      assert.ok(await dialog.evaluate(el => el.open))
+      assert.ok(await close.evaluate(el => el === document.activeElement))
+      assert.equal(await select.inputValue(), 'large')
+      assert.ok(await dialog.locator('img').evaluate((el, locale) => el.src.endsWith(`/layout-${locale}.png`) && el.naturalWidth === 1280, lang))
+      await select.selectOption('small')
+      assert.ok(await dialog.locator('img').evaluate((el, locale) => el.src.endsWith(`/layout-small-${locale}.png`) && el.naturalWidth === 960 && el.naturalHeight === 720, lang))
+      assert.ok((await dialog.locator('figcaption').innerText()).includes('960×720'))
+      await select.focus()
+      await page.keyboard.press('Tab')
+      assert.ok(await close.evaluate(el => el === document.activeElement), 'forward focus escaped dialog')
+      await page.keyboard.press('Shift+Tab')
+      assert.ok(await select.evaluate(el => el === document.activeElement), 'reverse focus escaped dialog')
+      await page.evaluate(() => document.querySelector('main a')?.focus())
+      assert.ok(await dialog.evaluate(el => el.contains(document.activeElement)), 'programmatic focus escaped dialog')
+      await page.screenshot({ path: join(artifacts, `viewer-${lang}-${width}.png`) })
+      await page.keyboard.press('Escape')
+      assert.ok(!(await dialog.evaluate(el => el.open)))
+      assert.ok(await open.evaluate(el => el === document.activeElement), 'Escape did not restore focus')
+      await open.click()
+      await close.click()
+      assert.ok(await open.evaluate(el => el === document.activeElement), 'close did not restore focus')
+      console.log(`PASS viewer ${lang} ${width}: keyboard and pointer, state, focus containment, Escape and close`)
+    }
+  }
   assert.ok(assetResponses.size > 0, 'no static assets loaded')
   await page.emulateMedia({ reducedMotion: 'reduce' })
   assert.equal(await page.evaluate(() => matchMedia('(prefers-reduced-motion: reduce)').matches), true)
@@ -327,6 +361,15 @@ try {
       assert.ok(await page.locator('main p').first().isVisible())
       assert.equal(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior), 'auto')
       await checkImages(page, path, lang)
+    }
+  }
+  for (const width of [360, 1280]) {
+    await page.setViewportSize({ width, height: 900 })
+    for (const lang of ['en', 'ru']) {
+      await go(`/oui/${lang}/capabilities/layout.html`)
+      await page.locator('.viewer-open').click()
+      assert.ok(await page.locator('.layout-viewer dialog').evaluate(el => el.open && getComputedStyle(el).animationName === 'none'))
+      await page.keyboard.press('Escape')
     }
   }
   console.log('PASS reduced motion: preference, transition duration, scrolling and prose visibility')
@@ -378,6 +421,14 @@ try {
           }
           assert.equal(await p.evaluate(() => typeof window.__VP_SITE_DATA__), 'undefined')
           await checkImages(p, path, lang)
+          if (path === 'capabilities/layout.html') {
+              const small = p.locator(`main img[src="/oui/media/layout-small-${lang}.png"]`)
+              assert.ok(await small.isVisible())
+              assert.ok(await small.evaluate(el => el.complete && el.naturalWidth === 960 && el.naturalHeight === 720 && !!el.alt))
+              assert.equal(await p.locator(`main a[href="/oui/media/layout-small-${lang}.png"]`).count(), 1)
+              assert.equal(await p.locator(`main a[href="/oui/media/layout-${lang}.png"]`).count(), 1)
+              assert.equal(await p.locator('.viewer-open').count(), 0)
+          }
           await p.screenshot({ path: join(artifacts, `nojs-${lang}-${sampleName(path)}-${width}.png`), fullPage: true })
           await focusByTab(`.content-container a[lang="${other}"]`, p)
           await p.keyboard.press('Enter')

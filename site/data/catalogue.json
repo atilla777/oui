@@ -3,7 +3,9 @@
   "coverage": {
     "mode": "sample",
     "ids": [
-      "layout"
+      "layout",
+      "scroll-table",
+      "collections"
     ]
   },
   "records": [
@@ -35,6 +37,69 @@
       "media": [
         "layout-en",
         "layout-ru"
+      ]
+    },
+    {
+      "id": "scroll-table",
+      "group": "gallery",
+      "categories": [
+        "scrolling"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_scroll"
+      ],
+      "source": "consumer/ui_showcase/app/pages.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Scroll and table",
+        "ru": "Прокрутка и таблица"
+      },
+      "summary": {
+        "en": "Scroll an ordinary table through a vertical viewport.",
+        "ru": "Вертикальная прокрутка обычной таблицы в области просмотра."
+      },
+      "limitations": {
+        "en": "Experimental; vertical non-nested scrolling and three fixed tracks.",
+        "ru": "Экспериментально; вертикальная невложенная прокрутка и три фиксированные колонки."
+      },
+      "media": [
+        "scroll-table-en",
+        "scroll-table-ru"
+      ]
+    },
+    {
+      "id": "collections",
+      "group": "gallery",
+      "categories": [
+        "scrolling",
+        "collections"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_collections"
+      ],
+      "source": "consumer/ui_showcase/app/collection_runtime.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Virtual collections",
+        "ru": "Виртуальные коллекции"
+      },
+      "summary": {
+        "en": "Materialize the visible portion of a uniform list or grid.",
+        "ru": "Материализация видимой части однородного списка или сетки."
+      },
+      "limitations": {
+        "en": "Experimental; uniform geometry and one offset owner per region.",
+        "ru": "Экспериментально; однородная геометрия и один владелец смещения на область."
+      },
+      "media": [
+        "collections-en",
+        "collections-ru"
       ]
     }
   ]

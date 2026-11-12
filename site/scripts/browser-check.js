@@ -6,6 +6,7 @@ import { chromium } from 'playwright-core'
 import { startPreview } from './preview.js'
 
 const artifacts = await mkdtemp(join(process.env.OUI_BROWSER_ARTIFACT_ROOT || tmpdir(), 'oui-browser-'))
+const media = JSON.parse(await readFile('data/media.json', 'utf8'))
 const profile = join(artifacts, 'profile')
 await mkdir(profile)
 console.log(`artifacts=${artifacts}`)
@@ -162,7 +163,9 @@ try {
   }
   const samplePages = [
     ['catalogue.html', 'Capability catalogue', 'Каталог возможностей', 'layout'],
-    ['capabilities/layout.html', 'Layout', 'Компоновка', 'boundaries']
+    ['capabilities/layout.html', 'Layout', 'Компоновка', 'boundaries'],
+    ['capabilities/scroll-table.html', 'Scroll and table', 'Прокрутка и таблица', 'boundaries'],
+    ['capabilities/collections.html', 'Virtual collections', 'Виртуальные коллекции', 'boundaries']
   ]
   for (const width of [360, 1280]) {
     await page.setViewportSize({ width, height: 900 })
@@ -173,12 +176,14 @@ try {
         const dimensions = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, client: document.documentElement.clientWidth }))
         assert.ok(dimensions.scroll <= dimensions.client, `${path} ${lang} ${width} overflow ${JSON.stringify(dimensions)}`)
         assert.ok(await page.locator('main p').first().isVisible())
+        const section = path.startsWith('capabilities/') ? path.split('/')[1].replace('.html', '') : 'catalogue'
         if (path.startsWith('capabilities/')) {
-          const image = page.locator(`main img[src="/oui/media/layout-${lang}.png"]`)
+          const image = page.locator(`main img[src="/oui/media/${section}-${lang}.png"]`)
           assert.ok(await image.isVisible())
           assert.ok(await image.evaluate(el => el.complete && el.naturalWidth === 1280 && el.naturalHeight === 960 && !!el.alt))
+          assert.equal(await image.getAttribute('alt'), media.records.find(item => item.id === `${section}-${lang}`).alt[lang])
         }
-        await page.screenshot({ path: join(artifacts, `${lang}-${path.startsWith('capabilities/') ? 'layout' : 'catalogue'}-${width}.png`), fullPage: true })
+        await page.screenshot({ path: join(artifacts, `${lang}-${section}-${width}.png`), fullPage: true })
         await page.keyboard.press('Tab')
         assert.equal(await page.evaluate(() => document.activeElement.classList.contains('VPSkipLink')), true)
         await page.keyboard.press('Enter')
@@ -205,9 +210,9 @@ try {
   assert.ok(await page.locator('main p').first().isVisible())
   assert.equal(await page.locator('main a').first().evaluate(el => getComputedStyle(el).transitionDuration), '0s')
   assert.equal(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior), 'auto')
-  for (const [path, en] of samplePages) {
-    await go(`/oui/en/${path}`)
-    await checkPage('en', en)
+  for (const [path, en, ru] of samplePages) for (const [lang, title] of [['en', en], ['ru', ru]]) {
+    await go(`/oui/${lang}/${path}`)
+    await checkPage(lang, title)
     assert.ok(await page.locator('main p').first().isVisible())
     assert.equal(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior), 'auto')
     if (path.startsWith('capabilities/')) assert.ok(await page.locator('main img').isVisible())
@@ -253,12 +258,16 @@ try {
           assert.equal((await p.locator('h1').first().innerText()).replace(/\u200b/g, '').trim(), heading)
           assert.ok(await p.locator('main p').first().isVisible())
           assert.equal(await p.evaluate(() => typeof window.__VP_SITE_DATA__), 'undefined')
+          const dimensions = await p.evaluate(() => ({ scroll: document.documentElement.scrollWidth, client: document.documentElement.clientWidth }))
+          assert.ok(dimensions.scroll <= dimensions.client, `no-JS ${path} ${lang} ${width} overflow ${JSON.stringify(dimensions)}`)
+          const section = path.startsWith('capabilities/') ? path.split('/')[1].replace('.html', '') : 'catalogue'
           if (path.startsWith('capabilities/')) {
-            const image = p.locator(`main img[src="/oui/media/layout-${lang}.png"]`)
+            const image = p.locator(`main img[src="/oui/media/${section}-${lang}.png"]`)
             assert.ok(await image.isVisible())
             assert.ok(await image.evaluate(el => el.complete && el.naturalWidth === 1280 && el.naturalHeight === 960 && !!el.alt))
+            assert.equal(await image.getAttribute('alt'), media.records.find(item => item.id === `${section}-${lang}`).alt[lang])
           }
-          await p.screenshot({ path: join(artifacts, `nojs-${lang}-${path.startsWith('capabilities/') ? 'layout' : 'catalogue'}-${width}.png`), fullPage: true })
+          await p.screenshot({ path: join(artifacts, `nojs-${lang}-${section}-${width}.png`), fullPage: true })
           await focusByTab(`.content-container a[lang="${other}"]`, p)
           await p.keyboard.press('Enter')
           await p.waitForURL(`**/oui/${other}/${path}`)

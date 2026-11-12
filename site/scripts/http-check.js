@@ -23,7 +23,11 @@ try {
     ['en/catalogue.html', 'en', 'Capability catalogue', '/oui/ru/catalogue.html'],
     ['ru/catalogue.html', 'ru', 'Каталог возможностей', '/oui/en/catalogue.html'],
     ['en/capabilities/layout.html', 'en', 'Layout', '/oui/ru/capabilities/layout.html'],
-    ['ru/capabilities/layout.html', 'ru', 'Компоновка', '/oui/en/capabilities/layout.html']
+    ['ru/capabilities/layout.html', 'ru', 'Компоновка', '/oui/en/capabilities/layout.html'],
+    ['en/capabilities/scroll-table.html', 'en', 'Scroll and table', '/oui/ru/capabilities/scroll-table.html'],
+    ['ru/capabilities/scroll-table.html', 'ru', 'Прокрутка и таблица', '/oui/en/capabilities/scroll-table.html'],
+    ['en/capabilities/collections.html', 'en', 'Virtual collections', '/oui/ru/capabilities/collections.html'],
+    ['ru/capabilities/collections.html', 'ru', 'Виртуальные коллекции', '/oui/en/capabilities/collections.html']
   ]) {
     const response = await get('/oui/' + path)
     assert.equal(response.status, 200, path)
@@ -34,10 +38,11 @@ try {
     assert.ok(html.includes(`href="${other}"`), path)
     if (path.includes('guide/')) assert.ok(html.includes('id="choose-a-boundary"'))
     const markup = html.split('<script>window.__VP_HASH_MAP__')[0]
-    if (path.includes('capabilities/layout')) {
-      const image = `/oui/media/layout-${lang}.png`
+    const capability = path.match(/capabilities\/(layout|scroll-table|collections)\.html$/)?.[1]
+    if (capability) {
+      const image = `/oui/media/${capability}-${lang}.png`
       assert.ok(markup.includes(`src="${image}"`), `missing no-JS image ${path}`)
-      const record = media.records.find(item => item.id === `layout-${lang}`)
+      const record = media.records.find(item => item.id === `${capability}-${lang}`)
       assert.ok(markup.includes(`alt="${record.alt[lang]}"`))
       const response = await get(image)
       assert.equal(response.status, 200)

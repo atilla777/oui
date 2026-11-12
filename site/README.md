@@ -54,7 +54,8 @@ stable cross-language anchors. The language link retains the page key; with JS i
 retains a hash only when that ID exists in the destination HTML. Without JS the
 ordinary link still reaches the corresponding page without a hash.
 
-The catalogue is an explicit `layout` sample, not complete coverage. The
+The catalogue is an explicit `layout`, `scroll-table` and `collections` sample,
+not complete coverage. The
 schema-versioned `data/catalogue.json` and `data/media.json` are checked before
 the build against the actual native section IDs, locale media, provenance,
 PNG dimensions and digests. `npm run check:catalogue:strict` deliberately fails

@@ -46,3 +46,40 @@ loopback-only preview. EN/RU catalogue/layout проверены на ширин
 `npm run check:http`, затем `npm run preview -- --port 0` и выданный локальный
 URL с `/oui/en/capabilities/layout` либо `/oui/ru/capabilities/layout`.
 Остановить свой preview — Ctrl-C. Подробнее: [site README](../../site/README.md).
+
+## Прокрутка и виртуальные коллекции
+
+Кандидат `oui-3no.10`, pending integration: sample расширен до `layout`,
+`scroll-table`, `collections`; остальные gallery/Lab IDs не объявлены готовыми.
+Новые EN/RU страницы доступны из статического каталога, содержат purpose,
+наблюдаемое поведение, ограничения, выбранные пакеты, pinned source links
+и native build/run команды. Библиотека и native поведение не изменены.
+
+`scroll-table` показывает обычную вертикальную невложенную прокрутку таблицы
+с тремя фиксированными колонками, не виртуализацию. `collections` описывает
+материализацию видимого диапазона однородного списка/сетки и единственного
+владельца смещения: ordinary scroll state нельзя подключать к той же области.
+Новые четыре PNG EN/RU показывают таблицу после прокрутки (строки 24–32)
+и список из 10 000 элементов после действия Middle (элементы 04995–05000).
+Снимки сетки, удаления/перестановки и иных состояний здесь не заявлены.
+
+Native source export сверен с ревизией
+`4da8d7a57bd2453227a4c37df6b0b4d171401681`; PNG 1280×960, scale 1,
+с тем же version1 media-контрактом, resource hashes и публично безопасными
+метаданными. Выбранная whole-source verified ISD `f8204c6` подтвердила
+`linux-abstract-v1` в create/status; собственные runs остановлены.
+Все четыре PNG просмотрены; использован ранее подготовленный private prefix
+libpng 1.6.59/zlib 1.4 с проверкой фактической linkage, без системной установки.
+
+Для этого кандидата прошли unit/parity/schema, build, loopback HTTP/digest,
+свежий portable export/portable-check и отдельно разрешённый sandboxed headless
+Chromium 152: EN/RU страницы на 360/1280, изображения/alt, отсутствие page overflow,
+клавиатура, смена языка с valid/missing anchors, no-JS и reduced motion.
+36 browser screenshots просмотрены, собственные browser/preview остановлены.
+Это ограниченная приёмка sample, не полная квалификация всех 23 IDs,
+не аудит доступности и не Pages deployment; прежние ограничения Vite 5 сохраняются.
+
+Как увидеть локальный кандидат: из `site/` с Node `.nvmrc` выполнить
+`npm run build`, `npm run check:http`, `npm run check:browser`, затем
+`npm run preview -- --port 0`; открыть выданный URL с `/oui/en/catalogue`
+или `/oui/ru/catalogue` и перейти к новым примерам. Остановить свой preview.

@@ -84,6 +84,174 @@
         "en": "Showcase window with row, column, stack, grid, absolute and intentionally clipped examples.",
         "ru": "Окно showcase: примеры строки, столбца, стека, сетки, абсолютного размещения и намеренного обрезания."
       }
+    },
+    {
+      "id": "scroll-table-en",
+      "section": "scroll-table",
+      "state": "ordinary table after wheel scrolling to rows 24–32",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/pages.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_scroll"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; wheel scrolling over table; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/scroll-table-en.png",
+      "sha256": "3cf10d6031aff889b3188b62bdb0347bf902a89136991bd10d11a6432f248ff6",
+      "caption": {
+        "en": "Native showcase scroll-table, EN UI; table scrolled to the end.",
+        "ru": "Нативный showcase scroll-table, интерфейс EN; таблица прокручена к концу."
+      },
+      "alt": {
+        "en": "Native table scrolled to items 24 through 32, with item, kind and quantity columns.",
+        "ru": "Нативная таблица прокручена к предметам с 24 по 32; видны колонки предмета, вида и количества."
+      }
+    },
+    {
+      "id": "scroll-table-ru",
+      "section": "scroll-table",
+      "state": "ordinary table after wheel scrolling to rows 24–32",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/pages.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_scroll"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; wheel scrolling over table; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/scroll-table-ru.png",
+      "sha256": "7802406bd5776ff1309e69ef157169394fcb3a784d8c7ef91b9c16211820e2d0",
+      "caption": {
+        "en": "Native showcase scroll-table, RU UI; table scrolled to the end.",
+        "ru": "Нативный showcase scroll-table, интерфейс RU; таблица прокручена к концу."
+      },
+      "alt": {
+        "en": "Native table scrolled to items 24 through 32, with item, kind and quantity columns.",
+        "ru": "Нативная таблица прокручена к предметам с 24 по 32; видны колонки предмета, вида и количества."
+      }
+    },
+    {
+      "id": "collections-en",
+      "section": "collections",
+      "state": "virtual list after Middle action materializes rows near item 05000",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/collection_runtime.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_collections"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; Middle action in list mode; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/collections-en.png",
+      "sha256": "8aa3015f54ded3de8eb781d8cb79dc28465e56a6f691098626e87d44f535402c",
+      "caption": {
+        "en": "Native showcase collections, EN UI; list materialized at the middle.",
+        "ru": "Нативный showcase collections, интерфейс EN; список материализован в середине."
+      },
+      "alt": {
+        "en": "Native virtual list at the middle of 10000 items, showing items 04995 through 05000.",
+        "ru": "Нативный виртуальный список в середине 10000 элементов: видны элементы с 04995 по 05000."
+      }
+    },
+    {
+      "id": "collections-ru",
+      "section": "collections",
+      "state": "virtual list after Middle action materializes rows near item 05000",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/collection_runtime.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_collections"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; Middle action in list mode; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/collections-ru.png",
+      "sha256": "d71888c41bc321b84fd4c836911db0d102beb23ca7ab37388f489b9dd2491afc",
+      "caption": {
+        "en": "Native showcase collections, RU UI; list materialized at the middle.",
+        "ru": "Нативный showcase collections, интерфейс RU; список материализован в середине."
+      },
+      "alt": {
+        "en": "Native virtual list at the middle of 10000 items, showing items 04995 through 05000.",
+        "ru": "Нативный виртуальный список в середине 10000 элементов: видны элементы с 04995 по 05000."
+      }
     }
   ]
 }

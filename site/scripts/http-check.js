@@ -28,6 +28,8 @@ try {
     ['ru/capabilities/text.html', 'ru', 'Текст', '/oui/en/capabilities/text.html'],
     ['en/capabilities/rich-text.html', 'en', 'Rich text', '/oui/ru/capabilities/rich-text.html'],
     ['ru/capabilities/rich-text.html', 'ru', 'Форматированный текст', '/oui/en/capabilities/rich-text.html'],
+    ['en/capabilities/text-input.html', 'en', 'Text input', '/oui/ru/capabilities/text-input.html'],
+    ['ru/capabilities/text-input.html', 'ru', 'Ввод текста', '/oui/en/capabilities/text-input.html'],
     ['en/capabilities/controls.html', 'en', 'Controls', '/oui/ru/capabilities/controls.html'],
     ['ru/capabilities/controls.html', 'ru', 'Элементы управления', '/oui/en/capabilities/controls.html'],
     ['en/capabilities/styling.html', 'en', 'Styling', '/oui/ru/capabilities/styling.html'],
@@ -44,8 +46,8 @@ try {
     assert.ok(html.includes(`href="${other}"`), path)
     if (path.includes('guide/')) assert.ok(html.includes('id="choose-a-boundary"'))
     const markup = html.split('<script>window.__VP_HASH_MAP__')[0]
-    const section = path.match(/capabilities\/(layout|text|rich-text)\.html/)?.[1]
-    for (const state of section === 'layout' ? [''] : section ? ['-initial', '-alternate'] : []) {
+    const section = path.match(/capabilities\/(layout|text|rich-text|text-input)\.html/)?.[1]
+    for (const state of ['layout', 'text-input'].includes(section) ? [''] : section ? ['-initial', '-alternate'] : []) {
       const image = `/oui/media/${section}-${lang}${state}.png`
       assert.ok(markup.includes(`src="${image}"`), `missing no-JS image ${path}`)
       const record = media.records.find(item => item.id === `${section}-${lang}${state}`)

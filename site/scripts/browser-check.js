@@ -168,10 +168,13 @@ try {
     ['capabilities/rich-text.html', 'Rich text', 'Форматированный текст', 'boundaries'],
     ['capabilities/controls.html', 'Controls', 'Элементы управления', 'boundaries'],
     ['capabilities/styling.html', 'Styling', 'Оформление', 'boundaries'],
-    ['capabilities/profiles.html', 'Profiles', 'Профили', 'workflow']
+    ['capabilities/profiles.html', 'Profiles', 'Профили', 'workflow'],
+    ['capabilities/text-input.html', 'Text input', 'Ввод текста', 'boundaries']
   ]
   const imagePaths = (path, lang) => path === 'capabilities/layout.html'
     ? [`/oui/media/layout-${lang}.png`, `/oui/media/layout-small-${lang}.png`]
+    : path === 'capabilities/text-input.html'
+      ? [`/oui/media/text-input-${lang}.png`]
     : path === 'capabilities/profiles.html'
       ? [`/oui/media/profiles-${lang}-initial.png`, `/oui/media/profiles-${lang}-dialog.png`, `/oui/media/profiles-${lang}-applied.png`]
       : ['controls', 'styling'].includes(path.split('/')[1]?.replace('.html', ''))
@@ -218,6 +221,21 @@ try {
       await select.selectOption('styling')
       assert.ok(await page.locator('#styling').isVisible())
       assert.equal(await page.locator('#layout').isVisible(), false)
+      assert.equal(await page.locator('#text-input').isVisible(), false)
+      await query.fill('ui_editor')
+      assert.equal(await select.locator('option[value="text"]').innerText(), lang === 'en' ? 'Text' : 'Текст')
+      assert.equal(await select.locator('option[value="input"]').innerText(), lang === 'en' ? 'Input' : 'Ввод')
+      await select.selectOption('input')
+      assert.equal(await select.locator('option:checked').innerText(), lang === 'en' ? 'Input' : 'Ввод')
+      assert.ok(await page.locator('#text-input').isVisible())
+      assert.equal(await page.locator('#layout').isVisible(), false)
+      assert.equal(await page.locator('#controls').isVisible(), false)
+      assert.equal(await page.locator('#styling').isVisible(), false)
+      await page.screenshot({ path: join(artifacts, `filter-text-input-${lang}-${width}.png`), fullPage: true })
+      await focusByTab('.catalogue-filter a[href="./capabilities/text-input.html"]')
+      await page.keyboard.press('Enter')
+      await page.waitForURL(`**/oui/${lang}/capabilities/text-input.html`)
+      await go(`/oui/${lang}/catalogue.html`)
       await query.fill(lang === 'en' ? 'draft' : 'черновик')
       await select.selectOption('state')
       assert.equal(await select.locator('option:checked').innerText(), lang === 'en' ? 'State' : 'Состояние')
@@ -240,6 +258,7 @@ try {
       assert.ok(await page.locator('#layout').isVisible())
       assert.ok(await page.locator('#controls').isVisible())
       assert.ok(await page.locator('#styling').isVisible())
+      assert.ok(await page.locator('#text-input').isVisible())
       assert.ok(await page.locator('#profiles').isVisible())
       assert.ok(await page.locator('#text').isVisible())
       assert.ok(await page.locator('#rich-text').isVisible())
@@ -409,7 +428,7 @@ try {
           assert.equal((await p.locator('h1').first().innerText()).replace(/\u200b/g, '').trim(), heading)
           assert.ok(await p.locator('main p').first().isVisible())
           if (path === 'catalogue.html') {
-            for (const id of ['layout', 'controls', 'styling', 'profiles', 'text', 'rich-text']) {
+            for (const id of ['layout', 'controls', 'styling', 'profiles', 'text', 'rich-text', 'text-input']) {
               const link = p.locator(`main a[href="./capabilities/${id}.html"]`)
               assert.ok(await link.isVisible())
               assert.equal(await link.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/capabilities/${id}.html`)

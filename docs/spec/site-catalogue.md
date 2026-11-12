@@ -1,15 +1,15 @@
 # Статический каталог и изображения сайта
 
-Основа — `oui-3no.2`; дополнение text-input — кандидат `oui-3no.9`, pending
-integration. Библиотека и native consumers не изменены; сайт описывает
-существующие возможности, а не реализует их в браузере.
+Контракт введён `oui-3no.2`; расширение text-input `oui-3no.9` — pending integration.
+Библиотека и native consumers не изменены; сайт описывает существующие возможности,
+а не реализует их в браузере.
 
-- `site/en/` и `site/ru/` содержат `catalogue`, `capabilities/layout`
-  и `capabilities/text-input`.
+- `site/en/` и `site/ru/` содержат `catalogue` и `capabilities/layout`,
+  `capabilities/controls`, `capabilities/styling`, `capabilities/text-input`.
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
   полный showcase, с pinned source links и native build/run command.
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
-  Каталог объявляет sample coverage только `layout` и `text-input`. Native source catalogue
+  Каталог объявляет sample coverage `layout`, `controls`, `styling`, `text-input`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -44,9 +44,31 @@ loopback-only preview. EN/RU catalogue/layout проверены на ширин
 Унаследованное ограничение unsupported Vite 5 остаётся раскрытым
 в `site/README.md`; dev server не разрешён.
 
+Для расширения `oui-3no.5` получены восемь дополнительных PNG 1280×960, scale 1,
+на source revision `4da8d7a57bd2453227a4c37df6b0b4d171401681`: controls и styling,
+EN/RU, начальное состояние и после Space для checkbox либо Return для Theme. Portable export
+связан с исходной ревизией; verified ISD той же версии, `linux-abstract-v1`,
+явный focus и остановка собственных runs подтверждены в артефактах проверки.
+PNG просмотрены; публичные копии без метаданных сохраняют пиксели captures.
+Существующие media layout и их provenance сохранены.
+
+Controls описывает application-owned values/proposals и slider 0–100 с шагом 1;
+styling — существующий cascade defaults → role → named → local, visual states
+и ограничения. Изменение модели и темы наблюдалось через настоящий native input;
+проверка всех состояний и полная native qualification не заявляются.
+Свежие portable-check, шесть unit/parity/schema tests, build и HTTP прошли.
+После отдельного разрешения владельца пройден sandboxed Chromium 152 для
+EN/RU страниц controls/styling и прежних foundation/layout/catalogue сценариев:
+360/1280, клавиатура, locale/anchors, no-JS content/images и reduced motion.
+Собственные browser/preview остановлены. Это ограниченная приёмка sample,
+не полная квалификация 23 IDs, всех браузеров, доступности или Pages deployment.
+
 Из `site/` с Node из `.nvmrc`: `npm ci`, `npm run check`, `npm run build`,
 `npm run check:http`, затем `npm run preview -- --port 0` и выданный локальный
 URL с `/oui/en/capabilities/layout` либо `/oui/ru/capabilities/layout`.
+Для новых страниц заменить `layout` на `controls`, `styling` или `text-input`; переключение
+языка сохраняет страницу. `npm run check:browser` запускает разрешённую
+изолированную браузерную приёмку (Linux Chromium с sandbox).
 Остановить свой preview — Ctrl-C. Подробнее: [site README](../../site/README.md).
 
 ## Однострочный ввод текста
@@ -80,3 +102,39 @@ loopback HTTP прошли. Последний проверяет новые EN/
 логи содержат X11 I/O error при остановке дисплея, без предшествующей ошибки
 редактора; точный порядок сигналов не установлен. Это не подтверждение
 штатного завершения приложения.
+## Локальный поиск и фильтр каталога
+
+Кандидат `oui-3no.3`, pending integration. Поиск сайта использует локальный
+индекс VitePress; внешнего поискового сервиса нет. Кнопка поиска и Ctrl+K
+открывают поиск текущего языка. Стрелки и Enter выбирают результат;
+пустая выдача и очистка локализованы. Результаты ведут под `/oui/en/` либо
+`/oui/ru/` соответственно.
+
+На странице каталога запрос проверяет опубликованные title/summary/limitations
+текущего языка и общие ID, group, categories, packages, source и runnable.
+Регистр и крайние пробелы не влияют на совпадение; все слова запроса должны
+входить в объединённый текст. Категория дополнительно ограничивает результат.
+Категории `text` и `input` показываются как Text/Input или Текст/Ввод в
+соответствующем языке; их стабильные IDs при этом не меняются.
+Пустая выдача показывает сообщение; «Сбросить фильтры» очищает запрос и категорию.
+Область остаётся sample `layout`, `controls`, `styling`, `text-input`, не полный каталог;
+фильтрация применяется к каждому разделу отдельно. Поиск и фильтры требуют
+JavaScript; без него исходные описания и ссылки всех четырёх разделов остаются в HTML.
+
+В интеграционном кандидате повторно проверены build, HTTP и sandboxed Chromium
+для четырёх разделов на EN/RU и ширинах 360/1280, включая фильтр `ui_editor`
+с категорией `input`, клавиатурный переход и no-JS ссылки. Просмотрены 64 browser
+PNG; собственные browser и preview остановлены. Это проверка кандидата, а не
+заявление о публикации или deployment.
+
+Проверены unit positive/negative queries, schema/parity, build, HTTP и свежий
+portable-check. С отдельным разрешением владельца для этой задачи пройдены
+изолированные Chromium 152 / Node 24.22.3 проверки EN/RU на 360/1280:
+запрос, пустая выдача, reset, клавиатурный переход по результату поиска и
+ссылке каталога, сохранение no-JS content и прежних locale/reduced-motion
+сценариев. Это не полная квалификация, аудит доступности или deployment.
+
+Как увидеть: из `site/` с Node из `.nvmrc` выполнить команды выше и открыть
+выданный URL с `/oui/en/catalogue` либо `/oui/ru/catalogue`. Ввести `ui_layout`,
+затем `zzznomatch`, сбросить фильтры и перейти на layout. Для поиска сайта
+нажать Ctrl+K, ввести `Layout` либо `Компоновка`, выбрать результат клавиатурой.

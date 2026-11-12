@@ -4,6 +4,8 @@
     "mode": "sample",
     "ids": [
       "layout",
+      "controls",
+      "styling",
       "text-input"
     ]
   },
@@ -36,6 +38,66 @@
       "media": [
         "layout-en",
         "layout-ru"
+      ]
+    },
+    {
+      "id": "controls",
+      "group": "gallery",
+      "categories": [
+        "controls"
+      ],
+      "packages": [
+        "ui_controls"
+      ],
+      "source": "consumer/ui_showcase/app/pages.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Controls",
+        "ru": "Элементы управления"
+      },
+      "summary": {
+        "en": "Compose application-controlled checkbox, toggle and slider values.",
+        "ru": "Флажок, переключатель и ползунок со значениями приложения."
+      },
+      "limitations": {
+        "en": "Experimental; controlled values and proposals; slider 0–100, step 1.",
+        "ru": "Экспериментально; управляемые значения и предложения; ползунок 0–100, шаг 1."
+      },
+      "media": [
+        "controls-en-initial",
+        "controls-en-changed",
+        "controls-ru-initial",
+        "controls-ru-changed"
+      ]
+    },
+    {
+      "id": "styling",
+      "group": "gallery",
+      "categories": [
+        "styling"
+      ],
+      "packages": [
+        "ui_style"
+      ],
+      "source": "consumer/ui_showcase/sections/content.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Styling",
+        "ru": "Оформление"
+      },
+      "summary": {
+        "en": "Existing primitives, theme cascade and visual states.",
+        "ru": "Существующие примитивы, каскад темы и визуальные состояния."
+      },
+      "limitations": {
+        "en": "Experimental; existing primitives and theme cascade only.",
+        "ru": "Экспериментально; только существующие примитивы и каскад темы."
+      },
+      "media": [
+        "styling-en-initial",
+        "styling-en-changed",
+        "styling-ru-initial",
+        "styling-ru-changed"
       ]
     },
     {

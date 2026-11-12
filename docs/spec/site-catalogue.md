@@ -1,13 +1,15 @@
 # Статический каталог и изображения сайта
 
-Кандидат `oui-3no.2`, pending integration. Библиотека и native consumers не
-изменены; сайт описывает существующий layout, а не реализует его в браузере.
+Основа — `oui-3no.2`; дополнение text-input — кандидат `oui-3no.9`, pending
+integration. Библиотека и native consumers не изменены; сайт описывает
+существующие возможности, а не реализует их в браузере.
 
-- `site/en/` и `site/ru/` содержат `catalogue` и `capabilities/layout`.
+- `site/en/` и `site/ru/` содержат `catalogue`, `capabilities/layout`
+  и `capabilities/text-input`.
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
   полный showcase, с pinned source links и native build/run command.
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
-  Каталог объявляет sample coverage только `layout`. Native source catalogue
+  Каталог объявляет sample coverage только `layout` и `text-input`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -46,3 +48,35 @@ loopback-only preview. EN/RU catalogue/layout проверены на ширин
 `npm run check:http`, затем `npm run preview -- --port 0` и выданный локальный
 URL с `/oui/en/capabilities/layout` либо `/oui/ru/capabilities/layout`.
 Остановить свой preview — Ctrl-C. Подробнее: [site README](../../site/README.md).
+
+## Однострочный ввод текста
+
+Кандидат `oui-3no.9` добавляет EN/RU описание существующего редактора имени:
+черновик и применённое значение принадлежат приложению, редактор обеспечивает
+взаимодействие. Указаны выбранные пакеты `ui_editor`, `ui_text`,
+`unicode_graphemes`, pinned source и команда native build/run. Описаны
+Unicode 15.1 EGC, ограничение showcase 1–64 EGC при применении и допустимость
+пустого черновика; IME, undo, нормализация, shaping и bidi не обещаются.
+
+Два настоящих PNG EN/RU показывают поле в фокусе после вставки символа:
+черновик изменён, применённое значение осталось прежним. Source revision
+`4da8d7a57bd2453227a4c37df6b0b4d171401681`, 1280×960, scale 1;
+media manifest сохраняет полные source/resource/image identities.
+Выбранная ISD `f8204c61615406ce5628b15692628e146476a008` проверена целиком,
+create/status подтвердили `linux-abstract-v1`; собственные процессы остановлены.
+Оба опубликованных PNG просмотрены, capture metadata удалены.
+Это демонстрация конкретного состояния, не полная квалификация редактора.
+
+Свежие portable export/check, site unit/parity/negative validation, build и
+loopback HTTP прошли. Последний проверяет новые EN/RU маршруты, HTML images/alt
+и image digests без исполнения JS. Для просмотра после сборки открыть
+`/oui/en/capabilities/text-input` либо `/oui/ru/capabilities/text-input`
+через каталог. После отдельного разрешения владельца для `oui-3no.9`
+пройдена изолированная headless Chromium приёмка: EN/RU на 360/1280,
+клавиатура и смена языка, reduced motion и no-JS content/images.
+Все 28 browser PNG просмотрены; sandbox проверен, собственные browser/preview
+остановлены. Другие браузеры, полный аудит доступности, полная native
+квалификация и deployment не заявляются. В native cleanup оба app exit равны 1:
+логи содержат X11 I/O error при остановке дисплея, без предшествующей ошибки
+редактора; точный порядок сигналов не установлен. Это не подтверждение
+штатного завершения приложения.

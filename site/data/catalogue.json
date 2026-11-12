@@ -3,7 +3,8 @@
   "coverage": {
     "mode": "sample",
     "ids": [
-      "layout"
+      "layout",
+      "text-input"
     ]
   },
   "records": [
@@ -35,6 +36,37 @@
       "media": [
         "layout-en",
         "layout-ru"
+      ]
+    },
+    {
+      "id": "text-input",
+      "group": "gallery",
+      "categories": [
+        "text",
+        "input"
+      ],
+      "packages": [
+        "ui_editor",
+        "ui_text",
+        "unicode_graphemes"
+      ],
+      "source": "consumer/ui_showcase/sections/name.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Text input",
+        "ru": "Ввод текста"
+      },
+      "summary": {
+        "en": "Edit a focused single-line name draft and apply or cancel it.",
+        "ru": "Редактирование однострочного имени в фокусе с применением или отменой."
+      },
+      "limitations": {
+        "en": "Experimental; single line; Unicode 15.1 EGC; no IME, undo or normalization.",
+        "ru": "Экспериментально; одна строка; EGC Unicode 15.1; нет IME, undo и нормализации."
+      },
+      "media": [
+        "text-input-en",
+        "text-input-ru"
       ]
     }
   ]

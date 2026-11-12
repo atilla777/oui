@@ -162,7 +162,8 @@ try {
   }
   const samplePages = [
     ['catalogue.html', 'Capability catalogue', 'Каталог возможностей', 'layout'],
-    ['capabilities/layout.html', 'Layout', 'Компоновка', 'boundaries']
+    ['capabilities/layout.html', 'Layout', 'Компоновка', 'boundaries'],
+    ['capabilities/text-input.html', 'Text input', 'Ввод текста', 'boundaries']
   ]
   for (const width of [360, 1280]) {
     await page.setViewportSize({ width, height: 900 })
@@ -174,11 +175,12 @@ try {
         assert.ok(dimensions.scroll <= dimensions.client, `${path} ${lang} ${width} overflow ${JSON.stringify(dimensions)}`)
         assert.ok(await page.locator('main p').first().isVisible())
         if (path.startsWith('capabilities/')) {
-          const image = page.locator(`main img[src="/oui/media/layout-${lang}.png"]`)
+          const id = path.split('/').at(-1).replace('.html', '')
+          const image = page.locator(`main img[src="/oui/media/${id}-${lang}.png"]`)
           assert.ok(await image.isVisible())
           assert.ok(await image.evaluate(el => el.complete && el.naturalWidth === 1280 && el.naturalHeight === 960 && !!el.alt))
         }
-        await page.screenshot({ path: join(artifacts, `${lang}-${path.startsWith('capabilities/') ? 'layout' : 'catalogue'}-${width}.png`), fullPage: true })
+        await page.screenshot({ path: join(artifacts, `${lang}-${path.split('/').at(-1).replace('.html', '')}-${width}.png`), fullPage: true })
         await page.keyboard.press('Tab')
         assert.equal(await page.evaluate(() => document.activeElement.classList.contains('VPSkipLink')), true)
         await page.keyboard.press('Enter')
@@ -254,11 +256,12 @@ try {
           assert.ok(await p.locator('main p').first().isVisible())
           assert.equal(await p.evaluate(() => typeof window.__VP_SITE_DATA__), 'undefined')
           if (path.startsWith('capabilities/')) {
-            const image = p.locator(`main img[src="/oui/media/layout-${lang}.png"]`)
+            const id = path.split('/').at(-1).replace('.html', '')
+            const image = p.locator(`main img[src="/oui/media/${id}-${lang}.png"]`)
             assert.ok(await image.isVisible())
             assert.ok(await image.evaluate(el => el.complete && el.naturalWidth === 1280 && el.naturalHeight === 960 && !!el.alt))
           }
-          await p.screenshot({ path: join(artifacts, `nojs-${lang}-${path.startsWith('capabilities/') ? 'layout' : 'catalogue'}-${width}.png`), fullPage: true })
+          await p.screenshot({ path: join(artifacts, `nojs-${lang}-${path.split('/').at(-1).replace('.html', '')}-${width}.png`), fullPage: true })
           await focusByTab(`.content-container a[lang="${other}"]`, p)
           await p.keyboard.press('Enter')
           await p.waitForURL(`**/oui/${other}/${path}`)

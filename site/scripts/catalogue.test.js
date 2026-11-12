@@ -31,6 +31,33 @@ test('published sample binds localized prose, media and selected resource hashes
   }
 })
 
+test('controls and styling bind both locale pages and genuine state records', async () => {
+  const catalogue = JSON.parse(await readFile('data/catalogue.json', 'utf8'))
+  const media = JSON.parse(await readFile('data/media.json', 'utf8'))
+  const source = await readFile('../consumer/ui_showcase/model/catalogue.odin', 'utf8')
+  assert.deepEqual(catalogue.coverage.ids, ['layout', 'controls', 'styling'])
+  await validateCatalogue({ catalogue, media, source, publicRoot: 'public', coverage: catalogue.coverage })
+  for (const id of ['controls', 'styling']) {
+    assert.ok(sourceIds(source).gallery.includes(id))
+    const record = catalogue.records.find(item => item.id === id)
+    assert.equal(record.media.length, 4)
+    for (const locale of ['en', 'ru']) {
+      const page = await readFile(`${locale}/capabilities/${id}.md`, 'utf8')
+      assert.ok(page.includes(`--section ${id} --locale ${locale}`))
+      for (const state of ['initial', 'changed']) {
+        const image = media.records.find(item => item.id === `${id}-${locale}-${state}`)
+        assert.equal(image.uiLocale, locale)
+        assert.equal(image.section, id)
+        assert.ok(page.includes(`![${image.alt[locale]}](/${image.path})`))
+        assert.ok(page.includes(image.caption[locale]))
+        for (const [path, expected] of Object.entries(image.resources)) {
+          assert.equal(createHash('sha256').update(await readFile(`../${path}`)).digest('hex'), expected, path)
+        }
+      }
+    }
+  }
+})
+
 test('sample validation rejects digest, provenance, locale and strict coverage failures', async () => {
   const root = await mkdtemp(join(tmpdir(), 'oui-catalogue-'))
   try {

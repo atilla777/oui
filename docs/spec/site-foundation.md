@@ -72,3 +72,19 @@ CI/deploy не входят в эту основу.
 X11/software проверка, не квалификация других платформ или полного меню.
 Новые native/API гарантии не добавлены; прежние браузерные наблюдения выше
 относятся к основе `oui-3no.1`, не к расширенному тексту этого кандидата.
+
+## Навигация по пакетам и lifecycle
+
+Кандидат `oui-3no.19`, ожидающий интеграции: парные EN/RU страницы
+`guide/using-oui` дают карту headless/family/backend/tools и ведут ко всем шести
+существующим recipes и их source/fixtures. Showcase обозначен как более широкий
+union, не минимальная зависимость. Сохранены прежние anchors; добавлены парные
+`package-map` и `compatibility`.
+
+Это объяснительная навигация, не новая спецификация API: авторитетными остаются
+[API](../api.md), [recipes](../recipes.md), [lifecycle](../lifecycle.md),
+[compatibility](../compatibility.md) и [scope](../scope.md). Сводка охватывает
+владение, подготовку до commit barrier, явное recovery без replay и lifetime.
+Текст сверен с этими контрактами, импортами и restricted recipe sets в
+`scripts/test-ui-showcase`; parity и ссылки проверены. Новый native запуск,
+браузерная аттестация расширенного текста и deployment этим не утверждаются.

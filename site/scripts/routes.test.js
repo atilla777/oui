@@ -6,7 +6,7 @@ import { join } from 'node:path'
 import { validateParity } from './routes.js'
 
 test('real routes have locale and explicit anchor parity', async () => {
-  assert.deepEqual(await validateParity(process.cwd()), ['capabilities/layout.md', 'catalogue.md', 'guide/using-oui.md', 'index.md'])
+  assert.deepEqual(await validateParity(process.cwd()), ['capabilities/controls.md', 'capabilities/layout.md', 'capabilities/styling.md', 'catalogue.md', 'guide/using-oui.md', 'index.md'])
 })
 test('a missing counterpart is an error, not a home fallback', async () => {
   const root = await mkdtemp(join(tmpdir(), 'oui-parity-'))

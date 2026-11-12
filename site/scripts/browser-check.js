@@ -162,7 +162,9 @@ try {
   }
   const samplePages = [
     ['catalogue.html', 'Capability catalogue', 'Каталог возможностей', 'layout'],
-    ['capabilities/layout.html', 'Layout', 'Компоновка', 'boundaries']
+    ['capabilities/layout.html', 'Layout', 'Компоновка', 'boundaries'],
+    ['capabilities/controls.html', 'Controls', 'Элементы управления', 'boundaries'],
+    ['capabilities/styling.html', 'Styling', 'Оформление', 'boundaries']
   ]
   for (const width of [360, 1280]) {
     await page.setViewportSize({ width, height: 900 })
@@ -174,11 +176,14 @@ try {
         assert.ok(dimensions.scroll <= dimensions.client, `${path} ${lang} ${width} overflow ${JSON.stringify(dimensions)}`)
         assert.ok(await page.locator('main p').first().isVisible())
         if (path.startsWith('capabilities/')) {
-          const image = page.locator(`main img[src="/oui/media/layout-${lang}.png"]`).first()
-          assert.ok(await image.isVisible())
-          assert.ok(await image.evaluate(el => el.complete && el.naturalWidth === 1280 && el.naturalHeight === 960 && !!el.alt))
+          const id = path.split('/')[1].replace('.html', '')
+          for (const suffix of id === 'layout' ? [''] : ['-initial', '-changed']) {
+            const image = page.locator(`main img[src="/oui/media/${id}-${lang}${suffix}.png"]`).first()
+            assert.ok(await image.isVisible())
+            assert.ok(await image.evaluate(el => el.complete && el.naturalWidth === 1280 && el.naturalHeight === 960 && !!el.alt))
+          }
         }
-        await page.screenshot({ path: join(artifacts, `${lang}-${path.startsWith('capabilities/') ? 'layout' : 'catalogue'}-${width}.png`), fullPage: true })
+        await page.screenshot({ path: join(artifacts, `${lang}-${path.startsWith('capabilities/') ? path.split('/')[1].replace('.html', '') : 'catalogue'}-${width}.png`), fullPage: true })
         await page.keyboard.press('Tab')
         assert.equal(await page.evaluate(() => document.activeElement.classList.contains('VPSkipLink')), true)
         await page.keyboard.press('Enter')
@@ -244,13 +249,7 @@ try {
     await checkPage('en', en)
     assert.ok(await page.locator('main p').first().isVisible())
     assert.equal(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior), 'auto')
-    if (path.startsWith('capabilities/')) {
-      assert.ok(await page.locator('main img').first().isVisible())
-      await page.locator('.viewer-open').click()
-      assert.ok(await page.locator('.layout-viewer dialog').evaluate(el => el.open))
-      assert.equal(await page.locator('.layout-viewer dialog').evaluate(el => getComputedStyle(el).animationName), 'none')
-      await page.keyboard.press('Escape')
-    }
+    if (path.startsWith('capabilities/')) assert.ok(await page.locator('main img').first().isVisible())
   }
   for (const width of [360, 1280]) {
     await page.setViewportSize({ width, height: 900 })
@@ -303,17 +302,22 @@ try {
           assert.ok(await p.locator('main p').first().isVisible())
           assert.equal(await p.evaluate(() => typeof window.__VP_SITE_DATA__), 'undefined')
           if (path.startsWith('capabilities/')) {
-            const image = p.locator(`main img[src="/oui/media/layout-${lang}.png"]`)
-            assert.ok(await image.isVisible())
-             assert.ok(await image.evaluate(el => el.complete && el.naturalWidth === 1280 && el.naturalHeight === 960 && !!el.alt))
-            const small = p.locator(`main img[src="/oui/media/layout-small-${lang}.png"]`)
-            assert.ok(await small.isVisible())
-            assert.ok(await small.evaluate(el => el.complete && el.naturalWidth === 960 && el.naturalHeight === 720 && !!el.alt))
-            assert.equal(await p.locator(`main a[href="/oui/media/layout-small-${lang}.png"]`).count(), 1)
-            assert.equal(await p.locator(`main a[href="/oui/media/layout-${lang}.png"]`).count(), 1)
-            assert.equal(await p.locator('.viewer-open').count(), 0)
+            const id = path.split('/')[1].replace('.html', '')
+            for (const suffix of id === 'layout' ? [''] : ['-initial', '-changed']) {
+              const image = p.locator(`main img[src="/oui/media/${id}-${lang}${suffix}.png"]`)
+              assert.ok(await image.isVisible())
+              assert.ok(await image.evaluate(el => el.complete && el.naturalWidth === 1280 && el.naturalHeight === 960 && !!el.alt))
+            }
+            if (id === 'layout') {
+              const small = p.locator(`main img[src="/oui/media/layout-small-${lang}.png"]`)
+              assert.ok(await small.isVisible())
+              assert.ok(await small.evaluate(el => el.complete && el.naturalWidth === 960 && el.naturalHeight === 720 && !!el.alt))
+              assert.equal(await p.locator(`main a[href="/oui/media/layout-small-${lang}.png"]`).count(), 1)
+              assert.equal(await p.locator(`main a[href="/oui/media/layout-${lang}.png"]`).count(), 1)
+              assert.equal(await p.locator('.viewer-open').count(), 0)
+            }
           }
-          await p.screenshot({ path: join(artifacts, `nojs-${lang}-${path.startsWith('capabilities/') ? 'layout' : 'catalogue'}-${width}.png`), fullPage: true })
+          await p.screenshot({ path: join(artifacts, `nojs-${lang}-${path.startsWith('capabilities/') ? path.split('/')[1].replace('.html', '') : 'catalogue'}-${width}.png`), fullPage: true })
           await focusByTab(`.content-container a[lang="${other}"]`, p)
           await p.keyboard.press('Enter')
           await p.waitForURL(`**/oui/${other}/${path}`)

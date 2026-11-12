@@ -78,7 +78,7 @@ try {
     assert.ok(await page.locator('main').innerText())
   }
   const checkImages = async (activePage, path, lang) => {
-    const section = path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud)\.html$/)?.[1]
+    const section = path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|text-input)\.html$/)?.[1]
     if (!section) { assert.equal(path, 'catalogue.html'); return }
     const ids = {
       layout: [`layout-${lang}`, `layout-small-${lang}`],
@@ -86,7 +86,8 @@ try {
       styling: [`styling-${lang}-initial`, `styling-${lang}-changed`],
       profiles: [`profiles-${lang}-initial`, `profiles-${lang}-dialog`, `profiles-${lang}-applied`],
       layers: [`layers-popup-tooltip-${lang}`, `layers-modal-${lang}`],
-      hud: [`hud-idle-${lang}`, `hud-completed-${lang}`]
+      hud: [`hud-idle-${lang}`, `hud-completed-${lang}`],
+      'text-input': [`text-input-${lang}`]
     }[section]
     const images = activePage.locator('main p > img')
     assert.equal(await images.count(), ids.length, `${section} ${lang}: image count`)
@@ -193,7 +194,8 @@ try {
     ['capabilities/styling.html', 'Styling', 'Оформление', 'boundaries'],
     ['capabilities/profiles.html', 'Profiles', 'Профили', 'workflow'],
     ['capabilities/layers.html', 'Layers', 'Слои', 'boundaries'],
-    ['capabilities/hud.html', 'HUD hold', 'HUD и удержание', 'boundaries']
+    ['capabilities/hud.html', 'HUD hold', 'HUD и удержание', 'boundaries'],
+    ['capabilities/text-input.html', 'Text input', 'Ввод текста', 'boundaries']
   ]
   const sampleName = path => path.startsWith('capabilities/') ? path.split('/')[1].replace('.html', '') : 'catalogue'
   for (const width of [360, 1280]) {
@@ -226,6 +228,21 @@ try {
       await select.selectOption('styling')
       assert.ok(await page.locator('#styling').isVisible())
       assert.equal(await page.locator('#layout').isVisible(), false)
+      assert.equal(await page.locator('#text-input').isVisible(), false)
+      await query.fill('ui_editor')
+      assert.equal(await select.locator('option[value="text"]').innerText(), lang === 'en' ? 'Text' : 'Текст')
+      assert.equal(await select.locator('option[value="input"]').innerText(), lang === 'en' ? 'Input' : 'Ввод')
+      await select.selectOption('input')
+      assert.equal(await select.locator('option:checked').innerText(), lang === 'en' ? 'Input' : 'Ввод')
+      assert.ok(await page.locator('#text-input').isVisible())
+      assert.equal(await page.locator('#layout').isVisible(), false)
+      assert.equal(await page.locator('#controls').isVisible(), false)
+      assert.equal(await page.locator('#styling').isVisible(), false)
+      await page.screenshot({ path: join(artifacts, `filter-text-input-${lang}-${width}.png`), fullPage: true })
+      await focusByTab('.catalogue-filter a[href="./capabilities/text-input.html"]')
+      await page.keyboard.press('Enter')
+      await page.waitForURL(`**/oui/${lang}/capabilities/text-input.html`)
+      await go(`/oui/${lang}/catalogue.html`)
       await query.fill(lang === 'en' ? 'draft' : 'черновик')
       await select.selectOption('state')
       assert.equal(await select.locator('option:checked').innerText(), lang === 'en' ? 'State' : 'Состояние')
@@ -242,6 +259,7 @@ try {
       assert.ok(await page.locator('#layout').isVisible())
       assert.ok(await page.locator('#controls').isVisible())
       assert.ok(await page.locator('#styling').isVisible())
+      assert.ok(await page.locator('#text-input').isVisible())
       assert.ok(await page.locator('#profiles').isVisible())
       await select.selectOption('layout')
       await query.fill('ui_layout')
@@ -421,7 +439,7 @@ try {
           const dimensions = await p.evaluate(() => ({ scroll: document.documentElement.scrollWidth, client: document.documentElement.clientWidth, font: parseFloat(getComputedStyle(document.querySelector('main p')).fontSize) }))
           assert.ok(dimensions.scroll <= dimensions.client && dimensions.font >= 14, `${path} ${lang} ${width}: ${JSON.stringify(dimensions)}`)
           if (path === 'catalogue.html') {
-            for (const id of ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud']) {
+            for (const id of ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'text-input']) {
               const link = p.locator(`main a[href="./capabilities/${id}.html"]`)
               assert.ok(await link.isVisible())
               assert.equal(await link.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/capabilities/${id}.html`)

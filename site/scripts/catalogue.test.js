@@ -20,12 +20,12 @@ test('published sample binds localized prose, media and selected resource hashes
   const media = JSON.parse(await readFile('data/media.json', 'utf8'))
   const source = await readFile('../consumer/ui_showcase/model/catalogue.odin', 'utf8')
   await validateCatalogue({ catalogue, media, source, publicRoot: 'public', coverage: catalogue.coverage })
-  assert.deepEqual(catalogue.coverage.ids, ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud'])
+  assert.deepEqual(catalogue.coverage.ids, ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'text-input'])
   for (const locale of ['en', 'ru']) {
     for (const section of catalogue.coverage.ids) {
       const page = await readFile(`${locale}/capabilities/${section}.md`, 'utf8')
       const images = media.records.filter(record => record.section === section && record.uiLocale === locale)
-      assert.equal(images.length, section === 'profiles' ? 3 : 2)
+      assert.equal(images.length, section === 'profiles' ? 3 : section === 'text-input' ? 1 : 2)
       for (const image of images) {
         assert.ok(page.includes(`![${image.alt[locale]}](/${image.path})`))
         if (section !== 'profiles') assert.ok(page.includes(image.caption[locale]))
@@ -34,6 +34,8 @@ test('published sample binds localized prose, media and selected resource hashes
         }
       }
     }
+  }
+  for (const locale of ['en', 'ru']) {
     const profiles = await readFile(`${locale}/capabilities/profiles.md`, 'utf8')
     for (const state of ['initial', 'dialog', 'applied']) {
       const capture = media.records.find(record => record.id === `profiles-${locale}-${state}`)
@@ -49,7 +51,7 @@ test('controls and styling bind both locale pages and genuine state records', as
   const catalogue = JSON.parse(await readFile('data/catalogue.json', 'utf8'))
   const media = JSON.parse(await readFile('data/media.json', 'utf8'))
   const source = await readFile('../consumer/ui_showcase/model/catalogue.odin', 'utf8')
-  assert.deepEqual(catalogue.coverage.ids, ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud'])
+  assert.deepEqual(catalogue.coverage.ids, ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'text-input'])
   await validateCatalogue({ catalogue, media, source, publicRoot: 'public', coverage: catalogue.coverage })
   for (const id of ['controls', 'styling']) {
     assert.ok(sourceIds(source).gallery.includes(id))

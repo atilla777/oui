@@ -1,18 +1,18 @@
 # Статический каталог и изображения сайта
 
-Контракт введён `oui-3no.2`; расширения `oui-3no.5`, `oui-3no.6` и локальный
+Контракт введён `oui-3no.2`; расширения `oui-3no.5`, `oui-3no.6`, `oui-3no.9` и локальный
 кандидат `oui-3no.11` pending integration.
-Библиотека и native consumers не изменены; сайт описывает существующие layout,
-controls, styling, profiles, layers и HUD, а не реализует их в браузере.
+Библиотека и native consumers не изменены; сайт описывает существующие возможности,
+а не реализует их в браузере.
 
 - `site/en/` и `site/ru/` содержат `catalogue` и `capabilities/layout`,
   `capabilities/controls`, `capabilities/styling`, `capabilities/profiles`,
-  `capabilities/layers`, `capabilities/hud`.
+  `capabilities/layers`, `capabilities/hud`, `capabilities/text-input`.
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
   полный showcase, с pinned source links и native build/run command.
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
   Каталог объявляет sample coverage `layout`, `controls`, `styling`, `profiles`,
-  `layers`, `hud`. Native source catalogue
+  `layers`, `hud`, `text-input`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -69,7 +69,7 @@ EN/RU страниц controls/styling и прежних foundation/layout/catalo
 Из `site/` с Node из `.nvmrc`: `npm ci`, `npm run check`, `npm run build`,
 `npm run check:http`, затем `npm run preview -- --port 0` и выданный локальный
 URL с `/oui/en/capabilities/layout` либо `/oui/ru/capabilities/layout`.
-Для новых страниц заменить `layout` на `controls` или `styling`; переключение
+Для новых страниц заменить `layout` на `controls`, `styling`, `profiles` или `text-input`; переключение
 языка сохраняет страницу. `npm run check:browser` запускает разрешённую
 изолированную браузерную приёмку (Linux Chromium с sandbox).
 Остановить свой preview — Ctrl-C. Подробнее: [site README](../../site/README.md).
@@ -98,7 +98,8 @@ catalogue/layout/guide сценарии проверены на ширинах 3
 overflow, все ожидаемые изображения загружены с локализованным alt, клавиатурные
 переходы из каталога, смена языка с valid/missing anchors, no-JS и reduced motion.
 Все 36 исходных browser PNG, затем все 80 PNG объединённого с опубликованными
-controls/styling/profiles, поиском/фильтрами и layout viewer кандидата просмотрены
+controls/styling/profiles, поиском/фильтрами и layout viewer кандидата, а также
+все 92 PNG после следующего объединения с text-input просмотрены
 исполнителем; собственные браузеры и preview остановлены в `finally`.
 Объединённые unit/schema/parity, build, HTTP и браузерные проверки прошли;
 portable source остался побайтово неизменным. Изображения на мобильном экране
@@ -111,9 +112,42 @@ portable source остался побайтово неизменным. Изоб
 Браузерные проверки воспроизводятся командой `npm run check:browser` из `site/`
 в разрешённой sandboxed Chromium-среде; другие браузеры и полный аудит доступности
 не проверены.
+
+## Однострочный ввод текста
+
+Результат `oui-3no.9` добавляет EN/RU описание существующего редактора имени:
+черновик и применённое значение принадлежат приложению, редактор обеспечивает
+взаимодействие. Указаны выбранные пакеты `ui_editor`, `ui_text`,
+`unicode_graphemes`, pinned source и команда native build/run. Описаны
+Unicode 15.1 EGC, ограничение showcase 1–64 EGC при применении и допустимость
+пустого черновика; IME, undo, нормализация, shaping и bidi не обещаются.
+
+Два настоящих PNG EN/RU показывают поле в фокусе после вставки символа:
+черновик изменён, применённое значение осталось прежним. Source revision
+`4da8d7a57bd2453227a4c37df6b0b4d171401681`, 1280×960, scale 1;
+media manifest сохраняет полные source/resource/image identities.
+Выбранная ISD `f8204c61615406ce5628b15692628e146476a008` проверена целиком,
+create/status подтвердили `linux-abstract-v1`; собственные процессы остановлены.
+Обе предназначенные для сайта PNG просмотрены, capture metadata удалены.
+Это демонстрация конкретного состояния, не полная квалификация редактора.
+
+Свежие portable export/check, site unit/parity/negative validation, build и
+loopback HTTP прошли. Последний проверяет новые EN/RU маршруты, HTML images/alt
+и image digests без исполнения JS. Для просмотра после сборки открыть
+`/oui/en/capabilities/text-input` либо `/oui/ru/capabilities/text-input`
+через каталог. После отдельного разрешения владельца для `oui-3no.9`
+пройдена изолированная headless Chromium приёмка: EN/RU на 360/1280,
+клавиатура и смена языка, reduced motion и no-JS content/images.
+Все 28 browser PNG просмотрены; sandbox проверен, собственные browser/preview
+остановлены. Другие браузеры, полный аудит доступности, полная native
+квалификация и deployment не заявляются. В native cleanup оба app exit равны 1:
+логи содержат X11 I/O error при остановке дисплея, без предшествующей ошибки
+редактора; точный порядок сигналов не установлен. Это не подтверждение
+штатного завершения приложения.
+
 ## Просмотр двух состояний layout
 
-Локальный кандидат `oui-3no.4`, pending integration, добавляет viewer на обе
+Результат `oui-3no.4` добавляет viewer на обе
 layout-страницы. Это просмотр изображений, не браузерная реализация native UI.
 `viewerStates` записи layout связывает `large` (1280×960) и `small` (960×720)
 с соответствующими EN/RU media records. Проверка каталога отвергает несовпадение
@@ -142,7 +176,7 @@ layout-страницу EN или RU, нажать кнопку просмотр
 controls клавишей Tab и закрыть Escape. Ожидаются другой настоящий capture
 и возврат фокуса на кнопку просмотра.
 
-## Profiles: локальный кандидат oui-3no.6
+## Profiles: результат oui-3no.6
 
 EN/RU страницы описывают consumer-owned draft/applied workflow: Apply, Cancel,
 подтверждение смены профиля и Reset. Применённые значения существуют только
@@ -169,7 +203,7 @@ no-JS prose/images и reduced motion; сохранены логи/снимки �
 
 ## Локальный поиск и фильтр каталога
 
-Кандидат `oui-3no.3`, pending integration. Поиск сайта использует локальный
+Результат `oui-3no.3`: поиск сайта использует локальный
 индекс VitePress; внешнего поискового сервиса нет. Кнопка поиска и Ctrl+K
 открывают поиск текущего языка. Стрелки и Enter выбирают результат;
 пустая выдача и очистка локализованы. Результаты ведут под `/oui/en/` либо
@@ -179,10 +213,27 @@ no-JS prose/images и reduced motion; сохранены логи/снимки �
 текущего языка и общие ID, group, categories, packages, source и runnable.
 Регистр и крайние пробелы не влияют на совпадение; все слова запроса должны
 входить в объединённый текст. Категория дополнительно ограничивает результат.
+Категории `text` и `input` показываются как Text/Input или Текст/Ввод в
+соответствующем языке; их стабильные IDs при этом не меняются.
 Пустая выдача показывает сообщение; «Сбросить фильтры» очищает запрос и категорию.
-Область остаётся sample `layout`, `controls`, `styling`, `profiles`, `layers`, `hud`,
+Область остаётся sample `layout`, `controls`, `styling`, `profiles`, `layers`, `hud`, `text-input`,
 не полный каталог; фильтрация применяется к каждому разделу отдельно. Поиск и фильтры требуют
-JavaScript; без него исходные описания и ссылки всех шести разделов остаются в HTML.
+JavaScript; без него исходные описания и ссылки всех семи разделов остаются в HTML.
+
+В интеграционном кандидате повторно проверены build, HTTP и sandboxed Chromium
+для четырёх разделов на EN/RU и ширинах 360/1280, включая фильтр `ui_editor`
+с категорией `input`, клавиатурный переход и no-JS ссылки. Просмотрены 64 browser
+PNG; собственные browser и preview остановлены. Это проверка кандидата, а не
+заявление о публикации или deployment.
+
+После объединения с profiles повторены site tests, build, HTTP и sandboxed
+Chromium для пяти разделов, EN/RU и 360/1280; просмотрены 72 browser PNG,
+собственные browser и preview остановлены. Это проверка интеграционного снимка,
+не утверждение о публикации или deployment.
+
+После объединения с layout viewer site tests, build, HTTP и sandboxed Chromium
+повторены для пяти разделов и viewer; просмотрены 76 browser PNG, собственные
+browser и preview остановлены. Это проверка интеграционного снимка, не deployment.
 
 Проверены unit positive/negative queries, schema/parity, build, HTTP и свежий
 portable-check. С отдельным разрешением владельца для этой задачи пройдены

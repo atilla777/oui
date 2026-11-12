@@ -46,8 +46,8 @@ OUI_BROWSER_ARTIFACT_ROOT="$PROOF" npm run check:browser 2>&1 | tee "$PROOF/brow
 
 The browser check observes local site search and catalogue query/filter/reset,
 keyboard interaction, locale switching, no-JS content,
-reduced motion and layout at 360 and 1280 pixels, including both sample catalogue
-and layout pages and the loaded localized images. Its screenshots need human
+reduced motion and layout at 360 and 1280 pixels, including the catalogue,
+layout, controls, styling, profiles and text-input pages and their localized images. Its screenshots need human
 inspection; automated checks do not establish accessibility conformance or cover
 other browsers and devices.
 Both locale trees must contain each page. Explicit matching heading IDs are the
@@ -55,8 +55,8 @@ stable cross-language anchors. The language link retains the page key; with JS i
 retains a hash only when that ID exists in the destination HTML. Without JS the
 ordinary link still reaches the corresponding page without a hash.
 
-The catalogue is an explicit `layout`, `controls`, `styling`, `profiles`, `layers`
-and `hud` sample, not complete coverage. The
+The catalogue is an explicit `layout`, `controls`, `styling`, `profiles`, `layers`,
+`hud` and `text-input` sample, not complete coverage. The
 schema-versioned `data/catalogue.json` and `data/media.json` are checked before
 the build against the actual native section IDs, locale media, provenance,
 PNG dimensions and digests. `npm run check:catalogue:strict` deliberately fails

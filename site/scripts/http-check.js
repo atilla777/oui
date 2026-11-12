@@ -28,6 +28,8 @@ try {
     ['ru/capabilities/layers.html', 'ru', 'Слои', '/oui/en/capabilities/layers.html'],
     ['en/capabilities/hud.html', 'en', 'HUD hold', '/oui/ru/capabilities/hud.html'],
     ['ru/capabilities/hud.html', 'ru', 'HUD и удержание', '/oui/en/capabilities/hud.html'],
+    ['en/capabilities/text-input.html', 'en', 'Text input', '/oui/ru/capabilities/text-input.html'],
+    ['ru/capabilities/text-input.html', 'ru', 'Ввод текста', '/oui/en/capabilities/text-input.html'],
     ['en/capabilities/controls.html', 'en', 'Controls', '/oui/ru/capabilities/controls.html'],
     ['ru/capabilities/controls.html', 'ru', 'Элементы управления', '/oui/en/capabilities/controls.html'],
     ['en/capabilities/styling.html', 'en', 'Styling', '/oui/ru/capabilities/styling.html'],
@@ -44,10 +46,10 @@ try {
     assert.ok(html.includes(`href="${other}"`), path)
     if (path.includes('guide/')) assert.ok(html.includes('id="choose-a-boundary"'))
     const markup = html.split('<script>window.__VP_HASH_MAP__')[0]
-    const section = path.match(/capabilities\/(layout|layers|hud)\.html/)?.[1]
+    const section = path.match(/capabilities\/(layout|layers|hud|text-input)\.html/)?.[1]
     if (section) {
       const records = media.records.filter(item => item.section === section && item.uiLocale === lang)
-      assert.equal(records.length, 2)
+      assert.equal(records.length, section === 'text-input' ? 1 : 2)
       for (const record of records) {
         const image = `/oui/${record.path}`
         assert.ok(markup.includes(`src="${image}"`), `missing no-JS image ${path}`)

@@ -1,7 +1,7 @@
 # Capability catalogue {#catalogue}
 
 This is an explicitly limited sample, not the complete showcase catalogue. It
-currently covers six of the 19 gallery sections and none of the four Integration
+currently covers seven of the 19 gallery sections and none of the four Integration
 Lab screens. The captures show the native application, not a browser port.
 
 <CatalogueFilter locale="en">
@@ -53,6 +53,15 @@ Modal and popup scopes and a noninteractive tooltip. [Explore layers](./capabili
 ## HUD hold {#hud}
 
 Hold to restore HP; the application owns the effect. [Explore HUD hold](./capabilities/hud).
+
+</CatalogueItem>
+
+<CatalogueItem id="text-input">
+
+## Text input {#text-input}
+
+Edit a single-line name with a focused draft and explicit Apply or Cancel.
+[Explore text input and its native example](./capabilities/text-input).
 
 </CatalogueItem>
 

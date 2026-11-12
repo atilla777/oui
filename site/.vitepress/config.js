@@ -10,7 +10,7 @@ export default defineConfig({
       lang: 'en', label: 'English',
       themeConfig: {
         nav: [{ text: 'Introduction', link: '/en/' }, { text: 'Using oui', link: '/en/guide/using-oui' }, { text: 'Catalogue', link: '/en/catalogue' }],
-        sidebar: [{ text: 'Guide', items: [{ text: 'Introduction', link: '/en/' }, { text: 'Using oui', link: '/en/guide/using-oui' }, { text: 'Catalogue', link: '/en/catalogue' }, { text: 'Layout', link: '/en/capabilities/layout' }, { text: 'Controls', link: '/en/capabilities/controls' }, { text: 'Styling', link: '/en/capabilities/styling' }, { text: 'Profiles', link: '/en/capabilities/profiles' }, { text: 'Layers', link: '/en/capabilities/layers' }, { text: 'HUD hold', link: '/en/capabilities/hud' }] }],
+        sidebar: [{ text: 'Guide', items: [{ text: 'Introduction', link: '/en/' }, { text: 'Using oui', link: '/en/guide/using-oui' }, { text: 'Catalogue', link: '/en/catalogue' }, { text: 'Layout', link: '/en/capabilities/layout' }, { text: 'Controls', link: '/en/capabilities/controls' }, { text: 'Styling', link: '/en/capabilities/styling' }, { text: 'Profiles', link: '/en/capabilities/profiles' }, { text: 'Layers', link: '/en/capabilities/layers' }, { text: 'HUD hold', link: '/en/capabilities/hud' }, { text: 'Text input', link: '/en/capabilities/text-input' }] }],
         outline: { label: 'On this page' },
         docFooter: { prev: 'Previous page', next: 'Next page' },
         sidebarMenuLabel: 'Menu', returnToTopLabel: 'Return to top'
@@ -20,7 +20,7 @@ export default defineConfig({
       lang: 'ru', label: 'Русский',
       themeConfig: {
         nav: [{ text: 'Введение', link: '/ru/' }, { text: 'Использование oui', link: '/ru/guide/using-oui' }, { text: 'Каталог', link: '/ru/catalogue' }],
-        sidebar: [{ text: 'Руководство', items: [{ text: 'Введение', link: '/ru/' }, { text: 'Использование oui', link: '/ru/guide/using-oui' }, { text: 'Каталог', link: '/ru/catalogue' }, { text: 'Компоновка', link: '/ru/capabilities/layout' }, { text: 'Элементы управления', link: '/ru/capabilities/controls' }, { text: 'Оформление', link: '/ru/capabilities/styling' }, { text: 'Профили', link: '/ru/capabilities/profiles' }, { text: 'Слои', link: '/ru/capabilities/layers' }, { text: 'HUD и удержание', link: '/ru/capabilities/hud' }] }],
+        sidebar: [{ text: 'Руководство', items: [{ text: 'Введение', link: '/ru/' }, { text: 'Использование oui', link: '/ru/guide/using-oui' }, { text: 'Каталог', link: '/ru/catalogue' }, { text: 'Компоновка', link: '/ru/capabilities/layout' }, { text: 'Элементы управления', link: '/ru/capabilities/controls' }, { text: 'Оформление', link: '/ru/capabilities/styling' }, { text: 'Профили', link: '/ru/capabilities/profiles' }, { text: 'Слои', link: '/ru/capabilities/layers' }, { text: 'HUD и удержание', link: '/ru/capabilities/hud' }, { text: 'Ввод текста', link: '/ru/capabilities/text-input' }] }],
         outline: { label: 'На этой странице' },
         docFooter: { prev: 'Предыдущая страница', next: 'Следующая страница' },
         sidebarMenuLabel: 'Меню', returnToTopLabel: 'Наверх',

@@ -25,3 +25,16 @@ invent product/test policy to satisfy MIS layout checks. Installation alone
 does not establish plan/run readiness. Native consumers do not require MIS.
 Local setup commits are authorized for this installation only; Git and Dolt
 publication require separate authority. Do not infer standing push permission.
+
+## Project sources and checks
+
+- `docs/product/index.md`: compact product purpose and boundaries, not task status.
+- `docs/rules/index.md`: development strategy and owner-approved checks.
+- `docs/spec/index.md`: navigation to existing contracts and future verified
+  MIS results; do not fabricate Beads linkage for inherited code.
+- Follow `docs/rules/checks.md`: docs-only link/diff checks; code changes require
+  portable-check and affected tests. Full qualification remains separate.
+- Task changes use native OpenCode worktrees and the canonical Beads workspace.
+  Before publication require independent read-only `advanced` review of the
+  complete candidate; Git and Dolt push still need explicit authorization.
+- Change project policy in project documents, not in the installed MIS skills.

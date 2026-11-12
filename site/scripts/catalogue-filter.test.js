@@ -26,4 +26,11 @@ test('five sample records filter independently and share categories', () => {
   assert.deepEqual(ids('en', ''), ['layout', 'profiles', 'controls', 'styling', 'atlas'])
   assert.deepEqual(ids('en', 'draft', 'state'), ['profiles'])
   assert.deepEqual(ids('ru', 'черновик', 'state'), ['profiles'])
+  for (const locale of ['en', 'ru']) {
+    for (const category of ['resources', 'images']) {
+      assert.deepEqual(ids(locale, '', category), ['atlas'])
+      assert.deepEqual(ids(locale, 'atlas', category), ['atlas'])
+      assert.deepEqual(ids(locale, 'zzznomatch', category), [])
+    }
+  }
 })

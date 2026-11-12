@@ -236,6 +236,17 @@ try {
       assert.ok(await page.locator('#styling').isVisible())
       assert.ok(await page.locator('#profiles').isVisible())
       assert.ok(await page.locator('#atlas').isVisible())
+      for (const [value, enLabel, ruLabel] of [['resources', 'Resources', 'Ресурсы'], ['images', 'Images', 'Изображения']]) {
+        await select.selectOption(value)
+        assert.equal(await select.locator('option:checked').innerText(), lang === 'en' ? enLabel : ruLabel)
+        assert.ok(await page.locator('#atlas').isVisible())
+        for (const id of ['layout', 'controls', 'styling', 'profiles']) assert.equal(await page.locator(`#${id}`).isVisible(), false)
+        await page.screenshot({ path: join(artifacts, `atlas-${value}-${lang}-${width}.png`), fullPage: true })
+        await page.getByRole('button', { name: reset }).click()
+        assert.equal(await select.inputValue(), '')
+        assert.equal(await query.inputValue(), '')
+        for (const id of ['layout', 'controls', 'styling', 'profiles', 'atlas']) assert.ok(await page.locator(`#${id}`).isVisible())
+      }
       await select.selectOption('layout')
       await query.fill('ui_layout')
       assert.ok(await page.locator('#layout').isVisible())

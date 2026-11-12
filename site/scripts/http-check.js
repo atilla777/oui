@@ -27,7 +27,13 @@ try {
     ['en/capabilities/text.html', 'en', 'Text', '/oui/ru/capabilities/text.html'],
     ['ru/capabilities/text.html', 'ru', 'Текст', '/oui/en/capabilities/text.html'],
     ['en/capabilities/rich-text.html', 'en', 'Rich text', '/oui/ru/capabilities/rich-text.html'],
-    ['ru/capabilities/rich-text.html', 'ru', 'Форматированный текст', '/oui/en/capabilities/rich-text.html']
+    ['ru/capabilities/rich-text.html', 'ru', 'Форматированный текст', '/oui/en/capabilities/rich-text.html'],
+    ['en/capabilities/controls.html', 'en', 'Controls', '/oui/ru/capabilities/controls.html'],
+    ['ru/capabilities/controls.html', 'ru', 'Элементы управления', '/oui/en/capabilities/controls.html'],
+    ['en/capabilities/styling.html', 'en', 'Styling', '/oui/ru/capabilities/styling.html'],
+    ['ru/capabilities/styling.html', 'ru', 'Оформление', '/oui/en/capabilities/styling.html'],
+    ['en/capabilities/profiles.html', 'en', 'Profiles', '/oui/ru/capabilities/profiles.html'],
+    ['ru/capabilities/profiles.html', 'ru', 'Профили', '/oui/en/capabilities/profiles.html']
   ]) {
     const response = await get('/oui/' + path)
     assert.equal(response.status, 200, path)
@@ -50,6 +56,19 @@ try {
       const bytes = Buffer.from(await response.arrayBuffer())
       assert.equal(bytes.subarray(0, 8).toString('hex'), '89504e470d0a1a0a')
       assert.equal(createHash('sha256').update(bytes).digest('hex'), record.sha256)
+    }
+    for (const [id, states] of [['profiles', ['initial', 'dialog', 'applied']], ['controls', ['initial', 'changed']], ['styling', ['initial', 'changed']]]) if (path.includes(`capabilities/${id}`)) {
+      for (const state of states) {
+        const record = media.records.find(item => item.id === `${id}-${lang}-${state}`)
+        const image = `/oui/${record.path}`
+        assert.ok(markup.includes(`src="${image}"`))
+        assert.ok(markup.includes(`alt="${record.alt[lang]}"`))
+        const response = await get(image)
+        assert.equal(response.status, 200)
+        assert.match(response.headers.get('content-type'), /^image\/png/)
+        const bytes = Buffer.from(await response.arrayBuffer())
+        assert.equal(createHash('sha256').update(bytes).digest('hex'), record.sha256)
+      }
     }
     const serialized = html.match(/window\.__VP_SITE_DATA__=JSON\.parse\(("(?:\\.|[^"\\])*")\)/)
     assert.ok(serialized, 'missing serialized site configuration')

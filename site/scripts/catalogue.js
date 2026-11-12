@@ -81,6 +81,9 @@ export async function validateCatalogue({ catalogue, media, source, publicRoot, 
     const selected = record.media.map(id => images.get(id))
     if (selected.some(image => !image || image.section !== record.id)) fail('Invalid media reference')
     for (const locale of locales) if (!selected.some(image => image.uiLocale === locale || image.uiLocale === 'neutral')) fail(`Missing ${locale} media`)
+    if (record.id === 'atlas') for (const locale of locales) for (const state of ['initial', 'alternate', 'reload']) {
+      if (!selected.some(image => image.id === `atlas-${locale}-${state}` && image.uiLocale === locale)) fail(`Missing atlas ${locale} ${state} media`)
+    }
   }
   if ([...images.keys()].some(id => ![...records.values()].some(record => record.media.includes(id)))) fail('Unreferenced media')
 }

@@ -3,7 +3,8 @@
   "coverage": {
     "mode": "sample",
     "ids": [
-      "layout"
+      "layout",
+      "atlas"
     ]
   },
   "records": [
@@ -35,6 +36,40 @@
       "media": [
         "layout-en",
         "layout-ru"
+      ]
+    },
+    {
+      "id": "atlas",
+      "group": "gallery",
+      "categories": [
+        "resources",
+        "images"
+      ],
+      "packages": [
+        "ui_style",
+        "ui_sdl"
+      ],
+      "source": "consumer/ui_showcase/sections/content.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Atlas",
+        "ru": "Атлас"
+      },
+      "summary": {
+        "en": "Load atlas pages and regions, switch resources and reload the selected set.",
+        "ru": "Загрузка страниц и областей атласа, смена ресурсов и перезагрузка выбранного набора."
+      },
+      "limitations": {
+        "en": "Manifest v1 and bounded non-interlaced RGB8/RGBA8 PNG only.",
+        "ru": "Только manifest v1 и ограниченный нечересстрочный PNG RGB8/RGBA8."
+      },
+      "media": [
+        "atlas-en-initial",
+        "atlas-en-alternate",
+        "atlas-en-reload",
+        "atlas-ru-initial",
+        "atlas-ru-alternate",
+        "atlas-ru-reload"
       ]
     }
   ]

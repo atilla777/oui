@@ -7,7 +7,8 @@
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
   полный showcase, с pinned source links и native build/run command.
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
-  Каталог объявляет sample coverage только `layout`. Native source catalogue
+  Каталог объявляет sample coverage `layout` и `atlas` (Atlas — кандидат
+  `oui-3no.7`, pending integration). Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -46,3 +47,39 @@ loopback-only preview. EN/RU catalogue/layout проверены на ширин
 `npm run check:http`, затем `npm run preview -- --port 0` и выданный локальный
 URL с `/oui/en/capabilities/layout` либо `/oui/ru/capabilities/layout`.
 Остановить свой preview — Ctrl-C. Подробнее: [site README](../../site/README.md).
+
+## Atlas: кандидат oui-3no.7
+
+`site/en/capabilities/atlas.md` и русский counterpart описывают существующий
+native Atlas: назначение, A/B resource identity, reload, выбранные пакеты,
+ограничения PNG/manifest loader и команды с pinned source links. Kit/native
+поведение не меняется; интерактивный viewer не добавлен.
+
+Для каждого языка опубликованы три настоящих состояния: начальный A
+(`B=false`, `reload=0`), переключённый B (`B=true`, `reload=0`) и B после reload
+(`B=true`, `reload=1`). Повторная загрузка неизменённых файлов не обязана менять
+изображение. Все шесть PNG сняты на clean source
+`4da8d7a57bd2453227a4c37df6b0b4d171401681`, 1280×960, scale 1, через проверенную
+ISD `f8204c61615406ce5628b15692628e146476a008`; pre-create/create/status подтвердили
+`linux-abstract-v1`, собственные runs остановлены. Использован ранее подготовленный
+private prefix libpng 1.6.59/zlib 1.4 с проверенной runtime linkage. PNG просмотрены,
+public-safe копии pixel-identical и не содержат ancillary metadata.
+Media manifest сохраняет отдельные state/locale/resource/image identities;
+валидатор дополнительно требует все три состояния Atlas в обоих языках.
+
+На этом кандидате прошли шесть site unit/schema/parity tests, включая negative
+missing-reload fixture, build, loopback HTTP (11 маршрутов и media digests),
+изолированный Chromium 152 с sandbox: Atlas EN/RU при 360/1280, keyboard,
+locale anchors, загруженные изображения, no-JS и reduced motion. Существующие
+сценарии сохранены. Все восемь Atlas browser PNG просмотрены исполнителем.
+Свежий portable export (630 файлов, сверенных с source revision) и portable-check,
+документированная native сборка, 11 loader tests и адресный Atlas reload-failure
+test прошли. Дополнительный широкий native app test run остановлен по таймауту
+после четырёх тестов, ещё 134 не выполнены; полной квалификации это не доказывает.
+Другие браузеры, полная доступность, прочие gallery IDs и deploy не проверены.
+
+Как увидеть локальный кандидат: из `site/` выполнить команды README,
+затем `npm run preview -- --port 0`; открыть выданный URL с
+`/oui/en/capabilities/atlas` либо `/oui/ru/capabilities/atlas`, или перейти
+через соответствующий catalogue. Сравнить A/B и счётчик reload под изображениями.
+Это проверено в локальном HTTP/browser, не означает публикацию или Pages deploy.

@@ -28,6 +28,14 @@ test('published sample binds localized prose, media and selected resource hashes
     for (const [path, expected] of Object.entries(image.resources)) {
       assert.equal(createHash('sha256').update(await readFile(`../${path}`)).digest('hex'), expected, path)
     }
+    const atlas = await readFile(`${locale}/capabilities/atlas.md`, 'utf8')
+    for (const state of ['initial', 'alternate', 'reload']) {
+      const capture = media.records.find(record => record.id === `atlas-${locale}-${state}`)
+      assert.ok(capture, `missing ${locale} ${state}`)
+      assert.ok(atlas.includes(`![${capture.alt[locale]}](/${capture.path})`))
+      assert.ok(atlas.includes(capture.caption[locale]))
+      for (const [path, expected] of Object.entries(capture.resources)) assert.equal(createHash('sha256').update(await readFile(`../${path}`)).digest('hex'), expected, path)
+    }
   }
 })
 
@@ -58,4 +66,14 @@ test('sample validation rejects digest, provenance, locale and strict coverage f
     await assert.rejects(validateCatalogue({ ...input, coverage: { mode: 'strict' } }), /Coverage mismatch/)
     await assert.rejects(validateCatalogue({ ...input, coverage: undefined }), /Explicit coverage/)
   } finally { await rm(root, { recursive: true, force: true }) }
+})
+
+test('atlas sample rejects a missing reload capture even when locale coverage remains', async () => {
+  const catalogue = JSON.parse(await readFile('data/catalogue.json', 'utf8'))
+  const media = JSON.parse(await readFile('data/media.json', 'utf8'))
+  const source = await readFile('../consumer/ui_showcase/model/catalogue.odin', 'utf8')
+  const id = 'atlas-ru-reload'
+  catalogue.records.find(record => record.id === 'atlas').media = catalogue.records.find(record => record.id === 'atlas').media.filter(value => value !== id)
+  media.records = media.records.filter(record => record.id !== id)
+  await assert.rejects(validateCatalogue({ catalogue, media, source, publicRoot: 'public', coverage: catalogue.coverage }), /Missing atlas ru reload media/)
 })

@@ -162,7 +162,8 @@ try {
   }
   const samplePages = [
     ['catalogue.html', 'Capability catalogue', 'Каталог возможностей', 'layout'],
-    ['capabilities/layout.html', 'Layout', 'Компоновка', 'boundaries']
+    ['capabilities/layout.html', 'Layout', 'Компоновка', 'boundaries'],
+    ['capabilities/atlas.html', 'Atlas', 'Атлас', 'boundaries']
   ]
   for (const width of [360, 1280]) {
     await page.setViewportSize({ width, height: 900 })
@@ -173,12 +174,17 @@ try {
         const dimensions = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, client: document.documentElement.clientWidth }))
         assert.ok(dimensions.scroll <= dimensions.client, `${path} ${lang} ${width} overflow ${JSON.stringify(dimensions)}`)
         assert.ok(await page.locator('main p').first().isVisible())
-        if (path.startsWith('capabilities/')) {
+        if (path.includes('layout.html')) {
           const image = page.locator(`main img[src="/oui/media/layout-${lang}.png"]`)
           assert.ok(await image.isVisible())
           assert.ok(await image.evaluate(el => el.complete && el.naturalWidth === 1280 && el.naturalHeight === 960 && !!el.alt))
         }
-        await page.screenshot({ path: join(artifacts, `${lang}-${path.startsWith('capabilities/') ? 'layout' : 'catalogue'}-${width}.png`), fullPage: true })
+        if (path.includes('atlas.html')) for (const state of ['initial', 'alternate', 'reload']) {
+          const image = page.locator(`main img[src="/oui/media/atlas-${lang}-${state}.png"]`)
+          assert.ok(await image.isVisible())
+          assert.ok(await image.evaluate(el => el.complete && el.naturalWidth === 1280 && el.naturalHeight === 960 && !!el.alt))
+        }
+        await page.screenshot({ path: join(artifacts, `${lang}-${path.includes('layout.html') ? 'layout' : path.includes('atlas.html') ? 'atlas' : 'catalogue'}-${width}.png`), fullPage: true })
         await page.keyboard.press('Tab')
         assert.equal(await page.evaluate(() => document.activeElement.classList.contains('VPSkipLink')), true)
         await page.keyboard.press('Enter')
@@ -210,7 +216,7 @@ try {
     await checkPage('en', en)
     assert.ok(await page.locator('main p').first().isVisible())
     assert.equal(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior), 'auto')
-    if (path.startsWith('capabilities/')) assert.ok(await page.locator('main img').isVisible())
+    if (path.startsWith('capabilities/')) assert.ok(await page.locator('main img').first().isVisible())
   }
   console.log('PASS reduced motion: preference, transition duration, scrolling and prose visibility')
 
@@ -253,12 +259,17 @@ try {
           assert.equal((await p.locator('h1').first().innerText()).replace(/\u200b/g, '').trim(), heading)
           assert.ok(await p.locator('main p').first().isVisible())
           assert.equal(await p.evaluate(() => typeof window.__VP_SITE_DATA__), 'undefined')
-          if (path.startsWith('capabilities/')) {
+          if (path.includes('layout.html')) {
             const image = p.locator(`main img[src="/oui/media/layout-${lang}.png"]`)
             assert.ok(await image.isVisible())
             assert.ok(await image.evaluate(el => el.complete && el.naturalWidth === 1280 && el.naturalHeight === 960 && !!el.alt))
           }
-          await p.screenshot({ path: join(artifacts, `nojs-${lang}-${path.startsWith('capabilities/') ? 'layout' : 'catalogue'}-${width}.png`), fullPage: true })
+          if (path.includes('atlas.html')) for (const state of ['initial', 'alternate', 'reload']) {
+            const image = p.locator(`main img[src="/oui/media/atlas-${lang}-${state}.png"]`)
+            assert.ok(await image.isVisible())
+            assert.ok(await image.evaluate(el => el.complete && el.naturalWidth === 1280 && el.naturalHeight === 960 && !!el.alt))
+          }
+          await p.screenshot({ path: join(artifacts, `nojs-${lang}-${path.includes('layout.html') ? 'layout' : path.includes('atlas.html') ? 'atlas' : 'catalogue'}-${width}.png`), fullPage: true })
           await focusByTab(`.content-container a[lang="${other}"]`, p)
           await p.keyboard.press('Enter')
           await p.waitForURL(`**/oui/${other}/${path}`)

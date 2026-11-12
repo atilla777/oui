@@ -1,18 +1,18 @@
 # Статический каталог и изображения сайта
 
-Контракт введён `oui-3no.2`; расширения `oui-3no.5`, `oui-3no.6`, `oui-3no.9` и локальный
+Контракт введён `oui-3no.2`; расширения `oui-3no.5`, `oui-3no.6`, `oui-3no.7`, `oui-3no.9` и локальный
 кандидат `oui-3no.11` pending integration.
 Библиотека и native consumers не изменены; сайт описывает существующие возможности,
 а не реализует их в браузере.
 
 - `site/en/` и `site/ru/` содержат `catalogue` и `capabilities/layout`,
   `capabilities/controls`, `capabilities/styling`, `capabilities/profiles`,
-  `capabilities/layers`, `capabilities/hud`, `capabilities/text-input`.
+  `capabilities/layers`, `capabilities/hud`, `capabilities/text-input`, `capabilities/atlas`.
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
   полный showcase, с pinned source links и native build/run command.
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
   Каталог объявляет sample coverage `layout`, `controls`, `styling`, `profiles`,
-  `layers`, `hud`, `text-input`. Native source catalogue
+  `layers`, `hud`, `text-input`, `atlas`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -101,6 +101,8 @@ overflow, все ожидаемые изображения загружены с
 controls/styling/profiles, поиском/фильтрами и layout viewer кандидата, а также
 все 92 PNG после следующего объединения с text-input просмотрены
 исполнителем; собственные браузеры и preview остановлены в `finally`.
+После объединения с Atlas повторены site checks, build, HTTP и sandboxed Chromium;
+все 108 browser PNG просмотрены, собственные browser и preview остановлены.
 Объединённые unit/schema/parity, build, HTTP и браузерные проверки прошли;
 portable source остался побайтово неизменным. Изображения на мобильном экране
 уменьшены; viewer/zoom для layers/HUD и полная квалификация остальных IDs
@@ -197,7 +199,7 @@ provenance и digests находятся в `site/data/media.json`. Собств
 no-JS prose/images и reduced motion; сохранены логи/снимки и cleanup.
 Отмена и Reset описаны по исходному коду, не заявлены как отдельная native
 приёмка этого кандидата. Мобильное уменьшение изображений и остальные ограничения
-выше сохраняются; полный каталог, новые viewer/search, Pages/deploy не входят
+выше сохраняются; полный каталог, viewer и Pages/deploy не входят
 в эту работу. Проверенные local preview маршруты:
 `/oui/en/capabilities/profiles` и `/oui/ru/capabilities/profiles`.
 
@@ -216,9 +218,9 @@ no-JS prose/images и reduced motion; сохранены логи/снимки �
 Категории `text` и `input` показываются как Text/Input или Текст/Ввод в
 соответствующем языке; их стабильные IDs при этом не меняются.
 Пустая выдача показывает сообщение; «Сбросить фильтры» очищает запрос и категорию.
-Область остаётся sample `layout`, `controls`, `styling`, `profiles`, `layers`, `hud`, `text-input`,
+Область остаётся sample `layout`, `controls`, `styling`, `profiles`, `layers`, `hud`, `text-input`, `atlas`,
 не полный каталог; фильтрация применяется к каждому разделу отдельно. Поиск и фильтры требуют
-JavaScript; без него исходные описания и ссылки всех семи разделов остаются в HTML.
+JavaScript; без него исходные описания и ссылки всех восьми разделов остаются в HTML.
 
 В интеграционном кандидате повторно проверены build, HTTP и sandboxed Chromium
 для четырёх разделов на EN/RU и ширинах 360/1280, включая фильтр `ui_editor`
@@ -246,3 +248,39 @@ portable-check. С отдельным разрешением владельца 
 выданный URL с `/oui/en/catalogue` либо `/oui/ru/catalogue`. Ввести `ui_layout`,
 затем `zzznomatch`, сбросить фильтры и перейти на layout. Для поиска сайта
 нажать Ctrl+K, ввести `Layout` либо `Компоновка`, выбрать результат клавиатурой.
+
+## Atlas: кандидат oui-3no.7
+
+`site/en/capabilities/atlas.md` и русский counterpart описывают существующий
+native Atlas: назначение, A/B resource identity, reload, выбранные пакеты,
+ограничения PNG/manifest loader и команды с pinned source links. Kit/native
+поведение не меняется; интерактивный viewer не добавлен.
+
+Для каждого языка опубликованы три настоящих состояния: начальный A
+(`B=false`, `reload=0`), переключённый B (`B=true`, `reload=0`) и B после reload
+(`B=true`, `reload=1`). Повторная загрузка неизменённых файлов не обязана менять
+изображение. Все шесть PNG сняты на clean source
+`4da8d7a57bd2453227a4c37df6b0b4d171401681`, 1280×960, scale 1, через проверенную
+ISD `f8204c61615406ce5628b15692628e146476a008`; pre-create/create/status подтвердили
+`linux-abstract-v1`, собственные runs остановлены. Использован ранее подготовленный
+private prefix libpng 1.6.59/zlib 1.4 с проверенной runtime linkage. PNG просмотрены,
+public-safe копии pixel-identical и не содержат ancillary metadata.
+Media manifest сохраняет отдельные state/locale/resource/image identities;
+валидатор дополнительно требует все три состояния Atlas в обоих языках.
+
+На этом кандидате прошли шесть site unit/schema/parity tests, включая negative
+missing-reload fixture, build, loopback HTTP (11 маршрутов и media digests),
+изолированный Chromium 152 с sandbox: Atlas EN/RU при 360/1280, keyboard,
+locale anchors, загруженные изображения, no-JS и reduced motion. Существующие
+сценарии сохранены. Все восемь Atlas browser PNG просмотрены исполнителем.
+Свежий portable export (630 файлов, сверенных с source revision) и portable-check,
+документированная native сборка, 11 loader tests и адресный Atlas reload-failure
+test прошли. Дополнительный широкий native app test run остановлен по таймауту
+после четырёх тестов, ещё 134 не выполнены; полной квалификации это не доказывает.
+Другие браузеры, полная доступность, прочие gallery IDs и deploy не проверены.
+
+Как увидеть локальный кандидат: из `site/` выполнить команды README,
+затем `npm run preview -- --port 0`; открыть выданный URL с
+`/oui/en/capabilities/atlas` либо `/oui/ru/capabilities/atlas`, или перейти
+через соответствующий catalogue. Сравнить A/B и счётчик reload под изображениями.
+Это проверено в локальном HTTP/browser, не означает публикацию или Pages deploy.

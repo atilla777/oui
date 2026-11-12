@@ -1200,6 +1200,270 @@
         "en": "Focused name editor with an edited draft, Apply and Cancel buttons, and the unchanged applied value.",
         "ru": "Редактор имени в фокусе с изменённым черновиком, кнопками применения и отмены и неизменённым применённым значением."
       }
+    },
+    {
+      "id": "atlas-en-initial",
+      "section": "atlas",
+      "state": "A initial B=false reload=0",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/content.odin",
+        "consumer/ui_showcase/app/runtime.odin",
+        "consumer/atlas_catalog/loader",
+        "kit/ui_style",
+        "kit/ui_sdl"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; scale 1; section atlas; A/B then Reload when applicable; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/atlas-en-initial.png",
+      "sha256": "d093e69a2fc2a0d44ff14a5ce8f893696f403729e113371b264e1a9594baba30",
+      "caption": {
+        "en": "Atlas A, initial state; B=false and reload=0.",
+        "ru": "Атлас A, начальное состояние; B=false и reload=0."
+      },
+      "alt": {
+        "en": "Native Atlas page with blue A resources, pivot 0.5,0.5 and reload counter zero.",
+        "ru": "Нативная страница Atlas: синие ресурсы A, pivot 0.5,0.5 и нулевой счётчик reload."
+      }
+    },
+    {
+      "id": "atlas-en-alternate",
+      "section": "atlas",
+      "state": "B after resource switch B=true reload=0",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/content.odin",
+        "consumer/ui_showcase/app/runtime.odin",
+        "consumer/atlas_catalog/loader",
+        "kit/ui_style",
+        "kit/ui_sdl"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; scale 1; section atlas; A/B then Reload when applicable; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/atlas-en-alternate.png",
+      "sha256": "e5f846ee1328e3e8883c26211cbe7b5480bb73a29487a9e29b7df082fb11e5a3",
+      "caption": {
+        "en": "Atlas B after switching resources; B=true and reload=0.",
+        "ru": "Атлас B после смены ресурса; B=true и reload=0."
+      },
+      "alt": {
+        "en": "Native Atlas page after switching to gold B resources, pivot 1,0 and reload counter zero.",
+        "ru": "Нативная страница Atlas после переключения на золотистые ресурсы B, pivot 1,0 и нулевой счётчик reload."
+      }
+    },
+    {
+      "id": "atlas-en-reload",
+      "section": "atlas",
+      "state": "B after reload B=true reload=1",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/content.odin",
+        "consumer/ui_showcase/app/runtime.odin",
+        "consumer/atlas_catalog/loader",
+        "kit/ui_style",
+        "kit/ui_sdl"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; scale 1; section atlas; A/B then Reload when applicable; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/atlas-en-reload.png",
+      "sha256": "0d83bffe3a45328015cbcb86d42c1fca62dbc0a92276d147bff69efd502b0c3e",
+      "caption": {
+        "en": "Atlas B after reload; B=true and reload=1.",
+        "ru": "Атлас B после перезагрузки; B=true и reload=1."
+      },
+      "alt": {
+        "en": "Native Atlas page after reloading B; the status reports B=true and reload=1.",
+        "ru": "Нативная страница Atlas после перезагрузки B: в статусе B=true и reload=1."
+      }
+    },
+    {
+      "id": "atlas-ru-initial",
+      "section": "atlas",
+      "state": "A initial B=false reload=0",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/content.odin",
+        "consumer/ui_showcase/app/runtime.odin",
+        "consumer/atlas_catalog/loader",
+        "kit/ui_style",
+        "kit/ui_sdl"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; scale 1; section atlas; A/B then Reload when applicable; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/atlas-ru-initial.png",
+      "sha256": "e7e419350a7b24677ce5193ff7836b5a1a4e7694a47ad1fe41d647df46214125",
+      "caption": {
+        "en": "Atlas A, initial state; B=false and reload=0.",
+        "ru": "Атлас A, начальное состояние; B=false и reload=0."
+      },
+      "alt": {
+        "en": "Native Atlas page with blue A resources, pivot 0.5,0.5 and reload counter zero.",
+        "ru": "Нативная страница Atlas: синие ресурсы A, pivot 0.5,0.5 и нулевой счётчик reload."
+      }
+    },
+    {
+      "id": "atlas-ru-alternate",
+      "section": "atlas",
+      "state": "B after resource switch B=true reload=0",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/content.odin",
+        "consumer/ui_showcase/app/runtime.odin",
+        "consumer/atlas_catalog/loader",
+        "kit/ui_style",
+        "kit/ui_sdl"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; scale 1; section atlas; A/B then Reload when applicable; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/atlas-ru-alternate.png",
+      "sha256": "b20282be82d60391b27f8890c5568d78cb4f5f5a98cee6765332784cae53b19b",
+      "caption": {
+        "en": "Atlas B after switching resources; B=true and reload=0.",
+        "ru": "Атлас B после смены ресурса; B=true и reload=0."
+      },
+      "alt": {
+        "en": "Native Atlas page after switching to gold B resources, pivot 1,0 and reload counter zero.",
+        "ru": "Нативная страница Atlas после переключения на золотистые ресурсы B, pivot 1,0 и нулевой счётчик reload."
+      }
+    },
+    {
+      "id": "atlas-ru-reload",
+      "section": "atlas",
+      "state": "B after reload B=true reload=1",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/content.odin",
+        "consumer/ui_showcase/app/runtime.odin",
+        "consumer/atlas_catalog/loader",
+        "kit/ui_style",
+        "kit/ui_sdl"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; scale 1; section atlas; A/B then Reload when applicable; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/atlas-ru-reload.png",
+      "sha256": "41b44bfae7d73c800a3b20ce423379368e495de68ffd88431dcf7d077ecb7364",
+      "caption": {
+        "en": "Atlas B after reload; B=true and reload=1.",
+        "ru": "Атлас B после перезагрузки; B=true и reload=1."
+      },
+      "alt": {
+        "en": "Native Atlas page after reloading B; the status reports B=true and reload=1.",
+        "ru": "Нативная страница Atlas после перезагрузки B: в статусе B=true и reload=1."
+      }
     }
   ]
 }

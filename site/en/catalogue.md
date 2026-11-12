@@ -1,7 +1,7 @@
 # Capability catalogue {#catalogue}
 
 This is an explicitly limited sample, not the complete showcase catalogue. It
-currently covers seven of the 19 gallery sections and none of the four Integration
+currently covers eight of the 19 gallery sections and none of the four Integration
 Lab screens. The captures show the native application, not a browser port.
 
 <CatalogueFilter locale="en">
@@ -62,6 +62,15 @@ Hold to restore HP; the application owns the effect. [Explore HUD hold](./capabi
 
 Edit a single-line name with a focused draft and explicit Apply or Cancel.
 [Explore text input and its native example](./capabilities/text-input).
+
+</CatalogueItem>
+
+<CatalogueItem id="atlas">
+
+## Atlas {#atlas}
+
+Load image regions, switch atlas resources and reload the selected set.
+[Explore Atlas and its native example](./capabilities/atlas).
 
 </CatalogueItem>
 

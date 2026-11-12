@@ -78,7 +78,7 @@ try {
     assert.ok(await page.locator('main').innerText())
   }
   const checkImages = async (activePage, path, lang) => {
-    const section = path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|text-input)\.html$/)?.[1]
+    const section = path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|text-input|atlas)\.html$/)?.[1]
     if (!section) { assert.equal(path, 'catalogue.html'); return }
     const ids = {
       layout: [`layout-${lang}`, `layout-small-${lang}`],
@@ -87,7 +87,8 @@ try {
       profiles: [`profiles-${lang}-initial`, `profiles-${lang}-dialog`, `profiles-${lang}-applied`],
       layers: [`layers-popup-tooltip-${lang}`, `layers-modal-${lang}`],
       hud: [`hud-idle-${lang}`, `hud-completed-${lang}`],
-      'text-input': [`text-input-${lang}`]
+      'text-input': [`text-input-${lang}`],
+      atlas: [`atlas-${lang}-initial`, `atlas-${lang}-alternate`, `atlas-${lang}-reload`]
     }[section]
     const images = activePage.locator('main p > img')
     assert.equal(await images.count(), ids.length, `${section} ${lang}: image count`)
@@ -190,6 +191,7 @@ try {
   const samplePages = [
     ['catalogue.html', 'Capability catalogue', 'Каталог возможностей', 'layout'],
     ['capabilities/layout.html', 'Layout', 'Компоновка', 'boundaries'],
+    ['capabilities/atlas.html', 'Atlas', 'Атлас', 'boundaries'],
     ['capabilities/controls.html', 'Controls', 'Элементы управления', 'boundaries'],
     ['capabilities/styling.html', 'Styling', 'Оформление', 'boundaries'],
     ['capabilities/profiles.html', 'Profiles', 'Профили', 'workflow'],
@@ -213,6 +215,7 @@ try {
       assert.equal(await page.locator('#controls').isVisible(), false)
       assert.equal(await page.locator('#styling').isVisible(), false)
       assert.equal(await page.locator('#profiles').isVisible(), false)
+      assert.equal(await page.locator('#atlas').isVisible(), false)
       await select.selectOption('geometry')
       assert.equal(await select.locator('option:checked').innerText(), lang === 'en' ? 'Geometry' : 'Геометрия')
       assert.ok(await page.locator('#layout').isVisible())
@@ -247,6 +250,7 @@ try {
       await select.selectOption('state')
       assert.equal(await select.locator('option:checked').innerText(), lang === 'en' ? 'State' : 'Состояние')
       assert.ok(await page.locator('#profiles').isVisible())
+      assert.equal(await page.locator('#atlas').isVisible(), false)
       assert.equal(await page.locator('#controls').isVisible(), false)
       await query.fill('zzznomatch')
       assert.equal(await page.locator('#layout').isVisible(), false)
@@ -261,6 +265,18 @@ try {
       assert.ok(await page.locator('#styling').isVisible())
       assert.ok(await page.locator('#text-input').isVisible())
       assert.ok(await page.locator('#profiles').isVisible())
+      assert.ok(await page.locator('#atlas').isVisible())
+      for (const [value, enLabel, ruLabel] of [['resources', 'Resources', 'Ресурсы'], ['images', 'Images', 'Изображения']]) {
+        await select.selectOption(value)
+        assert.equal(await select.locator('option:checked').innerText(), lang === 'en' ? enLabel : ruLabel)
+        assert.ok(await page.locator('#atlas').isVisible())
+        for (const id of ['layout', 'controls', 'styling', 'profiles', 'text-input']) assert.equal(await page.locator(`#${id}`).isVisible(), false)
+        await page.screenshot({ path: join(artifacts, `atlas-${value}-${lang}-${width}.png`), fullPage: true })
+        await page.getByRole('button', { name: reset }).click()
+        assert.equal(await select.inputValue(), '')
+        assert.equal(await query.inputValue(), '')
+        for (const id of ['layout', 'controls', 'styling', 'profiles', 'text-input', 'atlas']) assert.ok(await page.locator(`#${id}`).isVisible())
+      }
       await select.selectOption('layout')
       await query.fill('ui_layout')
       assert.ok(await page.locator('#layout').isVisible())
@@ -439,7 +455,7 @@ try {
           const dimensions = await p.evaluate(() => ({ scroll: document.documentElement.scrollWidth, client: document.documentElement.clientWidth, font: parseFloat(getComputedStyle(document.querySelector('main p')).fontSize) }))
           assert.ok(dimensions.scroll <= dimensions.client && dimensions.font >= 14, `${path} ${lang} ${width}: ${JSON.stringify(dimensions)}`)
           if (path === 'catalogue.html') {
-            for (const id of ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'text-input']) {
+            for (const id of ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'text-input', 'atlas']) {
               const link = p.locator(`main a[href="./capabilities/${id}.html"]`)
               assert.ok(await link.isVisible())
               assert.equal(await link.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/capabilities/${id}.html`)

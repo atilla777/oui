@@ -46,12 +46,28 @@ try {
     await page.waitForFunction(() => [...document.querySelectorAll('.VPSwitchAppearance')].some(x => x.title))
   }
   const focusByTab = async (selector, activePage = page) => {
-    for (let i = 0; i < 50; i++) {
+    // Count a conservative superset of sequential focus candidates, including
+    // hidden/disabled/negative-tabindex nodes. Allow a complete wrap from the
+    // current focus, including the browser's document boundary.
+    const candidates = await activePage.locator('a[href], area[href], button, input, select, textarea, iframe, object, embed, summary, [contenteditable], [tabindex]').count()
+    const limit = 2 * (candidates + 1)
+    for (let i = 0; i <= limit; i++) {
       if (await activePage.locator(selector).evaluateAll(nodes => nodes.includes(document.activeElement))) return
+      if (i === limit) break
       await activePage.keyboard.press('Tab')
     }
-    throw new Error(`keyboard could not reach ${selector}`)
+    throw new Error(`keyboard could not reach ${selector} after ${limit} tabs (${candidates} candidates)`)
   }
+  const fixture = await browser.newPage()
+  try {
+    await fixture.setContent(`<main>${'<button>Step</button>'.repeat(65)}<a href="#reached" id="reachable">Target</a><button id="unreachable" tabindex="-1">Not tabbable</button></main>`)
+    await focusByTab('#reachable', fixture)
+    assert.equal(await fixture.evaluate(() => document.activeElement.id), 'reachable')
+    await fixture.keyboard.press('Enter')
+    assert.equal(new URL(fixture.url()).hash, '#reached')
+    await assert.rejects(focusByTab('#unreachable', fixture), /keyboard could not reach #unreachable after \d+ tabs/)
+    console.log('PASS keyboard traversal fixture: >50 tabs, Enter, and finite unreachable failure')
+  } finally { await fixture.close() }
   const checkPage = async (lang, title) => {
     await page.waitForFunction(expected => document.querySelector('h1')?.innerText.replace(/\u200b/g, '').trim() === expected, title)
     assert.equal(await page.locator('html').getAttribute('lang'), lang)

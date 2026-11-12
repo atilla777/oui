@@ -44,9 +44,10 @@ PROOF="$(mktemp -d /tmp/opencode/oui-site-browser.XXXXXXXX)"
 OUI_BROWSER_ARTIFACT_ROOT="$PROOF" npm run check:browser 2>&1 | tee "$PROOF/browser.log"
 ```
 
-The browser check observes keyboard interaction, locale switching, no-JS content,
+The browser check observes local site search and catalogue query/filter/reset,
+keyboard interaction, locale switching, no-JS content,
 reduced motion and layout at 360 and 1280 pixels, including both sample catalogue
-and layout/Atlas pages and the loaded localized images. Its screenshots need human
+and layout, controls, styling, profiles and Atlas pages and the loaded localized images. Its screenshots need human
 inspection; automated checks do not establish accessibility conformance or cover
 other browsers and devices.
 Both locale trees must contain each page. Explicit matching heading IDs are the
@@ -54,7 +55,7 @@ stable cross-language anchors. The language link retains the page key; with JS i
 retains a hash only when that ID exists in the destination HTML. Without JS the
 ordinary link still reaches the corresponding page without a hash.
 
-The catalogue is an explicit `layout` and `atlas` sample, not complete coverage. The
+The catalogue is an explicit `layout`, `controls`, `styling`, `profiles` and `atlas` sample, not complete coverage. The
 schema-versioned `data/catalogue.json` and `data/media.json` are checked before
 the build against the actual native section IDs, locale media, provenance,
 PNG dimensions and digests. `npm run check:catalogue:strict` deliberately fails
@@ -69,5 +70,11 @@ relative, public-safe provenance; update its digest, locale, revision, source,
 geometry, selected resource hashes, options, caption and alt in `data/media.json`,
 and the corresponding localized pages. Run `npm run check`, `npm run build`,
 and `npm run check:http`. The site build never launches Odin or captures images.
-The private evidence is not part of the website. Search/filter/viewer and final
-coverage remain future work; browser and deployment checks are separate.
+The private evidence is not part of the website. Site search uses VitePress's
+local index; open it with the search button or Ctrl+K (Cmd+K on macOS), type a
+query and use arrows and Enter to select a result. The catalogue searches the
+active locale's title, summary and limitations plus shared IDs, category, package
+and source metadata. Combine a query with a category and use Reset filters to
+clear both. Search and filtering need JavaScript; static catalogue links and prose
+remain available without it. The viewer and final coverage remain future work;
+browser and deployment checks are separate.

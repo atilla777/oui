@@ -86,6 +86,608 @@
       }
     },
     {
+      "id": "profiles-en-initial",
+      "section": "profiles",
+      "state": "initial applied Aurora profile",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/profiles.odin",
+        "consumer/controls_demo/model/model.odin",
+        "consumer/ui_showcase/app/pages.odin",
+        "kit/ui_controls"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section profiles; supplied fonts and atlases; initial focus Show help.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/profiles-en-initial.png",
+      "sha256": "b2a0284f3d04f41745ebd0a7d1c516cb6d99de29eb4fac4936010134c245e099",
+      "caption": {
+        "en": "Native profiles showcase, EN UI; initial applied state.",
+        "ru": "Нативный showcase профилей, интерфейс EN; начальное применённое состояние."
+      },
+      "alt": {
+        "en": "Profiles controls and applied Aurora settings.",
+        "ru": "Элементы профилей и применённые настройки Aurora."
+      }
+    },
+    {
+      "id": "profiles-en-dialog",
+      "section": "profiles",
+      "state": "dirty Aurora draft; pending switch to Borealis confirmation",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/profiles.odin",
+        "consumer/controls_demo/model/model.odin",
+        "consumer/ui_showcase/app/pages.odin",
+        "kit/ui_controls"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section profiles; supplied fonts and atlases; Show help unchecked, then Borealis selected.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/profiles-en-dialog.png",
+      "sha256": "9b737c1821ce936b042120b556ea7f423860c9fa312dd379adfa402add87f802",
+      "caption": {
+        "en": "Native profiles showcase, EN UI; unsaved-change confirmation.",
+        "ru": "Нативный showcase профилей, интерфейс EN; подтверждение неприменённых изменений."
+      },
+      "alt": {
+        "en": "Confirmation dialog offering apply, discard or stay over an edited Aurora profile.",
+        "ru": "Диалог предлагает применить, отменить изменения или остаться в изменённом профиле Aurora."
+      }
+    },
+    {
+      "id": "profiles-ru-initial",
+      "section": "profiles",
+      "state": "initial applied Aurora profile",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/profiles.odin",
+        "consumer/controls_demo/model/model.odin",
+        "consumer/ui_showcase/app/pages.odin",
+        "kit/ui_controls"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section profiles; supplied fonts and atlases; initial focus Show help.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/profiles-ru-initial.png",
+      "sha256": "946f7bfdce47be358f1f2c24051cf1a7ff3cdfe3f9c6d25c89878b71fb6966a2",
+      "caption": {
+        "en": "Native profiles showcase, RU UI; initial applied state.",
+        "ru": "Нативный showcase профилей, интерфейс RU; начальное применённое состояние."
+      },
+      "alt": {
+        "en": "Profiles controls and applied Aurora settings.",
+        "ru": "Элементы профилей и применённые настройки Aurora."
+      }
+    },
+    {
+      "id": "profiles-ru-dialog",
+      "section": "profiles",
+      "state": "dirty Aurora draft; pending switch to Borealis confirmation",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/profiles.odin",
+        "consumer/controls_demo/model/model.odin",
+        "consumer/ui_showcase/app/pages.odin",
+        "kit/ui_controls"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section profiles; supplied fonts and atlases; Show help unchecked, then Borealis selected.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/profiles-ru-dialog.png",
+      "sha256": "de14c5f4eb8d91b52772b42f30973e38b21e023c625a8b2d98394bf8955b2ed5",
+      "caption": {
+        "en": "Native profiles showcase, RU UI; unsaved-change confirmation.",
+        "ru": "Нативный showcase профилей, интерфейс RU; подтверждение неприменённых изменений."
+      },
+      "alt": {
+        "en": "Confirmation dialog offering apply, discard or stay over an edited Aurora profile.",
+        "ru": "Диалог предлагает применить, отменить изменения или остаться в изменённом профиле Aurora."
+      }
+    },
+    {
+      "id": "profiles-en-applied",
+      "section": "profiles",
+      "state": "Aurora applied after changing Show help from checked to unchecked",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/profiles.odin",
+        "consumer/controls_demo/model/model.odin",
+        "consumer/ui_showcase/app/pages.odin",
+        "kit/ui_controls"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section profiles; supplied fonts and atlases; Show help unchecked then Apply clicked; clean portable export inventory f63c1278dd233c16394c44a0df0e6ebd2f7406dc86d81bec1576d56e188aa02a verified against pinned revision.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/profiles-en-applied.png",
+      "sha256": "12f7e3e26e21b9522efb28cb4c2e98361f63bd955f36964c21fe536bc1bc4b14",
+      "caption": {
+        "en": "Native profiles showcase, EN UI; Show help unchecked and applied.",
+        "ru": "Нативный showcase профилей, интерфейс EN; подсказки выключены и применены."
+      },
+      "alt": {
+        "en": "Aurora profile with Show help unchecked and status Applied.",
+        "ru": "Профиль Aurora с выключенными подсказками и статусом «Применено»."
+      }
+    },
+    {
+      "id": "profiles-ru-applied",
+      "section": "profiles",
+      "state": "Aurora applied after changing Show help from checked to unchecked",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/profiles.odin",
+        "consumer/controls_demo/model/model.odin",
+        "consumer/ui_showcase/app/pages.odin",
+        "kit/ui_controls"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section profiles; supplied fonts and atlases; Show help unchecked then Apply clicked; clean portable export inventory f63c1278dd233c16394c44a0df0e6ebd2f7406dc86d81bec1576d56e188aa02a verified against pinned revision.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/profiles-ru-applied.png",
+      "sha256": "81bb7b19ad5c96fc11926554b6d19d205d9a4818a1605f561f1583b85669fbb5",
+      "caption": {
+        "en": "Native profiles showcase, RU UI; Show help unchecked and applied.",
+        "ru": "Нативный showcase профилей, интерфейс RU; подсказки выключены и применены."
+      },
+      "alt": {
+        "en": "Aurora profile with Show help unchecked and status Applied.",
+        "ru": "Профиль Aurora с выключенными подсказками и статусом «Применено»."
+      }
+    },
+    {
+      "id": "controls-en-initial",
+      "section": "controls",
+      "state": "initial state",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/pages.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_controls"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section controls; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/controls-en-initial.png",
+      "sha256": "561b66b381a979e4c82a84eee10bcc90a474d3e18dca3eb2c37290b5c7911b7e",
+      "caption": {
+        "en": "Native controls, EN UI; initial state.",
+        "ru": "Нативные элементы, интерфейс EN; начальное состояние."
+      },
+      "alt": {
+        "en": "Native controls with an unchecked checkbox, toggle off and slider at 50.",
+        "ru": "Нативные элементы: флажок снят, переключатель выключен, ползунок на 50."
+      }
+    },
+    {
+      "id": "controls-en-changed",
+      "section": "controls",
+      "state": "checkbox checked by Space",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/pages.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_controls"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section controls; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/controls-en-changed.png",
+      "sha256": "863e331abdbf864353d5d4df3582e195c301d61f8d68d07d7263dc33ddf24380",
+      "caption": {
+        "en": "Native controls, EN UI; checkbox activated with Space.",
+        "ru": "Нативные элементы, интерфейс EN; флажок включён пробелом."
+      },
+      "alt": {
+        "en": "Native controls with a checked checkbox, toggle off and slider at 50.",
+        "ru": "Нативные элементы: флажок установлен, переключатель выключен, ползунок на 50."
+      }
+    },
+    {
+      "id": "controls-ru-initial",
+      "section": "controls",
+      "state": "initial state",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/pages.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_controls"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section controls; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/controls-ru-initial.png",
+      "sha256": "0cc330c92cad477f7a240f85869aa1ea5243af465da272af2566fe65d1f0e617",
+      "caption": {
+        "en": "Native controls, RU UI; initial state.",
+        "ru": "Нативные элементы, интерфейс RU; начальное состояние."
+      },
+      "alt": {
+        "en": "Native controls with an unchecked checkbox, toggle off and slider at 50.",
+        "ru": "Нативные элементы: флажок снят, переключатель выключен, ползунок на 50."
+      }
+    },
+    {
+      "id": "controls-ru-changed",
+      "section": "controls",
+      "state": "checkbox checked by Space",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/pages.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_controls"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section controls; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/controls-ru-changed.png",
+      "sha256": "bbfb1f1d2a88080a75b09c25e4cee60d2ea2ddac07a724db7bddae86b83d8245",
+      "caption": {
+        "en": "Native controls, RU UI; checkbox activated with Space.",
+        "ru": "Нативные элементы, интерфейс RU; флажок включён пробелом."
+      },
+      "alt": {
+        "en": "Native controls with a checked checkbox, toggle off and slider at 50.",
+        "ru": "Нативные элементы: флажок установлен, переключатель выключен, ползунок на 50."
+      }
+    },
+    {
+      "id": "styling-en-initial",
+      "section": "styling",
+      "state": "initial state",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/content.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_style"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section styling; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/styling-en-initial.png",
+      "sha256": "435b3b91eccae85600c8042c7dbb17f87bddf25fc8a463e36d22711b119b4fc6",
+      "caption": {
+        "en": "Native styling, EN UI; initial blue theme.",
+        "ru": "Нативное оформление, интерфейс EN; исходная синяя тема."
+      },
+      "alt": {
+        "en": "Native styling palette with blue accent and state controls.",
+        "ru": "Нативная палитра оформления с синим акцентом и кнопками состояний."
+      }
+    },
+    {
+      "id": "styling-en-changed",
+      "section": "styling",
+      "state": "alternate purple theme activated by Return",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/content.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_style"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section styling; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/styling-en-changed.png",
+      "sha256": "5897486360a26e913920c46b1d45b2484e57018b8fa25dab2812abf72445e241",
+      "caption": {
+        "en": "Native styling, EN UI; Theme activated.",
+        "ru": "Нативное оформление, интерфейс EN; тема переключена."
+      },
+      "alt": {
+        "en": "Native styling palette with purple accent after activating Theme.",
+        "ru": "Нативная палитра с фиолетовым акцентом после нажатия «Тема»."
+      }
+    },
+    {
+      "id": "styling-ru-initial",
+      "section": "styling",
+      "state": "initial state",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/content.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_style"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section styling; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/styling-ru-initial.png",
+      "sha256": "3d05c8146e62495f3c65f9003a2ddb4294facdc56cb9a068e3c4426ee3f05550",
+      "caption": {
+        "en": "Native styling, RU UI; initial blue theme.",
+        "ru": "Нативное оформление, интерфейс RU; исходная синяя тема."
+      },
+      "alt": {
+        "en": "Native styling palette with blue accent and state controls.",
+        "ru": "Нативная палитра оформления с синим акцентом и кнопками состояний."
+      }
+    },
+    {
+      "id": "styling-ru-changed",
+      "section": "styling",
+      "state": "alternate purple theme activated by Return",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/content.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_style"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section styling; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/styling-ru-changed.png",
+      "sha256": "ae6fbac6e21c95041933fa417dc842cdc83832250fa8c296117a8cb5bd7af9e9",
+      "caption": {
+        "en": "Native styling, RU UI; Theme activated.",
+        "ru": "Нативное оформление, интерфейс RU; тема переключена."
+      },
+      "alt": {
+        "en": "Native styling palette with purple accent after activating Theme.",
+        "ru": "Нативная палитра с фиолетовым акцентом после нажатия «Тема»."
+      }
+    },
+    {
       "id": "atlas-en-initial",
       "section": "atlas",
       "state": "A initial B=false reload=0",

@@ -1,15 +1,15 @@
 # Статический каталог и изображения сайта
 
-Контракт введён `oui-3no.2`; расширение `oui-3no.5` — pending integration.
+Контракт введён `oui-3no.2`; расширения `oui-3no.5` и `oui-3no.6`.
 Библиотека и native consumers не изменены; сайт описывает существующие layout,
-controls и styling, а не реализует их в браузере.
+controls, styling и profiles, а не реализует их в браузере.
 
 - `site/en/` и `site/ru/` содержат `catalogue` и `capabilities/layout`,
-  `capabilities/controls`, `capabilities/styling`.
+  `capabilities/controls`, `capabilities/styling`, `capabilities/profiles`.
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
   полный showcase, с pinned source links и native build/run command.
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
-  Каталог объявляет sample coverage `layout`, `controls`, `styling`. Native source catalogue
+  Каталог объявляет sample coverage `layout`, `controls`, `styling`, `profiles`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -102,6 +102,31 @@ layout-страницу EN или RU, нажать кнопку просмотр
 controls клавишей Tab и закрыть Escape. Ожидаются другой настоящий capture
 и возврат фокуса на кнопку просмотра.
 
+## Profiles: локальный кандидат oui-3no.6
+
+EN/RU страницы описывают consumer-owned draft/applied workflow: Apply, Cancel,
+подтверждение смены профиля и Reset. Применённые значения существуют только
+в памяти, disk persistence нет. Узкие пакеты отделены от зависимостей полного
+showcase; ссылки и native build/run команды закреплены на source revision.
+
+Для каждого языка получены три настоящих PNG 1280×960, scale 1: начальный
+применённый Aurora, неприменённое изменение Show help с диалогом смены профиля,
+и выключенный Show help после Apply со статусом Applied/«Применено».
+Source revision `4da8d7a57bd2453227a4c37df6b0b4d171401681`;
+portable source сверен с ревизией, ISD и allocation проверены по тем же правилам
+выше. Все шесть PNG просмотрены; публичные файлы очищены от metadata,
+provenance и digests находятся в `site/data/media.json`. Собственные runs остановлены.
+
+Пройдены sample/schema/unit, build, HTTP и свежий portable-check. После отдельного
+разрешения владельца пройдены sandboxed headless Chromium profiles EN/RU
+360/1280, три загруженных изображения на страницу, keyboard locale/anchors,
+no-JS prose/images и reduced motion; сохранены логи/снимки и cleanup.
+Отмена и Reset описаны по исходному коду, не заявлены как отдельная native
+приёмка этого кандидата. Мобильное уменьшение изображений и остальные ограничения
+выше сохраняются; полный каталог, новые viewer/search, Pages/deploy не входят
+в эту работу. Проверенные local preview маршруты:
+`/oui/en/capabilities/profiles` и `/oui/ru/capabilities/profiles`.
+
 ## Локальный поиск и фильтр каталога
 
 Кандидат `oui-3no.3`, pending integration. Поиск сайта использует локальный
@@ -115,9 +140,9 @@ controls клавишей Tab и закрыть Escape. Ожидаются др�
 Регистр и крайние пробелы не влияют на совпадение; все слова запроса должны
 входить в объединённый текст. Категория дополнительно ограничивает результат.
 Пустая выдача показывает сообщение; «Сбросить фильтры» очищает запрос и категорию.
-Область остаётся sample `layout`, `controls`, `styling`, не полный каталог;
+Область остаётся sample `layout`, `controls`, `styling`, `profiles`, не полный каталог;
 фильтрация применяется к каждому разделу отдельно. Поиск и фильтры требуют
-JavaScript; без него исходные описания и ссылки всех трёх разделов остаются в HTML.
+JavaScript; без него исходные описания и ссылки всех четырёх разделов остаются в HTML.
 
 Проверены unit positive/negative queries, schema/parity, build, HTTP и свежий
 portable-check. С отдельным разрешением владельца для этой задачи пройдены

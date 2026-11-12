@@ -5,7 +5,8 @@
     "ids": [
       "layout",
       "controls",
-      "styling"
+      "styling",
+      "profiles"
     ]
   },
   "records": [
@@ -59,6 +60,41 @@
             "ru": "layout-small-ru"
           }
         }
+      ]
+    },
+    {
+      "id": "profiles",
+      "group": "gallery",
+      "categories": [
+        "controls",
+        "state"
+      ],
+      "packages": [
+        "ui_controls",
+        "ui_interaction",
+        "ui_layout"
+      ],
+      "source": "consumer/ui_showcase/sections/profiles.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Profiles",
+        "ru": "Профили"
+      },
+      "summary": {
+        "en": "Edit a draft, apply or cancel it, and resolve unsaved changes when switching profiles.",
+        "ru": "Изменяйте черновик, применяйте или отменяйте его и разрешайте неприменённые изменения при смене профиля."
+      },
+      "limitations": {
+        "en": "Three fixed fixtures; applied state is in memory only, not persisted to disk.",
+        "ru": "Три фиксированных примера; применённое состояние хранится только в памяти, не на диске."
+      },
+      "media": [
+        "profiles-en-initial",
+        "profiles-en-dialog",
+        "profiles-ru-initial",
+        "profiles-ru-dialog",
+        "profiles-en-applied",
+        "profiles-ru-applied"
       ]
     },
     {

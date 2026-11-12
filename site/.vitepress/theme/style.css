@@ -1,2 +1,6 @@
 /* The default locale menu falls back to the locale root for missing pages. */
 .VPNavBarTranslations, .VPNavScreenTranslations { display: none !important; }
+.catalogue-controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; margin: 24px 0; }
+.catalogue-controls label { display: grid; gap: 4px; font-weight: 600; }
+.catalogue-controls input, .catalogue-controls select, .catalogue-controls button { border: 1px solid var(--vp-c-divider); border-radius: 6px; padding: 6px 10px; background: var(--vp-c-bg-soft); color: var(--vp-c-text-1); }
+.catalogue-controls input { max-width: 100%; }

@@ -4,7 +4,11 @@ This is an explicitly limited sample, not the complete showcase catalogue. It
 currently covers one of the 19 gallery sections and none of the four Integration
 Lab screens. The captures show the native application, not a browser port.
 
+<CatalogueFilter locale="en">
+
 ## Layout {#layout}
 
 Arrange geometry using rows, columns, stacks, grids, absolute placement and
 clipping. [Explore layout and its native example](./capabilities/layout).
+
+</CatalogueFilter>

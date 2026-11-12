@@ -64,6 +64,7 @@ try {
     await focusByTab('#reachable', fixture)
     assert.equal(await fixture.evaluate(() => document.activeElement.id), 'reachable')
     await fixture.keyboard.press('Enter')
+    await fixture.waitForURL(url => url.hash === '#reached')
     assert.equal(new URL(fixture.url()).hash, '#reached')
     await assert.rejects(focusByTab('#unreachable', fixture), /keyboard could not reach #unreachable after \d+ tabs/)
     console.log('PASS keyboard traversal fixture: >50 tabs, Enter, and finite unreachable failure')
@@ -166,6 +167,66 @@ try {
   ]
   for (const width of [360, 1280]) {
     await page.setViewportSize({ width, height: 900 })
+    for (const [lang, term, expected, empty, reset, category] of [
+      ['en', 'clipping', 'Layout', 'No results found.', 'Reset filters', 'Category'],
+      ['ru', 'обрезание', 'Компоновка', 'Ничего не найдено.', 'Сбросить фильтры', 'Категория']
+    ]) {
+      await go(`/oui/${lang}/catalogue.html`)
+      const query = page.getByLabel(lang === 'en' ? 'Search catalogue' : 'Поиск в каталоге')
+      const select = page.getByLabel(category)
+      await focusByTab('.catalogue-controls input')
+      await page.keyboard.insertText(term)
+      assert.ok(await page.locator('#layout').isVisible())
+      await select.selectOption('geometry')
+      assert.equal(await select.locator('option:checked').innerText(), lang === 'en' ? 'Geometry' : 'Геометрия')
+      assert.ok(await page.locator('#layout').isVisible())
+      await query.fill('zzznomatch')
+      assert.equal(await page.locator('#layout').isVisible(), false)
+      assert.equal(await page.locator('.catalogue-filter [role=status]').innerText(), empty)
+      await page.screenshot({ path: join(artifacts, `filter-empty-${lang}-${width}.png`), fullPage: true })
+      await focusByTab('.catalogue-controls button')
+      await page.keyboard.press('Enter')
+      assert.equal(await query.inputValue(), '')
+      assert.equal(await select.inputValue(), '')
+      assert.ok(await page.locator('#layout').isVisible())
+      await select.selectOption('layout')
+      await query.fill('ui_layout')
+      assert.ok(await page.locator('#layout').isVisible())
+      assert.equal(await page.getByRole('button', { name: reset }).count(), 1)
+      await page.screenshot({ path: join(artifacts, `filter-${lang}-${width}.png`), fullPage: true })
+      await focusByTab('.catalogue-filter a[href="./capabilities/layout.html"]')
+      await page.keyboard.press('Enter')
+      await page.waitForURL(`**/oui/${lang}/capabilities/layout.html`)
+      assert.equal(new URL(page.url()).pathname, `/oui/${lang}/capabilities/layout.html`)
+      await go(`/oui/${lang}/guide/using-oui.html`)
+      await page.keyboard.press('Control+k')
+      const input = page.locator('#localsearch-input')
+      await input.waitFor({ state: 'visible' })
+      await input.fill('zzznomatch987654')
+      await page.locator('.no-results').waitFor({ state: 'visible' })
+      assert.ok((await page.locator('.no-results').innerText()).includes(lang === 'en' ? 'No results for' : 'Нет результатов для'))
+      await page.screenshot({ path: join(artifacts, `search-empty-${lang}-${width}.png`), fullPage: true })
+      assert.equal(await page.locator('.clear-button').getAttribute('title'), lang === 'en' ? 'Reset search' : 'Очистить поиск')
+      await focusByTab('.clear-button')
+      await page.keyboard.press('Enter')
+      assert.equal(await input.inputValue(), '')
+      await input.fill(expected)
+      await page.locator('.results .result').first().waitFor({ state: 'visible' })
+      const urls = await page.locator('.results .result').evaluateAll(nodes => nodes.map(node => node.getAttribute('href')))
+      assert.ok(urls.every(url => url.startsWith(`/oui/${lang}/`)), JSON.stringify(urls))
+      await page.screenshot({ path: join(artifacts, `search-results-${lang}-${width}.png`), fullPage: true })
+      await input.focus()
+      await page.keyboard.press('ArrowDown')
+      const selectedHref = await page.locator('.results [aria-selected="true"] a').getAttribute('href')
+      await page.keyboard.press('Enter')
+      await page.waitForURL(url => url.pathname + url.hash === selectedHref)
+      assert.notEqual(new URL(page.url()).pathname, `/oui/${lang}/guide/using-oui.html`)
+      assert.ok(!await input.isVisible())
+      console.log(`PASS search/filter ${lang} ${width}: localized query, empty, reset and keyboard selection`)
+    }
+  }
+  for (const width of [360, 1280]) {
+    await page.setViewportSize({ width, height: 900 })
     for (const [path, en, ru, anchor] of samplePages) {
       for (const [lang, title, other, otherTitle] of [['en', en, 'ru', ru], ['ru', ru, 'en', en]]) {
         await go(`/oui/${lang}/${path}`)
@@ -252,6 +313,11 @@ try {
           assert.equal(await p.locator('html').getAttribute('lang'), lang)
           assert.equal((await p.locator('h1').first().innerText()).replace(/\u200b/g, '').trim(), heading)
           assert.ok(await p.locator('main p').first().isVisible())
+          if (path === 'catalogue.html') {
+            const link = p.locator('main a[href="./capabilities/layout.html"]')
+            assert.ok(await link.isVisible())
+            assert.equal(await link.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/capabilities/layout.html`)
+          }
           assert.equal(await p.evaluate(() => typeof window.__VP_SITE_DATA__), 'undefined')
           if (path.startsWith('capabilities/')) {
             const image = p.locator(`main img[src="/oui/media/layout-${lang}.png"]`)

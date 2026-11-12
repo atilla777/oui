@@ -31,6 +31,21 @@ export default defineConfig({
     }
   },
   themeConfig: {
+    search: {
+      provider: 'local',
+      options: {
+        locales: {
+          ru: { translations: {
+            button: { buttonText: 'Поиск', buttonAriaLabel: 'Поиск по сайту' },
+            modal: {
+              displayDetails: 'Показать подробный список', resetButtonTitle: 'Очистить поиск',
+              backButtonTitle: 'Закрыть поиск', noResultsText: 'Нет результатов для',
+              footer: { selectText: 'выбрать', selectKeyAriaLabel: 'ввод', navigateText: 'навигация', navigateUpKeyAriaLabel: 'стрелка вверх', navigateDownKeyAriaLabel: 'стрелка вниз', closeText: 'закрыть', closeKeyAriaLabel: 'escape' }
+            }
+          } }
+        }
+      }
+    },
     lightModeSwitchTitle: 'Switch to light theme',
     darkModeSwitchTitle: 'Switch to dark theme',
     notFound: { title: 'Page not found' }

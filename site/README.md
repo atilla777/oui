@@ -45,7 +45,8 @@ OUI_BROWSER_ARTIFACT_ROOT="$PROOF" npm run check:browser 2>&1 | tee "$PROOF/brow
 ```
 
 The browser check observes keyboard interaction, locale switching, no-JS content,
-reduced motion and layout at 360 and 1280 pixels. Its screenshots need human
+reduced motion and layout at 360 and 1280 pixels, including both sample catalogue
+and layout pages and the loaded localized images. Its screenshots need human
 inspection; automated checks do not establish accessibility conformance or cover
 other browsers and devices.
 Both locale trees must contain each page. Explicit matching heading IDs are the
@@ -53,5 +54,20 @@ stable cross-language anchors. The language link retains the page key; with JS i
 retains a hash only when that ID exists in the destination HTML. Without JS the
 ordinary link still reaches the corresponding page without a hash.
 
-This is a local preview, not a deployment or native qualification. Search,
-gallery, media, and deployment are outside this foundation.
+The catalogue is an explicit `layout` sample, not complete coverage. The
+schema-versioned `data/catalogue.json` and `data/media.json` are checked before
+the build against the actual native section IDs, locale media, provenance,
+PNG dimensions and digests. `npm run check:catalogue:strict` deliberately fails
+until all 19 gallery and four Lab IDs have records and media. Do not change the
+declared sample merely to hide missing coverage. Validation does not replace
+image inspection, privacy review, or native qualification.
+
+To update a capture, choose a clean pinned source and verify its native inputs;
+use the isolated wrapper and retain its private logs and stop evidence as described
+in `docs/isd.md`. Inspect each original image. Publish only a sanitized PNG and
+relative, public-safe provenance; update its digest, locale, revision, source,
+geometry, selected resource hashes, options, caption and alt in `data/media.json`,
+and the corresponding localized pages. Run `npm run check`, `npm run build`,
+and `npm run check:http`. The site build never launches Odin or captures images.
+The private evidence is not part of the website. Search/filter/viewer and final
+coverage remain future work; browser and deployment checks are separate.

@@ -144,6 +144,44 @@ try {
       console.log(`PASS ${lang} ${width}: hydrated chrome, width, keyboard, switching valid/missing hashes`)
     }
   }
+  const samplePages = [
+    ['catalogue.html', 'Capability catalogue', 'Каталог возможностей', 'layout'],
+    ['capabilities/layout.html', 'Layout', 'Компоновка', 'boundaries']
+  ]
+  for (const width of [360, 1280]) {
+    await page.setViewportSize({ width, height: 900 })
+    for (const [path, en, ru, anchor] of samplePages) {
+      for (const [lang, title, other, otherTitle] of [['en', en, 'ru', ru], ['ru', ru, 'en', en]]) {
+        await go(`/oui/${lang}/${path}`)
+        await checkPage(lang, title)
+        const dimensions = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, client: document.documentElement.clientWidth }))
+        assert.ok(dimensions.scroll <= dimensions.client, `${path} ${lang} ${width} overflow ${JSON.stringify(dimensions)}`)
+        assert.ok(await page.locator('main p').first().isVisible())
+        if (path.startsWith('capabilities/')) {
+          const image = page.locator(`main img[src="/oui/media/layout-${lang}.png"]`)
+          assert.ok(await image.isVisible())
+          assert.ok(await image.evaluate(el => el.complete && el.naturalWidth === 1280 && el.naturalHeight === 960 && !!el.alt))
+        }
+        await page.screenshot({ path: join(artifacts, `${lang}-${path.startsWith('capabilities/') ? 'layout' : 'catalogue'}-${width}.png`), fullPage: true })
+        await page.keyboard.press('Tab')
+        assert.equal(await page.evaluate(() => document.activeElement.classList.contains('VPSkipLink')), true)
+        await page.keyboard.press('Enter')
+        assert.equal(new URL(page.url()).hash, '#VPContent')
+        await go(`/oui/${lang}/${path}#${anchor}`)
+        await focusByTab(`.content-container a[lang="${other}"]`)
+        await page.keyboard.press('Enter')
+        await page.waitForURL(`**/oui/${other}/${path}#${anchor}`)
+        await checkPage(other, otherTitle)
+        await go(`/oui/${lang}/${path}#missing-anchor`)
+        await focusByTab(`.content-container a[lang="${other}"]`)
+        await page.keyboard.press('Enter')
+        await page.waitForURL(`**/oui/${other}/${path}`)
+        assert.equal(new URL(page.url()).hash, '')
+        await checkPage(other, otherTitle)
+        console.log(`PASS sample ${path} ${lang} ${width}: keyboard, width, locale valid/missing anchors`)
+      }
+    }
+  }
   assert.ok(assetResponses.size > 0, 'no static assets loaded')
   await page.emulateMedia({ reducedMotion: 'reduce' })
   assert.equal(await page.evaluate(() => matchMedia('(prefers-reduced-motion: reduce)').matches), true)
@@ -151,6 +189,13 @@ try {
   assert.ok(await page.locator('main p').first().isVisible())
   assert.equal(await page.locator('main a').first().evaluate(el => getComputedStyle(el).transitionDuration), '0s')
   assert.equal(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior), 'auto')
+  for (const [path, en] of samplePages) {
+    await go(`/oui/en/${path}`)
+    await checkPage('en', en)
+    assert.ok(await page.locator('main p').first().isVisible())
+    assert.equal(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior), 'auto')
+    if (path.startsWith('capabilities/')) assert.ok(await page.locator('main img').isVisible())
+  }
   console.log('PASS reduced motion: preference, transition duration, scrolling and prose visibility')
 
   const nojs = await chromium.launchPersistentContext(join(artifacts, 'profile-nojs'), {
@@ -181,6 +226,29 @@ try {
         await p.waitForURL(path.includes('/guide/') ? `**/oui/${other}/guide/using-oui.html` : `**/oui/${other}/`)
         assert.equal(await p.locator('html').getAttribute('lang'), other)
         assert.ok(await p.locator('main p').first().isVisible())
+      }
+    }
+    for (const width of [360, 1280]) {
+      await p.setViewportSize({ width, height: 900 })
+      for (const [path, en, ru] of samplePages) {
+        for (const [lang, heading, other] of [['en', en, 'ru'], ['ru', ru, 'en']]) {
+          assert.equal((await p.goto(`${origin}/oui/${lang}/${path}`)).status(), 200)
+          assert.equal(await p.locator('html').getAttribute('lang'), lang)
+          assert.equal((await p.locator('h1').first().innerText()).replace(/\u200b/g, '').trim(), heading)
+          assert.ok(await p.locator('main p').first().isVisible())
+          assert.equal(await p.evaluate(() => typeof window.__VP_SITE_DATA__), 'undefined')
+          if (path.startsWith('capabilities/')) {
+            const image = p.locator(`main img[src="/oui/media/layout-${lang}.png"]`)
+            assert.ok(await image.isVisible())
+            assert.ok(await image.evaluate(el => el.complete && el.naturalWidth === 1280 && el.naturalHeight === 960 && !!el.alt))
+          }
+          await p.screenshot({ path: join(artifacts, `nojs-${lang}-${path.startsWith('capabilities/') ? 'layout' : 'catalogue'}-${width}.png`), fullPage: true })
+          await focusByTab(`.content-container a[lang="${other}"]`, p)
+          await p.keyboard.press('Enter')
+          await p.waitForURL(`**/oui/${other}/${path}`)
+          assert.equal(await p.locator('html').getAttribute('lang'), other)
+          console.log(`PASS no-JS sample ${path} ${lang} ${width}: prose, image where present, keyboard locale`)
+        }
       }
     }
     console.log('PASS no-JS: root, introductions, nested prose, links and keyboard focus')

@@ -66,7 +66,8 @@ UI_KIT_ROOT="$PROOF/kit" TMPDIR="$PROOF" python3 -B "$PROOF/kit/scripts/test-ui-
 в `finally`, сохранение screenshots/logs. Нет fallback на основной desktop.
 Подробности — [ISD](../isd.md).
 
-Для браузерной приёмки основы сайта `oui-3no.1` владелец 2026-11-12 отдельно
+Для браузерной приёмки основы сайта `oui-3no.1` и layout/catalogue `oui-3no.2`
+владелец 2026-11-12 отдельно
 разрешил headless Chromium: без подключения к рабочему столу, с собственным
 временным профилем и собственным loopback-only HTTP static preview. Этот
 ограниченный путь не использует native-only ISD wrapper и не распространяется

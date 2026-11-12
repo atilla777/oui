@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "coverage": {
+    "mode": "sample",
+    "ids": [
+      "layout"
+    ]
+  },
+  "records": [
+    {
+      "id": "layout",
+      "group": "gallery",
+      "categories": [
+        "layout",
+        "geometry"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout"
+      ],
+      "source": "consumer/ui_showcase/app/pages.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Layout",
+        "ru": "Компоновка"
+      },
+      "summary": {
+        "en": "Arrange UI geometry with rows, columns, stacks, grids, absolute placement and clipping.",
+        "ru": "Компоновка интерфейса: строки, столбцы, стеки, сетки, абсолютное размещение и обрезание."
+      },
+      "limitations": {
+        "en": "Experimental; no wrap, span or auto-placement.",
+        "ru": "Экспериментально; нет wrap, span и auto-placement."
+      },
+      "media": [
+        "layout-en",
+        "layout-ru"
+      ]
+    }
+  ]
+}

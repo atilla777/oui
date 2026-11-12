@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "id": "layout-en",
+      "section": "layout",
+      "state": "initial layout geometry",
+      "uiLocale": "en",
+      "revision": "646dc817cd1b9e3149d6a018ef8bf83f5c87b3bb",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/pages.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_layout"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section layout; initial focus Controls; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/layout-en.png",
+      "sha256": "17efe8f7fa56a1c678199f4e2a4043689787687b71645febc1a9c1aaf11773d2",
+      "caption": {
+        "en": "Native showcase layout, EN UI; pinned revision, initial state.",
+        "ru": "Native showcase: layout, интерфейс EN; указанная ревизия, начальное состояние."
+      },
+      "alt": {
+        "en": "Showcase window with row, column, stack, grid, absolute and intentionally clipped examples.",
+        "ru": "Окно showcase: примеры строки, столбца, стека, сетки, абсолютного размещения и намеренного обрезания."
+      }
+    },
+    {
+      "id": "layout-ru",
+      "section": "layout",
+      "state": "initial layout geometry",
+      "uiLocale": "ru",
+      "revision": "646dc817cd1b9e3149d6a018ef8bf83f5c87b3bb",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/pages.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_layout"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section layout; initial focus Controls; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/layout-ru.png",
+      "sha256": "63961cd68e95352b4a036b6c59490f12e5643b5e9a452ee263962d2b2e95a2db",
+      "caption": {
+        "en": "Native showcase layout, RU UI; pinned revision, initial state.",
+        "ru": "Native showcase: layout, интерфейс RU; указанная ревизия, начальное состояние."
+      },
+      "alt": {
+        "en": "Showcase window with row, column, stack, grid, absolute and intentionally clipped examples.",
+        "ru": "Окно showcase: примеры строки, столбца, стека, сетки, абсолютного размещения и намеренного обрезания."
+      }
+    }
+  ]
+}

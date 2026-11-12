@@ -44,7 +44,8 @@ PROOF="$(mktemp -d /tmp/opencode/oui-site-browser.XXXXXXXX)"
 OUI_BROWSER_ARTIFACT_ROOT="$PROOF" npm run check:browser 2>&1 | tee "$PROOF/browser.log"
 ```
 
-The browser check observes keyboard interaction, locale switching, no-JS content,
+The browser check observes local site search and catalogue query/filter/reset,
+keyboard interaction, locale switching, no-JS content,
 reduced motion and layout at 360 and 1280 pixels, including both sample catalogue
 and layout pages and the loaded localized images. Its screenshots need human
 inspection; automated checks do not establish accessibility conformance or cover
@@ -73,5 +74,13 @@ The private evidence is not part of the website. The layout viewer is a progress
 enhancement: both native initial viewport captures (1280×960 and 960×720) and
 direct image links remain available without JavaScript. Open the viewer by pointer
 or keyboard, select a viewport, and close with the button or Escape; focus stays in
-the dialog and returns to its opener. There is no autoplay. Search/filter and final
-coverage remain future work; browser and deployment checks are separate.
+the dialog and returns to its opener. There is no autoplay.
+
+Site search uses VitePress's
+local index; open it with the search button or Ctrl+K (Cmd+K on macOS), type a
+query and use arrows and Enter to select a result. The catalogue searches the
+active locale's title, summary and limitations plus shared IDs, category, package
+and source metadata. Combine a query with a category and use Reset filters to
+clear both. Search and filtering need JavaScript; static catalogue links and prose
+remain available without it. Final coverage remains future work;
+browser and deployment checks are separate.

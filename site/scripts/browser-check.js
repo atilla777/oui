@@ -163,7 +163,9 @@ try {
   }
   const samplePages = [
     ['catalogue.html', 'Capability catalogue', 'Каталог возможностей', 'layout'],
-    ['capabilities/layout.html', 'Layout', 'Компоновка', 'boundaries']
+    ['capabilities/layout.html', 'Layout', 'Компоновка', 'boundaries'],
+    ['capabilities/controls.html', 'Controls', 'Элементы управления', 'boundaries'],
+    ['capabilities/styling.html', 'Styling', 'Оформление', 'boundaries']
   ]
   for (const width of [360, 1280]) {
     await page.setViewportSize({ width, height: 900 })
@@ -177,9 +179,23 @@ try {
       await focusByTab('.catalogue-controls input')
       await page.keyboard.insertText(term)
       assert.ok(await page.locator('#layout').isVisible())
+      assert.equal(await page.locator('#controls').isVisible(), false)
+      assert.equal(await page.locator('#styling').isVisible(), false)
       await select.selectOption('geometry')
       assert.equal(await select.locator('option:checked').innerText(), lang === 'en' ? 'Geometry' : 'Геометрия')
       assert.ok(await page.locator('#layout').isVisible())
+      await query.fill(lang === 'en' ? 'slider' : 'ползунок')
+      assert.equal(await page.locator('#layout').isVisible(), false)
+      assert.equal(await page.locator('#controls').isVisible(), false)
+      assert.equal(await page.locator('#styling').isVisible(), false)
+      await select.selectOption('controls')
+      assert.ok(await page.locator('#controls').isVisible())
+      assert.equal(await page.locator('#styling').isVisible(), false)
+      await query.fill(lang === 'en' ? 'cascade' : 'каскад')
+      assert.equal(await page.locator('#controls').isVisible(), false)
+      await select.selectOption('styling')
+      assert.ok(await page.locator('#styling').isVisible())
+      assert.equal(await page.locator('#layout').isVisible(), false)
       await query.fill('zzznomatch')
       assert.equal(await page.locator('#layout').isVisible(), false)
       assert.equal(await page.locator('.catalogue-filter [role=status]').innerText(), empty)
@@ -189,6 +205,8 @@ try {
       assert.equal(await query.inputValue(), '')
       assert.equal(await select.inputValue(), '')
       assert.ok(await page.locator('#layout').isVisible())
+      assert.ok(await page.locator('#controls').isVisible())
+      assert.ok(await page.locator('#styling').isVisible())
       await select.selectOption('layout')
       await query.fill('ui_layout')
       assert.ok(await page.locator('#layout').isVisible())
@@ -235,11 +253,14 @@ try {
         assert.ok(dimensions.scroll <= dimensions.client, `${path} ${lang} ${width} overflow ${JSON.stringify(dimensions)}`)
         assert.ok(await page.locator('main p').first().isVisible())
         if (path.startsWith('capabilities/')) {
-          const image = page.locator(`main img[src="/oui/media/layout-${lang}.png"]`)
-          assert.ok(await image.isVisible())
-          assert.ok(await image.evaluate(el => el.complete && el.naturalWidth === 1280 && el.naturalHeight === 960 && !!el.alt))
+          const id = path.split('/')[1].replace('.html', '')
+          for (const suffix of id === 'layout' ? [''] : ['-initial', '-changed']) {
+            const image = page.locator(`main img[src="/oui/media/${id}-${lang}${suffix}.png"]`)
+            assert.ok(await image.isVisible())
+            assert.ok(await image.evaluate(el => el.complete && el.naturalWidth === 1280 && el.naturalHeight === 960 && !!el.alt))
+          }
         }
-        await page.screenshot({ path: join(artifacts, `${lang}-${path.startsWith('capabilities/') ? 'layout' : 'catalogue'}-${width}.png`), fullPage: true })
+        await page.screenshot({ path: join(artifacts, `${lang}-${path.startsWith('capabilities/') ? path.split('/')[1].replace('.html', '') : 'catalogue'}-${width}.png`), fullPage: true })
         await page.keyboard.press('Tab')
         assert.equal(await page.evaluate(() => document.activeElement.classList.contains('VPSkipLink')), true)
         await page.keyboard.press('Enter')
@@ -271,7 +292,7 @@ try {
     await checkPage('en', en)
     assert.ok(await page.locator('main p').first().isVisible())
     assert.equal(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior), 'auto')
-    if (path.startsWith('capabilities/')) assert.ok(await page.locator('main img').isVisible())
+    if (path.startsWith('capabilities/')) assert.ok(await page.locator('main img').first().isVisible())
   }
   console.log('PASS reduced motion: preference, transition duration, scrolling and prose visibility')
 
@@ -314,17 +335,22 @@ try {
           assert.equal((await p.locator('h1').first().innerText()).replace(/\u200b/g, '').trim(), heading)
           assert.ok(await p.locator('main p').first().isVisible())
           if (path === 'catalogue.html') {
-            const link = p.locator('main a[href="./capabilities/layout.html"]')
-            assert.ok(await link.isVisible())
-            assert.equal(await link.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/capabilities/layout.html`)
+            for (const id of ['layout', 'controls', 'styling']) {
+              const link = p.locator(`main a[href="./capabilities/${id}.html"]`)
+              assert.ok(await link.isVisible())
+              assert.equal(await link.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/capabilities/${id}.html`)
+            }
           }
           assert.equal(await p.evaluate(() => typeof window.__VP_SITE_DATA__), 'undefined')
           if (path.startsWith('capabilities/')) {
-            const image = p.locator(`main img[src="/oui/media/layout-${lang}.png"]`)
-            assert.ok(await image.isVisible())
-            assert.ok(await image.evaluate(el => el.complete && el.naturalWidth === 1280 && el.naturalHeight === 960 && !!el.alt))
+            const id = path.split('/')[1].replace('.html', '')
+            for (const suffix of id === 'layout' ? [''] : ['-initial', '-changed']) {
+              const image = p.locator(`main img[src="/oui/media/${id}-${lang}${suffix}.png"]`)
+              assert.ok(await image.isVisible())
+              assert.ok(await image.evaluate(el => el.complete && el.naturalWidth === 1280 && el.naturalHeight === 960 && !!el.alt))
+            }
           }
-          await p.screenshot({ path: join(artifacts, `nojs-${lang}-${path.startsWith('capabilities/') ? 'layout' : 'catalogue'}-${width}.png`), fullPage: true })
+          await p.screenshot({ path: join(artifacts, `nojs-${lang}-${path.startsWith('capabilities/') ? path.split('/')[1].replace('.html', '') : 'catalogue'}-${width}.png`), fullPage: true })
           await focusByTab(`.content-container a[lang="${other}"]`, p)
           await p.keyboard.press('Enter')
           await p.waitForURL(`**/oui/${other}/${path}`)

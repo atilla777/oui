@@ -71,11 +71,17 @@ relative, public-safe provenance; update its digest, locale, revision, source,
 geometry, selected resource hashes, options, caption and alt in `data/media.json`,
 and the corresponding localized pages. Run `npm run check`, `npm run build`,
 and `npm run check:http`. The site build never launches Odin or captures images.
-The private evidence is not part of the website. Site search uses VitePress's
+The private evidence is not part of the website. The layout viewer is a progressive
+enhancement: both native initial viewport captures (1280×960 and 960×720) and
+direct image links remain available without JavaScript. Open the viewer by pointer
+or keyboard, select a viewport, and close with the button or Escape; focus stays in
+the dialog and returns to its opener. There is no autoplay.
+
+Site search uses VitePress's
 local index; open it with the search button or Ctrl+K (Cmd+K on macOS), type a
 query and use arrows and Enter to select a result. The catalogue searches the
 active locale's title, summary and limitations plus shared IDs, category, package
 and source metadata. Combine a query with a category and use Reset filters to
 clear both. Search and filtering need JavaScript; static catalogue links and prose
-remain available without it. The viewer and final coverage remain future work;
+remain available without it. Final coverage remains future work;
 browser and deployment checks are separate.

@@ -57,6 +57,17 @@ try {
       assert.equal(bytes.subarray(0, 8).toString('hex'), '89504e470d0a1a0a')
       assert.equal(createHash('sha256').update(bytes).digest('hex'), record.sha256)
     }
+    if (section === 'layout') {
+      const record = media.records.find(item => item.id === `layout-small-${lang}`)
+      const image = `/oui/${record.path}`
+      assert.ok(markup.includes(`src="${image}"`))
+      assert.ok(markup.includes(`alt="${record.alt[lang]}"`))
+      const response = await get(image)
+      assert.equal(response.status, 200)
+      assert.match(response.headers.get('content-type'), /^image\/png/)
+      const bytes = Buffer.from(await response.arrayBuffer())
+      assert.equal(createHash('sha256').update(bytes).digest('hex'), record.sha256)
+    }
     for (const [id, states] of [['profiles', ['initial', 'dialog', 'applied']], ['controls', ['initial', 'changed']], ['styling', ['initial', 'changed']]]) if (path.includes(`capabilities/${id}`)) {
       for (const state of states) {
         const record = media.records.find(item => item.id === `${id}-${lang}-${state}`)

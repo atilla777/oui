@@ -15,7 +15,7 @@ test('localized metadata query and category intersection', () => {
   assert.equal(matchesRecord(record, 'en', '   ', ''), true)
   assert.equal(matchesRecord(record, 'en', 'pages.odin', ''), true)
 })
-test('seven sample records filter independently and share categories', () => {
+test('sample records filter independently and share categories', () => {
   const ids = (locale, query, category = '') => records.filter(item => matchesRecord(item, locale, query, category)).map(item => item.id)
   assert.deepEqual(ids('en', 'slider'), ['controls'])
   assert.deepEqual(ids('ru', 'каскад'), ['styling'])
@@ -23,12 +23,24 @@ test('seven sample records filter independently and share categories', () => {
   assert.deepEqual(ids('ru', '', 'controls'), ['profiles', 'controls'])
   assert.deepEqual(ids('en', '', 'styling'), ['styling'])
   assert.deepEqual(ids('en', 'slider', 'styling'), [])
+  assert.deepEqual(ids('en', ''), ['layout', 'profiles', 'controls', 'styling', 'layers', 'hud', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text'])
+  assert.deepEqual(ids('en', 'tooltip', 'layers'), ['layers'])
+  assert.deepEqual(ids('ru', 'удержание', 'hud'), ['hud'])
   assert.deepEqual(ids('en', 'ui_editor', 'input'), ['text-input'])
   assert.deepEqual(ids('ru', 'однострочного', 'input'), ['text-input'])
   assert.deepEqual(ids('en', 'ui_editor', 'styling'), [])
-  assert.deepEqual(ids('en', ''), ['layout', 'profiles', 'controls', 'styling', 'text', 'rich-text', 'text-input'])
+  assert.deepEqual(ids('en', '', 'scrolling'), ['scroll-table', 'collections'])
+  assert.deepEqual(ids('en', 'uniform', 'scrolling'), ['collections'])
   assert.deepEqual(ids('en', 'draft', 'state'), ['profiles'])
   assert.deepEqual(ids('ru', 'черновик', 'state'), ['profiles'])
+  for (const locale of ['en', 'ru']) {
+    for (const category of ['resources', 'images']) {
+      assert.deepEqual(ids(locale, '', category), ['atlas'])
+      assert.deepEqual(ids(locale, 'atlas', category), ['atlas'])
+      assert.deepEqual(ids(locale, 'zzznomatch', category), [])
+    }
+  }
   assert.deepEqual(ids('en', 'typography', 'typography'), ['text', 'rich-text'])
   assert.deepEqual(ids('ru', 'абзацы', 'typography'), ['text'])
+  assert.deepEqual(ids('en', ''), ['layout', 'profiles', 'controls', 'styling', 'layers', 'hud', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text'])
 })

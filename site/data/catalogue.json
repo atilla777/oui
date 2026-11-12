@@ -7,9 +7,14 @@
       "controls",
       "styling",
       "profiles",
+      "layers",
+      "hud",
+      "text-input",
+      "atlas",
+      "scroll-table",
+      "collections",
       "text",
-      "rich-text",
-      "text-input"
+      "rich-text"
     ]
   },
   "records": [
@@ -161,6 +166,202 @@
       ]
     },
     {
+      "title": {
+        "en": "Layers",
+        "ru": "Слои"
+      },
+      "summary": {
+        "en": "Explicit modal and popup scopes with noninteractive tooltips.",
+        "ru": "Явные модальные области и панели с неинтерактивными подсказками."
+      },
+      "limitations": {
+        "en": "Experimental; explicit scopes and ownership, tooltip is noninteractive.",
+        "ru": "Экспериментально: явные области и владение, подсказка не принимает ввод."
+      },
+      "categories": [
+        "layers",
+        "interaction"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_interaction",
+        "ui_layers"
+      ],
+      "source": "consumer/ui_showcase/sections/layers.odin",
+      "id": "layers",
+      "group": "gallery",
+      "runnable": "consumer/ui_showcase",
+      "media": [
+        "layers-popup-tooltip-en",
+        "layers-popup-tooltip-ru",
+        "layers-modal-en",
+        "layers-modal-ru"
+      ]
+    },
+    {
+      "title": {
+        "en": "HUD hold",
+        "ru": "HUD и удержание"
+      },
+      "summary": {
+        "en": "A hold gesture reports progress before the application restores HP.",
+        "ru": "Удержание показывает прогресс до восстановления HP приложением."
+      },
+      "limitations": {
+        "en": "Experimental; 1000 ms hold required, Activate cannot bypass it.",
+        "ru": "Экспериментально: требуется удержание 1000 мс, Activate его не обходит."
+      },
+      "categories": [
+        "hud",
+        "hold"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_layers",
+        "ui_hold"
+      ],
+      "source": "consumer/ui_showcase/sections/hud.odin",
+      "id": "hud",
+      "group": "gallery",
+      "runnable": "consumer/ui_showcase",
+      "media": [
+        "hud-idle-en",
+        "hud-idle-ru",
+        "hud-completed-en",
+        "hud-completed-ru"
+      ]
+    },
+    {
+      "id": "text-input",
+      "group": "gallery",
+      "categories": [
+        "text",
+        "input"
+      ],
+      "packages": [
+        "ui_editor",
+        "ui_text",
+        "unicode_graphemes"
+      ],
+      "source": "consumer/ui_showcase/sections/name.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Text input",
+        "ru": "Ввод текста"
+      },
+      "summary": {
+        "en": "Edit a focused single-line name draft and apply or cancel it.",
+        "ru": "Редактирование однострочного имени в фокусе с применением или отменой."
+      },
+      "limitations": {
+        "en": "Experimental; single line; Unicode 15.1 EGC; no IME, undo or normalization.",
+        "ru": "Экспериментально; одна строка; EGC Unicode 15.1; нет IME, undo и нормализации."
+      },
+      "media": [
+        "text-input-en",
+        "text-input-ru"
+      ]
+    },
+    {
+      "id": "atlas",
+      "group": "gallery",
+      "categories": [
+        "resources",
+        "images"
+      ],
+      "packages": [
+        "ui_style",
+        "ui_sdl"
+      ],
+      "source": "consumer/ui_showcase/sections/content.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Atlas",
+        "ru": "Атлас"
+      },
+      "summary": {
+        "en": "Load atlas pages and regions, switch resources and reload the selected set.",
+        "ru": "Загрузка страниц и областей атласа, смена ресурсов и перезагрузка выбранного набора."
+      },
+      "limitations": {
+        "en": "Manifest v1 and bounded non-interlaced RGB8/RGBA8 PNG only.",
+        "ru": "Только manifest v1 и ограниченный нечересстрочный PNG RGB8/RGBA8."
+      },
+      "media": [
+        "atlas-en-initial",
+        "atlas-en-alternate",
+        "atlas-en-reload",
+        "atlas-ru-initial",
+        "atlas-ru-alternate",
+        "atlas-ru-reload"
+      ]
+    },
+    {
+      "id": "scroll-table",
+      "group": "gallery",
+      "categories": [
+        "scrolling"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_scroll"
+      ],
+      "source": "consumer/ui_showcase/app/pages.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Scroll and table",
+        "ru": "Прокрутка и таблица"
+      },
+      "summary": {
+        "en": "Scroll an ordinary table through a vertical viewport.",
+        "ru": "Вертикальная прокрутка обычной таблицы в области просмотра."
+      },
+      "limitations": {
+        "en": "Experimental; vertical non-nested scrolling and three fixed tracks.",
+        "ru": "Экспериментально; вертикальная невложенная прокрутка и три фиксированные колонки."
+      },
+      "media": [
+        "scroll-table-en",
+        "scroll-table-ru"
+      ]
+    },
+    {
+      "id": "collections",
+      "group": "gallery",
+      "categories": [
+        "scrolling",
+        "collections"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_collections"
+      ],
+      "source": "consumer/ui_showcase/app/collection_runtime.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Virtual collections",
+        "ru": "Виртуальные коллекции"
+      },
+      "summary": {
+        "en": "Materialize the visible portion of a uniform list or grid.",
+        "ru": "Материализация видимой части однородного списка или сетки."
+      },
+      "limitations": {
+        "en": "Experimental; uniform geometry and one offset owner per region.",
+        "ru": "Экспериментально; однородная геометрия и один владелец смещения на область."
+      },
+      "media": [
+        "collections-en",
+        "collections-ru"
+      ]
+    },
+    {
       "id": "text",
       "group": "gallery",
       "categories": [
@@ -229,37 +430,6 @@
         "rich-text-en-alternate",
         "rich-text-ru-initial",
         "rich-text-ru-alternate"
-      ]
-    },
-    {
-      "id": "text-input",
-      "group": "gallery",
-      "categories": [
-        "text",
-        "input"
-      ],
-      "packages": [
-        "ui_editor",
-        "ui_text",
-        "unicode_graphemes"
-      ],
-      "source": "consumer/ui_showcase/sections/name.odin",
-      "runnable": "consumer/ui_showcase",
-      "title": {
-        "en": "Text input",
-        "ru": "Ввод текста"
-      },
-      "summary": {
-        "en": "Edit a focused single-line name draft and apply or cancel it.",
-        "ru": "Редактирование однострочного имени в фокусе с применением или отменой."
-      },
-      "limitations": {
-        "en": "Experimental; single line; Unicode 15.1 EGC; no IME, undo or normalization.",
-        "ru": "Экспериментально; одна строка; EGC Unicode 15.1; нет IME, undo и нормализации."
-      },
-      "media": [
-        "text-input-en",
-        "text-input-ru"
       ]
     }
   ]

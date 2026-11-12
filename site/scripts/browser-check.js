@@ -6,6 +6,7 @@ import { chromium } from 'playwright-core'
 import { startPreview } from './preview.js'
 
 const artifacts = await mkdtemp(join(process.env.OUI_BROWSER_ARTIFACT_ROOT || tmpdir(), 'oui-browser-'))
+const media = JSON.parse(await readFile('data/media.json', 'utf8'))
 const profile = join(artifacts, 'profile')
 await mkdir(profile)
 console.log(`artifacts=${artifacts}`)
@@ -75,6 +76,36 @@ try {
     assert.equal((await page.locator('h1').first().innerText()).replace(/\u200b/g, '').trim(), title)
     assert.ok((await page.title()).includes(title))
     assert.ok(await page.locator('main').innerText())
+  }
+  const checkImages = async (activePage, path, lang) => {
+    const section = path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|text-input|atlas|scroll-table|collections|text|rich-text)\.html$/)?.[1]
+    if (!section) { assert.equal(path, 'catalogue.html'); return }
+    const ids = {
+      layout: [`layout-${lang}`, `layout-small-${lang}`],
+      controls: [`controls-${lang}-initial`, `controls-${lang}-changed`],
+      styling: [`styling-${lang}-initial`, `styling-${lang}-changed`],
+      profiles: [`profiles-${lang}-initial`, `profiles-${lang}-dialog`, `profiles-${lang}-applied`],
+      layers: [`layers-popup-tooltip-${lang}`, `layers-modal-${lang}`],
+      hud: [`hud-idle-${lang}`, `hud-completed-${lang}`],
+      'text-input': [`text-input-${lang}`],
+      atlas: [`atlas-${lang}-initial`, `atlas-${lang}-alternate`, `atlas-${lang}-reload`],
+      'scroll-table': [`scroll-table-${lang}`],
+      collections: [`collections-${lang}`],
+      text: [`text-${lang}-initial`, `text-${lang}-alternate`],
+      'rich-text': [`rich-text-${lang}-initial`, `rich-text-${lang}-alternate`]
+    }[section]
+    const images = activePage.locator('main p > img')
+    assert.equal(await images.count(), ids.length, `${section} ${lang}: image count`)
+    for (const id of ids) {
+      const matches = media.records.filter(record => record.id === id && record.section === section && record.uiLocale === lang)
+      assert.equal(matches.length, 1, `${id}: manifest record`)
+      const record = matches[0]
+      const image = activePage.locator(`main p > img[src="/oui/${record.path}"]`)
+      assert.equal(await image.count(), 1, `${id}: page reference`)
+      assert.ok(await image.isVisible(), `${id}: image visible`)
+      assert.equal(await image.getAttribute('alt'), record.alt[lang], `${id}: localized alt`)
+      assert.ok(await image.evaluate((el, size) => el.complete && el.naturalWidth === size.width && el.naturalHeight === size.height, record.drawable), `${id}: loaded`)
+    }
   }
   await go('/oui/')
   // Identify only our own browser by its unique profile, then examine its descendants.
@@ -166,31 +197,17 @@ try {
     ['capabilities/layout.html', 'Layout', 'Компоновка', 'boundaries'],
     ['capabilities/text.html', 'Text', 'Текст', 'boundaries'],
     ['capabilities/rich-text.html', 'Rich text', 'Форматированный текст', 'boundaries'],
+    ['capabilities/scroll-table.html', 'Scroll and table', 'Прокрутка и таблица', 'boundaries'],
+    ['capabilities/collections.html', 'Virtual collections', 'Виртуальные коллекции', 'boundaries'],
+    ['capabilities/atlas.html', 'Atlas', 'Атлас', 'boundaries'],
     ['capabilities/controls.html', 'Controls', 'Элементы управления', 'boundaries'],
     ['capabilities/styling.html', 'Styling', 'Оформление', 'boundaries'],
     ['capabilities/profiles.html', 'Profiles', 'Профили', 'workflow'],
+    ['capabilities/layers.html', 'Layers', 'Слои', 'boundaries'],
+    ['capabilities/hud.html', 'HUD hold', 'HUD и удержание', 'boundaries'],
     ['capabilities/text-input.html', 'Text input', 'Ввод текста', 'boundaries']
   ]
-  const imagePaths = (path, lang) => path === 'capabilities/layout.html'
-    ? [`/oui/media/layout-${lang}.png`, `/oui/media/layout-small-${lang}.png`]
-    : path === 'capabilities/text-input.html'
-      ? [`/oui/media/text-input-${lang}.png`]
-    : path === 'capabilities/profiles.html'
-      ? [`/oui/media/profiles-${lang}-initial.png`, `/oui/media/profiles-${lang}-dialog.png`, `/oui/media/profiles-${lang}-applied.png`]
-      : ['controls', 'styling'].includes(path.split('/')[1]?.replace('.html', ''))
-        ? ['initial', 'changed'].map(state => `/oui/media/${path.split('/')[1].replace('.html', '')}-${lang}-${state}.png`)
-        : ['text', 'rich-text'].includes(path.split('/')[1]?.replace('.html', ''))
-          ? ['initial', 'alternate'].map(state => `/oui/media/${path.split('/')[1].replace('.html', '')}-${lang}-${state}.png`)
-          : []
   const sampleName = path => path.startsWith('capabilities/') ? path.split('/')[1].replace('.html', '') : 'catalogue'
-  const checkImages = async (activePage, path, lang) => {
-    if (path.startsWith('capabilities/')) assert.equal(await activePage.locator('main img:not(.layout-viewer img)').count(), imagePaths(path, lang).length)
-    for (const src of imagePaths(path, lang)) {
-      const image = activePage.locator(`main img[src="${src}"]`).first()
-      assert.ok(await image.isVisible(), `missing image ${src}`)
-      assert.ok(await image.evaluate((el, small) => el.complete && el.naturalWidth === (small ? 960 : 1280) && el.naturalHeight === (small ? 720 : 960) && !!el.alt, src.includes('/layout-small-')), `invalid image ${src}`)
-    }
-  }
   for (const width of [360, 1280]) {
     await page.setViewportSize({ width, height: 900 })
     for (const [lang, term, expected, empty, reset, category] of [
@@ -206,6 +223,7 @@ try {
       assert.equal(await page.locator('#controls').isVisible(), false)
       assert.equal(await page.locator('#styling').isVisible(), false)
       assert.equal(await page.locator('#profiles').isVisible(), false)
+      assert.equal(await page.locator('#atlas').isVisible(), false)
       await select.selectOption('geometry')
       assert.equal(await select.locator('option:checked').innerText(), lang === 'en' ? 'Geometry' : 'Геометрия')
       assert.ok(await page.locator('#layout').isVisible())
@@ -240,6 +258,7 @@ try {
       await select.selectOption('state')
       assert.equal(await select.locator('option:checked').innerText(), lang === 'en' ? 'State' : 'Состояние')
       assert.ok(await page.locator('#profiles').isVisible())
+      assert.equal(await page.locator('#atlas').isVisible(), false)
       assert.equal(await page.locator('#controls').isVisible(), false)
       await query.fill('rich-text')
       await select.selectOption('typography')
@@ -262,6 +281,26 @@ try {
       assert.ok(await page.locator('#profiles').isVisible())
       assert.ok(await page.locator('#text').isVisible())
       assert.ok(await page.locator('#rich-text').isVisible())
+      assert.ok(await page.locator('#atlas').isVisible())
+      await select.selectOption('scrolling')
+      assert.equal(await select.locator('option:checked').innerText(), lang === 'en' ? 'Scrolling' : 'Прокрутка')
+      assert.equal(await select.locator('option[value="collections"]').innerText(), lang === 'en' ? 'Collections' : 'Коллекции')
+      assert.ok(await page.locator('#scroll-table').isVisible())
+      assert.ok(await page.locator('#collections').isVisible())
+      assert.equal(await page.locator('#atlas').isVisible(), false)
+      await page.screenshot({ path: join(artifacts, `filter-scrolling-${lang}-${width}.png`), fullPage: true })
+      await page.getByRole('button', { name: reset }).click()
+      for (const [value, enLabel, ruLabel] of [['resources', 'Resources', 'Ресурсы'], ['images', 'Images', 'Изображения']]) {
+        await select.selectOption(value)
+        assert.equal(await select.locator('option:checked').innerText(), lang === 'en' ? enLabel : ruLabel)
+        assert.ok(await page.locator('#atlas').isVisible())
+        for (const id of ['layout', 'controls', 'styling', 'profiles', 'text-input']) assert.equal(await page.locator(`#${id}`).isVisible(), false)
+        await page.screenshot({ path: join(artifacts, `atlas-${value}-${lang}-${width}.png`), fullPage: true })
+        await page.getByRole('button', { name: reset }).click()
+        assert.equal(await select.inputValue(), '')
+        assert.equal(await query.inputValue(), '')
+        for (const id of ['layout', 'controls', 'styling', 'profiles', 'text-input', 'atlas']) assert.ok(await page.locator(`#${id}`).isVisible())
+      }
       await select.selectOption('layout')
       await query.fill('ui_layout')
       assert.ok(await page.locator('#layout').isVisible())
@@ -304,8 +343,9 @@ try {
       for (const [lang, title, other, otherTitle] of [['en', en, 'ru', ru], ['ru', ru, 'en', en]]) {
         await go(`/oui/${lang}/${path}`)
         await checkPage(lang, title)
-        const dimensions = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, client: document.documentElement.clientWidth }))
+        const dimensions = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, client: document.documentElement.clientWidth, font: parseFloat(getComputedStyle(document.querySelector('main p')).fontSize) }))
         assert.ok(dimensions.scroll <= dimensions.client, `${path} ${lang} ${width} overflow ${JSON.stringify(dimensions)}`)
+        assert.ok(dimensions.font >= 14, `${path} ${lang} ${width} unreadable font`)
         assert.ok(await page.locator('main p').first().isVisible())
         await checkImages(page, path, lang)
         await page.screenshot({ path: join(artifacts, `${lang}-${sampleName(path)}-${width}.png`), fullPage: true })
@@ -313,6 +353,15 @@ try {
         assert.equal(await page.evaluate(() => document.activeElement.classList.contains('VPSkipLink')), true)
         await page.keyboard.press('Enter')
         assert.equal(new URL(page.url()).hash, '#VPContent')
+        if (path === 'catalogue.html') {
+          for (const [target, targetTitle] of [['layers', lang === 'en' ? 'Layers' : 'Слои'], ['hud', lang === 'en' ? 'HUD hold' : 'HUD и удержание']]) {
+            await go(`/oui/${lang}/catalogue.html`)
+            await focusByTab(`main a[href="./capabilities/${target}.html"]`)
+            await page.keyboard.press('Enter')
+            await page.waitForURL(`**/oui/${lang}/capabilities/${target}.html`)
+            await checkPage(lang, targetTitle)
+          }
+        }
         await go(`/oui/${lang}/${path}#${anchor}`)
         await focusByTab(`.content-container a[lang="${other}"]`)
         await page.keyboard.press('Enter')
@@ -427,8 +476,10 @@ try {
           assert.equal(await p.locator('html').getAttribute('lang'), lang)
           assert.equal((await p.locator('h1').first().innerText()).replace(/\u200b/g, '').trim(), heading)
           assert.ok(await p.locator('main p').first().isVisible())
+          const dimensions = await p.evaluate(() => ({ scroll: document.documentElement.scrollWidth, client: document.documentElement.clientWidth, font: parseFloat(getComputedStyle(document.querySelector('main p')).fontSize) }))
+          assert.ok(dimensions.scroll <= dimensions.client && dimensions.font >= 14, `${path} ${lang} ${width}: ${JSON.stringify(dimensions)}`)
           if (path === 'catalogue.html') {
-            for (const id of ['layout', 'controls', 'styling', 'profiles', 'text', 'rich-text', 'text-input']) {
+            for (const id of ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text']) {
               const link = p.locator(`main a[href="./capabilities/${id}.html"]`)
               assert.ok(await link.isVisible())
               assert.equal(await link.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/capabilities/${id}.html`)
@@ -449,6 +500,16 @@ try {
           await p.keyboard.press('Enter')
           await p.waitForURL(`**/oui/${other}/${path}`)
           assert.equal(await p.locator('html').getAttribute('lang'), other)
+          if (path === 'catalogue.html') {
+            for (const target of ['layers', 'hud']) {
+              assert.equal((await p.goto(`${origin}/oui/${lang}/catalogue.html`)).status(), 200)
+              await focusByTab(`main a[href="./capabilities/${target}.html"]`, p)
+              await p.keyboard.press('Enter')
+              await p.waitForURL(`**/oui/${lang}/capabilities/${target}.html`)
+              assert.ok(await p.locator('main p').first().isVisible())
+              await checkImages(p, `capabilities/${target}.html`, lang)
+            }
+          }
           console.log(`PASS no-JS sample ${path} ${lang} ${width}: prose, image where present, keyboard locale`)
         }
       }

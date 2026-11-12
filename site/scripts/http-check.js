@@ -28,6 +28,16 @@ try {
     ['ru/capabilities/text.html', 'ru', 'Текст', '/oui/en/capabilities/text.html'],
     ['en/capabilities/rich-text.html', 'en', 'Rich text', '/oui/ru/capabilities/rich-text.html'],
     ['ru/capabilities/rich-text.html', 'ru', 'Форматированный текст', '/oui/en/capabilities/rich-text.html'],
+    ['en/capabilities/scroll-table.html', 'en', 'Scroll and table', '/oui/ru/capabilities/scroll-table.html'],
+    ['ru/capabilities/scroll-table.html', 'ru', 'Прокрутка и таблица', '/oui/en/capabilities/scroll-table.html'],
+    ['en/capabilities/collections.html', 'en', 'Virtual collections', '/oui/ru/capabilities/collections.html'],
+    ['ru/capabilities/collections.html', 'ru', 'Виртуальные коллекции', '/oui/en/capabilities/collections.html'],
+    ['en/capabilities/layers.html', 'en', 'Layers', '/oui/ru/capabilities/layers.html'],
+    ['ru/capabilities/layers.html', 'ru', 'Слои', '/oui/en/capabilities/layers.html'],
+    ['en/capabilities/hud.html', 'en', 'HUD hold', '/oui/ru/capabilities/hud.html'],
+    ['ru/capabilities/hud.html', 'ru', 'HUD и удержание', '/oui/en/capabilities/hud.html'],
+    ['en/capabilities/atlas.html', 'en', 'Atlas', '/oui/ru/capabilities/atlas.html'],
+    ['ru/capabilities/atlas.html', 'ru', 'Атлас', '/oui/en/capabilities/atlas.html'],
     ['en/capabilities/text-input.html', 'en', 'Text input', '/oui/ru/capabilities/text-input.html'],
     ['ru/capabilities/text-input.html', 'ru', 'Ввод текста', '/oui/en/capabilities/text-input.html'],
     ['en/capabilities/controls.html', 'en', 'Controls', '/oui/ru/capabilities/controls.html'],
@@ -46,31 +56,23 @@ try {
     assert.ok(html.includes(`href="${other}"`), path)
     if (path.includes('guide/')) assert.ok(html.includes('id="choose-a-boundary"'))
     const markup = html.split('<script>window.__VP_HASH_MAP__')[0]
-    const section = path.match(/capabilities\/(layout|text|rich-text|text-input)\.html/)?.[1]
-    for (const state of ['layout', 'text-input'].includes(section) ? [''] : section ? ['-initial', '-alternate'] : []) {
-      const image = `/oui/media/${section}-${lang}${state}.png`
-      assert.ok(markup.includes(`src="${image}"`), `missing no-JS image ${path}`)
-      const record = media.records.find(item => item.id === `${section}-${lang}${state}`)
-      assert.ok(markup.includes(`alt="${record.alt[lang]}"`))
-      const response = await get(image)
-      assert.equal(response.status, 200)
-      assert.match(response.headers.get('content-type'), /^image\/png/)
-      const bytes = Buffer.from(await response.arrayBuffer())
-      assert.equal(bytes.subarray(0, 8).toString('hex'), '89504e470d0a1a0a')
-      assert.equal(createHash('sha256').update(bytes).digest('hex'), record.sha256)
+    const section = path.match(/capabilities\/(layout|layers|hud|text-input|scroll-table|collections|text|rich-text)\.html/)?.[1]
+    if (section) {
+      const records = media.records.filter(item => item.section === section && item.uiLocale === lang)
+      assert.equal(records.length, ['text-input', 'scroll-table', 'collections'].includes(section) ? 1 : 2)
+      for (const record of records) {
+        const image = `/oui/${record.path}`
+        assert.ok(markup.includes(`src="${image}"`), `missing no-JS image ${path}`)
+        assert.ok(markup.includes(`alt="${record.alt[lang]}"`))
+        const response = await get(image)
+        assert.equal(response.status, 200)
+        assert.match(response.headers.get('content-type'), /^image\/png/)
+        const bytes = Buffer.from(await response.arrayBuffer())
+        assert.equal(bytes.subarray(0, 8).toString('hex'), '89504e470d0a1a0a')
+        assert.equal(createHash('sha256').update(bytes).digest('hex'), record.sha256)
+      }
     }
-    if (section === 'layout') {
-      const record = media.records.find(item => item.id === `layout-small-${lang}`)
-      const image = `/oui/${record.path}`
-      assert.ok(markup.includes(`src="${image}"`))
-      assert.ok(markup.includes(`alt="${record.alt[lang]}"`))
-      const response = await get(image)
-      assert.equal(response.status, 200)
-      assert.match(response.headers.get('content-type'), /^image\/png/)
-      const bytes = Buffer.from(await response.arrayBuffer())
-      assert.equal(createHash('sha256').update(bytes).digest('hex'), record.sha256)
-    }
-    for (const [id, states] of [['profiles', ['initial', 'dialog', 'applied']], ['controls', ['initial', 'changed']], ['styling', ['initial', 'changed']]]) if (path.includes(`capabilities/${id}`)) {
+    for (const [id, states] of [['atlas', ['initial', 'alternate', 'reload']], ['profiles', ['initial', 'dialog', 'applied']], ['controls', ['initial', 'changed']], ['styling', ['initial', 'changed']]]) if (path.includes(`capabilities/${id}`)) {
       for (const state of states) {
         const record = media.records.find(item => item.id === `${id}-${lang}-${state}`)
         const image = `/oui/${record.path}`

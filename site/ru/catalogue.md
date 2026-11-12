@@ -1,7 +1,7 @@
 # Каталог возможностей {#catalogue}
 
 Это явно ограниченная выборка, а не полный каталог showcase. Сейчас она охватывает
-семь из 19 разделов галереи и ни один из четырёх экранов Integration Lab.
+двенадцать из 19 разделов галереи и ни один из четырёх экранов Integration Lab.
 На снимках показано нативное приложение, а не браузерный порт.
 
 <CatalogueFilter locale="ru">
@@ -33,6 +33,21 @@
 
 </CatalogueItem>
 
+<CatalogueItem id="scroll-table">
+
+## Прокрутка и таблица {#scroll-table}
+
+Вертикальная прокрутка обычной таблицы в области просмотра. [Подробнее и нативный пример](./capabilities/scroll-table).
+
+</CatalogueItem>
+
+<CatalogueItem id="collections">
+
+## Виртуальные коллекции {#collections}
+
+Материализация видимой части однородного списка или сетки. [Подробнее и нативный пример](./capabilities/collections).
+</CatalogueItem>
+
 <CatalogueItem id="controls">
 
 ## Элементы управления {#controls}
@@ -58,12 +73,37 @@
 
 </CatalogueItem>
 
+<CatalogueItem id="layers">
+
+## Слои {#layers}
+
+Модальные области, панели и неинтерактивная подсказка. [Подробнее о слоях](./capabilities/layers).
+
+</CatalogueItem>
+
+<CatalogueItem id="hud">
+
+## HUD и удержание {#hud}
+
+Удержание восстанавливает HP; эффект принадлежит приложению. [Подробнее о HUD](./capabilities/hud).
+
+</CatalogueItem>
+
 <CatalogueItem id="text-input">
 
 ## Ввод текста {#text-input}
 
 Редактирование однострочного имени: фокус на черновике, явные Apply и Cancel.
 [Подробнее и нативный пример](./capabilities/text-input).
+
+</CatalogueItem>
+
+<CatalogueItem id="atlas">
+
+## Атлас {#atlas}
+
+Загрузка областей изображений, смена атласа и перезагрузка выбранного набора.
+[Подробнее и нативный пример](./capabilities/atlas).
 
 </CatalogueItem>
 

@@ -28,6 +28,10 @@ try {
     ['ru/capabilities/scroll-table.html', 'ru', 'Прокрутка и таблица', '/oui/en/capabilities/scroll-table.html'],
     ['en/capabilities/collections.html', 'en', 'Virtual collections', '/oui/ru/capabilities/collections.html'],
     ['ru/capabilities/collections.html', 'ru', 'Виртуальные коллекции', '/oui/en/capabilities/collections.html'],
+    ['en/capabilities/layers.html', 'en', 'Layers', '/oui/ru/capabilities/layers.html'],
+    ['ru/capabilities/layers.html', 'ru', 'Слои', '/oui/en/capabilities/layers.html'],
+    ['en/capabilities/hud.html', 'en', 'HUD hold', '/oui/ru/capabilities/hud.html'],
+    ['ru/capabilities/hud.html', 'ru', 'HUD и удержание', '/oui/en/capabilities/hud.html'],
     ['en/capabilities/atlas.html', 'en', 'Atlas', '/oui/ru/capabilities/atlas.html'],
     ['ru/capabilities/atlas.html', 'ru', 'Атлас', '/oui/en/capabilities/atlas.html'],
     ['en/capabilities/text-input.html', 'en', 'Text input', '/oui/ru/capabilities/text-input.html'],
@@ -48,27 +52,20 @@ try {
     assert.ok(html.includes(`href="${other}"`), path)
     if (path.includes('guide/')) assert.ok(html.includes('id="choose-a-boundary"'))
     const markup = html.split('<script>window.__VP_HASH_MAP__')[0]
-    if (['layout', 'text-input', 'scroll-table', 'collections'].some(id => path === `${lang}/capabilities/${id}.html`)) {
-      const id = path.split('/').at(-1).replace('.html', '')
-      const image = `/oui/media/${id}-${lang}.png`
-      assert.ok(markup.includes(`src="${image}"`), `missing no-JS image ${path}`)
-      const record = media.records.find(item => item.id === `${id}-${lang}`)
-      assert.ok(markup.includes(`alt="${record.alt[lang]}"`))
-      const response = await get(image)
-      assert.equal(response.status, 200)
-      assert.match(response.headers.get('content-type'), /^image\/png/)
-      const bytes = Buffer.from(await response.arrayBuffer())
-      assert.equal(bytes.subarray(0, 8).toString('hex'), '89504e470d0a1a0a')
-      assert.equal(createHash('sha256').update(bytes).digest('hex'), record.sha256)
-      if (id === 'layout') {
-        const small = media.records.find(item => item.id === `layout-small-${lang}`)
-        const smallPath = `/oui/${small.path}`
-        assert.ok(markup.includes(`src="${smallPath}"`))
-        assert.ok(markup.includes(`alt="${small.alt[lang]}"`))
-        const smallResponse = await get(smallPath)
-        assert.equal(smallResponse.status, 200)
-        assert.match(smallResponse.headers.get('content-type'), /^image\/png/)
-        assert.equal(createHash('sha256').update(Buffer.from(await smallResponse.arrayBuffer())).digest('hex'), small.sha256)
+    const section = path.match(/capabilities\/(layout|layers|hud|text-input|scroll-table|collections)\.html/)?.[1]
+    if (section) {
+      const records = media.records.filter(item => item.section === section && item.uiLocale === lang)
+      assert.equal(records.length, ['text-input', 'scroll-table', 'collections'].includes(section) ? 1 : 2)
+      for (const record of records) {
+        const image = `/oui/${record.path}`
+        assert.ok(markup.includes(`src="${image}"`), `missing no-JS image ${path}`)
+        assert.ok(markup.includes(`alt="${record.alt[lang]}"`))
+        const response = await get(image)
+        assert.equal(response.status, 200)
+        assert.match(response.headers.get('content-type'), /^image\/png/)
+        const bytes = Buffer.from(await response.arrayBuffer())
+        assert.equal(bytes.subarray(0, 8).toString('hex'), '89504e470d0a1a0a')
+        assert.equal(createHash('sha256').update(bytes).digest('hex'), record.sha256)
       }
     }
     for (const [id, states] of [['atlas', ['initial', 'alternate', 'reload']], ['profiles', ['initial', 'dialog', 'applied']], ['controls', ['initial', 'changed']], ['styling', ['initial', 'changed']]]) if (path.includes(`capabilities/${id}`)) {

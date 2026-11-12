@@ -1,7 +1,7 @@
 # Capability catalogue {#catalogue}
 
 This is an explicitly limited sample, not the complete showcase catalogue. It
-currently covers eight of the 19 gallery sections and none of the four Integration
+currently covers ten of the 19 gallery sections and none of the four Integration
 Lab screens. The captures show the native application, not a browser port.
 
 <CatalogueFilter locale="en">
@@ -52,6 +52,22 @@ Theme, visual states and primitives. [Explore styling](./capabilities/styling).
 
 Explore a draft and applied settings workflow in the native showcase.
 [Explore profiles and its native example](./capabilities/profiles).
+
+</CatalogueItem>
+
+<CatalogueItem id="layers">
+
+## Layers {#layers}
+
+Modal and popup scopes and a noninteractive tooltip. [Explore layers](./capabilities/layers).
+
+</CatalogueItem>
+
+<CatalogueItem id="hud">
+
+## HUD hold {#hud}
+
+Hold to restore HP; the application owns the effect. [Explore HUD hold](./capabilities/hud).
 
 </CatalogueItem>
 

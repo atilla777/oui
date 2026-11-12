@@ -1,19 +1,20 @@
 # Статический каталог и изображения сайта
 
 Контракт введён `oui-3no.2`; опубликованные расширения включают `oui-3no.5`,
-`oui-3no.6`, text-input `oui-3no.9` и Atlas `oui-3no.7`.
+`oui-3no.6`, Atlas `oui-3no.7`, text-input `oui-3no.9` и layers/HUD `oui-3no.11`.
 Прокрутка/коллекции `oui-3no.10` — интеграционный кандидат, ещё не опубликованный.
 Библиотека и native consumers не изменены; сайт описывает существующие возможности,
 а не реализует их в браузере.
 
 - `site/en/` и `site/ru/` содержат `catalogue` и `capabilities/layout`,
-  `capabilities/controls`, `capabilities/styling`, `capabilities/profiles`, `capabilities/text-input`, `capabilities/atlas`,
+  `capabilities/controls`, `capabilities/styling`, `capabilities/profiles`,
+  `capabilities/layers`, `capabilities/hud`, `capabilities/text-input`, `capabilities/atlas`,
   `capabilities/scroll-table`, `capabilities/collections`.
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
   полный showcase, с pinned source links и native build/run command.
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
   Каталог объявляет sample coverage `layout`, `controls`, `styling`, `profiles`,
-  `text-input`, `atlas`, `scroll-table`, `collections`. Native source catalogue
+  `layers`, `hud`, `text-input`, `atlas`, `scroll-table`, `collections`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -70,7 +71,8 @@ EN/RU страниц controls/styling и прежних foundation/layout/catalo
 Из `site/` с Node из `.nvmrc`: `npm ci`, `npm run check`, `npm run build`,
 `npm run check:http`, затем `npm run preview -- --port 0` и выданный локальный
 URL с `/oui/en/capabilities/layout` либо `/oui/ru/capabilities/layout`.
-Для новых страниц заменить `layout` на `controls`, `styling`, `profiles` или `text-input`; переключение
+Для других страниц заменить `layout` на `controls`, `styling`, `profiles`, `layers`, `hud`,
+`text-input`, `atlas`, `scroll-table` или `collections`; переключение
 языка сохраняет страницу. `npm run check:browser` запускает разрешённую
 изолированную браузерную приёмку (Linux Chromium с sandbox).
 Остановить свой preview — Ctrl-C. Подробнее: [site README](../../site/README.md).
@@ -115,10 +117,57 @@ Chromium 152: EN/RU страницы на 360/1280, изображения/alt, 
 Применимость portable-check сохранена: 630 экспортированных файлов совпадают
 по байтам и executable mode с интеграционным снимком, site/docs в export не входят.
 
+После объединения с опубликованными layers/HUD повторены site checks, build,
+HTTP и разрешённый sandboxed Chromium для десяти разделов EN/RU на 360/1280,
+включая прежние search/filter/viewer и no-JS сценарии. Все 128 итоговых browser
+PNG просмотрены либо совпали с ранее просмотренными; browser и preview остановлены.
+Это проверка интеграционного кандидата, не полная квалификация или deployment.
+
 Как увидеть локальный кандидат: из `site/` с Node `.nvmrc` выполнить
 `npm run build`, `npm run check:http`, `npm run check:browser`, затем
 `npm run preview -- --port 0`; открыть выданный URL с `/oui/en/catalogue`
 или `/oui/ru/catalogue` и перейти к новым примерам. Остановить свой preview.
+
+## Расширение layers/HUD — oui-3no.11
+
+В локальном кандидате EN/RU страницы слоёв показывают popup с неинтерактивной
+подсказкой и модальную область A; страницы HUD — начальный HP 60 и HP 100/count 1
+после полного удержания и отпускания. Тексты отделяют механизмы от app-owned
+эффектов, описывают экспериментальные границы и запрет обхода hold через Activate.
+Native API и поведение не менялись.
+
+Восемь новых PNG 1280×960, scale 1 получены из portable export, все 630 inventory
+entries которого сверены с `4da8d7a57bd2453227a4c37df6b0b4d171401681`.
+Каждый PNG просмотрен; личных данных не обнаружено. Та же явно выбранная ISD
+проверена целиком; create/status подтвердили `linux-abstract-v1`, выполнен явный
+focus, собственные runs остановлены в `finally`. Использован существующий private
+prefix libpng 1.6.59/zlib 1.4 с проверенной фактической linkage.
+Unit/parity/schema, static build, HTTP всех новых страниц и image digests прошли.
+Portable-check прошёл на свежем export; site-only изменения не меняют его байты.
+
+После отдельного разрешения владельца для `oui-3no.11` пройдена браузерная
+приёмка в изолированном headless Chromium 152 с sandbox, собственными временными
+профилями и loopback-only static preview. EN/RU layers/HUD и сохранённые
+catalogue/layout/guide сценарии проверены на ширинах 360/1280: prose без page
+overflow, все ожидаемые изображения загружены с локализованным alt, клавиатурные
+переходы из каталога, смена языка с valid/missing anchors, no-JS и reduced motion.
+Все 36 исходных browser PNG, затем все 80 PNG объединённого с опубликованными
+controls/styling/profiles, поиском/фильтрами и layout viewer кандидата, а также
+все 92 PNG после следующего объединения с text-input просмотрены
+исполнителем; собственные браузеры и preview остановлены в `finally`.
+После объединения с Atlas повторены site checks, build, HTTP и sandboxed Chromium;
+все 108 browser PNG просмотрены, собственные browser и preview остановлены.
+Объединённые unit/schema/parity, build, HTTP и браузерные проверки прошли;
+portable source остался побайтово неизменным. Изображения на мобильном экране
+уменьшены; viewer/zoom для layers/HUD и полная квалификация остальных IDs
+не входят в этот результат. Существующий layout viewer сохранён.
+Публикация и deployment не выполнены.
+После сборки открыть `/oui/en/capabilities/layers` или `/oui/en/capabilities/hud`
+(либо соответствующие `/ru/` страницы); ожидаются текст и два настоящих
+изображения на каждой странице. HTTP и браузерное представление проверены.
+Браузерные проверки воспроизводятся командой `npm run check:browser` из `site/`
+в разрешённой sandboxed Chromium-среде; другие браузеры и полный аудит доступности
+не проверены.
 
 ## Однострочный ввод текста
 
@@ -151,6 +200,7 @@ loopback HTTP прошли. Последний проверяет новые EN/
 логи содержат X11 I/O error при остановке дисплея, без предшествующей ошибки
 редактора; точный порядок сигналов не установлен. Это не подтверждение
 штатного завершения приложения.
+
 ## Просмотр двух состояний layout
 
 Результат `oui-3no.4` добавляет viewer на обе
@@ -222,9 +272,9 @@ no-JS prose/images и reduced motion; сохранены логи/снимки �
 Категории `text` и `input` показываются как Text/Input или Текст/Ввод в
 соответствующем языке; их стабильные IDs при этом не меняются.
 Пустая выдача показывает сообщение; «Сбросить фильтры» очищает запрос и категорию.
-Область остаётся sample `layout`, `controls`, `styling`, `profiles`, `text-input`, `atlas`, `scroll-table`, `collections`, не полный каталог;
-фильтрация применяется к каждому разделу отдельно. Поиск и фильтры требуют
-JavaScript; без него исходные описания и ссылки всех восьми разделов остаются в HTML.
+Область остаётся sample `layout`, `controls`, `styling`, `profiles`, `layers`, `hud`, `text-input`, `atlas`, `scroll-table`, `collections`,
+не полный каталог; фильтрация применяется к каждому разделу отдельно. Поиск и фильтры требуют
+JavaScript; без него исходные описания и ссылки всех десяти разделов остаются в HTML.
 
 В интеграционном кандидате повторно проверены build, HTTP и sandboxed Chromium
 для четырёх разделов на EN/RU и ширинах 360/1280, включая фильтр `ui_editor`

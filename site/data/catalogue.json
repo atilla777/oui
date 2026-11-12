@@ -7,6 +7,8 @@
       "controls",
       "styling",
       "profiles",
+      "layers",
+      "hud",
       "text-input",
       "atlas",
       "scroll-table",
@@ -159,6 +161,74 @@
         "styling-en-changed",
         "styling-ru-initial",
         "styling-ru-changed"
+      ]
+    },
+    {
+      "title": {
+        "en": "Layers",
+        "ru": "Слои"
+      },
+      "summary": {
+        "en": "Explicit modal and popup scopes with noninteractive tooltips.",
+        "ru": "Явные модальные области и панели с неинтерактивными подсказками."
+      },
+      "limitations": {
+        "en": "Experimental; explicit scopes and ownership, tooltip is noninteractive.",
+        "ru": "Экспериментально: явные области и владение, подсказка не принимает ввод."
+      },
+      "categories": [
+        "layers",
+        "interaction"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_interaction",
+        "ui_layers"
+      ],
+      "source": "consumer/ui_showcase/sections/layers.odin",
+      "id": "layers",
+      "group": "gallery",
+      "runnable": "consumer/ui_showcase",
+      "media": [
+        "layers-popup-tooltip-en",
+        "layers-popup-tooltip-ru",
+        "layers-modal-en",
+        "layers-modal-ru"
+      ]
+    },
+    {
+      "title": {
+        "en": "HUD hold",
+        "ru": "HUD и удержание"
+      },
+      "summary": {
+        "en": "A hold gesture reports progress before the application restores HP.",
+        "ru": "Удержание показывает прогресс до восстановления HP приложением."
+      },
+      "limitations": {
+        "en": "Experimental; 1000 ms hold required, Activate cannot bypass it.",
+        "ru": "Экспериментально: требуется удержание 1000 мс, Activate его не обходит."
+      },
+      "categories": [
+        "hud",
+        "hold"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_layers",
+        "ui_hold"
+      ],
+      "source": "consumer/ui_showcase/sections/hud.odin",
+      "id": "hud",
+      "group": "gallery",
+      "runnable": "consumer/ui_showcase",
+      "media": [
+        "hud-idle-en",
+        "hud-idle-ru",
+        "hud-completed-en",
+        "hud-completed-ru"
       ]
     },
     {

@@ -772,6 +772,350 @@
       }
     },
     {
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "id": "layers-popup-tooltip-en",
+      "section": "layers",
+      "state": "base scope popup and tooltip open",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/layers.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "consumer/ui_showcase/app/layer_runtime.odin",
+        "kit/ui_layers"
+      ],
+      "options": "Normal mode; pixel-perfect off; section layers; supplied fonts and atlases.",
+      "path": "media/layers-popup-tooltip-en.png",
+      "sha256": "566ec908404aeecbac0226782eadf5e568a353d2b38c5e6a5899cef064be32bd",
+      "caption": {
+        "en": "Native layers: popup and noninteractive tooltip, EN UI.",
+        "ru": "Нативные слои: панель и неинтерактивная подсказка, интерфейс EN."
+      },
+      "alt": {
+        "en": "Layers showcase with an open popup and a noninteractive tooltip above the underlying controls.",
+        "ru": "Раздел слоёв: открытая панель и неинтерактивная подсказка поверх элементов."
+      }
+    },
+    {
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "id": "layers-popup-tooltip-ru",
+      "section": "layers",
+      "state": "base scope popup and tooltip open",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/layers.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "consumer/ui_showcase/app/layer_runtime.odin",
+        "kit/ui_layers"
+      ],
+      "options": "Normal mode; pixel-perfect off; section layers; supplied fonts and atlases.",
+      "path": "media/layers-popup-tooltip-ru.png",
+      "sha256": "94a50df16b8e92884fd61e6f3a40f07c08bd768aa1689828fae0d0d451fa086a",
+      "caption": {
+        "en": "Native layers: popup and noninteractive tooltip, RU UI.",
+        "ru": "Нативные слои: панель и неинтерактивная подсказка, интерфейс RU."
+      },
+      "alt": {
+        "en": "Layers showcase with an open popup and a noninteractive tooltip above the underlying controls.",
+        "ru": "Раздел слоёв: открытая панель и неинтерактивная подсказка поверх элементов."
+      }
+    },
+    {
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "id": "layers-modal-en",
+      "section": "layers",
+      "state": "modal A open",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/layers.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "consumer/ui_showcase/app/layer_runtime.odin",
+        "kit/ui_layers"
+      ],
+      "options": "Normal mode; pixel-perfect off; section layers; supplied fonts and atlases.",
+      "path": "media/layers-modal-en.png",
+      "sha256": "1d570fe25f2054fe807a3f1fa0bc9450f1e5ec0317948e075350d8b23607ddf8",
+      "caption": {
+        "en": "Native layers: modal A open, EN UI.",
+        "ru": "Нативные слои: открыта модальная область A, интерфейс EN."
+      },
+      "alt": {
+        "en": "Modal A with focused counter, scroll rows and controls to open B, close, show a popup or tooltip.",
+        "ru": "Модальная область A: счётчик в фокусе, прокручиваемые строки и кнопки B, закрытия, панели и подсказки."
+      }
+    },
+    {
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "id": "layers-modal-ru",
+      "section": "layers",
+      "state": "modal A open",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/layers.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "consumer/ui_showcase/app/layer_runtime.odin",
+        "kit/ui_layers"
+      ],
+      "options": "Normal mode; pixel-perfect off; section layers; supplied fonts and atlases.",
+      "path": "media/layers-modal-ru.png",
+      "sha256": "a3af0cb8dc8c24a1c6ac240ef34f9cf24f12bdce6e3b1a0e2d633c23f8b9b541",
+      "caption": {
+        "en": "Native layers: modal A open, RU UI.",
+        "ru": "Нативные слои: открыта модальная область A, интерфейс RU."
+      },
+      "alt": {
+        "en": "Modal A with focused counter, scroll rows and controls to open B, close, show a popup or tooltip.",
+        "ru": "Модальная область A: счётчик в фокусе, прокручиваемые строки и кнопки B, закрытия, панели и подсказки."
+      }
+    },
+    {
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "id": "hud-idle-en",
+      "section": "hud",
+      "state": "initial idle HP 60",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/hud.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "consumer/ui_showcase/app/hold_runtime.odin",
+        "kit/ui_hold"
+      ],
+      "options": "Normal mode; pixel-perfect off; section hud; supplied fonts and atlases.",
+      "path": "media/hud-idle-en.png",
+      "sha256": "f6169a972f9a720e732dfb442f7ab09b60ceab7080b1fdbcc3f537030b2d3e05",
+      "caption": {
+        "en": "Native HUD: idle at HP 60, EN UI.",
+        "ru": "Нативный HUD: покой, HP 60, интерфейс EN."
+      },
+      "alt": {
+        "en": "HUD at 60 of 100 HP, idle and count zero, with the hold-to-restore control focused.",
+        "ru": "HUD: HP 60 из 100, состояние покоя и счётчик ноль; кнопка удержания в фокусе."
+      }
+    },
+    {
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "id": "hud-idle-ru",
+      "section": "hud",
+      "state": "initial idle HP 60",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/hud.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "consumer/ui_showcase/app/hold_runtime.odin",
+        "kit/ui_hold"
+      ],
+      "options": "Normal mode; pixel-perfect off; section hud; supplied fonts and atlases.",
+      "path": "media/hud-idle-ru.png",
+      "sha256": "9df2a795fcb7561151c6e02e503b5b76f50f8b0999ae318568c75abb54905bc3",
+      "caption": {
+        "en": "Native HUD: idle at HP 60, RU UI.",
+        "ru": "Нативный HUD: покой, HP 60, интерфейс RU."
+      },
+      "alt": {
+        "en": "HUD at 60 of 100 HP, idle and count zero, with the hold-to-restore control focused.",
+        "ru": "HUD: HP 60 из 100, состояние покоя и счётчик ноль; кнопка удержания в фокусе."
+      }
+    },
+    {
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "id": "hud-completed-en",
+      "section": "hud",
+      "state": "after completed hold and release HP 100 count 1",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/hud.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "consumer/ui_showcase/app/hold_runtime.odin",
+        "kit/ui_hold"
+      ],
+      "options": "Normal mode; pixel-perfect off; section hud; supplied fonts and atlases.",
+      "path": "media/hud-completed-en.png",
+      "sha256": "5e5e6cdd1529b12e44349e820803dedf0cb62f2c56dbabb3d78e82d915d9431f",
+      "caption": {
+        "en": "Native HUD: after one completed hold and release, EN UI.",
+        "ru": "Нативный HUD: после одного полного удержания и отпускания, интерфейс EN."
+      },
+      "alt": {
+        "en": "HUD after a completed hold: HP 100 of 100, idle, count one.",
+        "ru": "HUD после полного удержания: HP 100 из 100, состояние покоя, счётчик один."
+      }
+    },
+    {
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "id": "hud-completed-ru",
+      "section": "hud",
+      "state": "after completed hold and release HP 100 count 1",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/hud.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "consumer/ui_showcase/app/hold_runtime.odin",
+        "kit/ui_hold"
+      ],
+      "options": "Normal mode; pixel-perfect off; section hud; supplied fonts and atlases.",
+      "path": "media/hud-completed-ru.png",
+      "sha256": "96dbc340793b90a2ea5b2f38fd1f64c49fbaf197b3d92afc2d6e8db23ceda27c",
+      "caption": {
+        "en": "Native HUD: after one completed hold and release, RU UI.",
+        "ru": "Нативный HUD: после одного полного удержания и отпускания, интерфейс RU."
+      },
+      "alt": {
+        "en": "HUD after a completed hold: HP 100 of 100, idle, count one.",
+        "ru": "HUD после полного удержания: HP 100 из 100, состояние покоя, счётчик один."
+      }
+    },
+    {
       "id": "text-input-en",
       "section": "text-input",
       "state": "focused draft after inserting one character; applied value unchanged",

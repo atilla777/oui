@@ -1,13 +1,15 @@
 # Статический каталог и изображения сайта
 
-Кандидат `oui-3no.2`, pending integration. Библиотека и native consumers не
-изменены; сайт описывает существующий layout, а не реализует его в браузере.
+Основа `oui-3no.2`; расширение кандидата `oui-3no.11` pending integration.
+Библиотека и native consumers не изменены; сайт описывает существующие
+возможности, а не реализует их в браузере.
 
-- `site/en/` и `site/ru/` содержат `catalogue` и `capabilities/layout`.
+- `site/en/` и `site/ru/` содержат `catalogue` и `capabilities/layout`,
+  `capabilities/layers`, `capabilities/hud`.
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
   полный showcase, с pinned source links и native build/run command.
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
-  Каталог объявляет sample coverage только `layout`. Native source catalogue
+  Каталог объявляет sample coverage `layout`, `layers`, `hud`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -46,3 +48,37 @@ loopback-only preview. EN/RU catalogue/layout проверены на ширин
 `npm run check:http`, затем `npm run preview -- --port 0` и выданный локальный
 URL с `/oui/en/capabilities/layout` либо `/oui/ru/capabilities/layout`.
 Остановить свой preview — Ctrl-C. Подробнее: [site README](../../site/README.md).
+
+## Расширение layers/HUD — oui-3no.11
+
+В локальном кандидате EN/RU страницы слоёв показывают popup с неинтерактивной
+подсказкой и модальную область A; страницы HUD — начальный HP 60 и HP 100/count 1
+после полного удержания и отпускания. Тексты отделяют механизмы от app-owned
+эффектов, описывают экспериментальные границы и запрет обхода hold через Activate.
+Native API и поведение не менялись.
+
+Восемь новых PNG 1280×960, scale 1 получены из portable export, все 630 inventory
+entries которого сверены с `4da8d7a57bd2453227a4c37df6b0b4d171401681`.
+Каждый PNG просмотрен; личных данных не обнаружено. Та же явно выбранная ISD
+проверена целиком; create/status подтвердили `linux-abstract-v1`, выполнен явный
+focus, собственные runs остановлены в `finally`. Использован существующий private
+prefix libpng 1.6.59/zlib 1.4 с проверенной фактической linkage.
+Unit/parity/schema, static build, HTTP всех новых страниц и image digests прошли.
+Portable-check прошёл на свежем export; site-only изменения не меняют его байты.
+
+После отдельного разрешения владельца для `oui-3no.11` пройдена браузерная
+приёмка в изолированном headless Chromium 152 с sandbox, собственными временными
+профилями и loopback-only static preview. EN/RU layers/HUD и сохранённые
+catalogue/layout/guide сценарии проверены на ширинах 360/1280: prose без page
+overflow, все ожидаемые изображения загружены с локализованным alt, клавиатурные
+переходы из каталога, смена языка с valid/missing anchors, no-JS и reduced motion.
+Все 36 итоговых browser PNG просмотрены исполнителем; собственные браузеры и
+preview остановлены в `finally`. Изображения на мобильном экране уменьшены;
+viewer/zoom и полная квалификация остальных IDs не входят в этот результат.
+Публикация и deployment не выполнены.
+После сборки открыть `/oui/en/capabilities/layers` или `/oui/en/capabilities/hud`
+(либо соответствующие `/ru/` страницы); ожидаются текст и два настоящих
+изображения на каждой странице. HTTP и браузерное представление проверены.
+Браузерные проверки воспроизводятся командой `npm run check:browser` из `site/`
+в разрешённой sandboxed Chromium-среде; другие браузеры и полный аудит доступности
+не проверены.

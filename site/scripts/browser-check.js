@@ -16,6 +16,12 @@ let browser
 let ownerPid
 let forbidden = []
 const pageErrors = []
+const media = JSON.parse(await readFile('data/media.json', 'utf8'))
+const expectedImages = {
+  layout: ['layout'],
+  layers: ['layers-popup-tooltip', 'layers-modal'],
+  hud: ['hud-idle', 'hud-completed']
+}
 const environment = { ...process.env }
 for (const key of ['DISPLAY', 'WAYLAND_DISPLAY', 'WAYLAND_SOCKET', 'XAUTHORITY', 'DBUS_SESSION_BUS_ADDRESS']) delete environment[key]
 try {
@@ -74,6 +80,21 @@ try {
     assert.equal((await page.locator('h1').first().innerText()).replace(/\u200b/g, '').trim(), title)
     assert.ok((await page.title()).includes(title))
     assert.ok(await page.locator('main').innerText())
+  }
+  const checkImages = async (activePage, section, lang) => {
+    const ids = expectedImages[section].map(state => `${state}-${lang}`)
+    const images = activePage.locator('main img')
+    assert.equal(await images.count(), ids.length, `${section} ${lang}: image count`)
+    for (const id of ids) {
+      const matches = media.records.filter(record => record.id === id && record.section === section && record.uiLocale === lang)
+      assert.equal(matches.length, 1, `${id}: manifest record`)
+      const record = matches[0]
+      const image = activePage.locator(`main img[src="/oui/${record.path}"]`)
+      assert.equal(await image.count(), 1, `${id}: page reference`)
+      assert.ok(await image.isVisible(), `${id}: image visible`)
+      assert.equal(await image.getAttribute('alt'), record.alt[lang], `${id}: localized alt`)
+      assert.ok(await image.evaluate(el => el.complete && el.naturalWidth === 1280 && el.naturalHeight === 960), `${id}: loaded`)
+    }
   }
   await go('/oui/')
   // Identify only our own browser by its unique profile, then examine its descendants.
@@ -162,7 +183,9 @@ try {
   }
   const samplePages = [
     ['catalogue.html', 'Capability catalogue', 'Каталог возможностей', 'layout'],
-    ['capabilities/layout.html', 'Layout', 'Компоновка', 'boundaries']
+    ['capabilities/layout.html', 'Layout', 'Компоновка', 'boundaries'],
+    ['capabilities/layers.html', 'Layers', 'Слои', 'boundaries'],
+    ['capabilities/hud.html', 'HUD hold', 'HUD и удержание', 'boundaries']
   ]
   for (const width of [360, 1280]) {
     await page.setViewportSize({ width, height: 900 })
@@ -170,19 +193,29 @@ try {
       for (const [lang, title, other, otherTitle] of [['en', en, 'ru', ru], ['ru', ru, 'en', en]]) {
         await go(`/oui/${lang}/${path}`)
         await checkPage(lang, title)
-        const dimensions = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, client: document.documentElement.clientWidth }))
+        const dimensions = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, client: document.documentElement.clientWidth, font: parseFloat(getComputedStyle(document.querySelector('main p')).fontSize) }))
         assert.ok(dimensions.scroll <= dimensions.client, `${path} ${lang} ${width} overflow ${JSON.stringify(dimensions)}`)
+        assert.ok(dimensions.font >= 14, `${path} ${lang} ${width} unreadable font`)
         assert.ok(await page.locator('main p').first().isVisible())
+        const section = path.match(/^capabilities\/(layout|layers|hud)\.html$/)?.[1]
         if (path.startsWith('capabilities/')) {
-          const image = page.locator(`main img[src="/oui/media/layout-${lang}.png"]`)
-          assert.ok(await image.isVisible())
-          assert.ok(await image.evaluate(el => el.complete && el.naturalWidth === 1280 && el.naturalHeight === 960 && !!el.alt))
+          assert.ok(section)
+          await checkImages(page, section, lang)
         }
-        await page.screenshot({ path: join(artifacts, `${lang}-${path.startsWith('capabilities/') ? 'layout' : 'catalogue'}-${width}.png`), fullPage: true })
+        await page.screenshot({ path: join(artifacts, `${lang}-${section || 'catalogue'}-${width}.png`), fullPage: true })
         await page.keyboard.press('Tab')
         assert.equal(await page.evaluate(() => document.activeElement.classList.contains('VPSkipLink')), true)
         await page.keyboard.press('Enter')
         assert.equal(new URL(page.url()).hash, '#VPContent')
+        if (path === 'catalogue.html') {
+          for (const [target, targetTitle] of [['layers', lang === 'en' ? 'Layers' : 'Слои'], ['hud', lang === 'en' ? 'HUD hold' : 'HUD и удержание']]) {
+            await go(`/oui/${lang}/catalogue.html`)
+            await focusByTab(`main a[href="./capabilities/${target}.html"]`)
+            await page.keyboard.press('Enter')
+            await page.waitForURL(`**/oui/${lang}/capabilities/${target}.html`)
+            await checkPage(lang, targetTitle)
+          }
+        }
         await go(`/oui/${lang}/${path}#${anchor}`)
         await focusByTab(`.content-container a[lang="${other}"]`)
         await page.keyboard.press('Enter')
@@ -205,12 +238,15 @@ try {
   assert.ok(await page.locator('main p').first().isVisible())
   assert.equal(await page.locator('main a').first().evaluate(el => getComputedStyle(el).transitionDuration), '0s')
   assert.equal(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior), 'auto')
-  for (const [path, en] of samplePages) {
-    await go(`/oui/en/${path}`)
-    await checkPage('en', en)
-    assert.ok(await page.locator('main p').first().isVisible())
-    assert.equal(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior), 'auto')
-    if (path.startsWith('capabilities/')) assert.ok(await page.locator('main img').isVisible())
+  for (const [path, en, ru] of samplePages) {
+    for (const [lang, title] of [['en', en], ['ru', ru]]) {
+      await go(`/oui/${lang}/${path}`)
+      await checkPage(lang, title)
+      assert.ok(await page.locator('main p').first().isVisible())
+      assert.equal(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior), 'auto')
+      const section = path.match(/^capabilities\/(layout|layers|hud)\.html$/)?.[1]
+      if (section) await checkImages(page, section, lang)
+    }
   }
   console.log('PASS reduced motion: preference, transition duration, scrolling and prose visibility')
 
@@ -252,17 +288,26 @@ try {
           assert.equal(await p.locator('html').getAttribute('lang'), lang)
           assert.equal((await p.locator('h1').first().innerText()).replace(/\u200b/g, '').trim(), heading)
           assert.ok(await p.locator('main p').first().isVisible())
+          const dimensions = await p.evaluate(() => ({ scroll: document.documentElement.scrollWidth, client: document.documentElement.clientWidth, font: parseFloat(getComputedStyle(document.querySelector('main p')).fontSize) }))
+          assert.ok(dimensions.scroll <= dimensions.client && dimensions.font >= 14, `${path} ${lang} ${width}: ${JSON.stringify(dimensions)}`)
           assert.equal(await p.evaluate(() => typeof window.__VP_SITE_DATA__), 'undefined')
-          if (path.startsWith('capabilities/')) {
-            const image = p.locator(`main img[src="/oui/media/layout-${lang}.png"]`)
-            assert.ok(await image.isVisible())
-            assert.ok(await image.evaluate(el => el.complete && el.naturalWidth === 1280 && el.naturalHeight === 960 && !!el.alt))
-          }
-          await p.screenshot({ path: join(artifacts, `nojs-${lang}-${path.startsWith('capabilities/') ? 'layout' : 'catalogue'}-${width}.png`), fullPage: true })
+          const section = path.match(/^capabilities\/(layout|layers|hud)\.html$/)?.[1]
+          if (section) await checkImages(p, section, lang)
+          await p.screenshot({ path: join(artifacts, `nojs-${lang}-${section || 'catalogue'}-${width}.png`), fullPage: true })
           await focusByTab(`.content-container a[lang="${other}"]`, p)
           await p.keyboard.press('Enter')
           await p.waitForURL(`**/oui/${other}/${path}`)
           assert.equal(await p.locator('html').getAttribute('lang'), other)
+          if (path === 'catalogue.html') {
+            for (const target of ['layers', 'hud']) {
+              assert.equal((await p.goto(`${origin}/oui/${lang}/catalogue.html`)).status(), 200)
+              await focusByTab(`main a[href="./capabilities/${target}.html"]`, p)
+              await p.keyboard.press('Enter')
+              await p.waitForURL(`**/oui/${lang}/capabilities/${target}.html`)
+              assert.ok(await p.locator('main p').first().isVisible())
+              await checkImages(p, target, lang)
+            }
+          }
           console.log(`PASS no-JS sample ${path} ${lang} ${width}: prose, image where present, keyboard locale`)
         }
       }

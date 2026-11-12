@@ -23,7 +23,11 @@ try {
     ['en/catalogue.html', 'en', 'Capability catalogue', '/oui/ru/catalogue.html'],
     ['ru/catalogue.html', 'ru', 'Каталог возможностей', '/oui/en/catalogue.html'],
     ['en/capabilities/layout.html', 'en', 'Layout', '/oui/ru/capabilities/layout.html'],
-    ['ru/capabilities/layout.html', 'ru', 'Компоновка', '/oui/en/capabilities/layout.html']
+    ['ru/capabilities/layout.html', 'ru', 'Компоновка', '/oui/en/capabilities/layout.html'],
+    ['en/capabilities/layers.html', 'en', 'Layers', '/oui/ru/capabilities/layers.html'],
+    ['ru/capabilities/layers.html', 'ru', 'Слои', '/oui/en/capabilities/layers.html'],
+    ['en/capabilities/hud.html', 'en', 'HUD hold', '/oui/ru/capabilities/hud.html'],
+    ['ru/capabilities/hud.html', 'ru', 'HUD и удержание', '/oui/en/capabilities/hud.html']
   ]) {
     const response = await get('/oui/' + path)
     assert.equal(response.status, 200, path)
@@ -34,17 +38,21 @@ try {
     assert.ok(html.includes(`href="${other}"`), path)
     if (path.includes('guide/')) assert.ok(html.includes('id="choose-a-boundary"'))
     const markup = html.split('<script>window.__VP_HASH_MAP__')[0]
-    if (path.includes('capabilities/layout')) {
-      const image = `/oui/media/layout-${lang}.png`
-      assert.ok(markup.includes(`src="${image}"`), `missing no-JS image ${path}`)
-      const record = media.records.find(item => item.id === `layout-${lang}`)
-      assert.ok(markup.includes(`alt="${record.alt[lang]}"`))
-      const response = await get(image)
-      assert.equal(response.status, 200)
-      assert.match(response.headers.get('content-type'), /^image\/png/)
-      const bytes = Buffer.from(await response.arrayBuffer())
-      assert.equal(bytes.subarray(0, 8).toString('hex'), '89504e470d0a1a0a')
-      assert.equal(createHash('sha256').update(bytes).digest('hex'), record.sha256)
+    const section = path.match(/capabilities\/(layout|layers|hud)\.html/)?.[1]
+    if (section) {
+      const records = media.records.filter(item => item.section === section && item.uiLocale === lang)
+      assert.equal(records.length, section === 'layout' ? 1 : 2)
+      for (const record of records) {
+        const image = `/oui/${record.path}`
+        assert.ok(markup.includes(`src="${image}"`), `missing no-JS image ${path}`)
+        assert.ok(markup.includes(`alt="${record.alt[lang]}"`))
+        const response = await get(image)
+        assert.equal(response.status, 200)
+        assert.match(response.headers.get('content-type'), /^image\/png/)
+        const bytes = Buffer.from(await response.arrayBuffer())
+        assert.equal(bytes.subarray(0, 8).toString('hex'), '89504e470d0a1a0a')
+        assert.equal(createHash('sha256').update(bytes).digest('hex'), record.sha256)
+      }
     }
     const serialized = html.match(/window\.__VP_SITE_DATA__=JSON\.parse\(("(?:\\.|[^"\\])*")\)/)
     assert.ok(serialized, 'missing serialized site configuration')

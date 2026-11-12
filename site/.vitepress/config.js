@@ -10,7 +10,7 @@ export default defineConfig({
       lang: 'en', label: 'English',
       themeConfig: {
         nav: [{ text: 'Introduction', link: '/en/' }, { text: 'Using oui', link: '/en/guide/using-oui' }, { text: 'Catalogue', link: '/en/catalogue' }],
-        sidebar: [{ text: 'Guide', items: [{ text: 'Introduction', link: '/en/' }, { text: 'Using oui', link: '/en/guide/using-oui' }, { text: 'Catalogue', link: '/en/catalogue' }, { text: 'Layout', link: '/en/capabilities/layout' }] }],
+        sidebar: [{ text: 'Guide', items: [{ text: 'Introduction', link: '/en/' }, { text: 'Using oui', link: '/en/guide/using-oui' }, { text: 'Catalogue', link: '/en/catalogue' }, { text: 'Layout', link: '/en/capabilities/layout' }, { text: 'Layers', link: '/en/capabilities/layers' }, { text: 'HUD hold', link: '/en/capabilities/hud' }] }],
         outline: { label: 'On this page' },
         docFooter: { prev: 'Previous page', next: 'Next page' },
         sidebarMenuLabel: 'Menu', returnToTopLabel: 'Return to top'
@@ -20,7 +20,7 @@ export default defineConfig({
       lang: 'ru', label: 'Русский',
       themeConfig: {
         nav: [{ text: 'Введение', link: '/ru/' }, { text: 'Использование oui', link: '/ru/guide/using-oui' }, { text: 'Каталог', link: '/ru/catalogue' }],
-        sidebar: [{ text: 'Руководство', items: [{ text: 'Введение', link: '/ru/' }, { text: 'Использование oui', link: '/ru/guide/using-oui' }, { text: 'Каталог', link: '/ru/catalogue' }, { text: 'Компоновка', link: '/ru/capabilities/layout' }] }],
+        sidebar: [{ text: 'Руководство', items: [{ text: 'Введение', link: '/ru/' }, { text: 'Использование oui', link: '/ru/guide/using-oui' }, { text: 'Каталог', link: '/ru/catalogue' }, { text: 'Компоновка', link: '/ru/capabilities/layout' }, { text: 'Слои', link: '/ru/capabilities/layers' }, { text: 'HUD и удержание', link: '/ru/capabilities/hud' }] }],
         outline: { label: 'На этой странице' },
         docFooter: { prev: 'Предыдущая страница', next: 'Следующая страница' },
         sidebarMenuLabel: 'Меню', returnToTopLabel: 'Наверх',

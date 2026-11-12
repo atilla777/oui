@@ -1,2 +1,33 @@
 /* The default locale menu falls back to the locale root for missing pages. */
 .VPNavBarTranslations, .VPNavScreenTranslations { display: none !important; }
+.layout-viewer button, .layout-viewer select {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 6px;
+  padding: 0.5rem 0.8rem;
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1);
+}
+.layout-viewer button { cursor: pointer; }
+.layout-viewer :is(button, select):focus-visible { outline: 3px solid var(--vp-c-brand-1); outline-offset: 2px; }
+.layout-viewer dialog {
+  position: fixed;
+  margin: auto;
+  max-width: min(95vw, 1100px);
+  max-height: 95vh;
+  overflow: auto;
+  padding: 1rem;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-1);
+}
+.layout-viewer dialog::backdrop { background: rgb(0 0 0 / 75%); }
+.viewer-header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; align-items: center; }
+.layout-viewer .viewer-header h2 { margin: 0; border: 0; padding: 0; }
+.layout-viewer label { display: inline-block; margin: 1rem 0.5rem 0 0; }
+.layout-viewer figure { margin: 1rem 0 0; }
+.layout-viewer figure img { max-width: 100%; height: auto; }
+.catalogue-controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; margin: 24px 0; }
+.catalogue-controls label { display: grid; gap: 4px; font-weight: 600; }
+.catalogue-controls input, .catalogue-controls select, .catalogue-controls button { border: 1px solid var(--vp-c-divider); border-radius: 6px; padding: 6px 10px; background: var(--vp-c-bg-soft); color: var(--vp-c-text-1); }
+.catalogue-controls input { max-width: 100%; }

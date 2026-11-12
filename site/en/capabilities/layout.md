@@ -10,6 +10,18 @@ belong to the showcase consumer; they are not a browser implementation of oui.
 Native showcase layout, EN UI; pinned revision, initial state. The clipped label is
 intentional. The image records the specific revision below, not every future version.
 
+![Showcase window with row, column, stack, grid, absolute and intentionally clipped examples.](/media/layout-small-en.png)
+
+Native showcase layout, EN UI; 960×720 viewport, initial state.
+
+The viewer selects between the 1280×960 and 960×720 native initial viewport
+states; it does not animate or change the native example. Both images above and
+their [original 1280×960](/media/layout-en.png) and [960×720](/media/layout-small-en.png)
+files remain available without JavaScript. The smaller capture is from revision
+`4da8d7a57bd2453227a4c37df6b0b4d171401681`.
+
+<LayoutViewer locale="en" />
+
 ## Boundaries and packages {#boundaries}
 
 Layout is experimental. The showcase catalogue explicitly lists **no wrap, span

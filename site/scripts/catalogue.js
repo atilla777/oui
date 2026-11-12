@@ -81,6 +81,21 @@ export async function validateCatalogue({ catalogue, media, source, publicRoot, 
     const selected = record.media.map(id => images.get(id))
     if (selected.some(image => !image || image.section !== record.id)) fail('Invalid media reference')
     for (const locale of locales) if (!selected.some(image => image.uiLocale === locale || image.uiLocale === 'neutral')) fail(`Missing ${locale} media`)
+    if (record.id === 'atlas') for (const locale of locales) for (const state of ['initial', 'alternate', 'reload']) {
+      if (!selected.some(image => image.id === `atlas-${locale}-${state}` && image.uiLocale === locale)) fail(`Missing atlas ${locale} ${state} media`)
+    }
+    if (record.id === 'layout') {
+      const expectedStates = [['large', 1280, 960, 'initial layout geometry'], ['small', 960, 720, 'initial layout geometry at 960x720']]
+      if (!Array.isArray(record.viewerStates) || record.viewerStates.length !== expectedStates.length) fail('Invalid viewer states')
+      for (const [index, [id, width, height, description]] of expectedStates.entries()) {
+        const state = record.viewerStates[index]
+        if (state?.id !== id || state.width !== width || state.height !== height) fail('Viewer state mismatch')
+        for (const locale of locales) {
+          const image = images.get(state.media?.[locale])
+          if (!image || !record.media.includes(image.id) || image.section !== record.id || image.uiLocale !== locale || image.window.width !== width || image.window.height !== height || image.drawable.width !== width || image.drawable.height !== height || image.scale !== 1 || image.state !== description) fail('Viewer state media mismatch')
+        }
+      }
+    }
   }
   if ([...images.keys()].some(id => ![...records.values()].some(record => record.media.includes(id)))) fail('Unreferenced media')
 }

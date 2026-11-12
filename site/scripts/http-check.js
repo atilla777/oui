@@ -27,7 +27,17 @@ try {
     ['en/capabilities/scroll-table.html', 'en', 'Scroll and table', '/oui/ru/capabilities/scroll-table.html'],
     ['ru/capabilities/scroll-table.html', 'ru', 'Прокрутка и таблица', '/oui/en/capabilities/scroll-table.html'],
     ['en/capabilities/collections.html', 'en', 'Virtual collections', '/oui/ru/capabilities/collections.html'],
-    ['ru/capabilities/collections.html', 'ru', 'Виртуальные коллекции', '/oui/en/capabilities/collections.html']
+    ['ru/capabilities/collections.html', 'ru', 'Виртуальные коллекции', '/oui/en/capabilities/collections.html'],
+    ['en/capabilities/atlas.html', 'en', 'Atlas', '/oui/ru/capabilities/atlas.html'],
+    ['ru/capabilities/atlas.html', 'ru', 'Атлас', '/oui/en/capabilities/atlas.html'],
+    ['en/capabilities/text-input.html', 'en', 'Text input', '/oui/ru/capabilities/text-input.html'],
+    ['ru/capabilities/text-input.html', 'ru', 'Ввод текста', '/oui/en/capabilities/text-input.html'],
+    ['en/capabilities/controls.html', 'en', 'Controls', '/oui/ru/capabilities/controls.html'],
+    ['ru/capabilities/controls.html', 'ru', 'Элементы управления', '/oui/en/capabilities/controls.html'],
+    ['en/capabilities/styling.html', 'en', 'Styling', '/oui/ru/capabilities/styling.html'],
+    ['ru/capabilities/styling.html', 'ru', 'Оформление', '/oui/en/capabilities/styling.html'],
+    ['en/capabilities/profiles.html', 'en', 'Profiles', '/oui/ru/capabilities/profiles.html'],
+    ['ru/capabilities/profiles.html', 'ru', 'Профили', '/oui/en/capabilities/profiles.html']
   ]) {
     const response = await get('/oui/' + path)
     assert.equal(response.status, 200, path)
@@ -38,11 +48,11 @@ try {
     assert.ok(html.includes(`href="${other}"`), path)
     if (path.includes('guide/')) assert.ok(html.includes('id="choose-a-boundary"'))
     const markup = html.split('<script>window.__VP_HASH_MAP__')[0]
-    const capability = path.match(/capabilities\/(layout|scroll-table|collections)\.html$/)?.[1]
-    if (capability) {
-      const image = `/oui/media/${capability}-${lang}.png`
+    if (['layout', 'text-input', 'scroll-table', 'collections'].some(id => path === `${lang}/capabilities/${id}.html`)) {
+      const id = path.split('/').at(-1).replace('.html', '')
+      const image = `/oui/media/${id}-${lang}.png`
       assert.ok(markup.includes(`src="${image}"`), `missing no-JS image ${path}`)
-      const record = media.records.find(item => item.id === `${capability}-${lang}`)
+      const record = media.records.find(item => item.id === `${id}-${lang}`)
       assert.ok(markup.includes(`alt="${record.alt[lang]}"`))
       const response = await get(image)
       assert.equal(response.status, 200)
@@ -50,6 +60,29 @@ try {
       const bytes = Buffer.from(await response.arrayBuffer())
       assert.equal(bytes.subarray(0, 8).toString('hex'), '89504e470d0a1a0a')
       assert.equal(createHash('sha256').update(bytes).digest('hex'), record.sha256)
+      if (id === 'layout') {
+        const small = media.records.find(item => item.id === `layout-small-${lang}`)
+        const smallPath = `/oui/${small.path}`
+        assert.ok(markup.includes(`src="${smallPath}"`))
+        assert.ok(markup.includes(`alt="${small.alt[lang]}"`))
+        const smallResponse = await get(smallPath)
+        assert.equal(smallResponse.status, 200)
+        assert.match(smallResponse.headers.get('content-type'), /^image\/png/)
+        assert.equal(createHash('sha256').update(Buffer.from(await smallResponse.arrayBuffer())).digest('hex'), small.sha256)
+      }
+    }
+    for (const [id, states] of [['atlas', ['initial', 'alternate', 'reload']], ['profiles', ['initial', 'dialog', 'applied']], ['controls', ['initial', 'changed']], ['styling', ['initial', 'changed']]]) if (path.includes(`capabilities/${id}`)) {
+      for (const state of states) {
+        const record = media.records.find(item => item.id === `${id}-${lang}-${state}`)
+        const image = `/oui/${record.path}`
+        assert.ok(markup.includes(`src="${image}"`))
+        assert.ok(markup.includes(`alt="${record.alt[lang]}"`))
+        const response = await get(image)
+        assert.equal(response.status, 200)
+        assert.match(response.headers.get('content-type'), /^image\/png/)
+        const bytes = Buffer.from(await response.arrayBuffer())
+        assert.equal(createHash('sha256').update(bytes).digest('hex'), record.sha256)
+      }
     }
     const serialized = html.match(/window\.__VP_SITE_DATA__=JSON\.parse\(("(?:\\.|[^"\\])*")\)/)
     assert.ok(serialized, 'missing serialized site configuration')

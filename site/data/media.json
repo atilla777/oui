@@ -84,6 +84,90 @@
         "en": "Showcase window with row, column, stack, grid, absolute and intentionally clipped examples.",
         "ru": "Окно showcase: примеры строки, столбца, стека, сетки, абсолютного размещения и намеренного обрезания."
       }
+    },
+    {
+      "id": "layout-small-en",
+      "section": "layout",
+      "state": "initial layout geometry at 960x720",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/pages.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_layout"
+      ],
+      "window": {
+        "width": 960,
+        "height": 720
+      },
+      "drawable": {
+        "width": 960,
+        "height": 720
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section layout; initial focus Controls; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/layout-small-en.png",
+      "sha256": "37047dfe13b2fef87552d1a2183fb43dc323600c2379dc8aeabae6b7fe88b176",
+      "caption": {
+        "en": "Native showcase layout, EN UI; 960×720 viewport, initial state.",
+        "ru": "Native showcase: layout, интерфейс EN; окно 960×720, начальное состояние."
+      },
+      "alt": {
+        "en": "Showcase window with row, column, stack, grid, absolute and intentionally clipped examples.",
+        "ru": "Окно showcase: примеры строки, столбца, стека, сетки, абсолютного размещения и намеренного обрезания."
+      }
+    },
+    {
+      "id": "layout-small-ru",
+      "section": "layout",
+      "state": "initial layout geometry at 960x720",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/pages.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_layout"
+      ],
+      "window": {
+        "width": 960,
+        "height": 720
+      },
+      "drawable": {
+        "width": 960,
+        "height": 720
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section layout; initial focus Controls; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/layout-small-ru.png",
+      "sha256": "8789309261d2d77789ff098d267cbb098d0fa5d62341135f46d0a0780a71c32e",
+      "caption": {
+        "en": "Native showcase layout, RU UI; 960×720 viewport, initial state.",
+        "ru": "Native showcase: layout, интерфейс RU; окно 960×720, начальное состояние."
+      },
+      "alt": {
+        "en": "Showcase window with row, column, stack, grid, absolute and intentionally clipped examples.",
+        "ru": "Окно showcase: примеры строки, столбца, стека, сетки, абсолютного размещения и намеренного обрезания."
+      }
     }
   ]
 }

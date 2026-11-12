@@ -34,7 +34,29 @@
       },
       "media": [
         "layout-en",
-        "layout-ru"
+        "layout-ru",
+        "layout-small-en",
+        "layout-small-ru"
+      ],
+      "viewerStates": [
+        {
+          "id": "large",
+          "width": 1280,
+          "height": 960,
+          "media": {
+            "en": "layout-en",
+            "ru": "layout-ru"
+          }
+        },
+        {
+          "id": "small",
+          "width": 960,
+          "height": 720,
+          "media": {
+            "en": "layout-small-en",
+            "ru": "layout-small-ru"
+          }
+        }
       ]
     }
   ]

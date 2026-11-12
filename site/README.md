@@ -69,5 +69,9 @@ relative, public-safe provenance; update its digest, locale, revision, source,
 geometry, selected resource hashes, options, caption and alt in `data/media.json`,
 and the corresponding localized pages. Run `npm run check`, `npm run build`,
 and `npm run check:http`. The site build never launches Odin or captures images.
-The private evidence is not part of the website. Search/filter/viewer and final
+The private evidence is not part of the website. The layout viewer is a progressive
+enhancement: both native initial viewport captures (1280×960 and 960×720) and
+direct image links remain available without JavaScript. Open the viewer by pointer
+or keyboard, select a viewport, and close with the button or Escape; focus stays in
+the dialog and returns to its opener. There is no autoplay. Search/filter and final
 coverage remain future work; browser and deployment checks are separate.

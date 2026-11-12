@@ -163,13 +163,17 @@ try {
   const samplePages = [
     ['catalogue.html', 'Capability catalogue', 'Каталог возможностей', 'layout'],
     ['capabilities/layout.html', 'Layout', 'Компоновка', 'boundaries'],
+    ['capabilities/controls.html', 'Controls', 'Элементы управления', 'boundaries'],
+    ['capabilities/styling.html', 'Styling', 'Оформление', 'boundaries'],
     ['capabilities/profiles.html', 'Profiles', 'Профили', 'workflow']
   ]
   const imagePaths = (path, lang) => path === 'capabilities/layout.html'
     ? [`/oui/media/layout-${lang}.png`]
     : path === 'capabilities/profiles.html'
       ? [`/oui/media/profiles-${lang}-initial.png`, `/oui/media/profiles-${lang}-dialog.png`, `/oui/media/profiles-${lang}-applied.png`]
-      : []
+      : ['controls', 'styling'].includes(path.split('/')[1]?.replace('.html', ''))
+        ? ['initial', 'changed'].map(state => `/oui/media/${path.split('/')[1].replace('.html', '')}-${lang}-${state}.png`)
+        : []
   const sampleName = path => path.startsWith('capabilities/') ? path.split('/')[1].replace('.html', '') : 'catalogue'
   const checkImages = async (activePage, path, lang) => {
     for (const src of imagePaths(path, lang)) {

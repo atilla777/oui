@@ -1,15 +1,15 @@
 # Статический каталог и изображения сайта
 
-Основа `oui-3no.2`; расширение `oui-3no.6` — локальный кандидат, pending integration.
-Библиотека и native consumers не изменены; сайт описывает существующие
-layout и profiles, а не реализует их в браузере.
+Контракт введён `oui-3no.2`; расширения `oui-3no.5` и `oui-3no.6`.
+Библиотека и native consumers не изменены; сайт описывает существующие layout,
+controls, styling и profiles, а не реализует их в браузере.
 
-- `site/en/` и `site/ru/` содержат `catalogue`, `capabilities/layout` и
-  `capabilities/profiles`.
+- `site/en/` и `site/ru/` содержат `catalogue` и `capabilities/layout`,
+  `capabilities/controls`, `capabilities/styling`, `capabilities/profiles`.
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
   полный showcase, с pinned source links и native build/run command.
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
-  Каталог объявляет sample coverage только `layout` и `profiles`. Native source catalogue
+  Каталог объявляет sample coverage `layout`, `controls`, `styling`, `profiles`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -44,9 +44,31 @@ loopback-only preview. EN/RU catalogue/layout проверены на ширин
 Унаследованное ограничение unsupported Vite 5 остаётся раскрытым
 в `site/README.md`; dev server не разрешён.
 
+Для расширения `oui-3no.5` получены восемь дополнительных PNG 1280×960, scale 1,
+на source revision `4da8d7a57bd2453227a4c37df6b0b4d171401681`: controls и styling,
+EN/RU, начальное состояние и после Space для checkbox либо Return для Theme. Portable export
+связан с исходной ревизией; verified ISD той же версии, `linux-abstract-v1`,
+явный focus и остановка собственных runs подтверждены в артефактах проверки.
+PNG просмотрены; публичные копии без метаданных сохраняют пиксели captures.
+Существующие media layout и их provenance сохранены.
+
+Controls описывает application-owned values/proposals и slider 0–100 с шагом 1;
+styling — существующий cascade defaults → role → named → local, visual states
+и ограничения. Изменение модели и темы наблюдалось через настоящий native input;
+проверка всех состояний и полная native qualification не заявляются.
+Свежие portable-check, шесть unit/parity/schema tests, build и HTTP прошли.
+После отдельного разрешения владельца пройден sandboxed Chromium 152 для
+EN/RU страниц controls/styling и прежних foundation/layout/catalogue сценариев:
+360/1280, клавиатура, locale/anchors, no-JS content/images и reduced motion.
+Собственные browser/preview остановлены. Это ограниченная приёмка sample,
+не полная квалификация 23 IDs, всех браузеров, доступности или Pages deployment.
+
 Из `site/` с Node из `.nvmrc`: `npm ci`, `npm run check`, `npm run build`,
 `npm run check:http`, затем `npm run preview -- --port 0` и выданный локальный
 URL с `/oui/en/capabilities/layout` либо `/oui/ru/capabilities/layout`.
+Для новых страниц заменить `layout` на `controls` или `styling`; переключение
+языка сохраняет страницу. `npm run check:browser` запускает разрешённую
+изолированную браузерную приёмку (Linux Chromium с sandbox).
 Остановить свой preview — Ctrl-C. Подробнее: [site README](../../site/README.md).
 
 ## Profiles: локальный кандидат oui-3no.6

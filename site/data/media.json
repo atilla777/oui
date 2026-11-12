@@ -772,6 +772,92 @@
       }
     },
     {
+      "id": "text-input-en",
+      "section": "text-input",
+      "state": "focused draft after inserting one character; applied value unchanged",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/name.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_editor",
+        "kit/unicode_graphemes"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section text-input; initial field focus; inserted a character; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/text-input-en.png",
+      "sha256": "65323673954bb8088199450f5bc29703ebee623d2589e4ec292e2a80d8e8cbff",
+      "caption": {
+        "en": "Native showcase text input, EN UI; focused draft after inserting a character; applied value unchanged.",
+        "ru": "Native showcase: ввод текста, интерфейс EN; черновик в фокусе после ввода символа; применённое значение не изменено."
+      },
+      "alt": {
+        "en": "Focused name editor with an edited draft, Apply and Cancel buttons, and the unchanged applied value.",
+        "ru": "Редактор имени в фокусе с изменённым черновиком, кнопками применения и отмены и неизменённым применённым значением."
+      }
+    },
+    {
+      "id": "text-input-ru",
+      "section": "text-input",
+      "state": "focused draft after inserting one character; applied value unchanged",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/name.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_editor",
+        "kit/unicode_graphemes"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section text-input; initial field focus; inserted a character; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/text-input-ru.png",
+      "sha256": "f66c5d250417f5cd54883e48152b45065ea19c049913ccfa056a05f3989787bf",
+      "caption": {
+        "en": "Native showcase text input, RU UI; focused draft after inserting a character; applied value unchanged.",
+        "ru": "Native showcase: ввод текста, интерфейс RU; черновик в фокусе после ввода символа; применённое значение не изменено."
+      },
+      "alt": {
+        "en": "Focused name editor with an edited draft, Apply and Cancel buttons, and the unchanged applied value.",
+        "ru": "Редактор имени в фокусе с изменённым черновиком, кнопками применения и отмены и неизменённым применённым значением."
+      }
+    },
+    {
       "id": "atlas-en-initial",
       "section": "atlas",
       "state": "A initial B=false reload=0",

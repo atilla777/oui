@@ -1,7 +1,7 @@
 # Capability catalogue {#catalogue}
 
 This is an explicitly limited sample, not the complete showcase catalogue. It
-currently covers five of the 19 gallery sections and none of the four Integration
+currently covers six of the 19 gallery sections and none of the four Integration
 Lab screens. The captures show the native application, not a browser port.
 
 <CatalogueFilter locale="en">
@@ -37,6 +37,15 @@ Theme, visual states and primitives. [Explore styling](./capabilities/styling).
 
 Explore a draft and applied settings workflow in the native showcase.
 [Explore profiles and its native example](./capabilities/profiles).
+
+</CatalogueItem>
+
+<CatalogueItem id="text-input">
+
+## Text input {#text-input}
+
+Edit a single-line name with a focused draft and explicit Apply or Cancel.
+[Explore text input and its native example](./capabilities/text-input).
 
 </CatalogueItem>
 

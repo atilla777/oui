@@ -15,7 +15,7 @@ test('localized metadata query and category intersection', () => {
   assert.equal(matchesRecord(record, 'en', '   ', ''), true)
   assert.equal(matchesRecord(record, 'en', 'pages.odin', ''), true)
 })
-test('five sample records filter independently and share categories', () => {
+test('six sample records filter independently and share categories', () => {
   const ids = (locale, query, category = '') => records.filter(item => matchesRecord(item, locale, query, category)).map(item => item.id)
   assert.deepEqual(ids('en', 'slider'), ['controls'])
   assert.deepEqual(ids('ru', 'каскад'), ['styling'])
@@ -23,7 +23,10 @@ test('five sample records filter independently and share categories', () => {
   assert.deepEqual(ids('ru', '', 'controls'), ['profiles', 'controls'])
   assert.deepEqual(ids('en', '', 'styling'), ['styling'])
   assert.deepEqual(ids('en', 'slider', 'styling'), [])
-  assert.deepEqual(ids('en', ''), ['layout', 'profiles', 'controls', 'styling', 'atlas'])
+  assert.deepEqual(ids('en', 'ui_editor', 'input'), ['text-input'])
+  assert.deepEqual(ids('ru', 'однострочного', 'input'), ['text-input'])
+  assert.deepEqual(ids('en', 'ui_editor', 'styling'), [])
+  assert.deepEqual(ids('en', ''), ['layout', 'profiles', 'controls', 'styling', 'text-input', 'atlas'])
   assert.deepEqual(ids('en', 'draft', 'state'), ['profiles'])
   assert.deepEqual(ids('ru', 'черновик', 'state'), ['profiles'])
   for (const locale of ['en', 'ru']) {

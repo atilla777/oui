@@ -1,0 +1,2 @@
+/* The default locale menu falls back to the locale root for missing pages. */
+.VPNavBarTranslations, .VPNavScreenTranslations { display: none !important; }

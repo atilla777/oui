@@ -1,0 +1,70 @@
+import assert from 'node:assert/strict'
+import { request } from 'node:http'
+import { startPreview } from './preview.js'
+
+const server = await startPreview(0)
+const address = server.address()
+const origin = `http://127.0.0.1:${address.port}`
+const get = (path, options = {}) => fetch(origin + path, { ...options, signal: AbortSignal.timeout(5000) })
+try {
+  assert.equal(address.address, '127.0.0.1')
+  assert.equal(address.family, 'IPv4')
+  assert.ok(address.port > 0)
+  console.log(`owned listener ${address.address}:${address.port}`)
+  for (const [path, lang, title, other] of [
+    ['', 'en', 'experimental Odin UI kit', '/oui/ru/'],
+    ['en/', 'en', 'Introducing oui', '/oui/ru/'],
+    ['ru/', 'ru', 'Знакомство с oui', '/oui/en/'],
+    ['en/guide/using-oui.html', 'en', 'Using oui', '/oui/ru/guide/using-oui.html'],
+    ['ru/guide/using-oui.html', 'ru', 'Использование oui', '/oui/en/guide/using-oui.html']
+  ]) {
+    const response = await get('/oui/' + path)
+    assert.equal(response.status, 200, path)
+    assert.match(response.headers.get('content-type'), /^text\/html/)
+    const html = await response.text()
+    assert.match(html, new RegExp(`<html lang="${lang}"`))
+    assert.ok(html.includes(title), path)
+    assert.ok(html.includes(`href="${other}"`), path)
+    if (path.includes('guide/')) assert.ok(html.includes('id="choose-a-boundary"'))
+    const markup = html.split('<script>window.__VP_HASH_MAP__')[0]
+    const serialized = html.match(/window\.__VP_SITE_DATA__=JSON\.parse\(("(?:\\.|[^"\\])*")\)/)
+    assert.ok(serialized, 'missing serialized site configuration')
+    const site = JSON.parse(JSON.parse(serialized[1]))
+    if (lang === 'ru') {
+      for (const label of ['Перейти к содержимому', '>Оформление<']) assert.ok(markup.includes(label), `${path}: ${label}`)
+      for (const label of ['Skip to content', '>Appearance<']) assert.ok(!markup.includes(label), `${path}: ${label}`)
+      // The theme sets switch titles on hydration; SSR serializes their locale values.
+      assert.equal(site.locales.ru.themeConfig.darkModeSwitchTitle, 'Включить тёмную тему')
+      assert.equal(site.locales.ru.themeConfig.lightModeSwitchTitle, 'Включить светлую тему')
+    } else {
+      for (const label of ['Skip to content', '>Appearance<']) assert.ok(markup.includes(label), `${path}: ${label}`)
+      assert.equal(site.themeConfig.darkModeSwitchTitle, 'Switch to dark theme')
+      assert.equal(site.themeConfig.lightModeSwitchTitle, 'Switch to light theme')
+    }
+    const asset = html.match(/(?:src|href)="(\/oui\/assets\/[^" ]+\.(?:js|css))"/)
+    assert.ok(asset, `missing asset in ${path}`)
+    const resource = await get(asset[1])
+    assert.equal(resource.status, 200)
+    assert.match(resource.headers.get('content-type'), /^(text\/css|text\/javascript)/)
+    console.log(`OK ${path || '/'} lang=${lang} asset=${asset[1]}`)
+  }
+  assert.equal((await get('/oui/en/guide/using-oui')).status, 200)
+  assert.equal((await get('/oui/en', { redirect: 'manual' })).headers.get('location'), '/oui/en/')
+  assert.equal((await get('/outside')).status, 404)
+  assert.equal((await get('/oui/missing.html')).status, 404)
+  assert.equal((await get('/oui/en/', { method: 'POST' })).status, 405)
+  // A raw HTTP request avoids URL normalization before the server sees traversal.
+  const status = await new Promise((resolve, reject) => {
+    const req = request({ host: address.address, port: address.port, path: '/oui/%2e%2e/package.json', timeout: 5000 }, res => { res.resume(); resolve(res.statusCode) })
+    req.on('timeout', () => req.destroy(new Error('request timed out')))
+    req.on('error', reject)
+    req.end()
+  })
+  assert.equal(status, 400)
+  console.log('OK clean URLs, base boundary, method and traversal rejection')
+} finally {
+  server.closeAllConnections()
+  await new Promise((resolve, reject) => server.close(error => error ? reject(error) : resolve()))
+  assert.equal(server.listening, false)
+  console.log('owned listener stopped')
+}

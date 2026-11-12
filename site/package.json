@@ -1,0 +1,21 @@
+{
+  "name": "oui-site",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25",
+    "npm": ">=11 <12"
+  },
+  "scripts": {
+    "check": "node --test scripts/*.test.js",
+    "build": "npm run check && vitepress build",
+    "preview": "node scripts/preview.js",
+    "check:http": "node scripts/http-check.js",
+    "check:browser": "node scripts/browser-check.js"
+  },
+  "devDependencies": {
+    "playwright-core": "1.65.0",
+    "vitepress": "1.6.4",
+    "vue": "3.5.45"
+  }
+}

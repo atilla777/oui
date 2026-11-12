@@ -1,0 +1,202 @@
+import assert from 'node:assert/strict'
+import { mkdtemp, mkdir, readFile, readdir } from 'node:fs/promises'
+import { join } from 'node:path'
+import { tmpdir } from 'node:os'
+import { chromium } from 'playwright-core'
+import { startPreview } from './preview.js'
+
+const artifacts = await mkdtemp(join(process.env.OUI_BROWSER_ARTIFACT_ROOT || tmpdir(), 'oui-browser-'))
+const profile = join(artifacts, 'profile')
+await mkdir(profile)
+console.log(`artifacts=${artifacts}`)
+const server = await startPreview(0)
+const address = server.address()
+const origin = `http://${address.address}:${address.port}`
+let browser
+let ownerPid
+let forbidden = []
+const pageErrors = []
+const environment = { ...process.env }
+for (const key of ['DISPLAY', 'WAYLAND_DISPLAY', 'WAYLAND_SOCKET', 'XAUTHORITY', 'DBUS_SESSION_BUS_ADDRESS']) delete environment[key]
+try {
+  assert.equal(address.address, '127.0.0.1')
+  browser = await chromium.launchPersistentContext(profile, {
+    executablePath: '/usr/bin/chromium', headless: true, chromiumSandbox: true,
+    env: environment, timeout: 20000
+  })
+  browser.setDefaultTimeout(7000)
+  browser.setDefaultNavigationTimeout(12000)
+  console.log(`browser=${browser.browser()?.version()} executable=/usr/bin/chromium profile=${profile} preview=${origin}`)
+  await browser.route('**/*', route => {
+    const url = route.request().url()
+    if (url.startsWith(origin + '/oui/')) return route.continue()
+    forbidden.push(url)
+    return route.abort('blockedbyclient')
+  })
+  const page = browser.pages()[0] || await browser.newPage()
+  page.on('pageerror', error => { pageErrors.push(error.message); console.error('pageerror:', error) })
+  const assetResponses = new Set()
+  page.on('response', response => {
+    if (response.url().startsWith(origin + '/oui/assets/') && response.status() === 200) assetResponses.add(response.url())
+  })
+  const go = async path => {
+    await page.goto('about:blank')
+    const response = await page.goto(origin + path, { waitUntil: 'networkidle' })
+    assert.equal(response.status(), 200, path)
+    await page.waitForFunction(() => [...document.querySelectorAll('.VPSwitchAppearance')].some(x => x.title))
+  }
+  const focusByTab = async (selector, activePage = page) => {
+    for (let i = 0; i < 50; i++) {
+      if (await activePage.locator(selector).evaluateAll(nodes => nodes.includes(document.activeElement))) return
+      await activePage.keyboard.press('Tab')
+    }
+    throw new Error(`keyboard could not reach ${selector}`)
+  }
+  const checkPage = async (lang, title) => {
+    await page.waitForFunction(expected => document.querySelector('h1')?.innerText.replace(/\u200b/g, '').trim() === expected, title)
+    assert.equal(await page.locator('html').getAttribute('lang'), lang)
+    assert.equal((await page.locator('h1').first().innerText()).replace(/\u200b/g, '').trim(), title)
+    assert.ok((await page.title()).includes(title))
+    assert.ok(await page.locator('main').innerText())
+  }
+  await go('/oui/')
+  // Identify only our own browser by its unique profile, then examine its descendants.
+  const pids = (await readdir('/proc')).filter(x => /^\d+$/.test(x))
+  const candidates = await Promise.all(pids.map(async pid => {
+    try { return [pid, (await readFile(`/proc/${pid}/cmdline`)).toString().split('\0')] } catch { return [pid, []] }
+  }))
+  const owner = candidates.find(([, args]) => args.includes(`--user-data-dir=${profile}`) && !args.some(x => x.startsWith('--type=')))
+  assert.ok(owner, 'could not identify own Chromium process')
+  ownerPid = owner[0]
+  assert.ok(!owner[1].includes('--no-sandbox') && !owner[1].includes('--disable-setuid-sandbox'), 'sandbox disabled')
+  assert.ok(owner[1].includes('--disable-background-networking'), 'background networking not disabled')
+  const descendants = async pid => {
+    let children = ''
+    try { children = await readFile(`/proc/${pid}/task/${pid}/children`, 'utf8') } catch { return [] }
+    const direct = children.trim().split(/\s+/).filter(Boolean)
+    return [...direct, ...(await Promise.all(direct.map(descendants))).flat()]
+  }
+  const childArgs = await Promise.all((await descendants(owner[0])).map(async pid => {
+    try { return [pid, (await readFile(`/proc/${pid}/cmdline`)).toString().split('\0')] } catch { return [pid, []] }
+  }))
+  const flag = (args, name) => new RegExp(`(?:^|\\s)${name}(?:\\s|$)`).test(args.join(' '))
+  assert.ok(childArgs.every(([, args]) => !flag(args, '--no-sandbox') && !flag(args, '--disable-setuid-sandbox')), 'child disabled sandbox')
+  const renderer = childArgs.find(([, args]) => flag(args, '--type=renderer'))
+  assert.ok(renderer, 'no own renderer process')
+  const status = await readFile(`/proc/${renderer[0]}/status`, 'utf8')
+  assert.match(status, /^Seccomp:\s+2$/m)
+  console.log(`sandbox browser-pid=${owner[0]} renderer-pid=${renderer[0]} renderer-seccomp=2 no-sandbox-flags=absent`)
+  await checkPage('en', 'oui: an experimental Odin UI kit')
+  assert.equal(await page.locator('a[href="/oui/en/"]').count() > 0, true)
+  assert.equal(await page.locator('a[href="/oui/ru/"]').count() > 0, true)
+
+  for (const width of [360, 1280]) {
+    await page.setViewportSize({ width, height: 900 })
+    for (const [lang, title, other] of [['en', 'Using oui', 'ru'], ['ru', 'Использование oui', 'en']]) {
+      await go(`/oui/${lang}/guide/using-oui.html`)
+      await checkPage(lang, title)
+      await page.waitForFunction(() => [...document.querySelectorAll('.VPSwitchAppearance')].some(x => x.title))
+      const titleExpected = lang === 'ru' ? 'Включить тёмную тему' : 'Switch to dark theme'
+      assert.equal(await page.locator('.VPSwitchAppearance').first().getAttribute('title'), titleExpected)
+      const measurements = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, client: document.documentElement.clientWidth, font: parseFloat(getComputedStyle(document.querySelector('main p')).fontSize) }))
+      assert.ok(measurements.scroll <= measurements.client, `${lang} ${width} overflow ${JSON.stringify(measurements)}`)
+      assert.ok(measurements.font >= 14, `${lang} ${width} unreadable font`)
+      assert.ok(await page.locator('main p').first().isVisible())
+      await page.screenshot({ path: join(artifacts, `${lang}-${width}.png`), fullPage: true })
+      await page.keyboard.press('Tab')
+      assert.equal(await page.evaluate(() => document.activeElement.classList.contains('VPSkipLink')), true)
+      assert.equal((await page.locator('.VPSkipLink').innerText()).trim(), lang === 'ru' ? 'Перейти к содержимому' : 'Skip to content')
+      await page.keyboard.press('Enter')
+      assert.equal(new URL(page.url()).hash, '#VPContent')
+      assert.notEqual(await page.evaluate(() => document.activeElement.tagName), 'BODY')
+      if (width === 360) {
+        await page.reload({ waitUntil: 'networkidle' })
+        await focusByTab('.VPLocalNav .menu')
+        await page.keyboard.press('Enter')
+        assert.equal(await page.locator('.VPLocalNav .menu').getAttribute('aria-expanded'), 'true')
+        assert.ok(await page.locator('#VPSidebarNav').isVisible())
+        await page.keyboard.press('Escape')
+        assert.equal(await page.locator('.VPLocalNav .menu').getAttribute('aria-expanded'), 'false')
+        await focusByTab('.VPLocalNav .menu')
+        await page.keyboard.press('Enter')
+        await focusByTab(`#VPSidebarNav a[href="/oui/${lang}/"]`)
+        await page.keyboard.press('Enter')
+        await page.waitForURL(`**/oui/${lang}/`)
+        await checkPage(lang, lang === 'en' ? 'Introducing oui' : 'Знакомство с oui')
+      }
+      await go(`/oui/${lang}/guide/using-oui.html#choose-a-boundary`)
+      await focusByTab(`.content-container a[lang="${other}"]`)
+      await page.keyboard.press('Enter')
+      try { await page.waitForURL(`**/oui/${other}/guide/using-oui.html#choose-a-boundary`) }
+      catch (error) { console.error('switch actual URL:', page.url()); throw error }
+      await checkPage(other, other === 'en' ? 'Using oui' : 'Использование oui')
+      assert.equal(new URL(page.url()).hash, '#choose-a-boundary')
+      await focusByTab(`.content-container a[lang="${lang}"]`)
+      await page.keyboard.press('Enter')
+      await page.waitForURL(`**/oui/${lang}/guide/using-oui.html#choose-a-boundary`)
+      await checkPage(lang, title)
+      await go(`/oui/${lang}/guide/using-oui.html#missing-anchor`)
+      await focusByTab(`.content-container a[lang="${other}"]`)
+      await page.keyboard.press('Enter')
+      await page.waitForURL(`**/oui/${other}/guide/using-oui.html`)
+      assert.equal(new URL(page.url()).hash, '')
+      await checkPage(other, other === 'en' ? 'Using oui' : 'Использование oui')
+      console.log(`PASS ${lang} ${width}: hydrated chrome, width, keyboard, switching valid/missing hashes`)
+    }
+  }
+  assert.ok(assetResponses.size > 0, 'no static assets loaded')
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  assert.equal(await page.evaluate(() => matchMedia('(prefers-reduced-motion: reduce)').matches), true)
+  await go('/oui/en/guide/using-oui.html')
+  assert.ok(await page.locator('main p').first().isVisible())
+  assert.equal(await page.locator('main a').first().evaluate(el => getComputedStyle(el).transitionDuration), '0s')
+  assert.equal(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior), 'auto')
+  console.log('PASS reduced motion: preference, transition duration, scrolling and prose visibility')
+
+  const nojs = await chromium.launchPersistentContext(join(artifacts, 'profile-nojs'), {
+    executablePath: '/usr/bin/chromium', headless: true, chromiumSandbox: true,
+    env: environment, timeout: 20000, javaScriptEnabled: false, viewport: { width: 360, height: 900 }
+  })
+  try {
+    await nojs.route('**/*', route => {
+      const url = route.request().url()
+      if (url.startsWith(origin + '/oui/')) return route.continue()
+      forbidden.push(url); return route.abort('blockedbyclient')
+    })
+    const p = await nojs.newPage()
+    p.setDefaultTimeout(7000)
+    for (const [path, lang, heading] of [['/oui/', 'en', 'oui: an experimental Odin UI kit'], ['/oui/en/', 'en', 'Introducing oui'], ['/oui/ru/', 'ru', 'Знакомство с oui'], ['/oui/en/guide/using-oui.html', 'en', 'Using oui'], ['/oui/ru/guide/using-oui.html', 'ru', 'Использование oui']]) {
+      assert.equal((await p.goto(origin + path)).status(), 200)
+      assert.equal(await p.locator('html').getAttribute('lang'), lang)
+      assert.equal((await p.locator('h1').first().innerText()).replace(/\u200b/g, '').trim(), heading)
+      assert.ok(await p.locator('main p').first().isVisible())
+      assert.ok(await p.locator('main a').first().isVisible())
+      assert.equal(await p.evaluate(() => typeof window.__VP_SITE_DATA__), 'undefined')
+      await p.keyboard.press('Tab')
+      assert.equal(await p.evaluate(() => document.activeElement.tagName), 'A')
+      if (path.startsWith('/oui/en/') || path.startsWith('/oui/ru/')) {
+        const other = lang === 'en' ? 'ru' : 'en'
+        await focusByTab(`.content-container a[lang="${other}"]`, p)
+        await p.keyboard.press('Enter')
+        await p.waitForURL(path.includes('/guide/') ? `**/oui/${other}/guide/using-oui.html` : `**/oui/${other}/`)
+        assert.equal(await p.locator('html').getAttribute('lang'), other)
+        assert.ok(await p.locator('main p').first().isVisible())
+      }
+    }
+    console.log('PASS no-JS: root, introductions, nested prose, links and keyboard focus')
+  } finally { await nojs.close() }
+  assert.deepEqual(forbidden, [], 'unexpected external network requests')
+  assert.deepEqual(pageErrors, [], 'browser page errors')
+} finally {
+  try { if (browser) await browser.close() }
+  finally {
+    server.closeAllConnections()
+    await new Promise((resolve, reject) => server.close(error => error ? reject(error) : resolve()))
+  }
+  if (ownerPid) {
+    let cmd = ''
+    try { cmd = (await readFile(`/proc/${ownerPid}/cmdline`)).toString() } catch (error) { if (error.code !== 'ENOENT') throw error }
+    assert.ok(!cmd.includes(profile), 'owned Chromium process still running')
+  }
+  console.log(`cleanup browser closed; preview listening=${server.listening}; artifacts=${artifacts}`)
+}

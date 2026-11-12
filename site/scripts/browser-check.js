@@ -17,11 +17,6 @@ let ownerPid
 let forbidden = []
 const pageErrors = []
 const media = JSON.parse(await readFile('data/media.json', 'utf8'))
-const expectedImages = {
-  layout: ['layout'],
-  layers: ['layers-popup-tooltip', 'layers-modal'],
-  hud: ['hud-idle', 'hud-completed']
-}
 const environment = { ...process.env }
 for (const key of ['DISPLAY', 'WAYLAND_DISPLAY', 'WAYLAND_SOCKET', 'XAUTHORITY', 'DBUS_SESSION_BUS_ADDRESS']) delete environment[key]
 try {
@@ -70,6 +65,7 @@ try {
     await focusByTab('#reachable', fixture)
     assert.equal(await fixture.evaluate(() => document.activeElement.id), 'reachable')
     await fixture.keyboard.press('Enter')
+    await fixture.waitForURL(url => url.hash === '#reached')
     assert.equal(new URL(fixture.url()).hash, '#reached')
     await assert.rejects(focusByTab('#unreachable', fixture), /keyboard could not reach #unreachable after \d+ tabs/)
     console.log('PASS keyboard traversal fixture: >50 tabs, Enter, and finite unreachable failure')
@@ -81,19 +77,28 @@ try {
     assert.ok((await page.title()).includes(title))
     assert.ok(await page.locator('main').innerText())
   }
-  const checkImages = async (activePage, section, lang) => {
-    const ids = expectedImages[section].map(state => `${state}-${lang}`)
-    const images = activePage.locator('main img')
+  const checkImages = async (activePage, path, lang) => {
+    const section = path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud)\.html$/)?.[1]
+    if (!section) { assert.equal(path, 'catalogue.html'); return }
+    const ids = {
+      layout: [`layout-${lang}`, `layout-small-${lang}`],
+      controls: [`controls-${lang}-initial`, `controls-${lang}-changed`],
+      styling: [`styling-${lang}-initial`, `styling-${lang}-changed`],
+      profiles: [`profiles-${lang}-initial`, `profiles-${lang}-dialog`, `profiles-${lang}-applied`],
+      layers: [`layers-popup-tooltip-${lang}`, `layers-modal-${lang}`],
+      hud: [`hud-idle-${lang}`, `hud-completed-${lang}`]
+    }[section]
+    const images = activePage.locator('main p > img')
     assert.equal(await images.count(), ids.length, `${section} ${lang}: image count`)
     for (const id of ids) {
       const matches = media.records.filter(record => record.id === id && record.section === section && record.uiLocale === lang)
       assert.equal(matches.length, 1, `${id}: manifest record`)
       const record = matches[0]
-      const image = activePage.locator(`main img[src="/oui/${record.path}"]`)
+      const image = activePage.locator(`main p > img[src="/oui/${record.path}"]`)
       assert.equal(await image.count(), 1, `${id}: page reference`)
       assert.ok(await image.isVisible(), `${id}: image visible`)
       assert.equal(await image.getAttribute('alt'), record.alt[lang], `${id}: localized alt`)
-      assert.ok(await image.evaluate(el => el.complete && el.naturalWidth === 1280 && el.naturalHeight === 960), `${id}: loaded`)
+      assert.ok(await image.evaluate((el, size) => el.complete && el.naturalWidth === size.width && el.naturalHeight === size.height, record.drawable), `${id}: loaded`)
     }
   }
   await go('/oui/')
@@ -184,9 +189,96 @@ try {
   const samplePages = [
     ['catalogue.html', 'Capability catalogue', 'Каталог возможностей', 'layout'],
     ['capabilities/layout.html', 'Layout', 'Компоновка', 'boundaries'],
+    ['capabilities/controls.html', 'Controls', 'Элементы управления', 'boundaries'],
+    ['capabilities/styling.html', 'Styling', 'Оформление', 'boundaries'],
+    ['capabilities/profiles.html', 'Profiles', 'Профили', 'workflow'],
     ['capabilities/layers.html', 'Layers', 'Слои', 'boundaries'],
     ['capabilities/hud.html', 'HUD hold', 'HUD и удержание', 'boundaries']
   ]
+  const sampleName = path => path.startsWith('capabilities/') ? path.split('/')[1].replace('.html', '') : 'catalogue'
+  for (const width of [360, 1280]) {
+    await page.setViewportSize({ width, height: 900 })
+    for (const [lang, term, expected, empty, reset, category] of [
+      ['en', 'clipping', 'Layout', 'No results found.', 'Reset filters', 'Category'],
+      ['ru', 'обрезание', 'Компоновка', 'Ничего не найдено.', 'Сбросить фильтры', 'Категория']
+    ]) {
+      await go(`/oui/${lang}/catalogue.html`)
+      const query = page.getByLabel(lang === 'en' ? 'Search catalogue' : 'Поиск в каталоге')
+      const select = page.getByLabel(category)
+      await focusByTab('.catalogue-controls input')
+      await page.keyboard.insertText(term)
+      assert.ok(await page.locator('#layout').isVisible())
+      assert.equal(await page.locator('#controls').isVisible(), false)
+      assert.equal(await page.locator('#styling').isVisible(), false)
+      assert.equal(await page.locator('#profiles').isVisible(), false)
+      await select.selectOption('geometry')
+      assert.equal(await select.locator('option:checked').innerText(), lang === 'en' ? 'Geometry' : 'Геометрия')
+      assert.ok(await page.locator('#layout').isVisible())
+      await query.fill(lang === 'en' ? 'slider' : 'ползунок')
+      assert.equal(await page.locator('#layout').isVisible(), false)
+      assert.equal(await page.locator('#controls').isVisible(), false)
+      assert.equal(await page.locator('#styling').isVisible(), false)
+      await select.selectOption('controls')
+      assert.ok(await page.locator('#controls').isVisible())
+      assert.equal(await page.locator('#styling').isVisible(), false)
+      await query.fill(lang === 'en' ? 'cascade' : 'каскад')
+      assert.equal(await page.locator('#controls').isVisible(), false)
+      await select.selectOption('styling')
+      assert.ok(await page.locator('#styling').isVisible())
+      assert.equal(await page.locator('#layout').isVisible(), false)
+      await query.fill(lang === 'en' ? 'draft' : 'черновик')
+      await select.selectOption('state')
+      assert.equal(await select.locator('option:checked').innerText(), lang === 'en' ? 'State' : 'Состояние')
+      assert.ok(await page.locator('#profiles').isVisible())
+      assert.equal(await page.locator('#controls').isVisible(), false)
+      await query.fill('zzznomatch')
+      assert.equal(await page.locator('#layout').isVisible(), false)
+      assert.equal(await page.locator('.catalogue-filter [role=status]').innerText(), empty)
+      await page.screenshot({ path: join(artifacts, `filter-empty-${lang}-${width}.png`), fullPage: true })
+      await focusByTab('.catalogue-controls button')
+      await page.keyboard.press('Enter')
+      assert.equal(await query.inputValue(), '')
+      assert.equal(await select.inputValue(), '')
+      assert.ok(await page.locator('#layout').isVisible())
+      assert.ok(await page.locator('#controls').isVisible())
+      assert.ok(await page.locator('#styling').isVisible())
+      assert.ok(await page.locator('#profiles').isVisible())
+      await select.selectOption('layout')
+      await query.fill('ui_layout')
+      assert.ok(await page.locator('#layout').isVisible())
+      assert.equal(await page.getByRole('button', { name: reset }).count(), 1)
+      await page.screenshot({ path: join(artifacts, `filter-${lang}-${width}.png`), fullPage: true })
+      await focusByTab('.catalogue-filter a[href="./capabilities/layout.html"]')
+      await page.keyboard.press('Enter')
+      await page.waitForURL(`**/oui/${lang}/capabilities/layout.html`)
+      assert.equal(new URL(page.url()).pathname, `/oui/${lang}/capabilities/layout.html`)
+      await go(`/oui/${lang}/guide/using-oui.html`)
+      await page.keyboard.press('Control+k')
+      const input = page.locator('#localsearch-input')
+      await input.waitFor({ state: 'visible' })
+      await input.fill('zzznomatch987654')
+      await page.locator('.no-results').waitFor({ state: 'visible' })
+      assert.ok((await page.locator('.no-results').innerText()).includes(lang === 'en' ? 'No results for' : 'Нет результатов для'))
+      await page.screenshot({ path: join(artifacts, `search-empty-${lang}-${width}.png`), fullPage: true })
+      assert.equal(await page.locator('.clear-button').getAttribute('title'), lang === 'en' ? 'Reset search' : 'Очистить поиск')
+      await focusByTab('.clear-button')
+      await page.keyboard.press('Enter')
+      assert.equal(await input.inputValue(), '')
+      await input.fill(expected)
+      await page.locator('.results .result').first().waitFor({ state: 'visible' })
+      const urls = await page.locator('.results .result').evaluateAll(nodes => nodes.map(node => node.getAttribute('href')))
+      assert.ok(urls.every(url => url.startsWith(`/oui/${lang}/`)), JSON.stringify(urls))
+      await page.screenshot({ path: join(artifacts, `search-results-${lang}-${width}.png`), fullPage: true })
+      await input.focus()
+      await page.keyboard.press('ArrowDown')
+      const selectedHref = await page.locator('.results [aria-selected="true"] a').getAttribute('href')
+      await page.keyboard.press('Enter')
+      await page.waitForURL(url => url.pathname + url.hash === selectedHref)
+      assert.notEqual(new URL(page.url()).pathname, `/oui/${lang}/guide/using-oui.html`)
+      assert.ok(!await input.isVisible())
+      console.log(`PASS search/filter ${lang} ${width}: localized query, empty, reset and keyboard selection`)
+    }
+  }
   for (const width of [360, 1280]) {
     await page.setViewportSize({ width, height: 900 })
     for (const [path, en, ru, anchor] of samplePages) {
@@ -197,12 +289,8 @@ try {
         assert.ok(dimensions.scroll <= dimensions.client, `${path} ${lang} ${width} overflow ${JSON.stringify(dimensions)}`)
         assert.ok(dimensions.font >= 14, `${path} ${lang} ${width} unreadable font`)
         assert.ok(await page.locator('main p').first().isVisible())
-        const section = path.match(/^capabilities\/(layout|layers|hud)\.html$/)?.[1]
-        if (path.startsWith('capabilities/')) {
-          assert.ok(section)
-          await checkImages(page, section, lang)
-        }
-        await page.screenshot({ path: join(artifacts, `${lang}-${section || 'catalogue'}-${width}.png`), fullPage: true })
+        await checkImages(page, path, lang)
+        await page.screenshot({ path: join(artifacts, `${lang}-${sampleName(path)}-${width}.png`), fullPage: true })
         await page.keyboard.press('Tab')
         assert.equal(await page.evaluate(() => document.activeElement.classList.contains('VPSkipLink')), true)
         await page.keyboard.press('Enter')
@@ -231,6 +319,40 @@ try {
       }
     }
   }
+  for (const width of [360, 1280]) {
+    await page.setViewportSize({ width, height: 900 })
+    for (const lang of ['en', 'ru']) {
+      await go(`/oui/${lang}/capabilities/layout.html`)
+      const open = page.locator('.viewer-open')
+      const dialog = page.locator('.layout-viewer dialog')
+      const close = dialog.locator('button')
+      const select = dialog.locator('select')
+      await focusByTab('.viewer-open')
+      await page.keyboard.press('Enter')
+      assert.ok(await dialog.evaluate(el => el.open))
+      assert.ok(await close.evaluate(el => el === document.activeElement))
+      assert.equal(await select.inputValue(), 'large')
+      assert.ok(await dialog.locator('img').evaluate((el, locale) => el.src.endsWith(`/layout-${locale}.png`) && el.naturalWidth === 1280, lang))
+      await select.selectOption('small')
+      assert.ok(await dialog.locator('img').evaluate((el, locale) => el.src.endsWith(`/layout-small-${locale}.png`) && el.naturalWidth === 960 && el.naturalHeight === 720, lang))
+      assert.ok((await dialog.locator('figcaption').innerText()).includes('960×720'))
+      await select.focus()
+      await page.keyboard.press('Tab')
+      assert.ok(await close.evaluate(el => el === document.activeElement), 'forward focus escaped dialog')
+      await page.keyboard.press('Shift+Tab')
+      assert.ok(await select.evaluate(el => el === document.activeElement), 'reverse focus escaped dialog')
+      await page.evaluate(() => document.querySelector('main a')?.focus())
+      assert.ok(await dialog.evaluate(el => el.contains(document.activeElement)), 'programmatic focus escaped dialog')
+      await page.screenshot({ path: join(artifacts, `viewer-${lang}-${width}.png`) })
+      await page.keyboard.press('Escape')
+      assert.ok(!(await dialog.evaluate(el => el.open)))
+      assert.ok(await open.evaluate(el => el === document.activeElement), 'Escape did not restore focus')
+      await open.click()
+      await close.click()
+      assert.ok(await open.evaluate(el => el === document.activeElement), 'close did not restore focus')
+      console.log(`PASS viewer ${lang} ${width}: keyboard and pointer, state, focus containment, Escape and close`)
+    }
+  }
   assert.ok(assetResponses.size > 0, 'no static assets loaded')
   await page.emulateMedia({ reducedMotion: 'reduce' })
   assert.equal(await page.evaluate(() => matchMedia('(prefers-reduced-motion: reduce)').matches), true)
@@ -244,8 +366,16 @@ try {
       await checkPage(lang, title)
       assert.ok(await page.locator('main p').first().isVisible())
       assert.equal(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior), 'auto')
-      const section = path.match(/^capabilities\/(layout|layers|hud)\.html$/)?.[1]
-      if (section) await checkImages(page, section, lang)
+      await checkImages(page, path, lang)
+    }
+  }
+  for (const width of [360, 1280]) {
+    await page.setViewportSize({ width, height: 900 })
+    for (const lang of ['en', 'ru']) {
+      await go(`/oui/${lang}/capabilities/layout.html`)
+      await page.locator('.viewer-open').click()
+      assert.ok(await page.locator('.layout-viewer dialog').evaluate(el => el.open && getComputedStyle(el).animationName === 'none'))
+      await page.keyboard.press('Escape')
     }
   }
   console.log('PASS reduced motion: preference, transition duration, scrolling and prose visibility')
@@ -290,10 +420,24 @@ try {
           assert.ok(await p.locator('main p').first().isVisible())
           const dimensions = await p.evaluate(() => ({ scroll: document.documentElement.scrollWidth, client: document.documentElement.clientWidth, font: parseFloat(getComputedStyle(document.querySelector('main p')).fontSize) }))
           assert.ok(dimensions.scroll <= dimensions.client && dimensions.font >= 14, `${path} ${lang} ${width}: ${JSON.stringify(dimensions)}`)
+          if (path === 'catalogue.html') {
+            for (const id of ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud']) {
+              const link = p.locator(`main a[href="./capabilities/${id}.html"]`)
+              assert.ok(await link.isVisible())
+              assert.equal(await link.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/capabilities/${id}.html`)
+            }
+          }
           assert.equal(await p.evaluate(() => typeof window.__VP_SITE_DATA__), 'undefined')
-          const section = path.match(/^capabilities\/(layout|layers|hud)\.html$/)?.[1]
-          if (section) await checkImages(p, section, lang)
-          await p.screenshot({ path: join(artifacts, `nojs-${lang}-${section || 'catalogue'}-${width}.png`), fullPage: true })
+          await checkImages(p, path, lang)
+          if (path === 'capabilities/layout.html') {
+              const small = p.locator(`main img[src="/oui/media/layout-small-${lang}.png"]`)
+              assert.ok(await small.isVisible())
+              assert.ok(await small.evaluate(el => el.complete && el.naturalWidth === 960 && el.naturalHeight === 720 && !!el.alt))
+              assert.equal(await p.locator(`main a[href="/oui/media/layout-small-${lang}.png"]`).count(), 1)
+              assert.equal(await p.locator(`main a[href="/oui/media/layout-${lang}.png"]`).count(), 1)
+              assert.equal(await p.locator('.viewer-open').count(), 0)
+          }
+          await p.screenshot({ path: join(artifacts, `nojs-${lang}-${sampleName(path)}-${width}.png`), fullPage: true })
           await focusByTab(`.content-container a[lang="${other}"]`, p)
           await p.keyboard.press('Enter')
           await p.waitForURL(`**/oui/${other}/${path}`)
@@ -305,7 +449,7 @@ try {
               await p.keyboard.press('Enter')
               await p.waitForURL(`**/oui/${lang}/capabilities/${target}.html`)
               assert.ok(await p.locator('main p').first().isVisible())
-              await checkImages(p, target, lang)
+              await checkImages(p, `capabilities/${target}.html`, lang)
             }
           }
           console.log(`PASS no-JS sample ${path} ${lang} ${width}: prose, image where present, keyboard locale`)

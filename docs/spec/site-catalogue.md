@@ -1,13 +1,15 @@
 # Статический каталог и изображения сайта
 
-Кандидат `oui-3no.2`, pending integration. Библиотека и native consumers не
-изменены; сайт описывает существующий layout, а не реализует его в браузере.
+Основа — `oui-3no.2`; расширение `oui-3no.8` — кандидат, pending integration.
+Библиотека и native consumers не изменены; сайт описывает существующие
+возможности, а не реализует их в браузере.
 
-- `site/en/` и `site/ru/` содержат `catalogue` и `capabilities/layout`.
+- `site/en/` и `site/ru/` содержат `catalogue` и `capabilities/layout`,
+  `capabilities/text`, `capabilities/rich-text`.
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
   полный showcase, с pinned source links и native build/run command.
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
-  Каталог объявляет sample coverage только `layout`. Native source catalogue
+  Каталог объявляет sample coverage `layout`, `text`, `rich-text`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -46,3 +48,36 @@ loopback-only preview. EN/RU catalogue/layout проверены на ширин
 `npm run check:http`, затем `npm run preview -- --port 0` и выданный локальный
 URL с `/oui/en/capabilities/layout` либо `/oui/ru/capabilities/layout`.
 Остановить свой preview — Ctrl-C. Подробнее: [site README](../../site/README.md).
+
+## Текст и форматированный текст (`oui-3no.8`)
+
+EN/RU страницы описывают локализованные native fixtures: переносы, обрезание,
+многоточие, выравнивание и выбор короткого текстового ключа; rich card со стилями,
+встроенным изображением, запасным шрифтом и переключением в одну строку.
+Указаны выбранные пакеты, ссылки на исходники и native build/run команды.
+Грамматика rich text ограничена; это не HTML и не редактор. Shaping/bidi не
+обещаются, лимиты текста — 65 536 байт и 4096 строк, покрытие зависит от шрифтов.
+
+Для каждого из двух разделов сняты начальное и переключённое состояния EN/RU:
+восемь PNG, 1280×960, scale 1, source revision
+`4da8d7a57bd2453227a4c37df6b0b4d171401681`. Свежий portable export сверен
+с 630 файлами этой ревизии. Снимки получены выбранной и повторно проверенной
+ISD `f8204c61615406ce5628b15692628e146476a008`, с `linux-abstract-v1`, явным
+focus и остановкой собственных runs в `finally`. Использован проверенный
+private prefix libpng 1.6.59/zlib 1.4 без изменения системных библиотек.
+Каждый PNG просмотрен; публичные изображения очищены от metadata с сохранением
+пикселей, provenance не содержит локальных путей. Проверены unit/parity/schema,
+build, HTTP всех новых страниц и media digests, свежий portable-check.
+После отдельного разрешения владельца пройдена браузерная приёмка новых
+страниц и прежних сценариев: Chromium 152 с sandbox, собственными профилями
+и loopback-only preview; EN/RU, ширины 360/1280, клавиатура, смена языка с
+valid/missing anchors, reduced motion и no-JS prose/images/links. В каждой
+новой странице проверены оба загруженных изображения. Все 36 browser PNG
+просмотрены исполнителем либо подтверждены побайтово/попиксельно идентичными
+уже просмотренным снимкам; браузеры и preview остановлены. Это не аудит
+доступности и не проверка других браузеров.
+
+Открыть на собственном preview `/oui/en/capabilities/text` или
+`/oui/en/capabilities/rich-text` (либо `/oui/ru/…`): видны описание, два реальных
+состояния, границы, исходники и команды запуска. Полное покрытие 23 IDs и
+Pages deployment этим расширением не устанавливаются.

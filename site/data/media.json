@@ -84,6 +84,346 @@
         "en": "Showcase window with row, column, stack, grid, absolute and intentionally clipped examples.",
         "ru": "Окно showcase: примеры строки, столбца, стека, сетки, абсолютного размещения и намеренного обрезания."
       }
+    },
+    {
+      "id": "text-en-initial",
+      "section": "text",
+      "state": "initial",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/content.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_text"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section text; initial focus on first control.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/text-en-initial.png",
+      "sha256": "d6d5b68c284f680754dad8439164ed033349dd50d68ecc091c8a3dc5f4795840",
+      "caption": {
+        "en": "English text fixture, initial state at the pinned revision.",
+        "ru": "Нативный text, интерфейс EN; начальное состояние; указанная ревизия."
+      },
+      "alt": {
+        "en": "Native showcase text page with an English paragraph, clipping and ellipsis examples.",
+        "ru": "Нативный раздел текста: абзац, обрезание и многоточие (интерфейс EN)."
+      }
+    },
+    {
+      "id": "text-en-alternate",
+      "section": "text",
+      "state": "short text key selected",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/content.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_text"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section text; first control activated with Return.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/text-en-alternate.png",
+      "sha256": "136b46cd2bfbfb1f3f1675820b6ec88c478443f32768af95271081ad65f20092",
+      "caption": {
+        "en": "The same fixture after selecting the short text key.",
+        "ru": "Нативный text, интерфейс EN; после переключения; указанная ревизия."
+      },
+      "alt": {
+        "en": "Native showcase text page with the shorter English paragraph selected.",
+        "ru": "Нативный раздел текста: выбран короткий абзац (интерфейс EN)."
+      }
+    },
+    {
+      "id": "text-ru-initial",
+      "section": "text",
+      "state": "initial",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/content.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_text"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section text; initial focus on first control.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/text-ru-initial.png",
+      "sha256": "bc2b65831d6afad6833e863f0561219d1eaad07a60656fca6b6f63a5b9aa66bf",
+      "caption": {
+        "en": "Native text, RU UI; initial; pinned revision.",
+        "ru": "Русский текстовый пример в начальном состоянии на указанной ревизии."
+      },
+      "alt": {
+        "en": "Native showcase text page with a paragraph, clipping and ellipsis examples (RU UI).",
+        "ru": "Нативный раздел текста: русский абзац, примеры обрезания и многоточия."
+      }
+    },
+    {
+      "id": "text-ru-alternate",
+      "section": "text",
+      "state": "short text key selected",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/content.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_text"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section text; first control activated with Return.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/text-ru-alternate.png",
+      "sha256": "3b37b54f3073d55b08616b6b82c41f340296f95a2e91ee27bedebf42fcb7eecd",
+      "caption": {
+        "en": "Native text, RU UI; short text key selected; pinned revision.",
+        "ru": "Тот же пример после выбора короткого текстового ключа."
+      },
+      "alt": {
+        "en": "Native showcase text page with the shorter paragraph selected (RU UI).",
+        "ru": "Нативный раздел текста с выбранным коротким русским абзацем."
+      }
+    },
+    {
+      "id": "rich-text-en-initial",
+      "section": "rich-text",
+      "state": "initial",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/content.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_text",
+        "kit/ui_rich"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section rich-text; initial focus on first control.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/rich-text-en-initial.png",
+      "sha256": "e2f030137b2f5573dac1eafa34561af39d45fa8df49f9fdd6a0b798c749d5bbe",
+      "caption": {
+        "en": "English rich card, initial state at the pinned revision.",
+        "ru": "Нативный rich-text, интерфейс EN; начальное состояние; указанная ревизия."
+      },
+      "alt": {
+        "en": "Native showcase rich text card in English with styled text and inline image.",
+        "ru": "Нативная карточка форматированного текста: стили и встроенное изображение (интерфейс EN)."
+      }
+    },
+    {
+      "id": "rich-text-en-alternate",
+      "section": "rich-text",
+      "state": "card switched to one line with ellipsis",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/content.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_text",
+        "kit/ui_rich"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section rich-text; first control activated with Return.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/rich-text-en-alternate.png",
+      "sha256": "336eee67d05b003e105cd038fd62d185aaf9f3fc298ffa62d98e2f43729a4fdd",
+      "caption": {
+        "en": "The same card after selecting the one-line limit.",
+        "ru": "Нативный rich-text, интерфейс EN; после переключения; указанная ревизия."
+      },
+      "alt": {
+        "en": "Native showcase English rich card after selecting one-line ellipsis.",
+        "ru": "Нативная карточка форматированного текста: одна строка с многоточием (интерфейс EN)."
+      }
+    },
+    {
+      "id": "rich-text-ru-initial",
+      "section": "rich-text",
+      "state": "initial",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/content.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_text",
+        "kit/ui_rich"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section rich-text; initial focus on first control.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/rich-text-ru-initial.png",
+      "sha256": "0123518ff52eaad7889534884f0ccb542f6aa6317bdcbaf9718d6a4181aa2f5c",
+      "caption": {
+        "en": "Native rich-text, RU UI; initial; pinned revision.",
+        "ru": "Русская карточка в начальном состоянии на указанной ревизии."
+      },
+      "alt": {
+        "en": "Native showcase rich text card with styled text and inline image (RU UI).",
+        "ru": "Нативная карточка форматированного текста на русском со стилями и встроенным изображением."
+      }
+    },
+    {
+      "id": "rich-text-ru-alternate",
+      "section": "rich-text",
+      "state": "card switched to one line with ellipsis",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/content.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_text",
+        "kit/ui_rich"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section rich-text; first control activated with Return.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/rich-text-ru-alternate.png",
+      "sha256": "09e0b7369c003fdad84c241c65c78b61fdf65ee5235bad4eb0eb6d8125e4e7f0",
+      "caption": {
+        "en": "Native rich-text, RU UI; card switched to one line with ellipsis; pinned revision.",
+        "ru": "Та же карточка после выбора ограничения в одну строку."
+      },
+      "alt": {
+        "en": "Native showcase rich text card with one-line ellipsis (RU UI).",
+        "ru": "Нативная русская карточка после выбора одной строки с многоточием."
+      }
     }
   ]
 }

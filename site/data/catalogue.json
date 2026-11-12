@@ -3,7 +3,9 @@
   "coverage": {
     "mode": "sample",
     "ids": [
-      "layout"
+      "layout",
+      "text",
+      "rich-text"
     ]
   },
   "records": [
@@ -35,6 +37,77 @@
       "media": [
         "layout-en",
         "layout-ru"
+      ]
+    },
+    {
+      "id": "text",
+      "group": "gallery",
+      "categories": [
+        "text",
+        "typography"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_text",
+        "translations",
+        "unicode_graphemes"
+      ],
+      "source": "consumer/ui_showcase/sections/content.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Text",
+        "ru": "Текст"
+      },
+      "summary": {
+        "en": "Localized paragraphs, wrapping and overflow.",
+        "ru": "Локализованные абзацы, перенос и переполнение."
+      },
+      "limitations": {
+        "en": "Experimental; 65536 bytes / 4096 lines; no shaping or bidi.",
+        "ru": "Экспериментально; 65536 байт / 4096 строк; нет shaping и bidi."
+      },
+      "media": [
+        "text-en-initial",
+        "text-en-alternate",
+        "text-ru-initial",
+        "text-ru-alternate"
+      ]
+    },
+    {
+      "id": "rich-text",
+      "group": "gallery",
+      "categories": [
+        "text",
+        "typography"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_style",
+        "ui_text",
+        "ui_rich",
+        "unicode_graphemes"
+      ],
+      "source": "consumer/ui_showcase/sections/content.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Rich text",
+        "ru": "Форматированный текст"
+      },
+      "summary": {
+        "en": "Styled localized text and inline images.",
+        "ru": "Локализованный текст со стилями и встроенными изображениями."
+      },
+      "limitations": {
+        "en": "Experimental bounded grammar; not HTML or an editor.",
+        "ru": "Экспериментальная ограниченная грамматика; не HTML и не редактор."
+      },
+      "media": [
+        "rich-text-en-initial",
+        "rich-text-en-alternate",
+        "rich-text-ru-initial",
+        "rich-text-ru-alternate"
       ]
     }
   ]

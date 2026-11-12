@@ -23,7 +23,9 @@ try {
     ['en/catalogue.html', 'en', 'Capability catalogue', '/oui/ru/catalogue.html'],
     ['ru/catalogue.html', 'ru', 'Каталог возможностей', '/oui/en/catalogue.html'],
     ['en/capabilities/layout.html', 'en', 'Layout', '/oui/ru/capabilities/layout.html'],
-    ['ru/capabilities/layout.html', 'ru', 'Компоновка', '/oui/en/capabilities/layout.html']
+    ['ru/capabilities/layout.html', 'ru', 'Компоновка', '/oui/en/capabilities/layout.html'],
+    ['en/capabilities/profiles.html', 'en', 'Profiles', '/oui/ru/capabilities/profiles.html'],
+    ['ru/capabilities/profiles.html', 'ru', 'Профили', '/oui/en/capabilities/profiles.html']
   ]) {
     const response = await get('/oui/' + path)
     assert.equal(response.status, 200, path)
@@ -45,6 +47,19 @@ try {
       const bytes = Buffer.from(await response.arrayBuffer())
       assert.equal(bytes.subarray(0, 8).toString('hex'), '89504e470d0a1a0a')
       assert.equal(createHash('sha256').update(bytes).digest('hex'), record.sha256)
+    }
+    if (path.includes('capabilities/profiles')) {
+      for (const state of ['initial', 'dialog', 'applied']) {
+        const record = media.records.find(item => item.id === `profiles-${lang}-${state}`)
+        const image = `/oui/${record.path}`
+        assert.ok(markup.includes(`src="${image}"`))
+        assert.ok(markup.includes(`alt="${record.alt[lang]}"`))
+        const response = await get(image)
+        assert.equal(response.status, 200)
+        assert.match(response.headers.get('content-type'), /^image\/png/)
+        const bytes = Buffer.from(await response.arrayBuffer())
+        assert.equal(createHash('sha256').update(bytes).digest('hex'), record.sha256)
+      }
     }
     const serialized = html.match(/window\.__VP_SITE_DATA__=JSON\.parse\(("(?:\\.|[^"\\])*")\)/)
     assert.ok(serialized, 'missing serialized site configuration')

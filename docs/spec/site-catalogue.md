@@ -1,13 +1,15 @@
 # Статический каталог и изображения сайта
 
-Кандидат `oui-3no.2`, pending integration. Библиотека и native consumers не
-изменены; сайт описывает существующий layout, а не реализует его в браузере.
+Основа `oui-3no.2`; расширение `oui-3no.6` — локальный кандидат, pending integration.
+Библиотека и native consumers не изменены; сайт описывает существующие
+layout и profiles, а не реализует их в браузере.
 
-- `site/en/` и `site/ru/` содержат `catalogue` и `capabilities/layout`.
+- `site/en/` и `site/ru/` содержат `catalogue`, `capabilities/layout` и
+  `capabilities/profiles`.
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
   полный showcase, с pinned source links и native build/run command.
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
-  Каталог объявляет sample coverage только `layout`. Native source catalogue
+  Каталог объявляет sample coverage только `layout` и `profiles`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -46,3 +48,28 @@ loopback-only preview. EN/RU catalogue/layout проверены на ширин
 `npm run check:http`, затем `npm run preview -- --port 0` и выданный локальный
 URL с `/oui/en/capabilities/layout` либо `/oui/ru/capabilities/layout`.
 Остановить свой preview — Ctrl-C. Подробнее: [site README](../../site/README.md).
+
+## Profiles: локальный кандидат oui-3no.6
+
+EN/RU страницы описывают consumer-owned draft/applied workflow: Apply, Cancel,
+подтверждение смены профиля и Reset. Применённые значения существуют только
+в памяти, disk persistence нет. Узкие пакеты отделены от зависимостей полного
+showcase; ссылки и native build/run команды закреплены на source revision.
+
+Для каждого языка получены три настоящих PNG 1280×960, scale 1: начальный
+применённый Aurora, неприменённое изменение Show help с диалогом смены профиля,
+и выключенный Show help после Apply со статусом Applied/«Применено».
+Source revision `4da8d7a57bd2453227a4c37df6b0b4d171401681`;
+portable source сверен с ревизией, ISD и allocation проверены по тем же правилам
+выше. Все шесть PNG просмотрены; публичные файлы очищены от metadata,
+provenance и digests находятся в `site/data/media.json`. Собственные runs остановлены.
+
+Пройдены sample/schema/unit, build, HTTP и свежий portable-check. После отдельного
+разрешения владельца пройдены sandboxed headless Chromium profiles EN/RU
+360/1280, три загруженных изображения на страницу, keyboard locale/anchors,
+no-JS prose/images и reduced motion; сохранены логи/снимки и cleanup.
+Отмена и Reset описаны по исходному коду, не заявлены как отдельная native
+приёмка этого кандидата. Мобильное уменьшение изображений и остальные ограничения
+выше сохраняются; полный каталог, новые viewer/search, Pages/deploy не входят
+в эту работу. Проверенные local preview маршруты:
+`/oui/en/capabilities/profiles` и `/oui/ru/capabilities/profiles`.

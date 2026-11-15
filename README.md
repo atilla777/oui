@@ -10,6 +10,11 @@ owners/errors/recovery; [compatibility](docs/compatibility.md) — границ�
 [resources](docs/resources.md) — ресурсы, инструменты подготовки и полные notices.
 [Provenance](docs/provenance.md) — необязательная история, не шаг сборки.
 
+Planned bilingual visual documentation / План двуязычной визуальной документации:
+[feature #1](https://github.com/atilla777/oui/issues/1),
+[requirements](docs/specs/1/spec.md), [design](docs/specs/1/design.md),
+[delivery plan](docs/specs/1/plan.md). This is preparation, not a deployed website.
+
 Maintained portable root: `kit/`, `consumer/`, `resources/`, `docs/`, `skills/`, `tests/`, `scripts/`, `preparation/`. Production build/run не требует Slyx checkout, истории проекта, трекера, Python, генераторов, agent client или сети. Full relocated qualification ещё не завершена.
 
 Собственный выбранный code/consumers/tests/helpers/docs/skill — MIT, полный текст

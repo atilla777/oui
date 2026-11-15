@@ -78,8 +78,8 @@ try {
     assert.ok(await page.locator('main').innerText())
   }
   const checkImages = async (activePage, path, lang) => {
-    const section = path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|text-input|atlas|scroll-table|collections|text|rich-text|gestures)\.html$/)?.[1]
-    if (!section) { assert.equal(path, 'catalogue.html'); return }
+    const section = path === 'lab/menu.html' ? 'lab-menu' : path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|text-input|atlas|scroll-table|collections|text|rich-text|gestures)\.html$/)?.[1]
+    if (!section) { assert.ok(['catalogue.html', 'recipes/menu.html'].includes(path), path); return }
     const ids = {
       layout: [`layout-${lang}`, `layout-small-${lang}`],
       controls: [`controls-${lang}-initial`, `controls-${lang}-changed`],
@@ -93,7 +93,8 @@ try {
       collections: [`collections-${lang}`],
       text: [`text-${lang}-initial`, `text-${lang}-alternate`],
       'rich-text': [`rich-text-${lang}-initial`, `rich-text-${lang}-alternate`],
-      gestures: [`gestures-${lang}-initial`, `gestures-${lang}-proposal`, `gestures-${lang}-applied`]
+      gestures: [`gestures-${lang}-initial`, `gestures-${lang}-proposal`, `gestures-${lang}-applied`],
+      'lab-menu': [`lab-menu-initial-${lang}`, `lab-menu-submenu-${lang}`, `lab-menu-settings-${lang}`, `lab-menu-confirm-${lang}`]
     }[section]
     const images = activePage.locator('main p > img')
     assert.equal(await images.count(), ids.length, `${section} ${lang}: image count`)
@@ -207,9 +208,11 @@ try {
     ['capabilities/layers.html', 'Layers', 'Слои', 'boundaries'],
     ['capabilities/hud.html', 'HUD hold', 'HUD и удержание', 'boundaries'],
     ['capabilities/text-input.html', 'Text input', 'Ввод текста', 'boundaries'],
-    ['capabilities/gestures.html', 'Gestures', 'Жесты', 'boundaries']
+    ['capabilities/gestures.html', 'Gestures', 'Жесты', 'boundaries'],
+    ['lab/menu.html', 'Lab menu', 'Меню лаборатории', 'boundaries'],
+    ['recipes/menu.html', 'Basic menu recipe', 'Рецепт меню', 'build-and-run']
   ]
-  const sampleName = path => path.startsWith('capabilities/') ? path.split('/')[1].replace('.html', '') : 'catalogue'
+  const sampleName = path => path === 'lab/menu.html' ? 'lab-menu' : path === 'recipes/menu.html' ? 'recipes-menu' : path.startsWith('capabilities/') ? path.split('/')[1].replace('.html', '') : 'catalogue'
   for (const width of [360, 1280]) {
     await page.setViewportSize({ width, height: 900 })
     for (const [lang, term, expected, empty, reset, category] of [
@@ -486,6 +489,9 @@ try {
               assert.ok(await link.isVisible())
               assert.equal(await link.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/capabilities/${id}.html`)
             }
+            const lab = p.locator('main a[href="./lab/menu.html"]')
+            assert.ok(await lab.isVisible())
+            assert.equal(await lab.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/lab/menu.html`)
           }
           assert.equal(await p.evaluate(() => typeof window.__VP_SITE_DATA__), 'undefined')
           await checkImages(p, path, lang)

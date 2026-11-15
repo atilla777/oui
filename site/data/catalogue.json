@@ -14,7 +14,8 @@
       "scroll-table",
       "collections",
       "text",
-      "rich-text"
+      "rich-text",
+      "lab-hud"
     ]
   },
   "records": [
@@ -430,6 +431,45 @@
         "rich-text-en-alternate",
         "rich-text-ru-initial",
         "rich-text-ru-alternate"
+      ]
+    },
+    {
+      "id": "lab-hud",
+      "group": "lab",
+      "categories": [
+        "hud",
+        "hold"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_layers",
+        "ui_hold"
+      ],
+      "source": "consumer/ui_showcase/app/lab_hud.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Lab HUD",
+        "ru": "Лаборатория HUD"
+      },
+      "summary": {
+        "en": "The Integration Lab HUD: mock HP with -10 and +10, a 1000 ms hold-to-restore, a popup and a noninteractive tooltip.",
+        "ru": "HUD Integration Lab: учебный HP с -10 и +10, восстановление удержанием 1000 мс, панель и неинтерактивная подсказка."
+      },
+      "limitations": {
+        "en": "Experimental; mock HP; hold 1000 ms.",
+        "ru": "Экспериментально: учебный HP; удержание 1000 мс."
+      },
+      "media": [
+        "lab-hud-initial-en",
+        "lab-hud-popup-en",
+        "lab-hud-hold-en",
+        "lab-hud-completed-en",
+        "lab-hud-initial-ru",
+        "lab-hud-popup-ru",
+        "lab-hud-hold-ru",
+        "lab-hud-completed-ru"
       ]
     }
   ]

@@ -1972,6 +1972,366 @@
         "en": "Native showcase rich text card with one-line ellipsis (RU UI).",
         "ru": "Нативная русская карточка после выбора одной строки с многоточием."
       }
+    },
+    {
+      "id": "lab-hud-initial-en",
+      "section": "lab-hud",
+      "state": "initial idle mock HP 60",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_hud.odin",
+        "consumer/ui_showcase/sections/hud.odin",
+        "consumer/ui_showcase/app/hold_runtime.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_hold",
+        "kit/ui_layers"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-hud; initial focus hold-to-restore; explicit window focus before capture; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-hud-initial-en.png",
+      "sha256": "7ab74fc5d16848e3edc3d86d5dcf003ba8fc4f2c6e24bd784929a824cce71bbc",
+      "caption": {
+        "en": "Native Lab HUD, EN UI; mock HP 60, idle and count zero.",
+        "ru": "Лаборатория HUD: учебный HP 60, покой и счётчик ноль, интерфейс EN."
+      },
+      "alt": {
+        "en": "Lab HUD at mock HP 60, idle and count zero, with the hold-to-restore control focused.",
+        "ru": "Лаборатория HUD: учебный HP 60, покой и счётчик ноль, кнопка удержания в фокусе."
+      }
+    },
+    {
+      "id": "lab-hud-popup-en",
+      "section": "lab-hud",
+      "state": "popup open",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_hud.odin",
+        "consumer/ui_showcase/sections/hud.odin",
+        "consumer/ui_showcase/app/hold_runtime.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_hold",
+        "kit/ui_layers"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-hud; Tab from hold-to-restore to Open popup, then Return; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-hud-popup-en.png",
+      "sha256": "fc0370274298397a19b7ae7e27a27f5b051456ffa475004b6de022042428f99f",
+      "caption": {
+        "en": "Native Lab HUD, EN UI; popup open over the hold controls.",
+        "ru": "Лаборатория HUD: открытая панель поверх элементов удержания, интерфейс EN."
+      },
+      "alt": {
+        "en": "Lab HUD with the popup open over the hold controls.",
+        "ru": "Лаборатория HUD с открытой панелью поверх элементов удержания."
+      }
+    },
+    {
+      "id": "lab-hud-hold-en",
+      "section": "lab-hud",
+      "state": "hold in progress",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_hud.odin",
+        "consumer/ui_showcase/sections/hud.odin",
+        "consumer/ui_showcase/app/hold_runtime.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_hold",
+        "kit/ui_layers"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-hud; Tab to hold-to-restore; Space held about 0.7 s (captured at 683 ms); supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-hud-hold-en.png",
+      "sha256": "6acbab483d7a02f994797598620109b9b5d45ff4de7f95852d8bde8da1c7c1e0",
+      "caption": {
+        "en": "Native Lab HUD, EN UI; hold in progress at 683 ms.",
+        "ru": "Лаборатория HUD: удержание в процессе, 683 мс, интерфейс EN."
+      },
+      "alt": {
+        "en": "Lab HUD during a hold with a partially filled progress bar.",
+        "ru": "Лаборатория HUD во время удержания: полоса прогресса заполнена частично."
+      }
+    },
+    {
+      "id": "lab-hud-completed-en",
+      "section": "lab-hud",
+      "state": "after completed hold and release HP 100 count 1",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_hud.odin",
+        "consumer/ui_showcase/sections/hud.odin",
+        "consumer/ui_showcase/app/hold_runtime.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_hold",
+        "kit/ui_layers"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-hud; Tab to hold-to-restore; Space pressed, held 1.3 s and released; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-hud-completed-en.png",
+      "sha256": "8d0cf4788a184a34b9dff4a5555ae8981f516f0d8705e723f53dd4ec89cdcabc",
+      "caption": {
+        "en": "Native Lab HUD, EN UI; after one completed hold and release, HP 100 and count one.",
+        "ru": "Нативная лаборатория HUD, интерфейс EN; после одного полного удержания и отпускания, HP 100 и счётчик один."
+      },
+      "alt": {
+        "en": "Lab HUD after one completed hold: mock HP 100 and count one.",
+        "ru": "Лаборатория HUD после одного полного удержания: учебный HP 100 и счётчик один."
+      }
+    },
+    {
+      "id": "lab-hud-initial-ru",
+      "section": "lab-hud",
+      "state": "initial idle mock HP 60",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_hud.odin",
+        "consumer/ui_showcase/sections/hud.odin",
+        "consumer/ui_showcase/app/hold_runtime.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_hold",
+        "kit/ui_layers"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-hud; initial focus hold-to-restore; explicit window focus before capture; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-hud-initial-ru.png",
+      "sha256": "db5dc7e7f4ead28052a46678c266505530deca14395beeb82206968924cdc8ac",
+      "caption": {
+        "en": "Native Lab HUD, RU UI; mock HP 60, idle and count zero.",
+        "ru": "Нативная лаборатория HUD, интерфейс RU; учебный HP 60, покой и счётчик ноль."
+      },
+      "alt": {
+        "en": "Lab HUD at mock HP 60, idle and count zero, with the hold-to-restore control focused.",
+        "ru": "Лаборатория HUD: учебный HP 60, покой и счётчик ноль, кнопка удержания в фокусе."
+      }
+    },
+    {
+      "id": "lab-hud-popup-ru",
+      "section": "lab-hud",
+      "state": "popup open",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_hud.odin",
+        "consumer/ui_showcase/sections/hud.odin",
+        "consumer/ui_showcase/app/hold_runtime.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_hold",
+        "kit/ui_layers"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-hud; Tab from hold-to-restore to Open popup, then Return; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-hud-popup-ru.png",
+      "sha256": "f18cc83fd56456e0698d8078c124645381b3ce094a397be7bffde87b9ccd9144",
+      "caption": {
+        "en": "Native Lab HUD, RU UI; popup open over the hold controls.",
+        "ru": "Нативная лаборатория HUD, интерфейс RU; открытая панель поверх элементов удержания."
+      },
+      "alt": {
+        "en": "Lab HUD with the popup open over the hold controls.",
+        "ru": "Лаборатория HUD с открытой панелью поверх элементов удержания."
+      }
+    },
+    {
+      "id": "lab-hud-hold-ru",
+      "section": "lab-hud",
+      "state": "hold in progress",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_hud.odin",
+        "consumer/ui_showcase/sections/hud.odin",
+        "consumer/ui_showcase/app/hold_runtime.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_hold",
+        "kit/ui_layers"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-hud; Tab to hold-to-restore; Space held about 0.7 s (captured at 698 ms); supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-hud-hold-ru.png",
+      "sha256": "813b8c1244bb8138a8f5dbe1534d84d2f4c9b43a947a30bf701364c82cf4f9bc",
+      "caption": {
+        "en": "Native Lab HUD, RU UI; hold in progress at 698 ms.",
+        "ru": "Нативная лаборатория HUD, интерфейс RU; удержание в процессе, 698 мс."
+      },
+      "alt": {
+        "en": "Lab HUD during a hold with a partially filled progress bar.",
+        "ru": "Лаборатория HUD во время удержания: полоса прогресса заполнена частично."
+      }
+    },
+    {
+      "id": "lab-hud-completed-ru",
+      "section": "lab-hud",
+      "state": "after completed hold and release HP 100 count 1",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_hud.odin",
+        "consumer/ui_showcase/sections/hud.odin",
+        "consumer/ui_showcase/app/hold_runtime.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_hold",
+        "kit/ui_layers"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-hud; Tab to hold-to-restore; Space pressed, held 1.3 s and released; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-hud-completed-ru.png",
+      "sha256": "d3094e99b3ba0a885bea0e4f1dbda38093dd868a582795b5ad1e9c4bb40eb85a",
+      "caption": {
+        "en": "Native Lab HUD, RU UI; after one completed hold and release, HP 100 and count one.",
+        "ru": "Нативная лаборатория HUD, интерфейс RU; после одного полного удержания и отпускания, HP 100 и счётчик один."
+      },
+      "alt": {
+        "en": "Lab HUD after one completed hold: mock HP 100 and count one.",
+        "ru": "Лаборатория HUD после одного полного удержания: учебный HP 100 и счётчик один."
+      }
     }
   ]
 }

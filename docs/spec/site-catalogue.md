@@ -6,6 +6,7 @@
 menu recipe/Lab menu `oui-3no.20`, HUD recipe/Lab HUD `oui-3no.22` и
 inventory recipe/Lab inventory `oui-3no.23` — интеграционные кандидаты.
 Жесты `oui-3no.12` — локальный кандидат, pending integration.
+Диагностика/производительность `oui-3no.17` — интеграционный кандидат.
 Библиотека и native consumers не изменены; сайт описывает существующие возможности,
 а не реализует их в браузере.
 
@@ -13,9 +14,10 @@ inventory recipe/Lab inventory `oui-3no.23` — интеграционные к�
   `capabilities/controls`, `capabilities/styling`, `capabilities/profiles`,
   `capabilities/layers`, `capabilities/hud`, `capabilities/text-input`, `capabilities/atlas`,
   `capabilities/scroll-table`, `capabilities/collections`, `capabilities/text`, `capabilities/rich-text`,
-  `capabilities/gestures`, а также рецепты и экраны Lab — опубликованные
-  `recipes/menu` и `lab/menu` (`oui-3no.20`), `recipes/hud`/`lab/hud` кандидата
-  `oui-3no.22` и `recipes/inventory`/`lab/inventory` кандидата `oui-3no.23`.
+  `capabilities/gestures`, `capabilities/diagnostics-performance`, а также рецепты
+  и экраны Lab — опубликованные `recipes/menu` и `lab/menu` (`oui-3no.20`),
+  `recipes/hud`/`lab/hud` кандидата `oui-3no.22` и
+  `recipes/inventory`/`lab/inventory` кандидата `oui-3no.23`.
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
   полный showcase, с pinned source links и native build/run command.
   Кандидаты добавляют страницы без собственных изображений: `oui-3no.20` —
@@ -25,7 +27,8 @@ inventory recipe/Lab inventory `oui-3no.23` — интеграционные к�
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
   Каталог объявляет sample coverage `layout`, `controls`, `styling`, `profiles`,
   `layers`, `hud`, `text-input`, `atlas`, `scroll-table`, `collections`, `text`, `rich-text`,
-  `gestures`, `lab-menu`, `lab-hud` и Lab ID `lab-inventory`. Native source catalogue
+  `gestures`, Lab IDs `lab-menu`/`lab-hud`/`lab-inventory` и
+  `diagnostics-performance`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -635,10 +638,17 @@ browser PNG; 16 PNG новых lab/recipe страниц (JS и no-JS, EN/RU, 36
 квалификация остальных IDs, другие браузеры и Pages deployment не
 проверялись. Kit/native API и поведение не менялись.
 
-После объединения с опубликованными menu/HUD/gestures-задачами sample coverage
-интегрированного дерева составляет 16 IDs (включая `gestures`, `lab-menu` и
-`lab-hud`), а site-проверки повторены на нём: `npm run check` (12/12),
-`npm run build` и `npm run check:http` прошли. Native-часть дерева
+После первого объединения с опубликованными menu/HUD/gestures-задачами sample
+coverage интегрированного дерева составлял 16 IDs, и site-проверки были
+повторены на нём: `npm run check` (12/12), `npm run build` и
+`npm run check:http` прошли. После второго объединения — с опубликованными
+`oui-3no.17` (diagnostics/performance) и исправлениями счётчиков README —
+sample coverage составляет 17 IDs (включая `gestures`, `lab-menu`, `lab-hud`,
+`lab-inventory` и `diagnostics-performance`); на этом финальном дереве
+повторены `npm run check` (13/13), `npm run build` и `npm run check:http`
+(все успешно). Полный `npm run check:browser` дал 175 PASS (exit 0) на
+предыдущем интегрированном дереве и 183 PASS (exit 0, включая новые сценарии
+diagnostics/performance) на этом финальном дереве. Native-часть дерева
 байт-идентична прежней ревизии, поэтому приведённые native/portable
 доказательства применимы без повтора.
 
@@ -649,3 +659,46 @@ browser PNG; 16 PNG новых lab/recipe страниц (JS и no-JS, EN/RU, 36
 Native сценарий — командами со страницы lab/inventory (для агентов — только
 через wrapper `scripts/ui_isd.py`). Это проверено в локальном static HTTP и
 native ISD runs; публикация и Pages deploy не выполнялись.
+
+## Диагностика и производительность (`oui-3no.17`)
+
+EN/RU страницы описывают нативную страницу G20–G21 showcase: фазы CPU
+(p/c/k/d/r/p), счётчики обратных вызовов метрик текста и операций, переключатель
+«Замеры вкл/выкл» и пять диагностических проб (Duplicate, Invalid, Resource,
+Ownership, Unsupported), выдающих наблюдение family/stage/code/id без изменения
+обычного состояния. Явно указаны границы: opt-in потребительские замеры, нет
+транспорта отладчика, времени GPU, учёта кучи SDL и числовых SLA. Выбранные
+пакеты (`ui_base`, `ui_layout`, `ui_interaction`, `ui_text`, `ui_editor`,
+`ui_editor/sdl`, `ui_collections`, `ui_sdl_text`, `ui_sdl` и общая отрисовка
+оболочки `ui_style`) выведены из фактических импортов страницы; ссылки на
+исходники и native команды закреплены за `4da8d7a57bd2453227a4c37df6b0b4d171401681`
+(native-байты идентичны текущему дереву — сверено пустым diff по `kit`/`consumer`).
+
+Сняты четыре подлинных PNG 1280×960, scale 1, EN/RU × начальное состояние
+(фазы CPU после первого полного кадра; строка состояния обновляется при
+перекомпозиции после первого кадра) и состояние после пробы «Дубликат»
+(наблюдение Layout/Prepare, код 2 = `Duplicate_ID`, id `fixture`; подтверждено
+app.log: revision 0→1, focus `diagnostics/duplicate`). Снимки получены выбранной
+проверенной ISD `f8204c61615406ce5628b15692628e146476a008` с `linux-abstract-v1`
+в create/status, явным focus и остановкой собственных runs в `finally`.
+Private prefix libpng 1.6.59/zlib 1.4 подготовлен заново (официальные архивы
+сверены по SHA256, upstream тесты прошли, C ABI и ldd executable и transitive
+zlib проверены) без изменения системных библиотек. Публичные копии содержат
+только IHDR/IDAT/IEND и pixel-identical captures; каждый PNG проверен исполнителем,
+координатором — программно (структура, пиксельное равенство, локализация отличий
+состояний в области статусной строки; визуальный просмотр в координаторском
+контексте этой сессии недоступен — модель без image input); 2026-11-15 владелец
+лично просмотрел и подтвердил все четыре опубликованных PNG (ожидаемое содержание,
+без приватных данных), закрыв обязательный визуальный шаг приёмки.
+
+Прошли site unit/parity/schema tests (включая новый binding-тест и
+negative fixtures), build, loopback HTTP с новыми маршрутами EN/RU и digests,
+свежий portable export (631 файл, byte-identical экспорту origin/main) и
+portable-check; `check:catalogue:strict` ожидаемо падает (после интеграции с
+опубликованными `oui-3no.12`, `oui-3no.20` и `oui-3no.22` — 16 из 23). После
+отдельного разрешения владельца 2026-11-15 пройдена изолированная браузерная
+приёмка Chromium 152 с sandbox: страница EN/RU при 360/1280, JS и no-JS,
+клавиатура, locale/anchors, изображения и reduced motion; существующие сценарии
+(включая опубликованные жесты, Lab menu и Lab HUD) сохранены; browser screenshot
+сохранены в артефактах проверки. Другие
+браузеры, полная доступность, остальные gallery IDs и deploy не проверены.

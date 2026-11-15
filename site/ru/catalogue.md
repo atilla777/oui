@@ -1,7 +1,7 @@
 # Каталог возможностей {#catalogue}
 
 Это явно ограниченная выборка, а не полный каталог showcase. Сейчас она охватывает
-тринадцать из 19 разделов галереи и три из четырёх экранов Integration Lab.
+четырнадцать из 19 разделов галереи и три из четырёх экранов Integration Lab.
 На снимках показано нативное приложение, а не браузерный порт.
 
 <CatalogueFilter locale="ru">
@@ -116,6 +116,15 @@
 
 </CatalogueItem>
 
+<CatalogueItem id="diagnostics-performance">
+
+## Диагностика и производительность {#diagnostics-performance}
+
+Фазы CPU, счётчики метрик текста и пять сбойных диагностических проб.
+[Подробнее и нативный пример](./capabilities/diagnostics-performance).
+
+</CatalogueItem>
+
 <CatalogueItem id="lab-menu">
 
 ## Меню лаборатории {#lab-menu}
@@ -140,7 +149,6 @@
 
 Выбор строки в двух однородных списках, предложение переноса и его подтверждение
 или отказ. [Подробнее и нативный пример](./lab/inventory).
-
 </CatalogueItem>
 
 </CatalogueFilter>

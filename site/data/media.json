@@ -2950,6 +2950,218 @@
       }
     },
     {
+      "id": "diagnostics-performance-en-initial",
+      "section": "diagnostics-performance",
+      "state": "initial state with CPU phase samples after the first complete frame",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/performance.odin",
+        "consumer/ui_showcase/app/performance_runtime.odin",
+        "consumer/ui_showcase/app/diagnostic_runtime.odin",
+        "consumer/ui_showcase/app/name_runtime.odin",
+        "consumer/ui_showcase/app/collection_runtime.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_base",
+        "kit/ui_layout",
+        "kit/ui_interaction",
+        "kit/ui_text",
+        "kit/ui_editor",
+        "kit/ui_collections",
+        "kit/ui_sdl_text",
+        "kit/ui_sdl"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section diagnostics-performance; metrics on; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/diagnostics-performance-en-initial.png",
+      "sha256": "d57acb0bfbb953751575f8b86d19b6b1f2688325b4c4e51f431aeed8fa516a3a",
+      "caption": {
+        "en": "Native diagnostics and performance page, EN UI; CPU phase samples after the first complete frame.",
+        "ru": "Нативная страница диагностики и производительности, интерфейс EN; фазы CPU после первого полного кадра."
+      },
+      "alt": {
+        "en": "Native G20-G21 page with five diagnostic probes, a metrics toggle, CPU phase counters and the editor and collection panels.",
+        "ru": "Нативная страница G20-G21: пять диагностических проб, переключатель замеров, счётчики фаз CPU и панели редактора и коллекции."
+      }
+    },
+    {
+      "id": "diagnostics-performance-en-diagnostic",
+      "section": "diagnostics-performance",
+      "state": "Duplicate diagnostic probe applied; observation shown",
+      "uiLocale": "en",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/performance.odin",
+        "consumer/ui_showcase/app/performance_runtime.odin",
+        "consumer/ui_showcase/app/diagnostic_runtime.odin",
+        "consumer/ui_showcase/app/name_runtime.odin",
+        "consumer/ui_showcase/app/collection_runtime.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_base",
+        "kit/ui_layout",
+        "kit/ui_interaction",
+        "kit/ui_text",
+        "kit/ui_editor",
+        "kit/ui_collections",
+        "kit/ui_sdl_text",
+        "kit/ui_sdl"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section diagnostics-performance; metrics on; Duplicate probe activated with Return; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/diagnostics-performance-en-diagnostic.png",
+      "sha256": "d3f9c5444b80e1a9875aed92eb1110457157e05a0ec5743c584abe355cad0fb4",
+      "caption": {
+        "en": "Native diagnostics and performance page, EN UI; Duplicate probe observation.",
+        "ru": "Нативная страница диагностики и производительности, интерфейс EN; наблюдение пробы «Дубликат»."
+      },
+      "alt": {
+        "en": "Native G20-G21 page after the Duplicate probe: the status line reports an expected Layout Prepare observation with code 2 and id fixture.",
+        "ru": "Нативная страница G20-G21 после пробы «Дубликат»: строка состояния сообщает ожидаемое наблюдение Layout Prepare с кодом 2 и id fixture."
+      }
+    },
+    {
+      "id": "diagnostics-performance-ru-initial",
+      "section": "diagnostics-performance",
+      "state": "initial state with CPU phase samples after the first complete frame",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/performance.odin",
+        "consumer/ui_showcase/app/performance_runtime.odin",
+        "consumer/ui_showcase/app/diagnostic_runtime.odin",
+        "consumer/ui_showcase/app/name_runtime.odin",
+        "consumer/ui_showcase/app/collection_runtime.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_base",
+        "kit/ui_layout",
+        "kit/ui_interaction",
+        "kit/ui_text",
+        "kit/ui_editor",
+        "kit/ui_collections",
+        "kit/ui_sdl_text",
+        "kit/ui_sdl"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section diagnostics-performance; metrics on; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/diagnostics-performance-ru-initial.png",
+      "sha256": "a33200a474261845c53eb0ceef49ff5c8916b2ca9e0dc37a22a02e5aea1faf69",
+      "caption": {
+        "en": "Native diagnostics and performance page, RU UI; CPU phase samples after the first complete frame.",
+        "ru": "Нативная страница диагностики и производительности, интерфейс RU; фазы CPU после первого полного кадра."
+      },
+      "alt": {
+        "en": "Native G20-G21 page with five diagnostic probes, a metrics toggle, CPU phase counters and the editor and collection panels.",
+        "ru": "Нативная страница G20-G21: пять диагностических проб, переключатель замеров, счётчики фаз CPU и панели редактора и коллекции."
+      }
+    },
+    {
+      "id": "diagnostics-performance-ru-diagnostic",
+      "section": "diagnostics-performance",
+      "state": "Duplicate diagnostic probe applied; observation shown",
+      "uiLocale": "ru",
+      "revision": "4da8d7a57bd2453227a4c37df6b0b4d171401681",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/performance.odin",
+        "consumer/ui_showcase/app/performance_runtime.odin",
+        "consumer/ui_showcase/app/diagnostic_runtime.odin",
+        "consumer/ui_showcase/app/name_runtime.odin",
+        "consumer/ui_showcase/app/collection_runtime.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_base",
+        "kit/ui_layout",
+        "kit/ui_interaction",
+        "kit/ui_text",
+        "kit/ui_editor",
+        "kit/ui_collections",
+        "kit/ui_sdl_text",
+        "kit/ui_sdl"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section diagnostics-performance; metrics on; Duplicate probe activated with Return; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/diagnostics-performance-ru-diagnostic.png",
+      "sha256": "3492e6e4f02cb30649df7d0798644478fe5d09a7df0fff076bf8819139f567cf",
+      "caption": {
+        "en": "Native diagnostics and performance page, RU UI; Duplicate probe observation.",
+        "ru": "Нативная страница диагностики и производительности, интерфейс RU; наблюдение пробы «Дубликат»."
+      },
+      "alt": {
+        "en": "Native G20-G21 page after the Duplicate probe: the status line reports an expected Layout Prepare observation with code 2 and id fixture.",
+        "ru": "Нативная страница G20-G21 после пробы «Дубликат»: строка состояния сообщает ожидаемое наблюдение Layout Prepare с кодом 2 и id fixture."
+      }
+    },
+    {
       "id": "lab-inventory-initial-en",
       "section": "lab-inventory",
       "state": "initial two lists",

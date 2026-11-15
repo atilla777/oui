@@ -1,6 +1,6 @@
 # Custom primitives {#custom}
 
-Two namespaced recipes build side-by-side panels with application-owned circle nodes. A custom description carries immutable payload bytes and trusted pure validate, measure and hit callbacks; the circle activates only inside its round area, and the panel footer counts the recorded activations. Style and Footer toggle the two recipes, and popup and tooltip overlays layer above the panels.
+Two namespaced recipes build side-by-side panels with application-owned circle nodes. A custom description carries immutable payload bytes and trusted pure validate, measure and hit callbacks; the circle activates only inside its round area, and the panel footer counts the recorded activations. Style and Footer toggle the left recipe's styling and its footer slot, and popup and tooltip overlays layer above the panels.
 
 ![Showcase page with Style, Footer, Disabled, Popup shield and Tooltip actions above two panels, each with a circle and footer count zero.](/media/custom-en-initial.png)
 

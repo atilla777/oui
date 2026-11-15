@@ -205,8 +205,9 @@ whole-source verified ISD `f8204c61615406ce5628b15692628e146476a008`
 libpng 1.6.59/zlib 1.4 с upstream tests, ABI-проверкой и фактической linkage,
 без системных изменений. Набор текста в изолированном Xvfb — латиница US-layout
 в обоих языках (wrapper ограничивает `--keyboard-layout` другими секциями), черновик
-в снимках буквально «Алексей test». Все восемь PNG просмотрены исполнителем;
-координатор независимо проверил digests, размеры 1280×960, chunk layout
+в снимках буквально «Алексей test». Все восемь PNG просмотрены исполнителем
+и независимо владельцем 2026-11-15 (подтверждены заявленные состояния и
+отсутствие личных/посторонних данных); координатор независимо проверил digests, размеры 1280×960, chunk layout
 публичных копий (только IHDR/IDAT/IEND, пиксели идентичны captures) и
 resource hashes против трека. Media manifest сохраняет полные
 state/locale/revision/source/resource identities без локальных путей.
@@ -220,8 +221,14 @@ export/portable-check (site/docs в export не входят, portable байт�
 изолированная headless Chromium 152 приёмка с sandbox, собственным профилем и
 loopback preview: EN/RU новые страницы на 360/1280, клавиатура, смена языка с
 valid/missing anchors, no-JS prose/images/links, reduced motion, новый
-filter-сценарий каталога (`settings`), 135 PASS и 164 screenshots с cleanup
-собственных browser/preview. Strict catalogue 23 IDs, полная квалификация,
+filter-сценарий каталога (`settings`). До интеграции: 135 PASS и 164 screenshots;
+на итоговом интегрированном дереве после объединения с опубликованными
+menu/HUD recipe+Lab, gestures, diagnostics, composition/custom, transitions и
+world: свежий запуск 215 PASS и 244 screenshots с cleanup
+собственных browser/preview (первый запуск того же снимка прервался переходящим
+сбоем chromium-контекста no-JS на recipes/hud 1280 под конкурентной нагрузкой
+параллельных сессий; повтор на том же дереве завершён полностью, exit 0).
+Strict catalogue 23 IDs, полная квалификация,
 аудит доступности, другие браузеры и deployment не заявляются; унаследованное
 ограничение Vite 5 сохраняется. Остальные три recipe+Lab (menu, HUD, inventory)
 этим кандидатом не покрываются.

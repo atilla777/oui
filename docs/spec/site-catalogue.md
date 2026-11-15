@@ -4,7 +4,9 @@
 `oui-3no.6`, Atlas `oui-3no.7`, text-input `oui-3no.9`, прокрутку/коллекции
 `oui-3no.10` и layers/HUD `oui-3no.11`. Text/rich-text `oui-3no.8` и
 menu recipe/Lab menu `oui-3no.20` — интеграционные кандидаты. Жесты `oui-3no.12` —
-локальный кандидат, pending integration.
+локальный кандидат, pending integration. Диагностика/производительность
+`oui-3no.17` — интеграционный кандидат. Composition/custom `oui-3no.13` —
+локальный кандидат.
 World anchors `oui-3no.15` — текущий кандидат этой worktree, pending integration.
 Библиотека и native consumers не изменены; сайт описывает существующие возможности,
 а не реализует их в браузере.
@@ -13,8 +15,10 @@ World anchors `oui-3no.15` — текущий кандидат этой worktree
   `capabilities/controls`, `capabilities/styling`, `capabilities/profiles`,
   `capabilities/layers`, `capabilities/hud`, `capabilities/text-input`, `capabilities/atlas`,
   `capabilities/scroll-table`, `capabilities/collections`, `capabilities/text`, `capabilities/rich-text`,
-  `capabilities/gestures`, `capabilities/world`, а также рецепты и экраны Lab — опубликованные
-  `recipes/menu` и `lab/menu` (`oui-3no.20`) и `recipes/hud`/`lab/hud` этого кандидата.
+  `capabilities/gestures`, `capabilities/diagnostics-performance`,
+  `capabilities/composition`, `capabilities/custom`, `capabilities/world`, а также рецепты
+  и экраны Lab — опубликованные `recipes/menu` и `lab/menu` (`oui-3no.20`) и
+  `recipes/hud`/`lab/hud` этого кандидата.
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
   полный showcase, с pinned source links и native build/run command.
   Кандидат `oui-3no.20` добавляет `recipes/menu` (узкий standalone-menu рецепт
@@ -22,7 +26,8 @@ World anchors `oui-3no.15` — текущий кандидат этой worktree
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
   Каталог объявляет sample coverage `layout`, `controls`, `styling`, `profiles`,
   `layers`, `hud`, `text-input`, `atlas`, `scroll-table`, `collections`, `text`, `rich-text`,
-  `gestures`, `lab-menu`, `lab-hud` и `world`. Native source catalogue
+  `gestures`, Lab IDs `lab-menu`/`lab-hud`, `diagnostics-performance`,
+  `composition`, `custom`, `world`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -562,12 +567,115 @@ native/portable доказательства применимы без повт�
 публикацию, Pages deploy или полную приёмку: остальные три рецепта/Lab,
 полное покрытие IDs, другие браузеры и доступность не проверены.
 
+## Диагностика и производительность (`oui-3no.17`)
+
+EN/RU страницы описывают нативную страницу G20–G21 showcase: фазы CPU
+(p/c/k/d/r/p), счётчики обратных вызовов метрик текста и операций, переключатель
+«Замеры вкл/выкл» и пять диагностических проб (Duplicate, Invalid, Resource,
+Ownership, Unsupported), выдающих наблюдение family/stage/code/id без изменения
+обычного состояния. Явно указаны границы: opt-in потребительские замеры, нет
+транспорта отладчика, времени GPU, учёта кучи SDL и числовых SLA. Выбранные
+пакеты (`ui_base`, `ui_layout`, `ui_interaction`, `ui_text`, `ui_editor`,
+`ui_editor/sdl`, `ui_collections`, `ui_sdl_text`, `ui_sdl` и общая отрисовка
+оболочки `ui_style`) выведены из фактических импортов страницы; ссылки на
+исходники и native команды закреплены за `4da8d7a57bd2453227a4c37df6b0b4d171401681`
+(native-байты идентичны текущему дереву — сверено пустым diff по `kit`/`consumer`).
+
+Сняты четыре подлинных PNG 1280×960, scale 1, EN/RU × начальное состояние
+(фазы CPU после первого полного кадра; строка состояния обновляется при
+перекомпозиции после первого кадра) и состояние после пробы «Дубликат»
+(наблюдение Layout/Prepare, код 2 = `Duplicate_ID`, id `fixture`; подтверждено
+app.log: revision 0→1, focus `diagnostics/duplicate`). Снимки получены выбранной
+проверенной ISD `f8204c61615406ce5628b15692628e146476a008` с `linux-abstract-v1`
+в create/status, явным focus и остановкой собственных runs в `finally`.
+Private prefix libpng 1.6.59/zlib 1.4 подготовлен заново (официальные архивы
+сверены по SHA256, upstream тесты прошли, C ABI и ldd executable и transitive
+zlib проверены) без изменения системных библиотек. Публичные копии содержат
+только IHDR/IDAT/IEND и pixel-identical captures; каждый PNG проверен исполнителем,
+координатором — программно (структура, пиксельное равенство, локализация отличий
+состояний в области статусной строки; визуальный просмотр в координаторском
+контексте этой сессии недоступен — модель без image input); 2026-11-15 владелец
+лично просмотрел и подтвердил все четыре опубликованных PNG (ожидаемое содержание,
+без приватных данных), закрыв обязательный визуальный шаг приёмки.
+
+Прошли site unit/parity/schema tests (включая новый binding-тест и
+negative fixtures), build, loopback HTTP с новыми маршрутами EN/RU и digests,
+свежий portable export (631 файл, byte-identical экспорту origin/main) и
+portable-check; `check:catalogue:strict` ожидаемо падает (после интеграции с
+опубликованными `oui-3no.12`, `oui-3no.20`, `oui-3no.22` и composition/custom
+`oui-3no.13` — 18 из 23). После
+отдельного разрешения владельца 2026-11-15 пройдена изолированная браузерная
+приёмка Chromium 152 с sandbox: страница EN/RU при 360/1280, JS и no-JS,
+клавиатура, locale/anchors, изображения и reduced motion; существующие сценарии
+(включая опубликованные жесты, Lab menu и Lab HUD) сохранены; browser screenshot
+сохранены в артефактах проверки. Другие
+браузеры, полная доступность, остальные gallery IDs и deploy не проверены.
+## Композиция и custom primitives — локальный кандидат oui-3no.13
+
+Локальный кандидат добавляет EN/RU страницы `capabilities/composition` и
+`capabilities/custom`; после объединения с опубликованными жестами, menu recipe
+и HUD recipe, а также diagnostics/performance declared sample coverage
+составляет восемнадцать IDs.
+Composition описывает владеемые панели с фиксированным порядком слотов,
+вложенную дочернюю кнопку в составной родительской и запись намерения в
+родительском маршруте при выключенном Stop. Custom описывает два рецепта
+с namespace, владеемые приложением узлы-круги с immutable payload и чистой
+проверкой попадания, popup-щит и неинтерактивную подсказку. Native API,
+поведение kit и showcase не менялись; страницы и каталог — site-only изменения.
+
+Двенадцать настоящих PNG 1280×960, scale 1 получены в собственной worktree
+на source revision `8bc09cff358aa629410437996520283ff98d77d9` в clean state
+до site-изменений: composition EN/RU в начальном состоянии (Stop включён,
+counts 0|0) и после распространения (Stop выключен, counts 1|1); custom EN/RU
+в начальном состоянии, после одной активации левого круга (count=1), после
+применения Style и удаления footer-слота, и с открытым popup-щитом и подсказкой.
+Состояния подтверждены OCR строки counts и пиксельными diffs (для activated
+изменилась ровно одна цифра счётчика; styled затронул только левую панель).
+Каждый PNG просмотрен через image-capable контекст; личных данных не обнаружено.
+Явно выбранная ISD `f8204c61615406ce5628b15692628e146476a008` прошла
+whole-source verification с native input; create/status подтвердили
+`linux-abstract-v1`, выполнен явный focus, собственные runs остановлены.
+Pinned пара libpng 1.6.59/zlib 1.4 пересобрана по разрешению владельца в
+новый приватный prefix с проверенными archive digests, upstream tests
+(zlib 64-bit OK, libpng 36/36) и фактической linkage (ldd показывает transitive
+zlib из prefix), без изменений системных библиотек.
+
+Unit/parity/schema/filter tests, catalogue validation, static build и loopback
+HTTP всех новых маршрутов прошли; свежий portable export + portable-check +
+`test-ui-kit` (5) прошли на исходном дереве задач, а native-часть
+интегрированного дерева побайтово равна базовой ревизии `8bc09cf`, поэтому
+portable/native доказательства применимы без повтора. После отдельного разрешения владельца
+для `oui-3no.13` пройдена браузерная приёмка в изолированном headless
+Chromium с sandbox, собственным временным профилем и loopback-only static
+preview: 183 PASS на финальном интегрированном дереве, включая EN/RU composition/custom
+и сохранённые сценарии на ширинах 360/1280 — prose без page overflow, изображения загружены с
+локализованным alt, клавиатурная навигация из каталога, смена языка с
+valid/missing anchors, no-JS content/images/links и reduced motion.
+Скриншоты новых страниц (16) просмотрены через image-capable контекст;
+собственные browser и preview остановлены в `finally`. Унаследованные
+особенности (пустая нижняя часть native window, горизонтальный скролл
+shell-блока, эллипсис длинного RU-заголовка в outline, мелкий текст
+изображений на 360) совпадают с поведением существующих страниц и не являются
+новыми дефектами. Мобильные изображения уменьшены; viewer для
+composition/custom не вводился, полная квалификация 23 IDs, другие браузеры,
+полный аудит доступности и Pages deployment не проверены.
+
+Как увидеть локальный кандидат: из `site/` с Node из `.nvmrc` выполнить
+`npm ci`, `npm run build`, `npm run check:http`, затем
+`npm run preview -- --port 0`; открыть выданный URL с
+`/oui/en/capabilities/composition`, `/oui/en/capabilities/custom`
+или соответствующие `/ru/` страницы, или перейти через каталог.
+`npm run check:browser` воспроизводит разрешённую изолированную браузерную
+проверку. Это локальный кандидат, не интеграция в основную ветку.
+
 ## World anchors (`oui-3no.15`)
 
 Кандидат `oui-3no.15`, pending integration: после объединения с опубликованными
-жестами (`oui-3no.12`), menu recipe/Lab menu (`oui-3no.20`) и HUD recipe/Lab HUD
-(`oui-3no.22`) sample вырос до шестнадцати записей — четырнадцать gallery-разделов
-(включая новый `world`, G19, fixture `anchors`) и два Lab-экрана. EN/RU страницы
+жестами (`oui-3no.12`), menu recipe/Lab menu (`oui-3no.20`), HUD recipe/Lab HUD
+(`oui-3no.22`), диагностикой/производительностью (`oui-3no.17`) и
+composition/custom (`oui-3no.13`) sample вырос до девятнадцати записей —
+семнадцать gallery-разделов (включая новый `world`, G19, fixture `anchors`)
+и два Lab-экрана. EN/RU страницы
 доступны из статического каталога, описывают назначение, наблюдаемое поведение,
 границы, выбранные пакеты, pinned source links и native build/run команду; kit и
 native поведение не изменялись.
@@ -614,16 +722,19 @@ portable export + portable-check, адресный `odin test kit/ui_world`
 собственный loopback-only static preview, world EN/RU на 360/1280 в hydrated,
 no-JS и reduced motion циклах — prose без overflow, оба изображения загружены
 с локализованным alt, клавиатура, смена языка с valid/missing anchors. После
-объединения с опубликованными .12/.20/.22 приёмка повторена на интегрированном
-снимке: полная suite 167 PASS, log
-`/tmp/opencode/oui-3no15-checks/integrated-check-browser.log` (sandbox
+объединения с опубликованными задачами (сначала .12/.20/.22, затем
+.17/.13) приёмка повторена на каждом интегрированном снимке; итоговая полная
+suite 191 PASS, log
+`/tmp/opencode/oui-3no15-checks/integrated2-check-browser.log` (sandbox
 renderer-seccomp=2, no-sandbox flags отсутствуют, cleanup: browser closed,
 preview listening=false), артефакты/скриншоты
-`/tmp/opencode/oui-3no15-browser/oui-browser-1hsNdl`; также сохранены логи
-интегрированных перезапусков `integrated-check.log`, `integrated-build.log`,
-`integrated-check-http.log` в `/tmp/opencode/oui-3no15-checks/`. 8 world-скриншотов
-просмотрены исполнителем и независимыми image-capable просмотрщиками (два
-просмотра до и после интеграции),
+`/tmp/opencode/oui-3no15-browser/oui-browser-cNXPlz`; также сохранены логи
+интегрированных перезапусков `integrated2-check.log` (12 тестов),
+`integrated2-build.log`, `integrated2-check-http.log` и portable gate
+`/tmp/opencode/oui-3no15-proof3.HYL5RPcD/portable.log` в
+`/tmp/opencode/oui-3no15-checks/`. 8 world-скриншотов
+просмотрены исполнителем и независимыми image-capable просмотрщиками (три
+просмотра: до интеграции и после каждой),
 без приватного содержимого; координатор и reviewer-модели не поддерживают
 просмотр изображений (раскрытое ограничение). Проверен один браузер (Chromium);
 аудит доступности/conformance и другие браузеры не заявлены, Pages deployment

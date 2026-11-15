@@ -48,7 +48,9 @@ The browser check observes local site search and catalogue query/filter/reset,
 keyboard interaction, locale switching, no-JS content,
 reduced motion and layout at 360 and 1280 pixels, including the catalogue,
 layout, controls, styling, profiles, layers, HUD, text-input, Atlas, scroll-table,
-collections, Lab menu and basic menu recipe pages and their localized images. Its screenshots need human
+collections, Lab menu, basic menu recipe, Lab HUD, HUD recipe and diagnostics
+and performance pages
+and their localized images. Its screenshots need human
 inspection; automated checks do not establish accessibility conformance or cover
 other browsers and devices.
 Both locale trees must contain each page. Explicit matching heading IDs are the
@@ -58,7 +60,10 @@ ordinary link still reaches the corresponding page without a hash.
 
 The catalogue is an explicit `layout`, `controls`, `styling`, `profiles`, `layers`,
 `hud`, `text`, `rich-text`, `text-input`, `atlas`, `scroll-table`, `collections`,
-`gestures`, `world`, `lab-menu` and `lab-hud` sample of fourteen gallery sections and two of the four Lab screens, not complete coverage. The
+`gestures`, `lab-menu`, `lab-hud`, `diagnostics-performance`, `composition`,
+`custom` and `world` sample of
+seventeen gallery
+sections and two of the four Lab screens, not complete coverage. The
 schema-versioned `data/catalogue.json` and `data/media.json` are checked before
 the build against the actual native section IDs, locale media, provenance,
 PNG dimensions and digests. `npm run check:catalogue:strict` deliberately fails

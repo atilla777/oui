@@ -3,18 +3,21 @@
 Контракт введён `oui-3no.2`; опубликованные расширения включают `oui-3no.5`,
 `oui-3no.6`, Atlas `oui-3no.7`, text-input `oui-3no.9`, прокрутку/коллекции
 `oui-3no.10` и layers/HUD `oui-3no.11`. Text/rich-text `oui-3no.8` — интеграционный кандидат.
+Диагностика/производительность `oui-3no.17` — интеграционный кандидат.
 Библиотека и native consumers не изменены; сайт описывает существующие возможности,
 а не реализует их в браузере.
 
 - `site/en/` и `site/ru/` содержат `catalogue` и `capabilities/layout`,
   `capabilities/controls`, `capabilities/styling`, `capabilities/profiles`,
   `capabilities/layers`, `capabilities/hud`, `capabilities/text-input`, `capabilities/atlas`,
-  `capabilities/scroll-table`, `capabilities/collections`, `capabilities/text`, `capabilities/rich-text`.
+  `capabilities/scroll-table`, `capabilities/collections`, `capabilities/text`, `capabilities/rich-text`,
+  `capabilities/diagnostics-performance`.
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
   полный showcase, с pinned source links и native build/run command.
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
   Каталог объявляет sample coverage `layout`, `controls`, `styling`, `profiles`,
-  `layers`, `hud`, `text-input`, `atlas`, `scroll-table`, `collections`, `text`, `rich-text`. Native source catalogue
+  `layers`, `hud`, `text-input`, `atlas`, `scroll-table`, `collections`, `text`, `rich-text`,
+  `diagnostics-performance`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -371,3 +374,44 @@ test прошли. Дополнительный широкий native app test r
 `/oui/en/capabilities/atlas` либо `/oui/ru/capabilities/atlas`, или перейти
 через соответствующий catalogue. Сравнить A/B и счётчик reload под изображениями.
 Это проверено в локальном HTTP/browser, не означает публикацию или Pages deploy.
+
+## Диагностика и производительность (`oui-3no.17`)
+
+EN/RU страницы описывают нативную страницу G20–G21 showcase: фазы CPU
+(p/c/k/d/r/p), счётчики обратных вызовов метрик текста и операций, переключатель
+«Замеры вкл/выкл» и пять диагностических проб (Duplicate, Invalid, Resource,
+Ownership, Unsupported), выдающих наблюдение family/stage/code/id без изменения
+обычного состояния. Явно указаны границы: opt-in потребительские замеры, нет
+транспорта отладчика, времени GPU, учёта кучи SDL и числовых SLA. Выбранные
+пакеты (`ui_base`, `ui_layout`, `ui_interaction`, `ui_text`, `ui_editor`,
+`ui_editor/sdl`, `ui_collections`, `ui_sdl_text`, `ui_sdl` и общая отрисовка
+оболочки `ui_style`) выведены из фактических импортов страницы; ссылки на
+исходники и native команды закреплены за `4da8d7a57bd2453227a4c37df6b0b4d171401681`
+(native-байты идентичны текущему дереву — сверено пустым diff по `kit`/`consumer`).
+
+Сняты четыре подлинных PNG 1280×960, scale 1, EN/RU × начальное состояние
+(фазы CPU после первого полного кадра; строка состояния обновляется при
+перекомпозиции после первого кадра) и состояние после пробы «Дубликат»
+(наблюдение Layout/Prepare, код 2 = `Duplicate_ID`, id `fixture`; подтверждено
+app.log: revision 0→1, focus `diagnostics/duplicate`). Снимки получены выбранной
+проверенной ISD `f8204c61615406ce5628b15692628e146476a008` с `linux-abstract-v1`
+в create/status, явным focus и остановкой собственных runs в `finally`.
+Private prefix libpng 1.6.59/zlib 1.4 подготовлен заново (официальные архивы
+сверены по SHA256, upstream тесты прошли, C ABI и ldd executable и transitive
+zlib проверены) без изменения системных библиотек. Публичные копии содержат
+только IHDR/IDAT/IEND и pixel-identical captures; каждый PNG проверен исполнителем,
+координатором — программно (структура, пиксельное равенство, локализация отличий
+состояний в области статусной строки; визуальный просмотр в координаторском
+контексте этой сессии недоступен — модель без image input); 2026-11-15 владелец
+лично просмотрел и подтвердил все четыре опубликованных PNG (ожидаемое содержание,
+без приватных данных), закрыв обязательный визуальный шаг приёмки.
+
+Прошли десять site unit/parity/schema tests (включая новый binding-тест и
+negative fixtures), build, loopback HTTP с новыми маршрутами EN/RU и digests,
+свежий portable export (631 файл, byte-identical экспорту origin/main) и
+portable-check; `check:catalogue:strict` ожидаемо падает (13 из 23). После
+отдельного разрешения владельца 2026-11-15 пройдена изолированная браузерная
+приёмка Chromium 152 с sandbox: страница EN/RU при 360/1280, JS и no-JS,
+клавиатура, locale/anchors, изображения и reduced motion; существующие сценарии
+сохранены, 152 browser screenshot сохранены в артефактах проверки. Другие
+браузеры, полная доступность, остальные gallery IDs и deploy не проверены.

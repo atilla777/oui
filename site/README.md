@@ -48,7 +48,7 @@ The browser check observes local site search and catalogue query/filter/reset,
 keyboard interaction, locale switching, no-JS content,
 reduced motion and layout at 360 and 1280 pixels, including the catalogue,
 layout, controls, styling, profiles, layers, HUD, transitions, text-input, Atlas,
-scroll-table, collections, Lab menu and basic menu recipe pages and their localized images. Its screenshots need human
+scroll-table, collections, gestures, Lab menu and basic menu recipe pages and their localized images. Its screenshots need human
 inspection; automated checks do not establish accessibility conformance or cover
 other browsers and devices.
 Both locale trees must contain each page. Explicit matching heading IDs are the

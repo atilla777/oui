@@ -18,6 +18,7 @@
       "lab-menu",
       "gestures",
       "lab-hud",
+      "diagnostics-performance",
       "composition",
       "custom"
     ]
@@ -552,6 +553,42 @@
         "lab-hud-popup-ru",
         "lab-hud-hold-ru",
         "lab-hud-completed-ru"
+      ]
+    },
+    {
+      "id": "diagnostics-performance",
+      "group": "gallery",
+      "categories": [
+        "state"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_text",
+        "ui_editor",
+        "ui_collections",
+        "ui_sdl_text"
+      ],
+      "source": "consumer/ui_showcase/sections/performance.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Diagnostics and performance",
+        "ru": "Диагностика и производительность"
+      },
+      "summary": {
+        "en": "Inspect CPU phase samples and run five failing probes around an editor and collection fixture.",
+        "ru": "Наблюдайте фазы CPU и запускайте пять сбойных проб вокруг примера с редактором и коллекцией."
+      },
+      "limitations": {
+        "en": "Experimental; no debugger transport, GPU time or numerical SLA.",
+        "ru": "Экспериментально; нет транспорта отладчика, времени GPU и числовых SLA."
+      },
+      "media": [
+        "diagnostics-performance-en-initial",
+        "diagnostics-performance-en-diagnostic",
+        "diagnostics-performance-ru-initial",
+        "diagnostics-performance-ru-diagnostic"
       ]
     },
     {

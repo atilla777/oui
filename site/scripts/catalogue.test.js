@@ -20,7 +20,7 @@ test('published sample binds localized prose, media and selected resource hashes
   const media = JSON.parse(await readFile('data/media.json', 'utf8'))
   const source = await readFile('../consumer/ui_showcase/model/catalogue.odin', 'utf8')
   await validateCatalogue({ catalogue, media, source, publicRoot: 'public', coverage: catalogue.coverage })
-  assert.deepEqual(catalogue.coverage.ids, ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text', 'lab-menu', 'gestures', 'lab-hud', 'composition', 'custom'])
+  assert.deepEqual(catalogue.coverage.ids, ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text', 'lab-menu', 'gestures', 'lab-hud', 'diagnostics-performance', 'composition', 'custom'])
   for (const locale of ['en', 'ru']) {
     for (const section of catalogue.coverage.ids) {
       const pagePath = section.startsWith('lab-') ? `${locale}/lab/${section.slice(4)}.md` : `${locale}/capabilities/${section}.md`
@@ -60,7 +60,7 @@ test('controls and styling bind both locale pages and genuine state records', as
   const catalogue = JSON.parse(await readFile('data/catalogue.json', 'utf8'))
   const media = JSON.parse(await readFile('data/media.json', 'utf8'))
   const source = await readFile('../consumer/ui_showcase/model/catalogue.odin', 'utf8')
-  assert.deepEqual(catalogue.coverage.ids, ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text', 'lab-menu', 'gestures', 'lab-hud', 'composition', 'custom'])
+  assert.deepEqual(catalogue.coverage.ids, ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text', 'lab-menu', 'gestures', 'lab-hud', 'diagnostics-performance', 'composition', 'custom'])
   await validateCatalogue({ catalogue, media, source, publicRoot: 'public', coverage: catalogue.coverage })
   for (const id of ['controls', 'styling']) {
     assert.ok(sourceIds(source).gallery.includes(id))
@@ -81,6 +81,38 @@ test('controls and styling bind both locale pages and genuine state records', as
       }
     }
   }
+})
+
+test('diagnostics-performance binds both locales, both genuine states and explicit opt-in boundaries', async () => {
+  const catalogue = JSON.parse(await readFile('data/catalogue.json', 'utf8'))
+  const media = JSON.parse(await readFile('data/media.json', 'utf8'))
+  const source = await readFile('../consumer/ui_showcase/model/catalogue.odin', 'utf8')
+  assert.ok(sourceIds(source).gallery.includes('diagnostics-performance'))
+  assert.ok(catalogue.coverage.ids.includes('diagnostics-performance'))
+  await validateCatalogue({ catalogue, media, source, publicRoot: 'public', coverage: catalogue.coverage })
+  const record = catalogue.records.find(item => item.id === 'diagnostics-performance')
+  assert.equal(record.media.length, 4)
+  const digests = new Set()
+  for (const locale of ['en', 'ru']) {
+    const page = await readFile(`${locale}/capabilities/diagnostics-performance.md`, 'utf8')
+    assert.ok(page.includes('{#diagnostics-performance}'))
+    assert.ok(page.includes(`--section diagnostics-performance --locale ${locale}`))
+    assert.ok(page.includes('4da8d7a57bd2453227a4c37df6b0b4d171401681'))
+    for (const phrase of locale === 'en' ? ['no debugger transport', 'no GPU timing', 'no numerical SLA'] : ['нет транспорта отладчика', 'измерения времени GPU', 'числовых SLA']) assert.ok(page.includes(phrase), `${locale}: ${phrase}`)
+    for (const state of ['initial', 'diagnostic']) {
+      const image = media.records.find(item => item.id === `diagnostics-performance-${locale}-${state}`)
+      assert.equal(image.uiLocale, locale)
+      assert.equal(image.section, 'diagnostics-performance')
+      assert.ok(page.includes(`![${image.alt[locale]}](/${image.path})`))
+      assert.ok(page.includes(image.caption[locale]))
+      digests.add(image.sha256)
+      for (const [path, expected] of Object.entries(image.resources)) {
+        assert.equal(createHash('sha256').update(await readFile(`../${path}`)).digest('hex'), expected, path)
+      }
+    }
+  }
+  assert.equal(digests.size, 4)
+  assert.notEqual(media.records.find(item => item.id === 'diagnostics-performance-en-initial').state, media.records.find(item => item.id === 'diagnostics-performance-en-diagnostic').state)
 })
 
 test('lab-menu sample binds four states per locale and its native command', async () => {

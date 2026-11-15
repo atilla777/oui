@@ -19,6 +19,8 @@
    "gestures",
    "lab-hud",
    "diagnostics-performance",
+   "composition",
+   "custom",
    "accessibility"
   ]
  },
@@ -588,6 +590,81 @@
     "diagnostics-performance-en-diagnostic",
     "diagnostics-performance-ru-initial",
     "diagnostics-performance-ru-diagnostic"
+   ]
+  },
+  {
+   "id": "composition",
+   "group": "gallery",
+   "categories": [
+    "composition",
+    "structure"
+   ],
+   "packages": [
+    "ui_base",
+    "ui_layout",
+    "ui_interaction",
+    "ui_composition",
+    "ui_style"
+   ],
+   "source": "consumer/ui_showcase/sections/composition.odin",
+   "runnable": "consumer/ui_showcase",
+   "title": {
+    "en": "Nested composition",
+    "ru": "Вложенная композиция"
+   },
+   "summary": {
+    "en": "Compose owned panels and nested nodes; a child activation records an intention on the parent route.",
+    "ru": "Композиция из владеемых панелей и вложенных узлов; активация дочернего элемента записывает намерение в родительском маршруте."
+   },
+   "limitations": {
+    "en": "Experimental; callbacks record intentions, no reentry; a pre-layout description without its own dispatch or focus.",
+    "ru": "Экспериментально; callbacks записывают намерения, нет reentry; описание до layout без собственного dispatch и фокуса."
+   },
+   "media": [
+    "composition-en-initial",
+    "composition-en-propagated",
+    "composition-ru-initial",
+    "composition-ru-propagated"
+   ]
+  },
+  {
+   "id": "custom",
+   "group": "gallery",
+   "categories": [
+    "custom",
+    "hit-testing"
+   ],
+   "packages": [
+    "ui_base",
+    "ui_layout",
+    "ui_interaction",
+    "ui_custom",
+    "ui_composition",
+    "ui_style"
+   ],
+   "source": "consumer/ui_showcase/sections/custom.odin",
+   "runnable": "consumer/ui_showcase",
+   "title": {
+    "en": "Custom primitives",
+    "ru": "Свои примитивы"
+   },
+   "summary": {
+    "en": "Two namespaced recipes with app-owned circle nodes and a pure circle hit predicate.",
+    "ru": "Два рецепта с namespace и владеемые приложением узлы-круги с чистой проверкой попадания."
+   },
+   "limitations": {
+    "en": "Experimental; two namespaces; pure circle hit; trusted process-lifetime callbacks, not a plugin ABI.",
+    "ru": "Экспериментально; два namespace; чистая проверка круга; callbacks доверенные на время процесса, не plugin ABI."
+   },
+   "media": [
+    "custom-en-initial",
+    "custom-en-activated",
+    "custom-en-styled",
+    "custom-en-popup-tooltip",
+    "custom-ru-initial",
+    "custom-ru-activated",
+    "custom-ru-styled",
+    "custom-ru-popup-tooltip"
    ]
   },
   {

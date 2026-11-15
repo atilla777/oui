@@ -1974,18 +1974,17 @@
       }
     },
     {
-      "id": "gestures-en-initial",
-      "section": "gestures",
-      "state": "initial two panels of six cards",
+      "id": "transitions-en-initial",
+      "section": "transitions",
+      "state": "initial Target A, count 0",
       "uiLocale": "en",
       "revision": "8bc09cff358aa629410437996520283ff98d77d9",
       "sourceState": "clean",
       "sourcePaths": [
-        "consumer/ui_showcase/sections/gestures.odin",
-        "consumer/ui_showcase/app/gesture_runtime.odin",
-        "consumer/gestures_demo/model/model.odin",
-        "kit/ui_gestures",
-        "kit/ui_gestures/sdl"
+        "consumer/ui_showcase/sections/transitions.odin",
+        "consumer/ui_showcase/app/transition_runtime.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_transitions"
       ],
       "window": {
         "width": 1280,
@@ -2004,32 +2003,31 @@
         "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
         "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
       },
-      "options": "Normal mode; pixel-perfect off; section gestures; supplied fonts and atlases.",
+      "options": "Normal mode; pixel-perfect off; section transitions; initial focus Target A; supplied fonts and atlases.",
       "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
-      "path": "media/gestures-en-initial.png",
-      "sha256": "cda9a0e552e9623390567fc4f50c2d5bea735055c0d8cbad48cc49276e72115f",
+      "path": "media/transitions-en-initial.png",
+      "sha256": "7eaab6e2ddeca75ea97ff28567327a5f8300be2ffa7c45c5c21edce48abe6c2f",
       "caption": {
-        "en": "Native gestures: both panels at six cards, EN UI.",
-        "ru": "Нативные жесты: обе панели по шесть карточек, интерфейс EN."
+        "en": "Native transitions: initial Target A state, EN UI.",
+        "ru": "Нативные переходы: начальное состояние «Цель A», интерфейс EN."
       },
       "alt": {
-        "en": "Two panels with six cards each, repeat buttons, pan handles and the focused name draft.",
-        "ru": "Две панели по шесть карточек, кнопки повторной прокрутки, ручки прокрутки и черновик имени в фокусе."
+        "en": "Transitions showcase at Target A: a card at its base position with count zero and a short progress bar; Target A is focused.",
+        "ru": "Раздел переходов в состоянии «Цель A»: карточка в базовом положении, счётчик ноль и короткая полоса прогресса; «Цель A» в фокусе."
       }
     },
     {
-      "id": "gestures-en-proposal",
-      "section": "gestures",
-      "state": "proposal while the mouse button is down over the target panel title",
+      "id": "transitions-en-after-b",
+      "section": "transitions",
+      "state": "after Target B activation",
       "uiLocale": "en",
       "revision": "8bc09cff358aa629410437996520283ff98d77d9",
       "sourceState": "clean",
       "sourcePaths": [
-        "consumer/ui_showcase/sections/gestures.odin",
-        "consumer/ui_showcase/app/gesture_runtime.odin",
-        "consumer/gestures_demo/model/model.odin",
-        "kit/ui_gestures",
-        "kit/ui_gestures/sdl"
+        "consumer/ui_showcase/sections/transitions.odin",
+        "consumer/ui_showcase/app/transition_runtime.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_transitions"
       ],
       "window": {
         "width": 1280,
@@ -2048,76 +2046,31 @@
         "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
         "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
       },
-      "options": "Normal mode; pixel-perfect off; section gestures; card-01 held over the panel-right title with the button down.",
+      "options": "Normal mode; pixel-perfect off; section transitions; initial focus Target A; Target B activated with Return, transition settled; supplied fonts and atlases.",
       "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
-      "path": "media/gestures-en-proposal.png",
-      "sha256": "0322ed28ad859cc648d57789bb4ef7e6a25da7de850ac1afa8098cafa2e16f1d",
+      "path": "media/transitions-en-after-b.png",
+      "sha256": "18b5a3de81dffdff3be5c337b07b1efa4913e119bb61bc3cbfe82d02361b6140",
       "caption": {
-        "en": "Native gestures: proposal with the mouse button still down, EN UI.",
-        "ru": "Нативные жесты: предложение при ещё нажатой кнопке мыши, интерфейс EN."
+        "en": "Native transitions: after Target B, EN UI.",
+        "ru": "Нативные переходы: после «Цели B», интерфейс EN."
       },
       "alt": {
-        "en": "A card held over the right panel title, which reads Drop: accepted, while the card stays in the left panel.",
-        "ru": "Карточка удерживается над заголовком правой панели с надписью «Перенос: разрешён», но остаётся в левой панели."
+        "en": "Transitions showcase after Target B: the card is offset and scaled down, faded with its colours retargeted, and the progress bar is longer; Target B is focused.",
+        "ru": "Раздел переходов после «Цели B»: карточка смещена и уменьшена, полупрозрачна с другими цветами, полоса прогресса длиннее; «Цель B» в фокусе."
       }
     },
     {
-      "id": "gestures-en-applied",
-      "section": "gestures",
-      "state": "after release the application moved card-01 to panel-right",
-      "uiLocale": "en",
-      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
-      "sourceState": "clean",
-      "sourcePaths": [
-        "consumer/ui_showcase/sections/gestures.odin",
-        "consumer/ui_showcase/app/gesture_runtime.odin",
-        "consumer/gestures_demo/model/model.odin",
-        "kit/ui_gestures",
-        "kit/ui_gestures/sdl"
-      ],
-      "window": {
-        "width": 1280,
-        "height": 960
-      },
-      "drawable": {
-        "width": 1280,
-        "height": 960
-      },
-      "scale": 1,
-      "resources": {
-        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
-        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
-        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
-        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
-        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
-        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
-      },
-      "options": "Normal mode; pixel-perfect off; section gestures; card-01 released over the panel-right title.",
-      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
-      "path": "media/gestures-en-applied.png",
-      "sha256": "213cfa863389958cd6d9bb87da86bc365e45202901607bac606fcdb9dbed5b72",
-      "caption": {
-        "en": "Native gestures: the application applied the move after release, EN UI.",
-        "ru": "Нативные жесты: приложение применило перенос после отпускания, интерфейс EN."
-      },
-      "alt": {
-        "en": "After release the left panel begins with card-02 and the right panel holds the moved card.",
-        "ru": "После отпускания левая панель начинается с card-02, а правая панель содержит перенесённую карточку."
-      }
-    },
-    {
-      "id": "gestures-ru-initial",
-      "section": "gestures",
-      "state": "initial two panels of six cards",
+      "id": "transitions-ru-initial",
+      "section": "transitions",
+      "state": "initial Target A, count 0",
       "uiLocale": "ru",
       "revision": "8bc09cff358aa629410437996520283ff98d77d9",
       "sourceState": "clean",
       "sourcePaths": [
-        "consumer/ui_showcase/sections/gestures.odin",
-        "consumer/ui_showcase/app/gesture_runtime.odin",
-        "consumer/gestures_demo/model/model.odin",
-        "kit/ui_gestures",
-        "kit/ui_gestures/sdl"
+        "consumer/ui_showcase/sections/transitions.odin",
+        "consumer/ui_showcase/app/transition_runtime.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_transitions"
       ],
       "window": {
         "width": 1280,
@@ -2136,32 +2089,31 @@
         "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
         "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
       },
-      "options": "Normal mode; pixel-perfect off; section gestures; supplied fonts and atlases.",
+      "options": "Normal mode; pixel-perfect off; section transitions; initial focus Target A; supplied fonts and atlases.",
       "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
-      "path": "media/gestures-ru-initial.png",
-      "sha256": "712c3b37a13aa98447307c239b51934d1004f629c67d7e5afb04d036ab495ff8",
+      "path": "media/transitions-ru-initial.png",
+      "sha256": "efaa628e6c5057b01b7666025cbcaf28025817939cf4f0e84252d8fa260b1f3e",
       "caption": {
-        "en": "Native gestures: both panels at six cards, RU UI.",
-        "ru": "Нативные жесты: обе панели по шесть карточек, интерфейс RU."
+        "en": "Native transitions: initial Target A state, RU UI.",
+        "ru": "Нативные переходы: начальное состояние «Цель A», интерфейс RU."
       },
       "alt": {
-        "en": "Two panels with six cards each, repeat buttons, pan handles and the focused name draft.",
-        "ru": "Две панели по шесть карточек, кнопки повторной прокрутки, ручки прокрутки и черновик имени в фокусе."
+        "en": "Transitions showcase at Target A: a card at its base position with count zero and a short progress bar; Target A is focused.",
+        "ru": "Раздел переходов в состоянии «Цель A»: карточка в базовом положении, счётчик ноль и короткая полоса прогресса; «Цель A» в фокусе."
       }
     },
     {
-      "id": "gestures-ru-proposal",
-      "section": "gestures",
-      "state": "proposal while the mouse button is down over the target panel title",
+      "id": "transitions-ru-after-b",
+      "section": "transitions",
+      "state": "after Target B activation",
       "uiLocale": "ru",
       "revision": "8bc09cff358aa629410437996520283ff98d77d9",
       "sourceState": "clean",
       "sourcePaths": [
-        "consumer/ui_showcase/sections/gestures.odin",
-        "consumer/ui_showcase/app/gesture_runtime.odin",
-        "consumer/gestures_demo/model/model.odin",
-        "kit/ui_gestures",
-        "kit/ui_gestures/sdl"
+        "consumer/ui_showcase/sections/transitions.odin",
+        "consumer/ui_showcase/app/transition_runtime.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_transitions"
       ],
       "window": {
         "width": 1280,
@@ -2180,61 +2132,17 @@
         "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
         "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
       },
-      "options": "Normal mode; pixel-perfect off; section gestures; card-01 held over the panel-right title with the button down.",
+      "options": "Normal mode; pixel-perfect off; section transitions; initial focus Target A; Target B activated with Return, transition settled; supplied fonts and atlases.",
       "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
-      "path": "media/gestures-ru-proposal.png",
-      "sha256": "e52e8ee945dc4aca280d11a2de2c82b34a4298d8ec057b2684a4cff8664780f2",
+      "path": "media/transitions-ru-after-b.png",
+      "sha256": "192ec5ec65aaa12e60c8614d1695b11f5016435ec2eecdf1e2c5bc243f746f75",
       "caption": {
-        "en": "Native gestures: proposal with the mouse button still down, RU UI.",
-        "ru": "Нативные жесты: предложение при ещё нажатой кнопке мыши, интерфейс RU."
+        "en": "Native transitions: after Target B, RU UI.",
+        "ru": "Нативные переходы: после «Цели B», интерфейс RU."
       },
       "alt": {
-        "en": "A card held over the right panel title, which reads Drop: accepted, while the card stays in the left panel.",
-        "ru": "Карточка удерживается над заголовком правой панели с надписью «Перенос: разрешён», но остаётся в левой панели."
-      }
-    },
-    {
-      "id": "gestures-ru-applied",
-      "section": "gestures",
-      "state": "after release the application moved card-01 to panel-right",
-      "uiLocale": "ru",
-      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
-      "sourceState": "clean",
-      "sourcePaths": [
-        "consumer/ui_showcase/sections/gestures.odin",
-        "consumer/ui_showcase/app/gesture_runtime.odin",
-        "consumer/gestures_demo/model/model.odin",
-        "kit/ui_gestures",
-        "kit/ui_gestures/sdl"
-      ],
-      "window": {
-        "width": 1280,
-        "height": 960
-      },
-      "drawable": {
-        "width": 1280,
-        "height": 960
-      },
-      "scale": 1,
-      "resources": {
-        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
-        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
-        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
-        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
-        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
-        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
-      },
-      "options": "Normal mode; pixel-perfect off; section gestures; card-01 released over the panel-right title.",
-      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
-      "path": "media/gestures-ru-applied.png",
-      "sha256": "56b06602363498dfb18c3e4fdb39f127fa302f168e56195ad7d4416293488a40",
-      "caption": {
-        "en": "Native gestures: the application applied the move after release, RU UI.",
-        "ru": "Нативные жесты: приложение применило перенос после отпускания, интерфейс RU."
-      },
-      "alt": {
-        "en": "After release the left panel begins with card-02 and the right panel holds the moved card.",
-        "ru": "После отпускания левая панель начинается с card-02, а правая панель содержит перенесённую карточку."
+        "en": "Transitions showcase after Target B: the card is offset and scaled down, faded with its colours retargeted, and the progress bar is longer; Target B is focused.",
+        "ru": "Раздел переходов после «Цели B»: карточка смещена и уменьшена, полупрозрачна с другими цветами, полоса прогресса длиннее; «Цель B» в фокусе."
       }
     },
     {
@@ -2587,6 +2495,270 @@
       "alt": {
         "en": "Lab menu apply confirmation showing the draft name, Enabled false, Amount 50, Keep editing and Confirm.",
         "ru": "Подтверждение применения в меню лаборатории: имя черновика, «Включено: false», «Количество: 50», «Продолжить редактирование» и «Подтвердить»."
+      }
+    },
+    {
+      "id": "gestures-en-initial",
+      "section": "gestures",
+      "state": "initial two panels of six cards",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/gestures.odin",
+        "consumer/ui_showcase/app/gesture_runtime.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "kit/ui_gestures",
+        "kit/ui_gestures/sdl"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section gestures; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/gestures-en-initial.png",
+      "sha256": "cda9a0e552e9623390567fc4f50c2d5bea735055c0d8cbad48cc49276e72115f",
+      "caption": {
+        "en": "Native gestures: both panels at six cards, EN UI.",
+        "ru": "Нативные жесты: обе панели по шесть карточек, интерфейс EN."
+      },
+      "alt": {
+        "en": "Two panels with six cards each, repeat buttons, pan handles and the focused name draft.",
+        "ru": "Две панели по шесть карточек, кнопки повторной прокрутки, ручки прокрутки и черновик имени в фокусе."
+      }
+    },
+    {
+      "id": "gestures-en-proposal",
+      "section": "gestures",
+      "state": "proposal while the mouse button is down over the target panel title",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/gestures.odin",
+        "consumer/ui_showcase/app/gesture_runtime.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "kit/ui_gestures",
+        "kit/ui_gestures/sdl"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section gestures; card-01 held over the panel-right title with the button down.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/gestures-en-proposal.png",
+      "sha256": "0322ed28ad859cc648d57789bb4ef7e6a25da7de850ac1afa8098cafa2e16f1d",
+      "caption": {
+        "en": "Native gestures: proposal with the mouse button still down, EN UI.",
+        "ru": "Нативные жесты: предложение при ещё нажатой кнопке мыши, интерфейс EN."
+      },
+      "alt": {
+        "en": "A card held over the right panel title, which reads Drop: accepted, while the card stays in the left panel.",
+        "ru": "Карточка удерживается над заголовком правой панели с надписью «Перенос: разрешён», но остаётся в левой панели."
+      }
+    },
+    {
+      "id": "gestures-en-applied",
+      "section": "gestures",
+      "state": "after release the application moved card-01 to panel-right",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/gestures.odin",
+        "consumer/ui_showcase/app/gesture_runtime.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "kit/ui_gestures",
+        "kit/ui_gestures/sdl"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section gestures; card-01 released over the panel-right title.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/gestures-en-applied.png",
+      "sha256": "213cfa863389958cd6d9bb87da86bc365e45202901607bac606fcdb9dbed5b72",
+      "caption": {
+        "en": "Native gestures: the application applied the move after release, EN UI.",
+        "ru": "Нативные жесты: приложение применило перенос после отпускания, интерфейс EN."
+      },
+      "alt": {
+        "en": "After release the left panel begins with card-02 and the right panel holds the moved card.",
+        "ru": "После отпускания левая панель начинается с card-02, а правая панель содержит перенесённую карточку."
+      }
+    },
+    {
+      "id": "gestures-ru-initial",
+      "section": "gestures",
+      "state": "initial two panels of six cards",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/gestures.odin",
+        "consumer/ui_showcase/app/gesture_runtime.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "kit/ui_gestures",
+        "kit/ui_gestures/sdl"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section gestures; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/gestures-ru-initial.png",
+      "sha256": "712c3b37a13aa98447307c239b51934d1004f629c67d7e5afb04d036ab495ff8",
+      "caption": {
+        "en": "Native gestures: both panels at six cards, RU UI.",
+        "ru": "Нативные жесты: обе панели по шесть карточек, интерфейс RU."
+      },
+      "alt": {
+        "en": "Two panels with six cards each, repeat buttons, pan handles and the focused name draft.",
+        "ru": "Две панели по шесть карточек, кнопки повторной прокрутки, ручки прокрутки и черновик имени в фокусе."
+      }
+    },
+    {
+      "id": "gestures-ru-proposal",
+      "section": "gestures",
+      "state": "proposal while the mouse button is down over the target panel title",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/gestures.odin",
+        "consumer/ui_showcase/app/gesture_runtime.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "kit/ui_gestures",
+        "kit/ui_gestures/sdl"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section gestures; card-01 held over the panel-right title with the button down.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/gestures-ru-proposal.png",
+      "sha256": "e52e8ee945dc4aca280d11a2de2c82b34a4298d8ec057b2684a4cff8664780f2",
+      "caption": {
+        "en": "Native gestures: proposal with the mouse button still down, RU UI.",
+        "ru": "Нативные жесты: предложение при ещё нажатой кнопке мыши, интерфейс RU."
+      },
+      "alt": {
+        "en": "A card held over the right panel title, which reads Drop: accepted, while the card stays in the left panel.",
+        "ru": "Карточка удерживается над заголовком правой панели с надписью «Перенос: разрешён», но остаётся в левой панели."
+      }
+    },
+    {
+      "id": "gestures-ru-applied",
+      "section": "gestures",
+      "state": "after release the application moved card-01 to panel-right",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/gestures.odin",
+        "consumer/ui_showcase/app/gesture_runtime.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "kit/ui_gestures",
+        "kit/ui_gestures/sdl"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section gestures; card-01 released over the panel-right title.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/gestures-ru-applied.png",
+      "sha256": "56b06602363498dfb18c3e4fdb39f127fa302f168e56195ad7d4416293488a40",
+      "caption": {
+        "en": "Native gestures: the application applied the move after release, RU UI.",
+        "ru": "Нативные жесты: приложение применило перенос после отпускания, интерфейс RU."
+      },
+      "alt": {
+        "en": "After release the left panel begins with card-02 and the right panel holds the moved card.",
+        "ru": "После отпускания левая панель начинается с card-02, а правая панель содержит перенесённую карточку."
       }
     },
     {
@@ -2947,6 +3119,466 @@
       "alt": {
         "en": "Lab HUD after one completed hold: mock HP 100 and count one.",
         "ru": "Лаборатория HUD после одного полного удержания: учебный HP 100 и счётчик один."
+      }
+    },
+    {
+      "id": "lab-inventory-initial-en",
+      "section": "lab-inventory",
+      "state": "initial two lists",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_inventory.odin",
+        "consumer/ui_showcase/app/lab_transfer.odin",
+        "consumer/ui_showcase/app/lab_input.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; initial focus on the first Backpack row; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-inventory-initial-en.png",
+      "sha256": "b29684e4dd9610e111a99bdc4bafd567edc6ddfc5a3e09adc1fd4f1e182ba6fa",
+      "caption": {
+        "en": "Native Lab inventory, EN UI; initial two lists with Compass focused.",
+        "ru": "Нативный инвентарь лаборатории: интерфейс EN, два исходных списка, фокус на Compass."
+      },
+      "alt": {
+        "en": "Lab inventory initial screen with Backpack and Chest lists and Compass focused.",
+        "ru": "Начальный экран инвентаря лаборатории с английскими списками Backpack и Chest и фокусом на Compass."
+      }
+    },
+    {
+      "id": "lab-inventory-selected-en",
+      "section": "lab-inventory",
+      "state": "selected row with drag handle",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_inventory.odin",
+        "consumer/ui_showcase/app/lab_transfer.odin",
+        "consumer/ui_showcase/app/lab_input.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; Backpack card-01 selected with a pointer click; focus stays on the selected row; drag handle visible; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-inventory-selected-en.png",
+      "sha256": "6ead9351b16cdd474536635550809a17bc50cb09de459d771e490ab78531b122",
+      "caption": {
+        "en": "Native Lab inventory, EN UI; Compass selected, stable ID and drag handle visible.",
+        "ru": "Нативный инвентарь лаборатории: интерфейс EN, выбран Compass, видны устойчивый ID и ручка перетаскивания."
+      },
+      "alt": {
+        "en": "Backpack row Compass selected, with the selection row showing card-01 / Compass / Backpack and the Drag selected item button.",
+        "ru": "Выбранная строка Compass в рюкзаке; строка выбора показывает card-01 / Compass / Backpack и кнопку Drag selected item."
+      }
+    },
+    {
+      "id": "lab-inventory-refused-en",
+      "section": "lab-inventory",
+      "state": "same-panel refusal",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_inventory.odin",
+        "consumer/ui_showcase/app/lab_transfer.odin",
+        "consumer/ui_showcase/app/lab_input.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; drag from the selected item handle to the Backpack header; same-panel refusal; focus stays on the selected row; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-inventory-refused-en.png",
+      "sha256": "26186101b717c79103771ccaaa4fe5b32e2c63952868c2850394f43c2df7053f",
+      "caption": {
+        "en": "Native Lab inventory, EN UI; same-panel drop refused, membership unchanged.",
+        "ru": "Нативный инвентарь лаборатории: интерфейс EN, перенос в ту же панель отклонён, состав не изменён."
+      },
+      "alt": {
+        "en": "Same-panel drop refused with the message Refused: item is already in this container.",
+        "ru": "Перенос в ту же панель отклонён; сообщение Refused: item is already in this container."
+      }
+    },
+    {
+      "id": "lab-inventory-pending-en",
+      "section": "lab-inventory",
+      "state": "pending transfer proposal",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_inventory.odin",
+        "consumer/ui_showcase/app/lab_transfer.odin",
+        "consumer/ui_showcase/app/lab_input.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; drag from the selected item handle to the Chest header opened the pending confirmation; focus on Cancel; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-inventory-pending-en.png",
+      "sha256": "5dd2fd6f7d926f10d7adff881933784c15e50e9e0e976a42a4cab5a3e5ed3333",
+      "caption": {
+        "en": "Native Lab inventory, EN UI; pending proposal for card-01, item not moved yet.",
+        "ru": "Нативный инвентарь лаборатории: интерфейс EN, ожидающее предложение для card-01, предмет ещё не перенесён."
+      },
+      "alt": {
+        "en": "Pending transfer modal asking Move selected item? for card-01 with Cancel and Confirm move.",
+        "ru": "Модальное подтверждение Move selected item? для card-01 с кнопками Cancel и Confirm move."
+      }
+    },
+    {
+      "id": "lab-inventory-confirmed-en",
+      "section": "lab-inventory",
+      "state": "confirmed transfer result",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_inventory.odin",
+        "consumer/ui_showcase/app/lab_transfer.odin",
+        "consumer/ui_showcase/app/lab_input.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; Confirm move applied the pending transfer once; focus returns to the shell Catalogue control; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-inventory-confirmed-en.png",
+      "sha256": "6371fe89f075c6b4b8f4387675f03d0e581da6048d96184ada41dfa1533d4982",
+      "caption": {
+        "en": "Native Lab inventory, EN UI; transfer confirmed once, stable selection preserved.",
+        "ru": "Нативный инвентарь лаборатории: интерфейс EN, перенос подтверждён один раз, выбор сохранён."
+      },
+      "alt": {
+        "en": "Confirmed transfer: Compass left the Backpack, the selection row shows card-01 / Compass / Chest, and the status says the item moved once.",
+        "ru": "Подтверждённый перенос: Compass покинул рюкзак, строка выбора показывает card-01 / Compass / Chest, статус сообщает об одном переносе."
+      }
+    },
+    {
+      "id": "lab-inventory-initial-ru",
+      "section": "lab-inventory",
+      "state": "initial two lists",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_inventory.odin",
+        "consumer/ui_showcase/app/lab_transfer.odin",
+        "consumer/ui_showcase/app/lab_input.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; initial focus on the first Backpack row; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-inventory-initial-ru.png",
+      "sha256": "1b639cd402c634184e70ac854a62345d4b10b0dfbace7854cde29554b75eda2a",
+      "caption": {
+        "en": "Native Lab inventory, RU UI; initial two lists with Компас focused.",
+        "ru": "Нативный инвентарь лаборатории: интерфейс RU, два исходных списка, фокус на «Компас»."
+      },
+      "alt": {
+        "en": "Lab inventory initial screen with Russian Backpack and Chest lists and Компас focused.",
+        "ru": "Начальный экран инвентаря лаборатории со списками «Рюкзак» и «Сундук» и фокусом на «Компас»."
+      }
+    },
+    {
+      "id": "lab-inventory-selected-ru",
+      "section": "lab-inventory",
+      "state": "selected row with drag handle",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_inventory.odin",
+        "consumer/ui_showcase/app/lab_transfer.odin",
+        "consumer/ui_showcase/app/lab_input.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; Backpack card-01 selected with a pointer click; focus stays on the selected row; drag handle visible; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-inventory-selected-ru.png",
+      "sha256": "aca4eabdd2901118ec64bb417e9404e9dcc39c148ed1deb95ab4955208167080",
+      "caption": {
+        "en": "Native Lab inventory, RU UI; Компас selected, stable ID and drag handle visible.",
+        "ru": "Нативный инвентарь лаборатории: интерфейс RU, выбран «Компас», видны устойчивый ID и ручка перетаскивания."
+      },
+      "alt": {
+        "en": "Russian Backpack row Компас selected, with the selection row showing card-01 / Компас / Рюкзак and the drag button.",
+        "ru": "Выбранная строка «Компас» в рюкзаке; строка выбора показывает card-01 / Компас / Рюкзак и кнопку «Перетащить выбранный предмет»."
+      }
+    },
+    {
+      "id": "lab-inventory-refused-ru",
+      "section": "lab-inventory",
+      "state": "same-panel refusal",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_inventory.odin",
+        "consumer/ui_showcase/app/lab_transfer.odin",
+        "consumer/ui_showcase/app/lab_input.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; drag from the selected item handle to the Backpack header; same-panel refusal; focus stays on the selected row; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-inventory-refused-ru.png",
+      "sha256": "313b3f94d95a729c04bb3e35b19a05d6be0dd6ad76f28b2f89d7c07cf52879ab",
+      "caption": {
+        "en": "Native Lab inventory, RU UI; same-panel drop refused, membership unchanged.",
+        "ru": "Нативный инвентарь лаборатории: интерфейс RU, перенос в ту же панель отклонён, состав не изменён."
+      },
+      "alt": {
+        "en": "Same-panel drop refused in the Russian UI with the message that the item is already in this container.",
+        "ru": "Перенос в ту же панель отклонён; сообщение «Отказ: предмет уже в этом контейнере»."
+      }
+    },
+    {
+      "id": "lab-inventory-pending-ru",
+      "section": "lab-inventory",
+      "state": "pending transfer proposal",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_inventory.odin",
+        "consumer/ui_showcase/app/lab_transfer.odin",
+        "consumer/ui_showcase/app/lab_input.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; drag from the selected item handle to the Chest header opened the pending confirmation; focus on Cancel; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-inventory-pending-ru.png",
+      "sha256": "1b10ce4d357d6148247de143c064aeb608dd921e7a548d3cb2d209f254959db9",
+      "caption": {
+        "en": "Native Lab inventory, RU UI; pending proposal for card-01, item not moved yet.",
+        "ru": "Нативный инвентарь лаборатории: интерфейс RU, ожидающее предложение для card-01, предмет ещё не перенесён."
+      },
+      "alt": {
+        "en": "Pending transfer modal in the Russian UI asking Move selected item? for card-01, with Отмена and Подтвердить перенос.",
+        "ru": "Модальное подтверждение «Перенести выбранный предмет?» для card-01 с кнопками «Отмена» и «Подтвердить перенос»."
+      }
+    },
+    {
+      "id": "lab-inventory-confirmed-ru",
+      "section": "lab-inventory",
+      "state": "confirmed transfer result",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_inventory.odin",
+        "consumer/ui_showcase/app/lab_transfer.odin",
+        "consumer/ui_showcase/app/lab_input.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; Confirm move applied the pending transfer once; focus returns to the shell Catalogue control; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-inventory-confirmed-ru.png",
+      "sha256": "05f808809ed5eb6a5893e177952f198c1ce513db03959149808999aa02392cdd",
+      "caption": {
+        "en": "Native Lab inventory, RU UI; transfer confirmed once, stable selection preserved.",
+        "ru": "Нативный инвентарь лаборатории: интерфейс RU, перенос подтверждён один раз, выбор сохранён."
+      },
+      "alt": {
+        "en": "Confirmed transfer in the Russian UI: Компас left the Backpack, the selection row shows card-01 / Компас / Сундук, and the status reports one move.",
+        "ru": "Подтверждённый перенос: «Компас» покинул рюкзак, строка выбора показывает card-01 / Компас / Сундук, статус сообщает об одном переносе."
       }
     },
     {
@@ -3666,20 +4298,17 @@
       }
     },
     {
-      "id": "lab-inventory-initial-en",
-      "section": "lab-inventory",
-      "state": "initial two lists",
+      "id": "world-initial-en",
+      "section": "world",
+      "state": "initial world fixture; A placed, B and C offscreen under Hide",
       "uiLocale": "en",
       "revision": "8bc09cff358aa629410437996520283ff98d77d9",
       "sourceState": "clean",
       "sourcePaths": [
-        "consumer/ui_showcase/app/lab_inventory.odin",
-        "consumer/ui_showcase/app/lab_transfer.odin",
-        "consumer/ui_showcase/app/lab_input.odin",
-        "consumer/ui_showcase/app/lab_strings.odin",
-        "consumer/gestures_demo/model/model.odin",
-        "consumer/ui_showcase/model/model.odin",
-        "consumer/ui_showcase/model/catalogue.odin"
+        "consumer/ui_showcase/sections/world.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "consumer/ui_showcase/app/runtime.odin",
+        "kit/ui_world"
       ],
       "window": {
         "width": 1280,
@@ -3698,34 +4327,74 @@
         "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
         "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
       },
-      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; initial focus on the first Backpack row; supplied fonts and atlases.",
+      "options": "Normal mode; pixel-perfect off; section world; initial focus world/object-left; supplied fonts and atlases.",
       "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
-      "path": "media/lab-inventory-initial-en.png",
-      "sha256": "b29684e4dd9610e111a99bdc4bafd567edc6ddfc5a3e09adc1fd4f1e182ba6fa",
+      "path": "media/world-initial-en.png",
+      "sha256": "5c704fcd517706ec58640b97394775fc847540f87447cbf6387a2f5b4b749cca",
       "caption": {
-        "en": "Native Lab inventory, EN UI; initial two lists with Compass focused.",
-        "ru": "Нативный инвентарь лаборатории: интерфейс EN, два исходных списка, фокус на Compass."
+        "en": "Native world anchors, EN UI; initial state with A placed and B/C offscreen under Hide.",
+        "ru": "Нативные якоря мира, интерфейс EN; начальное состояние: A размещён, B и C за экраном (политика Hide)."
       },
       "alt": {
-        "en": "Lab inventory initial screen with Backpack and Chest lists and Compass focused.",
-        "ru": "Начальный экран инвентаря лаборатории с английскими списками Backpack и Chest и фокусом на Compass."
+        "en": "Showcase world page with the A card at the centre, A/B/C reasons and Hide policy.",
+        "ru": "Страница world: карточка A в центре, причины A/B/C и политика Hide."
       }
     },
     {
-      "id": "lab-inventory-selected-en",
-      "section": "lab-inventory",
-      "state": "selected row with drag handle",
+      "id": "world-initial-ru",
+      "section": "world",
+      "state": "initial world fixture; A placed, B and C offscreen under Hide",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/world.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "consumer/ui_showcase/app/runtime.odin",
+        "kit/ui_world"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section world; initial focus world/object-left; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/world-initial-ru.png",
+      "sha256": "96d83adac480faf1df3f037c5f75878460e7c3604fdc8bcb1b8e76a9722980c1",
+      "caption": {
+        "en": "Native world anchors, RU UI; initial state with A placed and B/C offscreen under Hide.",
+        "ru": "Нативные якоря мира, интерфейс RU; начальное состояние: A размещён, B и C за экраном (политика Hide)."
+      },
+      "alt": {
+        "en": "Showcase world page with the A card at the centre, A/B/C reasons and Hide policy.",
+        "ru": "Страница world: карточка A в центре, причины A/B/C и политика Hide."
+      }
+    },
+    {
+      "id": "world-indicators-en",
+      "section": "world",
+      "state": "after three Camera +X steps and Direction policy; A shifted left, B and C at edge indicators",
       "uiLocale": "en",
       "revision": "8bc09cff358aa629410437996520283ff98d77d9",
       "sourceState": "clean",
       "sourcePaths": [
-        "consumer/ui_showcase/app/lab_inventory.odin",
-        "consumer/ui_showcase/app/lab_transfer.odin",
-        "consumer/ui_showcase/app/lab_input.odin",
-        "consumer/ui_showcase/app/lab_strings.odin",
-        "consumer/gestures_demo/model/model.odin",
-        "consumer/ui_showcase/model/model.odin",
-        "consumer/ui_showcase/model/catalogue.odin"
+        "consumer/ui_showcase/sections/world.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "consumer/ui_showcase/app/runtime.odin",
+        "kit/ui_world"
       ],
       "window": {
         "width": 1280,
@@ -3744,172 +4413,31 @@
         "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
         "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
       },
-      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; Backpack card-01 selected with a pointer click; focus stays on the selected row; drag handle visible; supplied fonts and atlases.",
+      "options": "Normal mode; pixel-perfect off; section world; three Camera +X activations, policy switched to Direction; supplied fonts and atlases.",
       "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
-      "path": "media/lab-inventory-selected-en.png",
-      "sha256": "6ead9351b16cdd474536635550809a17bc50cb09de459d771e490ab78531b122",
+      "path": "media/world-indicators-en.png",
+      "sha256": "863cc62827e0f0326b32116a465faaaea31f5146a00720726b2751ef2d2c09be",
       "caption": {
-        "en": "Native Lab inventory, EN UI; Compass selected, stable ID and drag handle visible.",
-        "ru": "Нативный инвентарь лаборатории: интерфейс EN, выбран Compass, видны устойчивый ID и ручка перетаскивания."
+        "en": "Native world anchors, EN UI; after three Camera +X steps and Direction policy.",
+        "ru": "Нативные якоря мира, интерфейс EN; после трёх шагов Camera +X и политики Direction."
       },
       "alt": {
-        "en": "Backpack row Compass selected, with the selection row showing card-01 / Compass / Backpack and the Drag selected item button.",
-        "ru": "Выбранная строка Compass в рюкзаке; строка выбора показывает card-01 / Compass / Backpack и кнопку Drag selected item."
+        "en": "Showcase world page after three Camera +X steps: A shifted left and two edge indicators for B and C under Direction policy.",
+        "ru": "Страница world после трёх шагов Camera +X: A смещён влево, у краёв два индикатора B и C при политике Direction."
       }
     },
     {
-      "id": "lab-inventory-refused-en",
-      "section": "lab-inventory",
-      "state": "same-panel refusal",
-      "uiLocale": "en",
-      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
-      "sourceState": "clean",
-      "sourcePaths": [
-        "consumer/ui_showcase/app/lab_inventory.odin",
-        "consumer/ui_showcase/app/lab_transfer.odin",
-        "consumer/ui_showcase/app/lab_input.odin",
-        "consumer/ui_showcase/app/lab_strings.odin",
-        "consumer/gestures_demo/model/model.odin",
-        "consumer/ui_showcase/model/model.odin",
-        "consumer/ui_showcase/model/catalogue.odin"
-      ],
-      "window": {
-        "width": 1280,
-        "height": 960
-      },
-      "drawable": {
-        "width": 1280,
-        "height": 960
-      },
-      "scale": 1,
-      "resources": {
-        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
-        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
-        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
-        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
-        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
-        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
-      },
-      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; drag from the selected item handle to the Backpack header; same-panel refusal; focus stays on the selected row; supplied fonts and atlases.",
-      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
-      "path": "media/lab-inventory-refused-en.png",
-      "sha256": "26186101b717c79103771ccaaa4fe5b32e2c63952868c2850394f43c2df7053f",
-      "caption": {
-        "en": "Native Lab inventory, EN UI; same-panel drop refused, membership unchanged.",
-        "ru": "Нативный инвентарь лаборатории: интерфейс EN, перенос в ту же панель отклонён, состав не изменён."
-      },
-      "alt": {
-        "en": "Same-panel drop refused with the message Refused: item is already in this container.",
-        "ru": "Перенос в ту же панель отклонён; сообщение Refused: item is already in this container."
-      }
-    },
-    {
-      "id": "lab-inventory-pending-en",
-      "section": "lab-inventory",
-      "state": "pending transfer proposal",
-      "uiLocale": "en",
-      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
-      "sourceState": "clean",
-      "sourcePaths": [
-        "consumer/ui_showcase/app/lab_inventory.odin",
-        "consumer/ui_showcase/app/lab_transfer.odin",
-        "consumer/ui_showcase/app/lab_input.odin",
-        "consumer/ui_showcase/app/lab_strings.odin",
-        "consumer/gestures_demo/model/model.odin",
-        "consumer/ui_showcase/model/model.odin",
-        "consumer/ui_showcase/model/catalogue.odin"
-      ],
-      "window": {
-        "width": 1280,
-        "height": 960
-      },
-      "drawable": {
-        "width": 1280,
-        "height": 960
-      },
-      "scale": 1,
-      "resources": {
-        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
-        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
-        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
-        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
-        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
-        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
-      },
-      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; drag from the selected item handle to the Chest header opened the pending confirmation; focus on Cancel; supplied fonts and atlases.",
-      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
-      "path": "media/lab-inventory-pending-en.png",
-      "sha256": "5dd2fd6f7d926f10d7adff881933784c15e50e9e0e976a42a4cab5a3e5ed3333",
-      "caption": {
-        "en": "Native Lab inventory, EN UI; pending proposal for card-01, item not moved yet.",
-        "ru": "Нативный инвентарь лаборатории: интерфейс EN, ожидающее предложение для card-01, предмет ещё не перенесён."
-      },
-      "alt": {
-        "en": "Pending transfer modal asking Move selected item? for card-01 with Cancel and Confirm move.",
-        "ru": "Модальное подтверждение Move selected item? для card-01 с кнопками Cancel и Confirm move."
-      }
-    },
-    {
-      "id": "lab-inventory-confirmed-en",
-      "section": "lab-inventory",
-      "state": "confirmed transfer result",
-      "uiLocale": "en",
-      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
-      "sourceState": "clean",
-      "sourcePaths": [
-        "consumer/ui_showcase/app/lab_inventory.odin",
-        "consumer/ui_showcase/app/lab_transfer.odin",
-        "consumer/ui_showcase/app/lab_input.odin",
-        "consumer/ui_showcase/app/lab_strings.odin",
-        "consumer/gestures_demo/model/model.odin",
-        "consumer/ui_showcase/model/model.odin",
-        "consumer/ui_showcase/model/catalogue.odin"
-      ],
-      "window": {
-        "width": 1280,
-        "height": 960
-      },
-      "drawable": {
-        "width": 1280,
-        "height": 960
-      },
-      "scale": 1,
-      "resources": {
-        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
-        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
-        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
-        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
-        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
-        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
-      },
-      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; Confirm move applied the pending transfer once; focus returns to the shell Catalogue control; supplied fonts and atlases.",
-      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
-      "path": "media/lab-inventory-confirmed-en.png",
-      "sha256": "6371fe89f075c6b4b8f4387675f03d0e581da6048d96184ada41dfa1533d4982",
-      "caption": {
-        "en": "Native Lab inventory, EN UI; transfer confirmed once, stable selection preserved.",
-        "ru": "Нативный инвентарь лаборатории: интерфейс EN, перенос подтверждён один раз, выбор сохранён."
-      },
-      "alt": {
-        "en": "Confirmed transfer: Compass left the Backpack, the selection row shows card-01 / Compass / Chest, and the status says the item moved once.",
-        "ru": "Подтверждённый перенос: Compass покинул рюкзак, строка выбора показывает card-01 / Compass / Chest, статус сообщает об одном переносе."
-      }
-    },
-    {
-      "id": "lab-inventory-initial-ru",
-      "section": "lab-inventory",
-      "state": "initial two lists",
+      "id": "world-indicators-ru",
+      "section": "world",
+      "state": "after three Camera +X steps and Direction policy; A shifted left, B and C at edge indicators",
       "uiLocale": "ru",
       "revision": "8bc09cff358aa629410437996520283ff98d77d9",
       "sourceState": "clean",
       "sourcePaths": [
-        "consumer/ui_showcase/app/lab_inventory.odin",
-        "consumer/ui_showcase/app/lab_transfer.odin",
-        "consumer/ui_showcase/app/lab_input.odin",
-        "consumer/ui_showcase/app/lab_strings.odin",
-        "consumer/gestures_demo/model/model.odin",
-        "consumer/ui_showcase/model/model.odin",
-        "consumer/ui_showcase/model/catalogue.odin"
+        "consumer/ui_showcase/sections/world.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "consumer/ui_showcase/app/runtime.odin",
+        "kit/ui_world"
       ],
       "window": {
         "width": 1280,
@@ -3928,201 +4456,17 @@
         "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
         "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
       },
-      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; initial focus on the first Backpack row; supplied fonts and atlases.",
+      "options": "Normal mode; pixel-perfect off; section world; three Camera +X activations, policy switched to Direction; supplied fonts and atlases.",
       "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
-      "path": "media/lab-inventory-initial-ru.png",
-      "sha256": "1b639cd402c634184e70ac854a62345d4b10b0dfbace7854cde29554b75eda2a",
+      "path": "media/world-indicators-ru.png",
+      "sha256": "a2e13b557809adecb043a27298aeea76a7fb076ff5b3a009b9ae7d55e66f5cfa",
       "caption": {
-        "en": "Native Lab inventory, RU UI; initial two lists with Компас focused.",
-        "ru": "Нативный инвентарь лаборатории: интерфейс RU, два исходных списка, фокус на «Компас»."
+        "en": "Native world anchors, RU UI; after three Camera +X steps and Direction policy.",
+        "ru": "Нативные якоря мира, интерфейс RU; после трёх шагов Camera +X и политики Direction."
       },
       "alt": {
-        "en": "Lab inventory initial screen with Russian Backpack and Chest lists and Компас focused.",
-        "ru": "Начальный экран инвентаря лаборатории со списками «Рюкзак» и «Сундук» и фокусом на «Компас»."
-      }
-    },
-    {
-      "id": "lab-inventory-selected-ru",
-      "section": "lab-inventory",
-      "state": "selected row with drag handle",
-      "uiLocale": "ru",
-      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
-      "sourceState": "clean",
-      "sourcePaths": [
-        "consumer/ui_showcase/app/lab_inventory.odin",
-        "consumer/ui_showcase/app/lab_transfer.odin",
-        "consumer/ui_showcase/app/lab_input.odin",
-        "consumer/ui_showcase/app/lab_strings.odin",
-        "consumer/gestures_demo/model/model.odin",
-        "consumer/ui_showcase/model/model.odin",
-        "consumer/ui_showcase/model/catalogue.odin"
-      ],
-      "window": {
-        "width": 1280,
-        "height": 960
-      },
-      "drawable": {
-        "width": 1280,
-        "height": 960
-      },
-      "scale": 1,
-      "resources": {
-        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
-        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
-        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
-        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
-        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
-        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
-      },
-      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; Backpack card-01 selected with a pointer click; focus stays on the selected row; drag handle visible; supplied fonts and atlases.",
-      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
-      "path": "media/lab-inventory-selected-ru.png",
-      "sha256": "aca4eabdd2901118ec64bb417e9404e9dcc39c148ed1deb95ab4955208167080",
-      "caption": {
-        "en": "Native Lab inventory, RU UI; Компас selected, stable ID and drag handle visible.",
-        "ru": "Нативный инвентарь лаборатории: интерфейс RU, выбран «Компас», видны устойчивый ID и ручка перетаскивания."
-      },
-      "alt": {
-        "en": "Russian Backpack row Компас selected, with the selection row showing card-01 / Компас / Рюкзак and the drag button.",
-        "ru": "Выбранная строка «Компас» в рюкзаке; строка выбора показывает card-01 / Компас / Рюкзак и кнопку «Перетащить выбранный предмет»."
-      }
-    },
-    {
-      "id": "lab-inventory-refused-ru",
-      "section": "lab-inventory",
-      "state": "same-panel refusal",
-      "uiLocale": "ru",
-      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
-      "sourceState": "clean",
-      "sourcePaths": [
-        "consumer/ui_showcase/app/lab_inventory.odin",
-        "consumer/ui_showcase/app/lab_transfer.odin",
-        "consumer/ui_showcase/app/lab_input.odin",
-        "consumer/ui_showcase/app/lab_strings.odin",
-        "consumer/gestures_demo/model/model.odin",
-        "consumer/ui_showcase/model/model.odin",
-        "consumer/ui_showcase/model/catalogue.odin"
-      ],
-      "window": {
-        "width": 1280,
-        "height": 960
-      },
-      "drawable": {
-        "width": 1280,
-        "height": 960
-      },
-      "scale": 1,
-      "resources": {
-        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
-        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
-        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
-        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
-        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
-        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
-      },
-      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; drag from the selected item handle to the Backpack header; same-panel refusal; focus stays on the selected row; supplied fonts and atlases.",
-      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
-      "path": "media/lab-inventory-refused-ru.png",
-      "sha256": "313b3f94d95a729c04bb3e35b19a05d6be0dd6ad76f28b2f89d7c07cf52879ab",
-      "caption": {
-        "en": "Native Lab inventory, RU UI; same-panel drop refused, membership unchanged.",
-        "ru": "Нативный инвентарь лаборатории: интерфейс RU, перенос в ту же панель отклонён, состав не изменён."
-      },
-      "alt": {
-        "en": "Same-panel drop refused in the Russian UI with the message that the item is already in this container.",
-        "ru": "Перенос в ту же панель отклонён; сообщение «Отказ: предмет уже в этом контейнере»."
-      }
-    },
-    {
-      "id": "lab-inventory-pending-ru",
-      "section": "lab-inventory",
-      "state": "pending transfer proposal",
-      "uiLocale": "ru",
-      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
-      "sourceState": "clean",
-      "sourcePaths": [
-        "consumer/ui_showcase/app/lab_inventory.odin",
-        "consumer/ui_showcase/app/lab_transfer.odin",
-        "consumer/ui_showcase/app/lab_input.odin",
-        "consumer/ui_showcase/app/lab_strings.odin",
-        "consumer/gestures_demo/model/model.odin",
-        "consumer/ui_showcase/model/model.odin",
-        "consumer/ui_showcase/model/catalogue.odin"
-      ],
-      "window": {
-        "width": 1280,
-        "height": 960
-      },
-      "drawable": {
-        "width": 1280,
-        "height": 960
-      },
-      "scale": 1,
-      "resources": {
-        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
-        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
-        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
-        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
-        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
-        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
-      },
-      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; drag from the selected item handle to the Chest header opened the pending confirmation; focus on Cancel; supplied fonts and atlases.",
-      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
-      "path": "media/lab-inventory-pending-ru.png",
-      "sha256": "1b10ce4d357d6148247de143c064aeb608dd921e7a548d3cb2d209f254959db9",
-      "caption": {
-        "en": "Native Lab inventory, RU UI; pending proposal for card-01, item not moved yet.",
-        "ru": "Нативный инвентарь лаборатории: интерфейс RU, ожидающее предложение для card-01, предмет ещё не перенесён."
-      },
-      "alt": {
-        "en": "Pending transfer modal in the Russian UI asking Move selected item? for card-01, with Отмена and Подтвердить перенос.",
-        "ru": "Модальное подтверждение «Перенести выбранный предмет?» для card-01 с кнопками «Отмена» и «Подтвердить перенос»."
-      }
-    },
-    {
-      "id": "lab-inventory-confirmed-ru",
-      "section": "lab-inventory",
-      "state": "confirmed transfer result",
-      "uiLocale": "ru",
-      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
-      "sourceState": "clean",
-      "sourcePaths": [
-        "consumer/ui_showcase/app/lab_inventory.odin",
-        "consumer/ui_showcase/app/lab_transfer.odin",
-        "consumer/ui_showcase/app/lab_input.odin",
-        "consumer/ui_showcase/app/lab_strings.odin",
-        "consumer/gestures_demo/model/model.odin",
-        "consumer/ui_showcase/model/model.odin",
-        "consumer/ui_showcase/model/catalogue.odin"
-      ],
-      "window": {
-        "width": 1280,
-        "height": 960
-      },
-      "drawable": {
-        "width": 1280,
-        "height": 960
-      },
-      "scale": 1,
-      "resources": {
-        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
-        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
-        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
-        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
-        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
-        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
-      },
-      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; Confirm move applied the pending transfer once; focus returns to the shell Catalogue control; supplied fonts and atlases.",
-      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
-      "path": "media/lab-inventory-confirmed-ru.png",
-      "sha256": "05f808809ed5eb6a5893e177952f198c1ce513db03959149808999aa02392cdd",
-      "caption": {
-        "en": "Native Lab inventory, RU UI; transfer confirmed once, stable selection preserved.",
-        "ru": "Нативный инвентарь лаборатории: интерфейс RU, перенос подтверждён один раз, выбор сохранён."
-      },
-      "alt": {
-        "en": "Confirmed transfer in the Russian UI: Компас left the Backpack, the selection row shows card-01 / Компас / Сундук, and the status reports one move.",
-        "ru": "Подтверждённый перенос: «Компас» покинул рюкзак, строка выбора показывает card-01 / Компас / Сундук, статус сообщает об одном переносе."
+        "en": "Showcase world page after three Camera +X steps: A shifted left and two edge indicators for B and C under Direction policy.",
+        "ru": "Страница world после трёх шагов Camera +X: A смещён влево, у краёв два индикатора B и C при политике Direction."
       }
     }
   ]

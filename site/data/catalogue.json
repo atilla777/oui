@@ -15,13 +15,15 @@
       "collections",
       "text",
       "rich-text",
+      "transitions",
       "lab-menu",
       "gestures",
       "diagnostics-performance",
       "lab-hud",
       "lab-inventory",
       "composition",
-      "custom"
+      "custom",
+      "world"
     ]
   },
   "records": [
@@ -440,41 +442,43 @@
       ]
     },
     {
-      "id": "gestures",
+      "id": "transitions",
       "group": "gallery",
       "categories": [
-        "gestures",
-        "interaction"
+        "transitions",
+        "state"
       ],
       "packages": [
+        "ui_transitions",
+        "ui_hold",
+        "ui_controls",
         "ui_base",
         "ui_layout",
         "ui_interaction",
+        "ui_layers",
         "ui_scroll",
-        "ui_sdl",
-        "ui_gestures"
+        "ui_style",
+        "ui_text"
       ],
-      "source": "consumer/ui_showcase/sections/gestures.odin",
+      "source": "consumer/ui_showcase/sections/transitions.odin",
       "runnable": "consumer/ui_showcase",
       "title": {
-        "en": "Gestures",
-        "ru": "Жесты"
+        "en": "State transitions",
+        "ru": "Переходы состояния"
       },
       "summary": {
-        "en": "Drag a card between panels and scroll clipped rows with repeat buttons or a pan handle.",
-        "ru": "Перетаскивание карточки между панелями и прокрутка обрезанных строк кнопками повтора или ручкой прокрутки."
+        "en": "Retarget offset, scale, opacity, colour and progress while layout and hit projections stay frozen.",
+        "ru": "Смена смещения, масштаба, прозрачности, цвета и прогресса при замороженных проекциях компоновки и попадания."
       },
       "limitations": {
-        "en": "Experimental; a proposal is not an application move and there is no inertia.",
-        "ru": "Экспериментально; предложение не является применённым переносом, инерции нет."
+        "en": "Experimental; frozen paint/hit; no layout animation.",
+        "ru": "Экспериментально: замороженные отрисовка и попадание; без анимации компоновки."
       },
       "media": [
-        "gestures-en-initial",
-        "gestures-en-proposal",
-        "gestures-en-applied",
-        "gestures-ru-initial",
-        "gestures-ru-proposal",
-        "gestures-ru-applied"
+        "transitions-en-initial",
+        "transitions-en-after-b",
+        "transitions-ru-initial",
+        "transitions-ru-after-b"
       ]
     },
     {
@@ -551,6 +555,44 @@
         "lab-menu-submenu-ru",
         "lab-menu-settings-ru",
         "lab-menu-confirm-ru"
+      ]
+    },
+    {
+      "id": "gestures",
+      "group": "gallery",
+      "categories": [
+        "gestures",
+        "interaction"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_scroll",
+        "ui_sdl",
+        "ui_gestures"
+      ],
+      "source": "consumer/ui_showcase/sections/gestures.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Gestures",
+        "ru": "Жесты"
+      },
+      "summary": {
+        "en": "Drag a card between panels and scroll clipped rows with repeat buttons or a pan handle.",
+        "ru": "Перетаскивание карточки между панелями и прокрутка обрезанных строк кнопками повтора или ручкой прокрутки."
+      },
+      "limitations": {
+        "en": "Experimental; a proposal is not an application move and there is no inertia.",
+        "ru": "Экспериментально; предложение не является применённым переносом, инерции нет."
+      },
+      "media": [
+        "gestures-en-initial",
+        "gestures-en-proposal",
+        "gestures-en-applied",
+        "gestures-ru-initial",
+        "gestures-ru-proposal",
+        "gestures-ru-applied"
       ]
     },
     {
@@ -708,6 +750,41 @@
         "custom-ru-activated",
         "custom-ru-styled",
         "custom-ru-popup-tooltip"
+      ]
+    },
+    {
+      "id": "world",
+      "group": "gallery",
+      "categories": [
+        "world",
+        "positioning"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_style",
+        "ui_world"
+      ],
+      "source": "consumer/ui_showcase/sections/world.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "World anchors",
+        "ru": "Якоря мира"
+      },
+      "summary": {
+        "en": "Place application-owned cards at world-space points through a camera and projection callback, with Hide, Clamp or Direction for anchors outside the viewport.",
+        "ru": "Размещайте карточки приложения в мировых координатах через камеру и callback проекции; для якорей за пределами области просмотра доступны Hide, Clamp или Direction."
+      },
+      "limitations": {
+        "en": "Experimental; the application owns the camera and the projection callback; no engine, no Game Bridge.",
+        "ru": "Экспериментально; камерой и callback проекции владеет приложение; нет движка и Game Bridge."
+      },
+      "media": [
+        "world-initial-en",
+        "world-initial-ru",
+        "world-indicators-en",
+        "world-indicators-ru"
       ]
     }
   ]

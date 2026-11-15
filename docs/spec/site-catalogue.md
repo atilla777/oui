@@ -516,12 +516,14 @@ zlib проверены) без изменения системных библи
 лично просмотрел и подтвердил все четыре опубликованных PNG (ожидаемое содержание,
 без приватных данных), закрыв обязательный визуальный шаг приёмки.
 
-Прошли десять site unit/parity/schema tests (включая новый binding-тест и
+Прошли двенадцать site unit/parity/schema tests (включая новый binding-тест и
 negative fixtures), build, loopback HTTP с новыми маршрутами EN/RU и digests,
 свежий portable export (631 файл, byte-identical экспорту origin/main) и
-portable-check; `check:catalogue:strict` ожидаемо падает (13 из 23). После
+portable-check; `check:catalogue:strict` ожидаемо падает (после интеграции с
+опубликованными жестами `oui-3no.12` и Lab menu `oui-3no.20` — 15 из 23). После
 отдельного разрешения владельца 2026-11-15 пройдена изолированная браузерная
 приёмка Chromium 152 с sandbox: страница EN/RU при 360/1280, JS и no-JS,
 клавиатура, locale/anchors, изображения и reduced motion; существующие сценарии
-сохранены, 152 browser screenshot сохранены в артефактах проверки. Другие
+(включая опубликованные жесты и Lab menu) сохранены, 176 browser screenshot
+сохранены в артефактах проверки. Другие
 браузеры, полная доступность, остальные gallery IDs и deploy не проверены.

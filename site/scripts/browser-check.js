@@ -77,7 +77,7 @@ try {
     assert.ok((await page.title()).includes(title))
     assert.ok(await page.locator('main').innerText())
   }
-  const sectionOf = path => path === 'lab/menu.html' ? 'lab-menu' : path === 'lab/hud.html' ? 'lab-hud' : path === 'lab/inventory.html' ? 'lab-inventory' : path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|text-input|atlas|scroll-table|collections|text|rich-text|gestures|diagnostics-performance)\.html$/)?.[1]
+  const sectionOf = path => path === 'lab/menu.html' ? 'lab-menu' : path === 'lab/hud.html' ? 'lab-hud' : path === 'lab/inventory.html' ? 'lab-inventory' : path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|text-input|atlas|scroll-table|collections|text|rich-text|gestures|diagnostics-performance|composition|custom)\.html$/)?.[1]
   const checkImages = async (activePage, path, lang) => {
     const section = sectionOf(path)
     if (!section) {
@@ -102,7 +102,9 @@ try {
       gestures: [`gestures-${lang}-initial`, `gestures-${lang}-proposal`, `gestures-${lang}-applied`],
       'lab-menu': [`lab-menu-initial-${lang}`, `lab-menu-submenu-${lang}`, `lab-menu-settings-${lang}`, `lab-menu-confirm-${lang}`],
       'lab-inventory': [`lab-inventory-initial-${lang}`, `lab-inventory-selected-${lang}`, `lab-inventory-refused-${lang}`, `lab-inventory-pending-${lang}`, `lab-inventory-confirmed-${lang}`],
-      'diagnostics-performance': [`diagnostics-performance-${lang}-initial`, `diagnostics-performance-${lang}-diagnostic`]
+      'diagnostics-performance': [`diagnostics-performance-${lang}-initial`, `diagnostics-performance-${lang}-diagnostic`],
+      composition: [`composition-${lang}-initial`, `composition-${lang}-propagated`],
+      custom: [`custom-${lang}-initial`, `custom-${lang}-activated`, `custom-${lang}-styled`, `custom-${lang}-popup-tooltip`]
     }[section]
     const images = activePage.locator('main p > img')
     assert.equal(await images.count(), ids.length, `${section} ${lang}: image count`)
@@ -216,6 +218,8 @@ try {
     ['capabilities/layers.html', 'Layers', 'Слои', 'boundaries'],
     ['capabilities/hud.html', 'HUD hold', 'HUD и удержание', 'boundaries'],
     ['capabilities/text-input.html', 'Text input', 'Ввод текста', 'boundaries'],
+    ['capabilities/composition.html', 'Nested composition', 'Вложенная композиция', 'boundaries'],
+    ['capabilities/custom.html', 'Custom primitives', 'Свои примитивы', 'boundaries'],
     ['capabilities/gestures.html', 'Gestures', 'Жесты', 'boundaries'],
     ['lab/menu.html', 'Lab menu', 'Меню лаборатории', 'boundaries'],
     ['recipes/menu.html', 'Basic menu recipe', 'Рецепт меню', 'build-and-run'],

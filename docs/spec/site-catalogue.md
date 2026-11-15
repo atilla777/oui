@@ -7,6 +7,7 @@ menu recipe/Lab menu `oui-3no.20`, HUD recipe/Lab HUD `oui-3no.22` и
 inventory recipe/Lab inventory `oui-3no.23` — интеграционные кандидаты.
 Жесты `oui-3no.12` — локальный кандидат, pending integration.
 Диагностика/производительность `oui-3no.17` — интеграционный кандидат.
+Composition/custom `oui-3no.13` — локальный кандидат.
 Библиотека и native consumers не изменены; сайт описывает существующие возможности,
 а не реализует их в браузере.
 
@@ -14,21 +15,24 @@ inventory recipe/Lab inventory `oui-3no.23` — интеграционные к�
   `capabilities/controls`, `capabilities/styling`, `capabilities/profiles`,
   `capabilities/layers`, `capabilities/hud`, `capabilities/text-input`, `capabilities/atlas`,
   `capabilities/scroll-table`, `capabilities/collections`, `capabilities/text`, `capabilities/rich-text`,
-  `capabilities/gestures`, `capabilities/diagnostics-performance`, а также рецепты
+  `capabilities/gestures`, `capabilities/diagnostics-performance`,
+  `capabilities/composition`, `capabilities/custom`, а также рецепты
   и экраны Lab — опубликованные `recipes/menu` и `lab/menu` (`oui-3no.20`),
   `recipes/hud`/`lab/hud` кандидата `oui-3no.22` и
   `recipes/inventory`/`lab/inventory` кандидата `oui-3no.23`.
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
   полный showcase, с pinned source links и native build/run command.
-  Кандидаты добавляют страницы без собственных изображений: `oui-3no.20` —
-  `recipes/menu` (узкий standalone-menu рецепт) и первый Lab обзор `lab/menu`;
-  `oui-3no.23` — `recipes/inventory` (headless-рецепт с двумя однородными
-  списками) и Lab обзор `lab/inventory`.
+  Кандидаты добавляют страницы: `oui-3no.20` — `recipes/menu` (узкий
+  standalone-menu рецепт без собственных изображений) и первый Lab обзор
+  `lab/menu`; `oui-3no.23` — `recipes/inventory` (headless-рецепт с двумя
+  однородными списками) и Lab обзор `lab/inventory`; `oui-3no.13` —
+  `capabilities/composition` и `capabilities/custom` с собственными
+  изображениями.
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
   Каталог объявляет sample coverage `layout`, `controls`, `styling`, `profiles`,
   `layers`, `hud`, `text-input`, `atlas`, `scroll-table`, `collections`, `text`, `rich-text`,
-  `gestures`, Lab IDs `lab-menu`/`lab-hud`/`lab-inventory` и
-  `diagnostics-performance`. Native source catalogue
+  `gestures`, Lab IDs `lab-menu`/`lab-hud`/`lab-inventory`, `diagnostics-performance`,
+  `composition`, `custom`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -643,12 +647,15 @@ coverage интегрированного дерева составлял 16 IDs
 повторены на нём: `npm run check` (12/12), `npm run build` и
 `npm run check:http` прошли. После второго объединения — с опубликованными
 `oui-3no.17` (diagnostics/performance) и исправлениями счётчиков README —
-sample coverage составляет 17 IDs (включая `gestures`, `lab-menu`, `lab-hud`,
-`lab-inventory` и `diagnostics-performance`); на этом финальном дереве
-повторены `npm run check` (13/13), `npm run build` и `npm run check:http`
-(все успешно). Полный `npm run check:browser` дал 175 PASS (exit 0) на
-предыдущем интегрированном дереве и 183 PASS (exit 0, включая новые сценарии
-diagnostics/performance) на этом финальном дереве. Native-часть дерева
+sample coverage составлял 17 IDs; на том дереве прошли `npm run check` (13/13),
+`npm run build` и `npm run check:http`, а полный `npm run check:browser` дал
+175 PASS (exit 0) на предыдущем дереве и 183 PASS (exit 0, включая новые
+сценарии diagnostics/performance) на том дереве. После третьего объединения —
+с опубликованными composition/custom `oui-3no.13` — sample coverage составляет
+19 IDs (16 gallery, включая `gestures`, `diagnostics-performance`, `composition`
+и `custom`, и 3 Lab: `lab-menu`, `lab-hud`, `lab-inventory`); на этом итоговом
+дереве повторены `npm run check` (13/13), `npm run build`, `npm run check:http`
+и полный `npm run check:browser` — 199 PASS (exit 0). Native-часть дерева
 байт-идентична прежней ревизии, поэтому приведённые native/portable
 доказательства применимы без повтора.
 
@@ -695,10 +702,68 @@ zlib проверены) без изменения системных библи
 negative fixtures), build, loopback HTTP с новыми маршрутами EN/RU и digests,
 свежий portable export (631 файл, byte-identical экспорту origin/main) и
 portable-check; `check:catalogue:strict` ожидаемо падает (после интеграции с
-опубликованными `oui-3no.12`, `oui-3no.20` и `oui-3no.22` — 16 из 23). После
+опубликованными `oui-3no.12`, `oui-3no.20`, `oui-3no.22`, composition/custom
+`oui-3no.13` и inventory recipe/Lab inventory `oui-3no.23` — 19 из 23). После
 отдельного разрешения владельца 2026-11-15 пройдена изолированная браузерная
 приёмка Chromium 152 с sandbox: страница EN/RU при 360/1280, JS и no-JS,
 клавиатура, locale/anchors, изображения и reduced motion; существующие сценарии
 (включая опубликованные жесты, Lab menu и Lab HUD) сохранены; browser screenshot
 сохранены в артефактах проверки. Другие
 браузеры, полная доступность, остальные gallery IDs и deploy не проверены.
+## Композиция и custom primitives — локальный кандидат oui-3no.13
+
+Локальный кандидат добавляет EN/RU страницы `capabilities/composition` и
+`capabilities/custom`; после объединения с опубликованными жестами, menu recipe,
+HUD recipe, diagnostics/performance и inventory recipe/Lab inventory declared
+sample coverage составляет девятнадцать IDs.
+Composition описывает владеемые панели с фиксированным порядком слотов,
+вложенную дочернюю кнопку в составной родительской и запись намерения в
+родительском маршруте при выключенном Stop. Custom описывает два рецепта
+с namespace, владеемые приложением узлы-круги с immutable payload и чистой
+проверкой попадания, popup-щит и неинтерактивную подсказку. Native API,
+поведение kit и showcase не менялись; страницы и каталог — site-only изменения.
+
+Двенадцать настоящих PNG 1280×960, scale 1 получены в собственной worktree
+на source revision `8bc09cff358aa629410437996520283ff98d77d9` в clean state
+до site-изменений: composition EN/RU в начальном состоянии (Stop включён,
+counts 0|0) и после распространения (Stop выключен, counts 1|1); custom EN/RU
+в начальном состоянии, после одной активации левого круга (count=1), после
+применения Style и удаления footer-слота, и с открытым popup-щитом и подсказкой.
+Состояния подтверждены OCR строки counts и пиксельными diffs (для activated
+изменилась ровно одна цифра счётчика; styled затронул только левую панель).
+Каждый PNG просмотрен через image-capable контекст; личных данных не обнаружено.
+Явно выбранная ISD `f8204c61615406ce5628b15692628e146476a008` прошла
+whole-source verification с native input; create/status подтвердили
+`linux-abstract-v1`, выполнен явный focus, собственные runs остановлены.
+Pinned пара libpng 1.6.59/zlib 1.4 пересобрана по разрешению владельца в
+новый приватный prefix с проверенными archive digests, upstream tests
+(zlib 64-bit OK, libpng 36/36) и фактической linkage (ldd показывает transitive
+zlib из prefix), без изменений системных библиотек.
+
+Unit/parity/schema/filter tests, catalogue validation, static build и loopback
+HTTP всех новых маршрутов прошли; свежий portable export + portable-check +
+`test-ui-kit` (5) прошли на исходном дереве задач, а native-часть
+интегрированного дерева побайтово равна базовой ревизии `8bc09cf`, поэтому
+portable/native доказательства применимы без повтора. После отдельного разрешения владельца
+для `oui-3no.13` пройдена браузерная приёмка в изолированном headless
+Chromium с sandbox, собственным временным профилем и loopback-only static
+preview: 199 PASS на этом итоговом объединённом дереве, включая EN/RU composition/custom
+и сохранённые сценарии на ширинах 360/1280 — prose без page overflow, изображения загружены с
+локализованным alt, клавиатурная навигация из каталога, смена языка с
+valid/missing anchors, no-JS content/images/links и reduced motion.
+Скриншоты новых страниц (16) просмотрены через image-capable контекст;
+собственные browser и preview остановлены в `finally`. Унаследованные
+особенности (пустая нижняя часть native window, горизонтальный скролл
+shell-блока, эллипсис длинного RU-заголовка в outline, мелкий текст
+изображений на 360) совпадают с поведением существующих страниц и не являются
+новыми дефектами. Мобильные изображения уменьшены; viewer для
+composition/custom не вводился, полная квалификация 23 IDs, другие браузеры,
+полный аудит доступности и Pages deployment не проверены.
+
+Как увидеть локальный кандидат: из `site/` с Node из `.nvmrc` выполнить
+`npm ci`, `npm run build`, `npm run check:http`, затем
+`npm run preview -- --port 0`; открыть выданный URL с
+`/oui/en/capabilities/composition`, `/oui/en/capabilities/custom`
+или соответствующие `/ru/` страницы, или перейти через каталог.
+`npm run check:browser` воспроизводит разрешённую изолированную браузерную
+проверку. Это локальный кандидат, не интеграция в основную ветку.

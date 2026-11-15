@@ -1,7 +1,7 @@
 # Capability catalogue {#catalogue}
 
 This is an explicitly limited sample, not the complete showcase catalogue. It
-currently covers fourteen of the 19 gallery sections and three of the four Integration
+currently covers sixteen of the 19 gallery sections and three of the four Integration
 Lab screens. The captures show the native application, not a browser port.
 
 <CatalogueFilter locale="en">
@@ -149,6 +149,24 @@ Mock HP with -10 and +10, a 1000 ms hold-to-restore, a popup and a tooltip.
 
 Select a row in two uniform lists, propose a transfer and confirm or refuse it.
 [Explore Lab inventory and its native example](./lab/inventory).
+</CatalogueItem>
+
+<CatalogueItem id="composition">
+
+## Nested composition {#composition}
+
+Compose owned panels with nested nodes where child activation records a parent intention.
+[Explore nested composition and its native example](./capabilities/composition).
+
+</CatalogueItem>
+
+<CatalogueItem id="custom">
+
+## Custom primitives {#custom}
+
+App-owned circle nodes with a pure circle hit predicate in two namespaced recipes.
+[Explore custom primitives and their native example](./capabilities/custom).
+
 </CatalogueItem>
 
 </CatalogueFilter>

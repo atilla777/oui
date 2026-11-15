@@ -2,19 +2,22 @@
 
 Контракт введён `oui-3no.2`; опубликованные расширения включают `oui-3no.5`,
 `oui-3no.6`, Atlas `oui-3no.7`, text-input `oui-3no.9`, прокрутку/коллекции
-`oui-3no.10` и layers/HUD `oui-3no.11`. Text/rich-text `oui-3no.8` — интеграционный кандидат.
+`oui-3no.10` и layers/HUD `oui-3no.11`; composition/custom `oui-3no.13` —
+локальный кандидат. Text/rich-text `oui-3no.8` — интеграционный кандидат.
 Библиотека и native consumers не изменены; сайт описывает существующие возможности,
 а не реализует их в браузере.
 
 - `site/en/` и `site/ru/` содержат `catalogue` и `capabilities/layout`,
   `capabilities/controls`, `capabilities/styling`, `capabilities/profiles`,
   `capabilities/layers`, `capabilities/hud`, `capabilities/text-input`, `capabilities/atlas`,
-  `capabilities/scroll-table`, `capabilities/collections`, `capabilities/text`, `capabilities/rich-text`.
+  `capabilities/scroll-table`, `capabilities/collections`, `capabilities/text`, `capabilities/rich-text`,
+  `capabilities/composition`, `capabilities/custom`.
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
   полный showcase, с pinned source links и native build/run command.
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
   Каталог объявляет sample coverage `layout`, `controls`, `styling`, `profiles`,
-  `layers`, `hud`, `text-input`, `atlas`, `scroll-table`, `collections`, `text`, `rich-text`. Native source catalogue
+  `layers`, `hud`, `text-input`, `atlas`, `scroll-table`, `collections`, `text`, `rich-text`,
+  `composition`, `custom`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -371,3 +374,57 @@ test прошли. Дополнительный широкий native app test r
 `/oui/en/capabilities/atlas` либо `/oui/ru/capabilities/atlas`, или перейти
 через соответствующий catalogue. Сравнить A/B и счётчик reload под изображениями.
 Это проверено в локальном HTTP/browser, не означает публикацию или Pages deploy.
+
+## Композиция и custom primitives — локальный кандидат oui-3no.13
+
+Локальный кандидат добавляет EN/RU страницы `capabilities/composition` и
+`capabilities/custom` и расширяет declared sample coverage до четырнадцати IDs.
+Composition описывает владеемые панели с фиксированным порядком слотов,
+вложенную дочернюю кнопку в составной родительской и запись намерения в
+родительском маршруте при выключенном Stop. Custom описывает два рецепта
+с namespace, владеемые приложением узлы-круги с immutable payload и чистой
+проверкой попадания, popup-щит и неинтерактивную подсказку. Native API,
+поведение kit и showcase не менялись; страницы и каталог — site-only изменения.
+
+Двенадцать настоящих PNG 1280×960, scale 1 получены в собственной worktree
+на source revision `8bc09cff358aa629410437996520283ff98d77d9` в clean state
+до site-изменений: composition EN/RU в начальном состоянии (Stop включён,
+counts 0|0) и после распространения (Stop выключен, counts 1|1); custom EN/RU
+в начальном состоянии, после одной активации левого круга (count=1), после
+применения Style и удаления footer-слота, и с открытым popup-щитом и подсказкой.
+Состояния подтверждены OCR строки counts и пиксельными diffs (для activated
+изменилась ровно одна цифра счётчика; styled затронул только левую панель).
+Каждый PNG просмотрен через image-capable контекст; личных данных не обнаружено.
+Явно выбранная ISD `f8204c61615406ce5628b15692628e146476a008` прошла
+whole-source verification с native input; create/status подтвердили
+`linux-abstract-v1`, выполнен явный focus, собственные runs остановлены.
+Pinned пара libpng 1.6.59/zlib 1.4 пересобрана по разрешению владельца в
+новый приватный prefix с проверенными archive digests, upstream tests
+(zlib 64-bit OK, libpng 36/36) и фактической linkage (ldd показывает transitive
+zlib из prefix), без изменений системных библиотек.
+
+Unit/parity/schema/filter tests (9), catalogue validation с 14 sample IDs,
+static build, loopback HTTP всех новых маршрутов и свежий portable export +
+portable-check + `test-ui-kit` прошли. После отдельного разрешения владельца
+для `oui-3no.13` пройдена браузерная приёмка в изолированном headless
+Chromium с sandbox, собственным временным профилем и loopback-only static
+preview: 135 PASS, включая EN/RU composition/custom и сохранённые сценарии
+на ширинах 360/1280 — prose без page overflow, изображения загружены с
+локализованным alt, клавиатурная навигация из каталога, смена языка с
+valid/missing anchors, no-JS content/images/links и reduced motion.
+Скриншоты новых страниц (16) просмотрены через image-capable контекст;
+собственные browser и preview остановлены в `finally`. Унаследованные
+особенности (пустая нижняя часть native window, горизонтальный скролл
+shell-блока, эллипсис длинного RU-заголовка в outline, мелкий текст
+изображений на 360) совпадают с поведением существующих страниц и не являются
+новыми дефектами. Мобильные изображения уменьшены; viewer для
+composition/custom не вводился, полная квалификация 23 IDs, другие браузеры,
+полный аудит доступности и Pages deployment не проверены.
+
+Как увидеть локальный кандидат: из `site/` с Node из `.nvmrc` выполнить
+`npm ci`, `npm run build`, `npm run check:http`, затем
+`npm run preview -- --port 0`; открыть выданный URL с
+`/oui/en/capabilities/composition`, `/oui/en/capabilities/custom`
+или соответствующие `/ru/` страницы, или перейти через каталог.
+`npm run check:browser` воспроизводит разрешённую изолированную браузерную
+проверку. Это локальный кандидат, не интеграция в основную ветку.

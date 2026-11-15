@@ -2,7 +2,8 @@
 
 Контракт введён `oui-3no.2`; опубликованные расширения включают `oui-3no.5`,
 `oui-3no.6`, Atlas `oui-3no.7`, text-input `oui-3no.9`, прокрутку/коллекции
-`oui-3no.10` и layers/HUD `oui-3no.11`. Text/rich-text `oui-3no.8` — интеграционный кандидат.
+`oui-3no.10` и layers/HUD `oui-3no.11`. Text/rich-text `oui-3no.8` и
+menu recipe/Lab menu `oui-3no.20` — интеграционные кандидаты.
 Библиотека и native consumers не изменены; сайт описывает существующие возможности,
 а не реализует их в браузере.
 
@@ -12,9 +13,12 @@
   `capabilities/scroll-table`, `capabilities/collections`, `capabilities/text`, `capabilities/rich-text`.
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
   полный showcase, с pinned source links и native build/run command.
+  Кандидат `oui-3no.20` добавляет `recipes/menu` (узкий standalone-menu рецепт
+  без собственных изображений) и первый Lab обзор `lab/menu`.
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
   Каталог объявляет sample coverage `layout`, `controls`, `styling`, `profiles`,
-  `layers`, `hud`, `text-input`, `atlas`, `scroll-table`, `collections`, `text`, `rich-text`. Native source catalogue
+  `layers`, `hud`, `text-input`, `atlas`, `scroll-table`, `collections`, `text`, `rich-text`
+  и первый Lab ID `lab-menu`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -371,3 +375,57 @@ test прошли. Дополнительный широкий native app test r
 `/oui/en/capabilities/atlas` либо `/oui/ru/capabilities/atlas`, или перейти
 через соответствующий catalogue. Сравнить A/B и счётчик reload под изображениями.
 Это проверено в локальном HTTP/browser, не означает публикацию или Pages deploy.
+
+## Рецепт меню и Lab menu (`oui-3no.20`)
+
+`site/en/recipes/menu.md` и русский counterpart документируют существующий
+Basic menu recipe (`consumer/standalone_menu`): прямое замыкание
+`ui_base`/`ui_layout`/`ui_interaction`/`ui_style`/`ui_text`/`ui_sdl`/`ui_sdl_text`
+плюс транзитивный `unicode_graphemes`, владение моделью/строками/шрифтом,
+жизненный цикл publication и фактически выполненные build/test/run команды
+с pinned source links на `8bc09cff358aa629410437996520283ff98d77d9`.
+Страница явно отличает этот узкий рецепт от более широкого union Integration Lab;
+сниппетов кода на странице нет, только выполняемые команды и ссылки на реальные
+источники. Recipe-страницы не содержат собственных изображений, как и guide.
+
+`site/en/lab/menu.md` и русский counterpart — первый обзор Lab-экрана:
+mock settings flow `lab-menu` (подменю, однострочный editor имени, checkbox,
+slider, подтверждение apply/discard), его ограничения из native catalogue
+(«Mock settings; process-local» / «Учебные данные; состояние только до
+завершения процесса»), прямые семейства экрана и отличие от полного union
+showcase с atlas loader. Каталог получил первую запись группы `lab`
+(`lab-menu`, coverage 13 IDs) и восемь media records — по четыре состояния
+(initial/submenu/settings/confirm) в EN и RU, снятые как настоящие PNG
+1280×960, scale 1, на clean source `8bc09cff358aa629410437996520283ff98d77d9`
+через проверенную ISD `f8204c61615406ce5628b15692628e146476a008`;
+create/status подтвердили `linux-abstract-v1`, собственные runs остановлены
+(app/supervisor/Xvfb не живы, owned пуст). Использован отдельный private
+prefix libpng 1.6.59/zlib 1.4 (archive digests, upstream tests, ABI/ldd),
+собранный по явному разрешению владельца для этой задачи; системные
+библиотеки не менялись. Публичные PNG byte-identical приватным capture-копиям,
+содержат только IHDR/cHRM/bKGD/IDAT/IEND (без текстовых metadata-чанков);
+каждый просмотрен отдельно (визуальная инспекция выполнялась в vision-способном
+read-only контексте `explore`, а не моделью основного контекста, который не
+принимает изображения): состояния, локали и фокус соответствуют media records,
+приватных данных нет. Внешний вид slider в settings-захватах совпадает с уже
+опубликованными captures controls. Команды запуска recipe проверены реальными
+ISD standalone-menu runs EN/RU 800×600 scale 1 (приватные скриншоты, не commit).
+
+На этом кандидате прошли: свежий portable export (630 файлов, сверенных
+с исходной ревизией) и portable-check; documented native сборка и тесты
+рецепта (build standalone_menu, 2 model + 4 consumer + 17 ui_sdl + 1 ui_sdl_text
+tests, сборка ui_showcase с pinned кодеками); десять site unit/schema/parity
+tests, build, loopback HTTP и разрешённая изолированная Chromium browser
+приёмка (135 PASS, включая новые lab/recipes страницы в EN/RU на 360/1280,
+клавиатуру, locale anchors, no-JS и reduced motion); `check:catalogue:strict`
+по-прежнему ожидаемо завершается ошибкой (не все 23 IDs). Kit/native API,
+Slyx, extraction inventory и notices не менялись. Полная квалификация,
+остальные рецепты/Lab экраны и deploy не заявляются.
+
+Как увидеть локальный кандидат: из `site/` с Node из `.nvmrc` выполнить
+`npm ci`, `npm run build`, `npm run check:http`, `npm run preview -- --port 0`;
+открыть выданный URL с `/oui/en/recipes/menu`, `/oui/ru/recipes/menu`,
+`/oui/en/lab/menu` либо `/oui/ru/lab/menu`, или перейти из catalogue.
+Native сценарий — командами со страницы lab/menu (для агентов — только через
+wrapper `scripts/ui_isd.py`). Это проверено в локальном HTTP/browser
+и native ISD runs; публикация и Pages deploy не выполнялись.

@@ -14,7 +14,8 @@
       "scroll-table",
       "collections",
       "text",
-      "rich-text"
+      "rich-text",
+      "lab-menu"
     ]
   },
   "records": [
@@ -430,6 +431,46 @@
         "rich-text-en-alternate",
         "rich-text-ru-initial",
         "rich-text-ru-alternate"
+      ]
+    },
+    {
+      "id": "lab-menu",
+      "group": "lab",
+      "categories": [
+        "menu",
+        "settings"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_interaction",
+        "ui_layers",
+        "ui_controls",
+        "ui_editor",
+        "ui_sdl_text"
+      ],
+      "source": "consumer/ui_showcase/app/lab_menu.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Lab menu",
+        "ru": "Меню лаборатории"
+      },
+      "summary": {
+        "en": "Open a submenu, edit mock settings in a modal and confirm the shown draft.",
+        "ru": "Открыть подменю, изменить учебные настройки в модальном окне и подтвердить показанный черновик."
+      },
+      "limitations": {
+        "en": "Experimental; mock settings; process-local state, no persistence.",
+        "ru": "Экспериментально; учебные настройки; состояние только до завершения процесса, без сохранения."
+      },
+      "media": [
+        "lab-menu-initial-en",
+        "lab-menu-submenu-en",
+        "lab-menu-settings-en",
+        "lab-menu-confirm-en",
+        "lab-menu-initial-ru",
+        "lab-menu-submenu-ru",
+        "lab-menu-settings-ru",
+        "lab-menu-confirm-ru"
       ]
     }
   ]

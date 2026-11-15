@@ -17,8 +17,8 @@ async function fixture(markdown) {
 
 test('real pages have existing internal pages and /media assets', async () => {
   const { pages, links } = await validateLinks(process.cwd())
-  assert.equal(pages, 34)
-  assert.ok(links > 80)
+  assert.equal(pages, 42)
+  assert.ok(links > 120)
 })
 
 test('clean URLs, trailing-slash indexes and anchors resolve', async () => {

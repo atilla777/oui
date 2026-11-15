@@ -13,7 +13,10 @@ export const PINNED_ODIN = 'dev-2026-10-nightly:84bc3fc'
 export const PINNED_ODIN_SOURCES = 'docs/resources.md and the site recipe pages'
 export const DEFAULT_TIMEOUT_MS = 600_000
 const launchFlags = ['--font', '--fallback-font', '--assets', '--alternate-assets']
-const launchBinaries = ['build/menu', 'build/showcase']
+// Launch lines run the binaries the preceding build snippets produce under
+// build/ (menu, showcase, and per-recipe fixtures like hud-recipe). They are
+// verified structurally, never executed by this check.
+const isLaunchBinary = first => first.startsWith('build/') && !first.slice(6).includes('/')
 const ignoredDirectories = new Set(['node_modules', '.vitepress', '.git'])
 
 // Fenced ```sh blocks only. Line numbers are 1-based page line numbers.
@@ -42,7 +45,7 @@ export function classifySnippetBlock(block) {
     if (!line || line.startsWith('#')) continue
     const first = line.split(/\s+/)[0]
     if (first === 'odin' || (first === 'mkdir' && line.split(/\s+/)[1] === '-p')) commands.push(line)
-    else if (launchBinaries.includes(first)) launches.push(line)
+    else if (isLaunchBinary(first)) launches.push(line)
     else other.push(line)
   }
   return { commands, launches, other }

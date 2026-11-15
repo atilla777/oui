@@ -4,22 +4,27 @@
 `oui-3no.6`, Atlas `oui-3no.7`, text-input `oui-3no.9`, прокрутку/коллекции
 `oui-3no.10` и layers/HUD `oui-3no.11`. Text/rich-text `oui-3no.8`,
 menu recipe/Lab menu `oui-3no.20` и обязательные site-проверки/CI
-`oui-3no.24` — интеграционные кандидаты.
+`oui-3no.24` — интеграционные кандидаты. Жесты `oui-3no.12` —
+локальный кандидат, pending integration. Диагностика/производительность
+`oui-3no.17` — интеграционный кандидат.
 Библиотека и native consumers не изменены; сайт описывает существующие возможности,
 а не реализует их в браузере.
 
-- `site/en/` и `site/ru/` содержат `catalogue` и `capabilities/layout`,
+- `site/en/` и `site/ru/` содержат `catalogue`, `capabilities/layout`,
   `capabilities/controls`, `capabilities/styling`, `capabilities/profiles`,
   `capabilities/layers`, `capabilities/hud`, `capabilities/text-input`, `capabilities/atlas`,
-  `capabilities/scroll-table`, `capabilities/collections`, `capabilities/text`, `capabilities/rich-text`.
+  `capabilities/scroll-table`, `capabilities/collections`, `capabilities/text`, `capabilities/rich-text`,
+  `capabilities/gestures`, `capabilities/diagnostics-performance`, а также рецепты
+  и экраны Lab — опубликованные `recipes/menu` и `lab/menu` (`oui-3no.20`) и
+  `recipes/hud`/`lab/hud` этого кандидата.
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
   полный showcase, с pinned source links и native build/run command.
   Кандидат `oui-3no.20` добавляет `recipes/menu` (узкий standalone-menu рецепт
   без собственных изображений) и первый Lab обзор `lab/menu`.
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
   Каталог объявляет sample coverage `layout`, `controls`, `styling`, `profiles`,
-  `layers`, `hud`, `text-input`, `atlas`, `scroll-table`, `collections`, `text`, `rich-text`
-  и первый Lab ID `lab-menu`. Native source catalogue
+  `layers`, `hud`, `text-input`, `atlas`, `scroll-table`, `collections`, `text`, `rich-text`,
+  `gestures`, Lab IDs `lab-menu`/`lab-hud` и `diagnostics-performance`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -77,7 +82,7 @@ EN/RU страниц controls/styling и прежних foundation/layout/catalo
 `npm run check:http`, затем `npm run preview -- --port 0` и выданный локальный
 URL с `/oui/en/capabilities/layout` либо `/oui/ru/capabilities/layout`.
 Для других страниц заменить `layout` на `controls`, `styling`, `profiles`, `layers`, `hud`,
-`text-input`, `atlas`, `scroll-table` или `collections`; переключение
+`text-input`, `atlas`, `scroll-table`, `collections`, `recipes/hud` или `lab/hud`; переключение
 языка сохраняет страницу. `npm run check:browser` запускает разрешённую
 изолированную браузерную приёмку (Linux Chromium с sandbox).
 Остановить свой preview — Ctrl-C. Подробнее: [site README](../../site/README.md).
@@ -206,6 +211,58 @@ portable source остался побайтово неизменным. Изоб
 Браузерные проверки воспроизводятся командой `npm run check:browser` из `site/`
 в разрешённой sandboxed Chromium-среде; другие браузеры и полный аудит доступности
 не проверены.
+
+## Галерея жестов — oui-3no.12
+
+Локальный кандидат, pending integration. EN/RU страницы `capabilities/gestures`
+описывают существующий native fixture `cards-repeat-pan`: две панели карточек,
+кнопки повторной прокрутки ±24, обрезанные строки по 48 px, ручка прокрутки и
+заголовок-цель на каждой панели. Нажатие на карточку начинает перетаскивание;
+пока кнопка мыши удерживается, UI сообщает предложение и помечает заголовок
+панели «Drop: accepted»/«Перенос: разрешён», карточка остаётся в исходной панели.
+Приложение применяет ровно один перенос после отпускания; запросы из той же
+панели, устаревшие, повторные или недоступные отклоняются; инерции нет. Узкие
+пакеты `ui_base`, `ui_layout`, `ui_interaction`, `ui_scroll`, `ui_sdl`,
+`ui_gestures` отделены от полного showcase; pinned source links и native
+build/run команды закреплены на ревизии кандидата.
+
+Для каждого языка сняты три настоящих состояния PNG 1280×960, scale 1:
+начальное (по шесть карточек), предложение при нажатой кнопке и применённый
+перенос (5/7 карточек). Снимки выполнены на clean source revision
+`8bc09cff358aa629410437996520283ff98d77d9`; app log независимо подтверждает
+`phase=Active target="panel-right" accepted=true` с revision 0 и effects 0 при
+предложении, затем revision 1 effects 1 после отпускания. Выбранная ISD
+`f8204c61615406ce5628b15692628e146476a008` проверена целиком; create/status
+подтвердили `linux-abstract-v1`, выполнен явный focus, собственные runs
+остановлены. Private prefix libpng 1.6.59/zlib 1.4 пересобран для этого запуска
+по документированной процедуре из опубликованных archives: digest, upstream
+tests, C ABI и фактическая `ldd` linkage (включая transitive zlib) проверены,
+системные библиотеки не менялись. Все шесть PNG просмотрены исполнителем;
+координатор проверил структуру чанков (только
+IHDR/cHRM/bKGD/IDAT/IEND, без text-метаданных), digest и попиксельные отличия
+состояний; личных данных не обнаружено. Media manifest сохраняет полные state/locale/resource/image
+identities по контракту версии 1.
+
+Для этого кандидата прошли unit/parity/schema tests (включая новые привязки
+gestures: три состояния на язык, уникальные digest, публично безопасные state
+тексты), static build, loopback HTTP новых EN/RU маршрутов с image digests и
+свежий portable export/portable-check. После отдельного разрешения владельца
+для `oui-3no.12` (записано в rules) пройдена изолированная headless
+браузерная приёмка: Chromium 152 с sandbox (renderer seccomp 2, без
+no-sandbox флагов), собственный временный профиль и loopback-only static
+preview. EN/RU страницы жестов и сохранённые прежние сценарии (catalogue,
+guide, поиск/фильтры, viewer, reduced motion, no-JS) проверены на ширинах
+360/1280: prose без overflow, ровно три изображения на страницу с
+локализованным alt и натуральными размерами 1280×960, клавиатурный переход из
+каталога, смена языка с valid/missing anchors, no-JS prose/images/links.
+Исполнитель просмотрел 14 screenshots жестов/каталога; все 152 browser PNG
+сохранены в артефактах, собственные браузер и preview остановлены (cleanup
+подтверждён). Это ограниченная приёмка sample, не полная квалификация 23 IDs,
+не аудит доступности и не Pages deployment. Как увидеть локальный кандидат:
+из `site/` с Node из `.nvmrc` выполнить `npm run build`, `npm run check:http`,
+`npm run check:browser`, затем `npm run preview -- --port 0`; открыть выданный
+URL с `/oui/en/capabilities/gestures` либо `/oui/ru/capabilities/gestures` или
+перейти через каталог. Публикация и deployment не выполнены.
 
 ## Однострочный ввод текста
 
@@ -431,6 +488,125 @@ Native сценарий — командами со страницы lab/menu (�
 wrapper `scripts/ui_isd.py`). Это проверено в локальном HTTP/browser
 и native ISD runs; публикация и Pages deploy не выполнялись.
 
+## Рецепт HUD и Lab HUD (`oui-3no.22`)
+
+Кандидат `oui-3no.22`, следующий recipe+Lab срез после опубликованного menu-среза `oui-3no.20`:
+библиотека и native consumers не изменены, `kit/`, `consumer/`, `tests/`
+и корневые `scripts/` байтово идентичны базовой ревизии; в `docs/` изменён
+только этот spec-файл.
+
+- `site/en/recipes/hud.md` и RU-зеркало описывают узкий рецепт HUD: прямые
+  выбранные импорты `ui_layers`, `ui_hold`, `ui_hold/sdl` плюс `ui_base`,
+  `ui_layout`, `ui_interaction`, `ui_style`, `ui_text`, `ui_sdl`, `ui_sdl_text`,
+  транзитивно только Unicode; без controls/editor/collections/gestures/rich/
+  custom/transitions/translations/inspect/wire/debug и без atlas loader, поэтому
+  сам рецепт не линкует libpng/zlib. Страница документирует владение (приложение
+  владеет HP, счётчиком и эффектом), сборку/запуск существующего complete compile
+  fixture `tests/ui_recipes/hud/native` (F11 — bounded verification scenario,
+  F12 — graceful quit) и проверки, реально выполненные на этом кандидате.
+- `site/en/lab/hud.md` и RU-зеркало описывают экран `lab-hud`: учебный HP 60/100
+  с clamp −10/+10, восстановление удержанием Space 1000 мс, панель Popup с Close
+  и неинтерактивная подсказка Explain; ограничение native catalogue
+  «Учебные данные; состояние только до завершения процесса». Различия
+  порога (999 мс без эффекта), plain Activate, отмены панелью/потерей фокуса
+  и отсутствия повтора восстановления описаны со ссылкой на contract test.
+- `catalogue.json` получил запись группы `lab` (`lab-hud`, source
+  `consumer/ui_showcase/app/lab_hud.odin`, runnable `consumer/ui_showcase`),
+  в интегрированном дереве sample coverage составляет 15 IDs (включая опубликованные `gestures` и `lab-menu`); strict-проверка по-прежнему ожидаемо
+  требует полного покрытия 19 gallery + 4 Lab. Site test fixtures
+  (`routes.test.js`, `catalogue.test.js`, `catalogue-filter.test.js`) обновлены
+  под расширенный sample, а `http-check.js` и `browser-check.js` расширены
+  четырьмя маршрутами/страницами рецепта и Lab (включая image-проверки lab-hud,
+  no-JS и 360/1280) — та же механика, что в предыдущих site-задачах
+  (прецедент `ac0c111`).
+
+Получены восемь настоящих PNG 1280×960, scale 1, на clean source
+`8bc09cff358aa629410437996520283ff98d77d9` (зафиксировано в артефактах runs:
+`dirty=false`), EN/RU по четыре состояния: initial (HP 60, Idle, count 0),
+popup open, hold in progress (683/698 мс, полоса прогресса частично заполнена),
+completed (HP 100, count 1). Выбранная ISD
+`f8204c61615406ce5628b15692628e146476a008` прошла whole-source verification;
+create/status подтвердили `linux-abstract-v1`, явный focus перед вводом,
+собственные runs остановлены (`phase=stopped`, `owned=[]`). Private prefix
+libpng 1.6.59/zlib 1.4 собран из digest-проверенных archives. Все восемь PNG
+просмотрены (автором и отдельным независимым контекстом), содержат только
+IHDR/cHRM/bKGD/IDAT/IEND, без приватных путей/имён/метаданных; digests, captions и alt в `media.json` сверены валидатором.
+
+На этом кандидате прошли: `git diff --check`; `npm run check` (9/9, включая
+обновлённые fixtures), `npm run build`, `npm run check:http` (включая новые
+маршруты `en/ru/recipes/hud.html` и `en/ru/lab/hud.html`), изолированный
+sandboxed Chromium `npm run check:browser` (135 PASS; новые страницы рецепта и
+Lab проверены в hydrated/no-JS циклах на 360/1280 с клавиатурой, локалью и
+image-проверками; собственные артефакты);
+native: `odin test tests/ui_recipes/hud/native` (1), `kit/ui_hold` (20),
+`kit/ui_hold/sdl` (4), `kit/ui_layers` (24); headless fixture
+`tests/ui_recipes/hud` собран и запущен (`recipe-hud effects=1 conflicts=1
+live=0`); native recipe запущен через обёртку в обоих локалях (EN и RU:
+F11 → вывод `native-hud=ok threshold=999+1 loss=cancel failure=not-ready
+recovery=no-replay input=native-synthetic`, F12, `app_exit=0`, runs
+остановлены); свежий portable export + `test-ui-kit.py` (5) +
+`scripts/test-ui-showcase --portable-check` прошли из export. Static build
+по-прежнему не запускает Odin/ISD; native snippet проверки выполнены отдельно
+от статической сборки. Независимое review (advanced, read-only) подтвердило
+фактуру страниц против исходников, провенанс и неизменность kit/consumer;
+его medium-находка о непокрытых маршрутах закрыта расширением http/browser
+проверок, low-находки — правкой формулировок и RU-прогоном. После объединения
+с опубликованными menu/gestures-задачами повторены site checks на
+интегрированном дереве: `npm run check` 11/11, build, `check:http` и
+sandboxed Chromium `check:browser` 159 PASS (включая 16 строк HUD-страниц);
+native-часть дерева байт-идентична базовой ревизии, поэтому прежние
+native/portable доказательства применимы без повтора.
+
+Как увидеть локальный кандидат: команды README из `site/`, затем
+`npm run preview -- --port 0`; открыть `/oui/en/recipes/hud`, `/oui/en/lab/hud`
+или RU-зеркала, либо перейти из каталога. Native команды страниц выполняются из
+подготовленного checkout по документации. Это проверено локально и не означает
+публикацию, Pages deploy или полную приёмку: остальные три рецепта/Lab,
+полное покрытие IDs, другие браузеры и доступность не проверены.
+
+## Диагностика и производительность (`oui-3no.17`)
+
+EN/RU страницы описывают нативную страницу G20–G21 showcase: фазы CPU
+(p/c/k/d/r/p), счётчики обратных вызовов метрик текста и операций, переключатель
+«Замеры вкл/выкл» и пять диагностических проб (Duplicate, Invalid, Resource,
+Ownership, Unsupported), выдающих наблюдение family/stage/code/id без изменения
+обычного состояния. Явно указаны границы: opt-in потребительские замеры, нет
+транспорта отладчика, времени GPU, учёта кучи SDL и числовых SLA. Выбранные
+пакеты (`ui_base`, `ui_layout`, `ui_interaction`, `ui_text`, `ui_editor`,
+`ui_editor/sdl`, `ui_collections`, `ui_sdl_text`, `ui_sdl` и общая отрисовка
+оболочки `ui_style`) выведены из фактических импортов страницы; ссылки на
+исходники и native команды закреплены за `4da8d7a57bd2453227a4c37df6b0b4d171401681`
+(native-байты идентичны текущему дереву — сверено пустым diff по `kit`/`consumer`).
+
+Сняты четыре подлинных PNG 1280×960, scale 1, EN/RU × начальное состояние
+(фазы CPU после первого полного кадра; строка состояния обновляется при
+перекомпозиции после первого кадра) и состояние после пробы «Дубликат»
+(наблюдение Layout/Prepare, код 2 = `Duplicate_ID`, id `fixture`; подтверждено
+app.log: revision 0→1, focus `diagnostics/duplicate`). Снимки получены выбранной
+проверенной ISD `f8204c61615406ce5628b15692628e146476a008` с `linux-abstract-v1`
+в create/status, явным focus и остановкой собственных runs в `finally`.
+Private prefix libpng 1.6.59/zlib 1.4 подготовлен заново (официальные архивы
+сверены по SHA256, upstream тесты прошли, C ABI и ldd executable и transitive
+zlib проверены) без изменения системных библиотек. Публичные копии содержат
+только IHDR/IDAT/IEND и pixel-identical captures; каждый PNG проверен исполнителем,
+координатором — программно (структура, пиксельное равенство, локализация отличий
+состояний в области статусной строки; визуальный просмотр в координаторском
+контексте этой сессии недоступен — модель без image input); 2026-11-15 владелец
+лично просмотрел и подтвердил все четыре опубликованных PNG (ожидаемое содержание,
+без приватных данных), закрыв обязательный визуальный шаг приёмки.
+
+Прошли site unit/parity/schema tests (включая новый binding-тест и
+negative fixtures), build, loopback HTTP с новыми маршрутами EN/RU и digests,
+свежий portable export (631 файл, byte-identical экспорту origin/main) и
+portable-check; `check:catalogue:strict` ожидаемо падает (после интеграции с
+опубликованными `oui-3no.12`, `oui-3no.20` и `oui-3no.22` — 16 из 23). После
+отдельного разрешения владельца 2026-11-15 пройдена изолированная браузерная
+приёмка Chromium 152 с sandbox: страница EN/RU при 360/1280, JS и no-JS,
+клавиатура, locale/anchors, изображения и reduced motion; существующие сценарии
+(включая опубликованные жесты, Lab menu и Lab HUD) сохранены; browser screenshot
+сохранены в артефактах проверки. Другие
+браузеры, полная доступность, остальные gallery IDs и deploy не проверены.
+
 ## Обязательные site-проверки и процедура обновления (`oui-3no.24`)
 
 `.github/workflows/pr-site.yml` вводит least-privilege PR CI: три обязательные
@@ -479,21 +655,28 @@ app/supervisor/Xvfb после stop не живы). Вывод байтово с
 не каждую ссылку документа — recipes/resources/isd ссылки остались на
 `8bc09cf…`). Изменение байтов изображения требует явного обновления digest.
 
-Наблюдённые проверки кандидата: `npm run check` 22/22 (включая все новые
-negative fixtures; 94 ссылки в 34 страницах), `build`, `check:http`,
-разрешённая browser-проверка с собственными артефактами, `check:native`
-(7 дедуплицированных команд: сборка showcase с pinned codec prefix,
-standalone-menu build, 2 model + 4 consumer + 17 ui_sdl + 1 ui_sdl_text
-tests; 28 launch-строк проверены структурно; guide acquisition-блоки не
-исполняются и сообщаются явно), `git diff --check`, свежий portable export
-и portable-check. Пределы: исполнение jobs на GitHub-hosted runners не
-наблюдалось из этой задачи (нет push-полномочий; в образе ubuntu-24.04
-заявлен Chromium 157, путь не проверен); верифицированного native CI runner
-нет — это открытый environment blocker, обязательный native gate не
-заменяется успехом static lane. Kit/native API, Slyx, extraction inventory
-и notices не менялись; Node остаётся только site tooling. Заявление
-`docs/rules/checks.md` об отсутствии версионированных CI теперь историческое
-и требует отдельного решения владельца.
+Наблюдённые проверки кандидата (после интеграции свежего primary с
+конкурентными публикациями `oui-3no.12`/`oui-3no.17`/`oui-3no.22`):
+`npm run check` 25/25 (включая все новые negative fixtures; 130 ссылок
+в 42 страницах), `build`, `check:http`, разрешённая browser-проверка
+с собственными артефактами, `check:native` (13 дедуплицированных команд:
+сборка showcase с pinned codec prefix, standalone-menu build, fixture
+`tests/ui_recipes/hud/native` и headless fixture рецепта HUD, 2 model +
+4 consumer + 17 ui_sdl + 1 ui_sdl_text + 20 ui_hold + 4 ui_hold/sdl tests;
+37 launch-строк проверены структурно; guide acquisition-блоки не
+исполняются и сообщаются явно). Интеграционная правка классификации:
+launch-строкой считается любой `build/<binary>` (не только menu/showcase),
+чтобы опубликованные команды fixture-рецептов исполнялись, а не попадали
+в отчёт non-recipe; ожидаемые счётчики страниц обновлены. `git diff --check`,
+свежий portable export и portable-check (входы экспорта между b4c8be1
+и интегрированным primary не менялись). Пределы: исполнение jobs на
+GitHub-hosted runners не наблюдалось из этой задачи (нет push-полномочий;
+в образе ubuntu-24.04 заявлен Chromium 157, путь не проверен);
+верифицированного native CI runner нет — это открытый environment blocker,
+обязательный native gate не заменяется успехом static lane. Kit/native API,
+Slyx, extraction inventory и notices не менялись; Node остаётся только
+site tooling. Заявление `docs/rules/checks.md` об отсутствии версионированных
+CI теперь историческое и требует отдельного решения владельца.
 
 Как увидеть локальный кандидат: из `site/` с Node из `.nvmrc` —
 `npm ci`, `npm run check`, `npm run build`, `npm run check:http`,

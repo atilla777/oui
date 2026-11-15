@@ -35,7 +35,13 @@ export function snippetBlocks(markdown) {
 }
 
 // Split a block into runnable lines and launch lines. Comments and blank lines
-// carry no command. Any other shell line makes the block a non-recipe block.
+// carry no command. Every odin build/test line is a snippet command regardless
+// of its neighbouring lines (they compile and test repository code from the
+// repo root); launch lines run the binaries the preceding build snippets
+// produce under build/ (menu, showcase, per-recipe fixtures, optionally with
+// a ./ prefix) and are verified structurally, never executed. Any other shell
+// line (acquisition steps, ISD wrapper invocations, portable-root
+// placeholders) is not executed and is reported with its block.
 export function classifySnippetBlock(block) {
   const commands = []
   const launches = []
@@ -43,7 +49,7 @@ export function classifySnippetBlock(block) {
   for (const raw of block.lines) {
     const line = raw.trim()
     if (!line || line.startsWith('#')) continue
-    const first = line.split(/\s+/)[0]
+    const first = line.split(/\s+/)[0].replace(/^\.\//, '')
     if (first === 'odin' || (first === 'mkdir' && line.split(/\s+/)[1] === '-p')) commands.push(line)
     else if (isLaunchBinary(first)) launches.push(line)
     else other.push(line)
@@ -71,6 +77,13 @@ function collect(map, key, page) {
 // source page. Blocks containing other shell commands (acquisition steps,
 // portable-root placeholders) are never executed; their launch lines are still
 // verified structurally.
+// Commands run from the repository root, so pages that document consumer-side
+// acquisition or vendored-root flows (the guide) never have their odin lines
+// executed: their blocks run in a different working directory (for example
+// `cd vendor/odin-ui`). Their launch lines are still collected for structural
+// verification when they name build/ binaries.
+const commandPages = (page, locale) => !page.startsWith(`${locale}/guide/`)
+
 export async function collectSnippets(siteRoot) {
   const commands = new Map()
   const launches = new Map()
@@ -79,11 +92,11 @@ export async function collectSnippets(siteRoot) {
     for (const { page, path } of await markdownPages(join(siteRoot, locale), locale)) {
       for (const block of snippetBlocks(await readFile(path, 'utf8'))) {
         const classified = classifySnippetBlock(block)
-        if (!classified.other.length) for (const command of classified.commands) collect(commands, command, page)
+        if (commandPages(page, locale)) for (const command of classified.commands) collect(commands, command, page)
         for (const launch of classified.launches) collect(launches, launch, page)
         if (classified.other.length) {
           const first = classified.other.map(line => line.split(/\s+/)[0])
-          skipped.push({ page, line: block.line, reason: `non-recipe shell block (${[...new Set(first)].join(', ')})` })
+          skipped.push({ page, line: block.line, reason: `non-snippet shell lines not executed (${[...new Set(first)].join(', ')})` })
         }
       }
     }

@@ -71,9 +71,11 @@ UI_KIT_ROOT="$PROOF/kit" TMPDIR="$PROOF" python3 -B "$PROOF/kit/scripts/test-ui-
 profiles `oui-3no.6`, Atlas `oui-3no.7`, text/rich-text `oui-3no.8`, text-input `oui-3no.9`,
 scroll-table/collections `oui-3no.10`, layers/HUD `oui-3no.11` (2026-11-12),
 жестов `oui-3no.12`, transitions `oui-3no.14`, diagnostics/performance `oui-3no.17`,
-composition/custom `oui-3no.13` и world `oui-3no.15` (2026-11-15) владелец
-отдельно разрешил headless Chromium: без подключения к рабочему столу, с собственным
-временным профилем и собственным loopback-only HTTP static preview. Этот
+composition/custom `oui-3no.13` и world `oui-3no.15` (2026-11-15), menu recipe/Lab menu
+`oui-3no.20`, HUD recipe/Lab HUD `oui-3no.22` и inventory recipe/Lab inventory
+`oui-3no.23` (2026-11-15) владелец отдельно разрешил headless Chromium: без
+подключения к рабочему столу, с собственным временным профилем и собственным
+loopback-only HTTP static preview. Этот
 ограниченный путь не использует native-only ISD wrapper и не распространяется
 на native-графику. Не подключайся к чужому браузеру/профилю, не отключай sandbox
 и не запускай dev-сервер Vite/VitePress. Сохраняй screenshots/logs; закрывай

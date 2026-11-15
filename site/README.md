@@ -49,10 +49,11 @@ OUI_BROWSER_ARTIFACT_ROOT="$PROOF" npm run check:browser 2>&1 | tee "$PROOF/brow
 The browser check observes local site search and catalogue query/filter/reset,
 keyboard interaction, locale switching, no-JS content,
 reduced motion and layout at 360 and 1280 pixels, including the catalogue,
-layout, controls, styling, profiles, layers, HUD, transitions, text-input, Atlas,
-scroll-table, collections, gestures, Lab menu, basic menu recipe, Lab HUD, HUD
-recipe, diagnostics and performance, nested composition and custom primitives
-pages and their localized images. Its screenshots need human
+layout, controls, styling, profiles, layers, HUD, transitions, text-input, Atlas, scroll-table,
+collections, gestures, the nested composition and custom primitives pages, the
+Lab menu, Lab HUD and Lab inventory screens, the
+basic menu, HUD and inventory recipe pages, the diagnostics and performance
+pages and the world anchors pages with their localized images. Its screenshots need human
 inspection; automated checks do not establish accessibility conformance or cover
 other browsers and devices.
 Both locale trees must contain each page. Explicit matching heading IDs are the
@@ -62,10 +63,9 @@ ordinary link still reaches the corresponding page without a hash.
 
 The catalogue is an explicit `layout`, `controls`, `styling`, `profiles`, `layers`,
 `hud`, `transitions`, `text`, `rich-text`, `text-input`, `atlas`, `scroll-table`,
-`collections`, `gestures`, `lab-menu`, `lab-hud`, `diagnostics-performance`,
-`composition`, `custom` and `world` sample of
-eighteen gallery
-sections and two of the four Lab screens, not complete coverage. The
+`collections`, `gestures`, `composition`, `custom`, `lab-menu`, `lab-hud`, `lab-inventory`,
+`diagnostics-performance` and `world` sample of eighteen gallery sections and
+three of the four Lab screens, not complete coverage. The
 schema-versioned `data/catalogue.json` and `data/media.json` are checked before
 the build against the actual native section IDs, locale media, provenance,
 PNG dimensions and digests. `npm run check:catalogue:strict` deliberately fails

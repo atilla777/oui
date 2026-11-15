@@ -31,12 +31,15 @@ test('real pages deduplicate commands and keep every source page', async () => {
   const { commands, launches, skipped } = await collectSnippets(process.cwd())
   const showcase = 'odin build consumer/ui_showcase -collection:ui=kit -extra-linker-flags:"$(pkg-config --libs libpng zlib)" -out:build/showcase'
   assert.ok(commands.has(showcase))
-  assert.equal(commands.get(showcase).length, 40)
+  assert.equal(commands.get(showcase).length, 42)
   assert.deepEqual(commands.get('odin test kit/ui_sdl -define:ODIN_TEST_THREADS=1 -out:build/ui-sdl-tests'), ['en/recipes/menu.md', 'ru/recipes/menu.md'])
   assert.deepEqual(commands.get('odin build tests/ui_recipes/hud/native -collection:ui=kit -vet -vet-style -vet-tabs -vet-semicolon -out:build/hud-recipe'), ['en/recipes/hud.md', 'ru/recipes/hud.md'])
   assert.deepEqual(launches.get('build/hud-recipe-headless'), ['en/recipes/hud.md', 'ru/recipes/hud.md'])
+  assert.deepEqual(commands.get('odin build tests/ui_recipes/inventory/native -collection:ui=kit -vet -vet-style -vet-tabs -vet-semicolon -out:build/inventory-native'), ['en/recipes/inventory.md', 'ru/recipes/inventory.md'])
+  assert.deepEqual(launches.get('./build/inventory-recipe'), ['en/recipes/inventory.md', 'ru/recipes/inventory.md'])
+  assert.ok([...commands.keys()].every(command => !command.includes('vendor/odin-ui')), 'guide vendored-root commands must not execute')
   assert.deepEqual(launches.get('build/showcase --font resources/font.ttf --fallback-font resources/fallback.ttf --assets resources/atlas/a/manifest.json --alternate-assets resources/atlas/b/manifest.json --section lab-menu --locale en --size 1280x960 --scale 1'), ['en/lab/menu.md', 'ru/lab/menu.md'])
-  assert.ok(skipped.some(block => block.page === 'en/guide/using-oui.md' && /non-recipe shell block \(cd\)/.test(block.reason)))
+  assert.ok(skipped.some(block => block.page === 'en/guide/using-oui.md' && /non-snippet shell lines not executed \(cd\)/.test(block.reason)))
 })
 
 test('a failing command names the page, the command and its output', async () => {

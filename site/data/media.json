@@ -3122,6 +3122,466 @@
       }
     },
     {
+      "id": "lab-inventory-initial-en",
+      "section": "lab-inventory",
+      "state": "initial two lists",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_inventory.odin",
+        "consumer/ui_showcase/app/lab_transfer.odin",
+        "consumer/ui_showcase/app/lab_input.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; initial focus on the first Backpack row; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-inventory-initial-en.png",
+      "sha256": "b29684e4dd9610e111a99bdc4bafd567edc6ddfc5a3e09adc1fd4f1e182ba6fa",
+      "caption": {
+        "en": "Native Lab inventory, EN UI; initial two lists with Compass focused.",
+        "ru": "Нативный инвентарь лаборатории: интерфейс EN, два исходных списка, фокус на Compass."
+      },
+      "alt": {
+        "en": "Lab inventory initial screen with Backpack and Chest lists and Compass focused.",
+        "ru": "Начальный экран инвентаря лаборатории с английскими списками Backpack и Chest и фокусом на Compass."
+      }
+    },
+    {
+      "id": "lab-inventory-selected-en",
+      "section": "lab-inventory",
+      "state": "selected row with drag handle",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_inventory.odin",
+        "consumer/ui_showcase/app/lab_transfer.odin",
+        "consumer/ui_showcase/app/lab_input.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; Backpack card-01 selected with a pointer click; focus stays on the selected row; drag handle visible; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-inventory-selected-en.png",
+      "sha256": "6ead9351b16cdd474536635550809a17bc50cb09de459d771e490ab78531b122",
+      "caption": {
+        "en": "Native Lab inventory, EN UI; Compass selected, stable ID and drag handle visible.",
+        "ru": "Нативный инвентарь лаборатории: интерфейс EN, выбран Compass, видны устойчивый ID и ручка перетаскивания."
+      },
+      "alt": {
+        "en": "Backpack row Compass selected, with the selection row showing card-01 / Compass / Backpack and the Drag selected item button.",
+        "ru": "Выбранная строка Compass в рюкзаке; строка выбора показывает card-01 / Compass / Backpack и кнопку Drag selected item."
+      }
+    },
+    {
+      "id": "lab-inventory-refused-en",
+      "section": "lab-inventory",
+      "state": "same-panel refusal",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_inventory.odin",
+        "consumer/ui_showcase/app/lab_transfer.odin",
+        "consumer/ui_showcase/app/lab_input.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; drag from the selected item handle to the Backpack header; same-panel refusal; focus stays on the selected row; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-inventory-refused-en.png",
+      "sha256": "26186101b717c79103771ccaaa4fe5b32e2c63952868c2850394f43c2df7053f",
+      "caption": {
+        "en": "Native Lab inventory, EN UI; same-panel drop refused, membership unchanged.",
+        "ru": "Нативный инвентарь лаборатории: интерфейс EN, перенос в ту же панель отклонён, состав не изменён."
+      },
+      "alt": {
+        "en": "Same-panel drop refused with the message Refused: item is already in this container.",
+        "ru": "Перенос в ту же панель отклонён; сообщение Refused: item is already in this container."
+      }
+    },
+    {
+      "id": "lab-inventory-pending-en",
+      "section": "lab-inventory",
+      "state": "pending transfer proposal",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_inventory.odin",
+        "consumer/ui_showcase/app/lab_transfer.odin",
+        "consumer/ui_showcase/app/lab_input.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; drag from the selected item handle to the Chest header opened the pending confirmation; focus on Cancel; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-inventory-pending-en.png",
+      "sha256": "5dd2fd6f7d926f10d7adff881933784c15e50e9e0e976a42a4cab5a3e5ed3333",
+      "caption": {
+        "en": "Native Lab inventory, EN UI; pending proposal for card-01, item not moved yet.",
+        "ru": "Нативный инвентарь лаборатории: интерфейс EN, ожидающее предложение для card-01, предмет ещё не перенесён."
+      },
+      "alt": {
+        "en": "Pending transfer modal asking Move selected item? for card-01 with Cancel and Confirm move.",
+        "ru": "Модальное подтверждение Move selected item? для card-01 с кнопками Cancel и Confirm move."
+      }
+    },
+    {
+      "id": "lab-inventory-confirmed-en",
+      "section": "lab-inventory",
+      "state": "confirmed transfer result",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_inventory.odin",
+        "consumer/ui_showcase/app/lab_transfer.odin",
+        "consumer/ui_showcase/app/lab_input.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; Confirm move applied the pending transfer once; focus returns to the shell Catalogue control; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-inventory-confirmed-en.png",
+      "sha256": "6371fe89f075c6b4b8f4387675f03d0e581da6048d96184ada41dfa1533d4982",
+      "caption": {
+        "en": "Native Lab inventory, EN UI; transfer confirmed once, stable selection preserved.",
+        "ru": "Нативный инвентарь лаборатории: интерфейс EN, перенос подтверждён один раз, выбор сохранён."
+      },
+      "alt": {
+        "en": "Confirmed transfer: Compass left the Backpack, the selection row shows card-01 / Compass / Chest, and the status says the item moved once.",
+        "ru": "Подтверждённый перенос: Compass покинул рюкзак, строка выбора показывает card-01 / Compass / Chest, статус сообщает об одном переносе."
+      }
+    },
+    {
+      "id": "lab-inventory-initial-ru",
+      "section": "lab-inventory",
+      "state": "initial two lists",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_inventory.odin",
+        "consumer/ui_showcase/app/lab_transfer.odin",
+        "consumer/ui_showcase/app/lab_input.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; initial focus on the first Backpack row; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-inventory-initial-ru.png",
+      "sha256": "1b639cd402c634184e70ac854a62345d4b10b0dfbace7854cde29554b75eda2a",
+      "caption": {
+        "en": "Native Lab inventory, RU UI; initial two lists with Компас focused.",
+        "ru": "Нативный инвентарь лаборатории: интерфейс RU, два исходных списка, фокус на «Компас»."
+      },
+      "alt": {
+        "en": "Lab inventory initial screen with Russian Backpack and Chest lists and Компас focused.",
+        "ru": "Начальный экран инвентаря лаборатории со списками «Рюкзак» и «Сундук» и фокусом на «Компас»."
+      }
+    },
+    {
+      "id": "lab-inventory-selected-ru",
+      "section": "lab-inventory",
+      "state": "selected row with drag handle",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_inventory.odin",
+        "consumer/ui_showcase/app/lab_transfer.odin",
+        "consumer/ui_showcase/app/lab_input.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; Backpack card-01 selected with a pointer click; focus stays on the selected row; drag handle visible; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-inventory-selected-ru.png",
+      "sha256": "aca4eabdd2901118ec64bb417e9404e9dcc39c148ed1deb95ab4955208167080",
+      "caption": {
+        "en": "Native Lab inventory, RU UI; Компас selected, stable ID and drag handle visible.",
+        "ru": "Нативный инвентарь лаборатории: интерфейс RU, выбран «Компас», видны устойчивый ID и ручка перетаскивания."
+      },
+      "alt": {
+        "en": "Russian Backpack row Компас selected, with the selection row showing card-01 / Компас / Рюкзак and the drag button.",
+        "ru": "Выбранная строка «Компас» в рюкзаке; строка выбора показывает card-01 / Компас / Рюкзак и кнопку «Перетащить выбранный предмет»."
+      }
+    },
+    {
+      "id": "lab-inventory-refused-ru",
+      "section": "lab-inventory",
+      "state": "same-panel refusal",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_inventory.odin",
+        "consumer/ui_showcase/app/lab_transfer.odin",
+        "consumer/ui_showcase/app/lab_input.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; drag from the selected item handle to the Backpack header; same-panel refusal; focus stays on the selected row; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-inventory-refused-ru.png",
+      "sha256": "313b3f94d95a729c04bb3e35b19a05d6be0dd6ad76f28b2f89d7c07cf52879ab",
+      "caption": {
+        "en": "Native Lab inventory, RU UI; same-panel drop refused, membership unchanged.",
+        "ru": "Нативный инвентарь лаборатории: интерфейс RU, перенос в ту же панель отклонён, состав не изменён."
+      },
+      "alt": {
+        "en": "Same-panel drop refused in the Russian UI with the message that the item is already in this container.",
+        "ru": "Перенос в ту же панель отклонён; сообщение «Отказ: предмет уже в этом контейнере»."
+      }
+    },
+    {
+      "id": "lab-inventory-pending-ru",
+      "section": "lab-inventory",
+      "state": "pending transfer proposal",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_inventory.odin",
+        "consumer/ui_showcase/app/lab_transfer.odin",
+        "consumer/ui_showcase/app/lab_input.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; drag from the selected item handle to the Chest header opened the pending confirmation; focus on Cancel; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-inventory-pending-ru.png",
+      "sha256": "1b10ce4d357d6148247de143c064aeb608dd921e7a548d3cb2d209f254959db9",
+      "caption": {
+        "en": "Native Lab inventory, RU UI; pending proposal for card-01, item not moved yet.",
+        "ru": "Нативный инвентарь лаборатории: интерфейс RU, ожидающее предложение для card-01, предмет ещё не перенесён."
+      },
+      "alt": {
+        "en": "Pending transfer modal in the Russian UI asking Move selected item? for card-01, with Отмена and Подтвердить перенос.",
+        "ru": "Модальное подтверждение «Перенести выбранный предмет?» для card-01 с кнопками «Отмена» и «Подтвердить перенос»."
+      }
+    },
+    {
+      "id": "lab-inventory-confirmed-ru",
+      "section": "lab-inventory",
+      "state": "confirmed transfer result",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_inventory.odin",
+        "consumer/ui_showcase/app/lab_transfer.odin",
+        "consumer/ui_showcase/app/lab_input.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-inventory; test controls enabled; Confirm move applied the pending transfer once; focus returns to the shell Catalogue control; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-inventory-confirmed-ru.png",
+      "sha256": "05f808809ed5eb6a5893e177952f198c1ce513db03959149808999aa02392cdd",
+      "caption": {
+        "en": "Native Lab inventory, RU UI; transfer confirmed once, stable selection preserved.",
+        "ru": "Нативный инвентарь лаборатории: интерфейс RU, перенос подтверждён один раз, выбор сохранён."
+      },
+      "alt": {
+        "en": "Confirmed transfer in the Russian UI: Компас left the Backpack, the selection row shows card-01 / Компас / Сундук, and the status reports one move.",
+        "ru": "Подтверждённый перенос: «Компас» покинул рюкзак, строка выбора показывает card-01 / Компас / Сундук, статус сообщает об одном переносе."
+      }
+    },
+    {
       "id": "diagnostics-performance-en-initial",
       "section": "diagnostics-performance",
       "state": "initial state with CPU phase samples after the first complete frame",

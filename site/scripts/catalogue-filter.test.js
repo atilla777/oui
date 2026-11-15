@@ -23,7 +23,7 @@ test('sample records filter independently and share categories', () => {
   assert.deepEqual(ids('ru', '', 'controls'), ['profiles', 'controls'])
   assert.deepEqual(ids('en', '', 'styling'), ['styling'])
   assert.deepEqual(ids('en', 'slider', 'styling'), [])
-  assert.deepEqual(ids('en', ''), ['layout', 'profiles', 'controls', 'styling', 'layers', 'hud', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text', 'transitions', 'lab-menu', 'gestures', 'lab-hud', 'diagnostics-performance', 'composition', 'custom', 'world'])
+assert.deepEqual(ids('en', ''), ['layout', 'profiles', 'controls', 'styling', 'layers', 'hud', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text', 'transitions', 'diagnostics-performance', 'lab-menu', 'gestures', 'lab-hud', 'lab-inventory', 'composition', 'custom', 'world'])
   assert.deepEqual(ids('en', 'tooltip', 'layers'), ['layers'])
   assert.deepEqual(ids('en', '', 'interaction'), ['layers', 'gestures'])
   assert.deepEqual(ids('en', 'pan', 'interaction'), ['gestures'])
@@ -46,5 +46,6 @@ test('sample records filter independently and share categories', () => {
   }
   assert.deepEqual(ids('en', 'typography', 'typography'), ['text', 'rich-text'])
   assert.deepEqual(ids('ru', 'абзацы', 'typography'), ['text'])
-  assert.deepEqual(ids('en', ''), ['layout', 'profiles', 'controls', 'styling', 'layers', 'hud', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text', 'transitions', 'lab-menu', 'gestures', 'lab-hud', 'diagnostics-performance', 'composition', 'custom', 'world'])
+assert.deepEqual(ids('ru', 'узлы-круги'), ['custom'])
+  assert.deepEqual(ids('en', ''), ['layout', 'profiles', 'controls', 'styling', 'layers', 'hud', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text', 'transitions', 'diagnostics-performance', 'lab-menu', 'gestures', 'lab-hud', 'lab-inventory', 'composition', 'custom', 'world'])
 })

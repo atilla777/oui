@@ -18,8 +18,9 @@
       "transitions",
       "lab-menu",
       "gestures",
-      "lab-hud",
       "diagnostics-performance",
+      "lab-hud",
+      "lab-inventory",
       "composition",
       "custom",
       "world"
@@ -481,6 +482,42 @@
       ]
     },
     {
+      "id": "diagnostics-performance",
+      "group": "gallery",
+      "categories": [
+        "state"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_text",
+        "ui_editor",
+        "ui_collections",
+        "ui_sdl_text"
+      ],
+      "source": "consumer/ui_showcase/sections/performance.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Diagnostics and performance",
+        "ru": "Диагностика и производительность"
+      },
+      "summary": {
+        "en": "Inspect CPU phase samples and run five failing probes around an editor and collection fixture.",
+        "ru": "Наблюдайте фазы CPU и запускайте пять сбойных проб вокруг примера с редактором и коллекцией."
+      },
+      "limitations": {
+        "en": "Experimental; no debugger transport, GPU time or numerical SLA.",
+        "ru": "Экспериментально; нет транспорта отладчика, времени GPU и числовых SLA."
+      },
+      "media": [
+        "diagnostics-performance-en-initial",
+        "diagnostics-performance-en-diagnostic",
+        "diagnostics-performance-ru-initial",
+        "diagnostics-performance-ru-diagnostic"
+      ]
+    },
+    {
       "id": "lab-menu",
       "group": "lab",
       "categories": [
@@ -598,39 +635,46 @@
       ]
     },
     {
-      "id": "diagnostics-performance",
-      "group": "gallery",
+      "id": "lab-inventory",
+      "group": "lab",
       "categories": [
-        "state"
+        "collections",
+        "state",
+        "input"
       ],
       "packages": [
         "ui_base",
-        "ui_layout",
-        "ui_interaction",
-        "ui_text",
-        "ui_editor",
         "ui_collections",
-        "ui_sdl_text"
+        "ui_gestures",
+        "ui_gestures/sdl",
+        "ui_interaction",
+        "ui_layout"
       ],
-      "source": "consumer/ui_showcase/sections/performance.odin",
+      "source": "consumer/ui_showcase/app/lab_inventory.odin",
       "runnable": "consumer/ui_showcase",
       "title": {
-        "en": "Diagnostics and performance",
-        "ru": "Диагностика и производительность"
+        "en": "Lab inventory",
+        "ru": "Инвентарь лаборатории"
       },
       "summary": {
-        "en": "Inspect CPU phase samples and run five failing probes around an editor and collection fixture.",
-        "ru": "Наблюдайте фазы CPU и запускайте пять сбойных проб вокруг примера с редактором и коллекцией."
+        "en": "Select a row in two uniform lists, propose a transfer and confirm or refuse it.",
+        "ru": "Выбрать строку в двух однородных списках, предложить перенос и подтвердить или отклонить его."
       },
       "limitations": {
-        "en": "Experimental; no debugger transport, GPU time or numerical SLA.",
-        "ru": "Экспериментально; нет транспорта отладчика, времени GPU и числовых SLA."
+        "en": "Experimental; two uniform lists; no row drag-reorder; process-local teaching data.",
+        "ru": "Экспериментально; два однородных списка; без перетаскивания строк для переупорядочивания; учебные данные, состояние только до завершения процесса."
       },
       "media": [
-        "diagnostics-performance-en-initial",
-        "diagnostics-performance-en-diagnostic",
-        "diagnostics-performance-ru-initial",
-        "diagnostics-performance-ru-diagnostic"
+        "lab-inventory-initial-en",
+        "lab-inventory-selected-en",
+        "lab-inventory-refused-en",
+        "lab-inventory-pending-en",
+        "lab-inventory-confirmed-en",
+        "lab-inventory-initial-ru",
+        "lab-inventory-selected-ru",
+        "lab-inventory-refused-ru",
+        "lab-inventory-pending-ru",
+        "lab-inventory-confirmed-ru"
       ]
     },
     {

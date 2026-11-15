@@ -197,7 +197,7 @@ applied раздельны, Apply → подтверждение, Keep editing �
 dirty-отмена/уход спрашивают Stay/Discard, подтверждённая ревизия применяется
 один раз; редактор однострочный, bound 1–64 EGC принадлежит потребителю,
 IME/undo/нормализации нет, значения process-local без записи на диск.
-Каталог получил первую Lab-запись (`lab-settings`, group `lab`, категория
+Каталог получил Lab-запись `oui-3no.21` (`lab-settings`, group `lab`, категория
 `settings` в обоих языках) и ссылку на страницу Lab.
 
 Восемь настоящих PNG 1280×960, scale 1, на clean source revision

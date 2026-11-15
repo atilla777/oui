@@ -21,6 +21,8 @@ npm run check
 npm run build
 npm run check:http
 npm run check:browser
+npm run check:live -- <origin>
+npm run check:live:browser -- <origin>
 npm run preview -- --port 4173
 ```
 
@@ -28,7 +30,8 @@ Open `http://127.0.0.1:4173/oui/`; stop the preview with Ctrl-C. Choose another
 free port if needed. The preview binds only to `127.0.0.1`; it never accepts a
 host option. `check` validates page-key and explicit anchor parity, internal page
 links and published `/media` assets, and includes negative fixtures for a missing
-counterpart, a broken link and a digest mismatch; `build` runs `check` before
+counterpart, a broken link and a digest mismatch; it also runs the strict
+full-coverage catalogue check described below. `build` runs `check` before
 compiling.
 Run `check:http` separately after the build: it starts and stops an isolated
 preview on a dynamically allocated port and checks routes, chrome and assets.
@@ -45,6 +48,15 @@ For example, on this machine:
 PROOF="$(mktemp -d /tmp/opencode/oui-site-browser.XXXXXXXX)"
 OUI_BROWSER_ARTIFACT_ROOT="$PROOF" npm run check:browser 2>&1 | tee "$PROOF/browser.log"
 ```
+
+`check:live` and `check:live:browser` read back an already deployed origin, which
+must be passed as the required argument; neither starts a local server. For
+example, `npm run check:live -- https://atilla777.github.io` re-fetches every
+page in the shared route table, its first `/oui/assets/` script or stylesheet and
+every expected media image, and verifies the PNG bytes against `data/media.json`.
+`npm run check:live:browser -- https://atilla777.github.io` drives its own
+headless Chromium with a fresh profile, blocks requests outside that origin, and
+checks catalogue search in both locales, the language link and Atlas images.
 
 The browser check observes local site search and catalogue query/filter/reset,
 keyboard interaction, locale switching, no-JS content,
@@ -73,19 +85,21 @@ Lab screens); `lab-settings` filters under the `settings` category. It is a
 declared sample of per-section media states, not complete state coverage. The
 schema-versioned `data/catalogue.json` and `data/media.json` are checked before
 the build against the actual native section IDs, locale media, provenance,
-PNG dimensions and digests. On the current merged tree
-`npm run check:catalogue:strict` passes, because all 19 gallery and four Lab IDs
-have records (23 in total) and media. Do not change the declared sample merely
-to hide missing coverage. Validation does not replace image inspection, privacy
-review, or native qualification.
+PNG dimensions and digests. `npm run check` runs the declared-sample check
+first and then `npm run check:catalogue:strict`, which requires all 19 gallery
+and four Lab IDs (23 in total) to have records and media. Full coverage is
+therefore enforced in CI, not only locally. Do not change the declared sample
+merely to hide missing coverage. Validation does not replace image inspection,
+privacy review, or native qualification.
 
 ## Continuous integration
 
 `.github/workflows/pr-site.yml` defines one pull-request workflow with three
 required jobs. It runs only for pull requests that touch `site/**`,
 `consumer/**`, `kit/**`, `resources/**` or the workflow itself. Permissions are
-`contents: read`; there are no secrets, deploy steps, Pages configuration or
-`pull_request_target` trigger, because the site has no deployment. The `static`
+`contents: read`; there are no secrets, deploy steps or `pull_request_target`
+trigger, so a pull request never deploys. The separate main/manual Pages workflow
+is described below. The `static`
 job installs from the lockfile and runs `npm run check`, `npm run build` and
 `npm run check:http`; it never runs Odin, native snippets, captures or graphics.
 The `browser` job rebuilds and runs `npm run check:browser`; it needs Linux
@@ -151,3 +165,38 @@ and source metadata. Combine a query with a category and use Reset filters to
 clear both. Search and filtering need JavaScript; static catalogue links and prose
 remain available without it. Final coverage remains future work;
 browser and deployment checks are separate.
+
+## GitHub Pages deployment
+
+`.github/workflows/pages-site.yml` deploys the built site to GitHub Pages. It
+runs on a push to `main` that touches `site/**`, `consumer/**`, `kit/**`,
+`resources/**` or the workflow itself, and on manual `workflow_dispatch`. There
+is no `pull_request` or `pull_request_target` trigger, so untrusted fork
+pull-request code is never deployed. The workflow keeps `contents: read`; only
+the `deploy` job receives `pages: write` and `id-token: write`, and it uses the
+Pages OIDC token. A `pages` concurrency group with `cancel-in-progress: false`
+serializes deployments. The `build` job is native-free and mirrors the `static`
+job of `pr-site.yml`: it runs `npm ci`, `npm run check`, `npm run build` and
+`npm run check:http`, then uploads `site/.vitepress/dist`. The workflow never
+enables or reconfigures the Pages site itself.
+
+Enabling Pages is a separate owner preflight step. `gh api
+repos/atilla777/oui/pages` returns 404 until the site is enabled; enable it once
+with `gh api -X POST repos/atilla777/oui/pages -f build_type=workflow` (or choose
+the GitHub Actions source in the repository settings). Then deploy with
+`gh workflow run pages-site.yml --ref main`, and observe it with `gh run list
+--workflow pages-site.yml` and `gh run watch <run-id>`. The first runner
+execution is itself the deployment observation; this change has not seen the
+workflow run on GitHub-hosted runners.
+
+After a deployment, from `site/`, read the live site back with:
+
+```sh
+npm run check:live -- https://atilla777.github.io
+npm run check:live:browser -- https://atilla777.github.io
+```
+
+Both take the origin only and append `/oui/` paths themselves. The site has no
+custom domain; the Pages URL is `https://atilla777.github.io/oui/`. The PR CI
+`native` lane stays unobserved on GitHub-hosted runners, and a successful Pages
+deployment does not change that.

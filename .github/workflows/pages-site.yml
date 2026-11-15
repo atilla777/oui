@@ -1,0 +1,72 @@
+# Least-privilege GitHub Pages deployment for the static oui site.
+#
+# - Runs only for a push to `main` (paths-filtered like `pr-site.yml`) and for
+#   manual `workflow_dispatch`. There is no `pull_request` or
+#   `pull_request_target` trigger, so untrusted fork pull-request code is never
+#   deployed.
+# - The deploy job uses the GitHub Pages OIDC token: `id-token: write` and
+#   `pages: write` are granted on that job only; the workflow keeps
+#   `contents: read` otherwise.
+# - Concurrency group `pages` with `cancel-in-progress: false` serializes
+#   deployments; a running deployment is never cancelled by a newer one.
+# - This workflow never enables or reconfigures the Pages site itself. Enabling
+#   Pages with `build_type=workflow` is a separate owner preflight step
+#   documented in `site/README.md`.
+# - The build lane is native-free (no Odin, no captures), exactly like the
+#   `static` job of `pr-site.yml`.
+# - Runner execution is observed only at the first authorized deployment; this
+#   file does not claim an observed GitHub-hosted run.
+name: Pages site deploy
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+    paths:
+      - 'site/**'
+      - 'consumer/**'
+      - 'kit/**'
+      - 'resources/**'
+      - '.github/workflows/pages-site.yml'
+permissions:
+  contents: read
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  build:
+    name: build static site (native-free)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: site/.nvmrc
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - name: Check, build and serve
+        working-directory: site
+        run: |
+          npm ci
+          npm run check
+          npm run build
+          npm run check:http
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/.vitepress/dist
+  deploy:
+    name: deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

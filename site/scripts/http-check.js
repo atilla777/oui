@@ -3,6 +3,7 @@ import { request } from 'node:http'
 import { readFile } from 'node:fs/promises'
 import { createHash } from 'node:crypto'
 import { startPreview } from './preview.js'
+import { pages, mediaSection, expectedMediaCount, mediaStates } from './site-pages.js'
 
 const media = JSON.parse(await readFile('data/media.json', 'utf8'))
 const server = await startPreview(0)
@@ -14,61 +15,7 @@ try {
   assert.equal(address.family, 'IPv4')
   assert.ok(address.port > 0)
   console.log(`owned listener ${address.address}:${address.port}`)
-  for (const [path, lang, title, other] of [
-    ['', 'en', 'experimental Odin UI kit', '/oui/ru/'],
-    ['en/', 'en', 'Introducing oui', '/oui/ru/'],
-    ['ru/', 'ru', 'Знакомство с oui', '/oui/en/'],
-    ['en/guide/using-oui.html', 'en', 'Using oui', '/oui/ru/guide/using-oui.html'],
-    ['ru/guide/using-oui.html', 'ru', 'Использование oui', '/oui/en/guide/using-oui.html'],
-    ['en/catalogue.html', 'en', 'Capability catalogue', '/oui/ru/catalogue.html'],
-    ['ru/catalogue.html', 'ru', 'Каталог возможностей', '/oui/en/catalogue.html'],
-    ['en/capabilities/accessibility.html', 'en', 'Accessibility assessment', '/oui/ru/capabilities/accessibility.html'],
-    ['ru/capabilities/accessibility.html', 'ru', 'Оценка доступности', '/oui/en/capabilities/accessibility.html'],
-    ['en/capabilities/layout.html', 'en', 'Layout', '/oui/ru/capabilities/layout.html'],
-    ['ru/capabilities/layout.html', 'ru', 'Компоновка', '/oui/en/capabilities/layout.html'],
-    ['en/capabilities/text.html', 'en', 'Text', '/oui/ru/capabilities/text.html'],
-    ['ru/capabilities/text.html', 'ru', 'Текст', '/oui/en/capabilities/text.html'],
-    ['en/capabilities/rich-text.html', 'en', 'Rich text', '/oui/ru/capabilities/rich-text.html'],
-    ['ru/capabilities/rich-text.html', 'ru', 'Форматированный текст', '/oui/en/capabilities/rich-text.html'],
-    ['en/capabilities/scroll-table.html', 'en', 'Scroll and table', '/oui/ru/capabilities/scroll-table.html'],
-    ['ru/capabilities/scroll-table.html', 'ru', 'Прокрутка и таблица', '/oui/en/capabilities/scroll-table.html'],
-    ['en/capabilities/collections.html', 'en', 'Virtual collections', '/oui/ru/capabilities/collections.html'],
-    ['ru/capabilities/collections.html', 'ru', 'Виртуальные коллекции', '/oui/en/capabilities/collections.html'],
-    ['en/capabilities/layers.html', 'en', 'Layers', '/oui/ru/capabilities/layers.html'],
-    ['ru/capabilities/layers.html', 'ru', 'Слои', '/oui/en/capabilities/layers.html'],
-    ['en/capabilities/hud.html', 'en', 'HUD hold', '/oui/ru/capabilities/hud.html'],
-    ['ru/capabilities/hud.html', 'ru', 'HUD и удержание', '/oui/en/capabilities/hud.html'],
-    ['en/capabilities/transitions.html', 'en', 'State transitions', '/oui/ru/capabilities/transitions.html'],
-    ['ru/capabilities/transitions.html', 'ru', 'Переходы состояния', '/oui/en/capabilities/transitions.html'],
-    ['en/capabilities/atlas.html', 'en', 'Atlas', '/oui/ru/capabilities/atlas.html'],
-    ['ru/capabilities/atlas.html', 'ru', 'Атлас', '/oui/en/capabilities/atlas.html'],
-    ['en/capabilities/composition.html', 'en', 'Nested composition', '/oui/ru/capabilities/composition.html'],
-    ['ru/capabilities/composition.html', 'ru', 'Вложенная композиция', '/oui/en/capabilities/composition.html'],
-    ['en/capabilities/custom.html', 'en', 'Custom primitives', '/oui/ru/capabilities/custom.html'],
-    ['ru/capabilities/custom.html', 'ru', 'Свои примитивы', '/oui/en/capabilities/custom.html'],
-    ['en/capabilities/gestures.html', 'en', 'Gestures', '/oui/ru/capabilities/gestures.html'],
-    ['ru/capabilities/gestures.html', 'ru', 'Жесты', '/oui/en/capabilities/gestures.html'],
-    ['en/capabilities/text-input.html', 'en', 'Text input', '/oui/ru/capabilities/text-input.html'],
-    ['ru/capabilities/text-input.html', 'ru', 'Ввод текста', '/oui/en/capabilities/text-input.html'],
-    ['en/capabilities/controls.html', 'en', 'Controls', '/oui/ru/capabilities/controls.html'],
-    ['ru/capabilities/controls.html', 'ru', 'Элементы управления', '/oui/en/capabilities/controls.html'],
-    ['en/capabilities/styling.html', 'en', 'Styling', '/oui/ru/capabilities/styling.html'],
-    ['ru/capabilities/styling.html', 'ru', 'Оформление', '/oui/en/capabilities/styling.html'],
-    ['en/capabilities/profiles.html', 'en', 'Profiles', '/oui/ru/capabilities/profiles.html'],
-    ['ru/capabilities/profiles.html', 'ru', 'Профили', '/oui/en/capabilities/profiles.html'],
-    ['en/labs/settings.html', 'en', 'Lab settings', '/oui/ru/labs/settings.html'],
-    ['ru/labs/settings.html', 'ru', 'Лаборатория: настройки', '/oui/en/labs/settings.html'],
-    ['en/recipes/settings.html', 'en', 'Settings recipe', '/oui/ru/recipes/settings.html'],
-    ['ru/recipes/settings.html', 'ru', 'Рецепт: настройки', '/oui/en/recipes/settings.html'],
-    ['en/recipes/hud.html', 'en', 'HUD recipe', '/oui/ru/recipes/hud.html'],
-    ['ru/recipes/hud.html', 'ru', 'Рецепт HUD', '/oui/en/recipes/hud.html'],
-    ['en/lab/hud.html', 'en', 'Lab HUD', '/oui/ru/lab/hud.html'],
-    ['ru/lab/hud.html', 'ru', 'Лаборатория HUD', '/oui/en/lab/hud.html'],
-    ['en/capabilities/diagnostics-performance.html', 'en', 'Diagnostics and performance', '/oui/ru/capabilities/diagnostics-performance.html'],
-    ['ru/capabilities/diagnostics-performance.html', 'ru', 'Диагностика и производительность', '/oui/en/capabilities/diagnostics-performance.html'],
-    ['en/capabilities/world.html', 'en', 'World anchors', '/oui/ru/capabilities/world.html'],
-    ['ru/capabilities/world.html', 'ru', 'Якоря мира', '/oui/en/capabilities/world.html']
-  ]) {
+  for (const [path, lang, title, other] of pages) {
     const response = await get('/oui/' + path)
     assert.equal(response.status, 200, path)
     assert.match(response.headers.get('content-type'), /^text\/html/)
@@ -78,10 +25,10 @@ try {
     assert.ok(html.includes(`href="${other}"`), path)
     if (path.includes('guide/')) assert.ok(html.includes('id="choose-a-boundary"'))
     const markup = html.split('<script>window.__VP_HASH_MAP__')[0]
-const section = path === 'labs/settings.html' ? 'lab-settings' : path.match(/capabilities\/(layout|layers|hud|transitions|text-input|scroll-table|collections|text|rich-text|gestures|diagnostics-performance|world)\.html/)?.[1] ?? (path.endsWith('lab/hud.html') ? 'lab-hud' : undefined)
+    const section = mediaSection(path)
     if (section) {
       const records = media.records.filter(item => item.section === section && item.uiLocale === lang)
-      assert.equal(records.length, ['profiles', 'atlas', 'gestures'].includes(section) ? 3 : ['text-input', 'scroll-table', 'collections'].includes(section) ? 1 : section === 'lab-hud' || section === 'lab-settings' ? 4 : 2)
+      assert.equal(records.length, expectedMediaCount(section))
       for (const record of records) {
         const image = `/oui/${record.path}`
         assert.ok(markup.includes(`src="${image}"`), `missing no-JS image ${path}`)
@@ -94,7 +41,7 @@ const section = path === 'labs/settings.html' ? 'lab-settings' : path.match(/cap
         assert.equal(createHash('sha256').update(bytes).digest('hex'), record.sha256)
       }
     }
-    for (const [id, states] of [['atlas', ['initial', 'alternate', 'reload']], ['profiles', ['initial', 'dialog', 'applied']], ['controls', ['initial', 'changed']], ['styling', ['initial', 'changed']], ['gestures', ['initial', 'proposal', 'applied']], ['diagnostics-performance', ['initial', 'diagnostic']]]) if (path.includes(`capabilities/${id}`)) {
+    for (const [id, states] of mediaStates) if (path.includes(`capabilities/${id}`)) {
       for (const state of states) {
         const record = media.records.find(item => item.id === `${id}-${lang}-${state}`)
         const image = `/oui/${record.path}`

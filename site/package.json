@@ -7,13 +7,15 @@
     "npm": ">=11 <12"
   },
   "scripts": {
-    "check": "node --test scripts/*.test.js && node scripts/check-catalogue.js && node scripts/check-links.js",
+    "check": "node --test scripts/*.test.js && node scripts/check-catalogue.js && node scripts/check-catalogue.js --strict && node scripts/check-links.js",
     "check:catalogue:strict": "node scripts/check-catalogue.js --strict",
     "check:native": "node scripts/check-snippets.js",
     "build": "npm run check && vitepress build",
     "preview": "node scripts/preview.js",
     "check:http": "node scripts/http-check.js",
-    "check:browser": "node scripts/browser-check.js"
+    "check:browser": "node scripts/browser-check.js",
+    "check:live": "node scripts/live-check.js",
+    "check:live:browser": "node scripts/live-browser-check.js"
   },
   "devDependencies": {
     "playwright-core": "1.65.0",

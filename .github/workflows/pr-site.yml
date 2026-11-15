@@ -1,8 +1,9 @@
 # Least-privilege pull-request CI for the static oui site.
 #
 # - Pull requests only (`pull_request`, not `pull_request_target`): fork code runs
-#   with a read-only token, no secrets, no deploy or Pages step. The site has no
-#   deployment and this workflow adds none.
+#   with a read-only token, no secrets and no deploy step. The separate
+#   main/manual Pages workflow (`pages-site.yml`) deploys the site; this
+#   pull-request workflow adds no deploy step, secret or Pages configuration.
 # - `static` is native-free: it never runs Odin, native snippets, captures or
 #   graphics; it checks pages/catalogue/links, builds VitePress and serves the
 #   built dist over loopback.
@@ -13,9 +14,9 @@
 #   Required native environment: Odin dev-2026-10-nightly:84bc3fc, SDL3 3.4.16,
 #   SDL3_ttf 3.2.2 and libpng 1.6.59 + zlib 1.4 in a private prefix, per
 #   docs/resources.md. GitHub-hosted runners do not currently provide it here.
-# - `check:catalogue:strict` is intentionally not wired in: on the current merged
-#   tree all 19 gallery and four Lab IDs have records/media and the strict check
-#   passes locally; CI still uses the declared sample.
+# - `check:catalogue:strict` is enforced in `npm run check` in the `static` job:
+#   it now covers all 19 gallery and four Lab IDs with media after the declared
+#   sample check, so CI rejects full-coverage regressions.
 # - Verified locally (Node 24.22.3, Chromium 152, pinned Odin). These jobs have not
 #   been observed executing on GitHub-hosted runners from this change.
 name: PR site checks

@@ -3,15 +3,17 @@
 Контракт введён `oui-3no.2`; опубликованные расширения включают `oui-3no.5`,
 `oui-3no.6`, Atlas `oui-3no.7`, text/rich-text `oui-3no.8`, text-input `oui-3no.9`,
 прокрутку/коллекции `oui-3no.10`, layers/HUD `oui-3no.11`, жесты `oui-3no.12`,
-composition/custom `oui-3no.13`, диагностику/производительность `oui-3no.17`,
-menu recipe/Lab menu `oui-3no.20` и HUD recipe/Lab HUD `oui-3no.22`. Оценка
-доступности `oui-3no.16` — интеграционный кандидат.
+переходы состояния `oui-3no.14`, composition/custom `oui-3no.13`,
+диагностику/производительность `oui-3no.17`, menu recipe/Lab menu `oui-3no.20`
+и HUD recipe/Lab HUD `oui-3no.22`. Оценка доступности
+`oui-3no.16` — интеграционный кандидат.
 Библиотека и native consumers не изменены; сайт описывает существующие возможности,
 а не реализует их в браузере.
 
 - `site/en/` и `site/ru/` содержат `catalogue`, `capabilities/layout`,
   `capabilities/controls`, `capabilities/styling`, `capabilities/profiles`,
-  `capabilities/layers`, `capabilities/hud`, `capabilities/text-input`, `capabilities/atlas`,
+  `capabilities/layers`, `capabilities/hud`, `capabilities/transitions`,
+  `capabilities/text-input`, `capabilities/atlas`,
   `capabilities/scroll-table`, `capabilities/collections`, `capabilities/text`, `capabilities/rich-text`,
   `capabilities/accessibility`, `capabilities/gestures`, `capabilities/diagnostics-performance`,
   `capabilities/composition`, `capabilities/custom`, а также рецепты
@@ -23,8 +25,8 @@ menu recipe/Lab menu `oui-3no.20` и HUD recipe/Lab HUD `oui-3no.22`. Оценк
   без собственных изображений) и первый Lab обзор `lab/menu`.
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
   Каталог объявляет sample coverage `layout`, `controls`, `styling`, `profiles`,
-  `layers`, `hud`, `text-input`, `atlas`, `scroll-table`, `collections`, `text`, `rich-text`,
-  `accessibility`, `gestures`, Lab IDs `lab-menu`/`lab-hud`, `diagnostics-performance`,
+  `layers`, `hud`, `transitions`, `text-input`, `atlas`, `scroll-table`, `collections`, `text`,
+  `rich-text`, `accessibility`, `gestures`, Lab IDs `lab-menu`/`lab-hud`, `diagnostics-performance`,
   `composition`, `custom`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
@@ -212,6 +214,55 @@ portable source остался побайтово неизменным. Изоб
 Браузерные проверки воспроизводятся командой `npm run check:browser` из `site/`
 в разрешённой sandboxed Chromium-среде; другие браузеры и полный аудит доступности
 не проверены.
+
+## Переходы состояния — oui-3no.14
+
+Кандидат `oui-3no.14`, pending integration: sample расширен до тринадцати
+gallery-разделов добавлением `transitions`. Новые EN/RU страницы доступны из
+статического каталога и боковой навигации и описывают существующий fixture G17
+card-presence: активация «Цели B» перецеливает paint-дорожки карточки
+(смещение (120, 24), масштаб 0.8, прозрачность 0.6, новые цвета, прогресс
+0.25 → 0.75), удержание Space 1000 мс инкрементирует счёт после отпускания;
+проекции компоновки и попадания остаются замороженными, анимации layout нет.
+Указаны purpose/observable behavior/ограничения, выбранные пакеты, pinned source
+links и native build/run команды. Kit/native API и поведение не изменены.
+
+Для каждого языка сняты два настоящих состояния PNG 1280×960, scale 1:
+`initial` (Цель A, счёт 0) и `after-b` (после активации Цели B). Состояния
+достигнуты настоящим вводом через изолированный запуск (explicit focus,
+Tab/Return, ожидание завершения перехода), без правки изображений. Source
+revision `8bc09cff358aa629410437996520283ff98d77d9`, `sourceState: clean`;
+media manifest версии 1 сохраняет resource hashes, ISD identity, digests и
+EN/RU captions/alt. Выбранная whole-source verified ISD
+`f8204c61615406ce5628b15692628e146476a008` подтвердила `linux-abstract-v1`
+в create и в каждом status перед graphics/input; собственные runs остановлены
+в `finally`. Private prefix libpng 1.6.59/zlib 1.4 подготован заново по
+документированной процедуре `docs/resources.md` (проверенные archive digests,
+upstream tests, C ABI и фактическая ldd linkage, включая транзитивный zlib),
+без системных изменений. Каждый PNG просмотрен исполнителем (нет приватных
+данных, состояния соответствуют заявленным); координатор подтвердил размер
+1280×960 и отсутствие metadata/text-чанков (только IHDR/cHRM/bKGD/IDAT/IEND).
+
+На этом кандидате прошли девять unit/parity/schema tests (coverage 13 IDs),
+static build, loopback HTTP новых маршрутов EN/RU с media digests, свежий
+portable export/portable-check и отдельно разрешённая владельцем для
+`oui-3no.14` изолированная browser-приёмка headless Chromium 152 с sandbox,
+собственными профилями и loopback-only static preview: EN/RU transitions на
+360/1280, изображения с alt, клавиатурный переход из каталога, смена языка
+с anchors, no-JS и reduced motion; сохранены прежние сценарии. Representative
+browser-скриншоты финального прогона просмотрены исполнителем, включая
+transitions EN/RU 360/1280 и no-JS; transitions-скриншоты между прогонами
+побайтово совпали; собственные browser/preview остановлены. Скрытое состояние
+presence, motion video и полный каталог 19 IDs этим результатом не заявлены.
+Публикация и deployment не выполнены.
+
+Как увидеть локальный кандидат: из `site/` с Node из `.nvmrc` выполнить
+`npm run build`, `npm run check:http`, `npm run check:browser`, затем
+`npm run preview -- --port 0`; открыть выданный URL с
+`/oui/en/capabilities/transitions` либо `/oui/ru/capabilities/transitions`,
+или перейти через каталог. Ожидается два настоящих изображения на страницу.
+Native состояние B воспроизводится командой со страницы: Tab к «Target B»
+и Return; удержание Space 1 с инкрементирует счёт.
 
 ## Галерея жестов — oui-3no.12
 

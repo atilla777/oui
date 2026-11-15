@@ -107,6 +107,15 @@ Load image regions, switch atlas resources and reload the selected set.
 
 </CatalogueItem>
 
+<CatalogueItem id="transitions">
+
+## State transitions {#transitions}
+
+Retarget paint offset, scale, opacity, colour and progress without animating layout.
+[Explore transitions and their native example](./capabilities/transitions).
+
+</CatalogueItem>
+
 <CatalogueItem id="gestures">
 
 ## Gestures {#gestures}

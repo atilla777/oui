@@ -107,6 +107,15 @@
 
 </CatalogueItem>
 
+<CatalogueItem id="transitions">
+
+## Переходы состояния {#transitions}
+
+Смена смещения, масштаба, прозрачности, цвета и прогресса без анимации компоновки.
+[Подробнее и нативный пример](./capabilities/transitions).
+
+</CatalogueItem>
+
 <CatalogueItem id="gestures">
 
 ## Жесты {#gestures}

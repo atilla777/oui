@@ -20,12 +20,13 @@ test('published sample binds localized prose, media and selected resource hashes
   const media = JSON.parse(await readFile('data/media.json', 'utf8'))
   const source = await readFile('../consumer/ui_showcase/model/catalogue.odin', 'utf8')
   await validateCatalogue({ catalogue, media, source, publicRoot: 'public', coverage: catalogue.coverage })
-  assert.deepEqual(catalogue.coverage.ids, ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text', 'composition', 'custom'])
+  assert.deepEqual(catalogue.coverage.ids, ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text', 'lab-menu', 'gestures', 'lab-hud', 'composition', 'custom'])
   for (const locale of ['en', 'ru']) {
     for (const section of catalogue.coverage.ids) {
-      const page = await readFile(`${locale}/capabilities/${section}.md`, 'utf8')
+      const pagePath = section.startsWith('lab-') ? `${locale}/lab/${section.slice(4)}.md` : `${locale}/capabilities/${section}.md`
+      const page = await readFile(pagePath, 'utf8')
       const images = media.records.filter(record => record.section === section && record.uiLocale === locale)
-      assert.equal(images.length, ['profiles', 'atlas'].includes(section) ? 3 : section === 'custom' ? 4 : ['text-input', 'scroll-table', 'collections'].includes(section) ? 1 : 2)
+      assert.equal(images.length, ['profiles', 'atlas', 'gestures'].includes(section) ? 3 : section === 'custom' ? 4 : ['text-input', 'scroll-table', 'collections'].includes(section) ? 1 : section.startsWith('lab-') ? 4 : 2)
       for (const image of images) {
         assert.ok(page.includes(`![${image.alt[locale]}](/${image.path})`))
         if (section !== 'profiles') assert.ok(page.includes(image.caption[locale]))
@@ -59,7 +60,7 @@ test('controls and styling bind both locale pages and genuine state records', as
   const catalogue = JSON.parse(await readFile('data/catalogue.json', 'utf8'))
   const media = JSON.parse(await readFile('data/media.json', 'utf8'))
   const source = await readFile('../consumer/ui_showcase/model/catalogue.odin', 'utf8')
-  assert.deepEqual(catalogue.coverage.ids, ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text', 'composition', 'custom'])
+  assert.deepEqual(catalogue.coverage.ids, ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text', 'lab-menu', 'gestures', 'lab-hud', 'composition', 'custom'])
   await validateCatalogue({ catalogue, media, source, publicRoot: 'public', coverage: catalogue.coverage })
   for (const id of ['controls', 'styling']) {
     assert.ok(sourceIds(source).gallery.includes(id))
@@ -78,6 +79,27 @@ test('controls and styling bind both locale pages and genuine state records', as
           assert.equal(createHash('sha256').update(await readFile(`../${path}`)).digest('hex'), expected, path)
         }
       }
+    }
+  }
+})
+
+test('lab-menu sample binds four states per locale and its native command', async () => {
+  const catalogue = JSON.parse(await readFile('data/catalogue.json', 'utf8'))
+  const media = JSON.parse(await readFile('data/media.json', 'utf8'))
+  const source = await readFile('../consumer/ui_showcase/model/catalogue.odin', 'utf8')
+  await validateCatalogue({ catalogue, media, source, publicRoot: 'public', coverage: catalogue.coverage })
+  const record = catalogue.records.find(item => item.id === 'lab-menu')
+  assert.equal(record.group, 'lab')
+  assert.equal(record.media.length, 8)
+  for (const locale of ['en', 'ru']) {
+    const page = await readFile(`${locale}/lab/menu.md`, 'utf8')
+    assert.ok(page.includes(`--section lab-menu --locale ${locale}`))
+    for (const state of ['initial', 'submenu', 'settings', 'confirm']) {
+      const image = media.records.find(item => item.id === `lab-menu-${state}-${locale}`)
+      assert.equal(image.uiLocale, locale)
+      assert.equal(image.section, 'lab-menu')
+      assert.ok(page.includes(`![${image.alt[locale]}](/${image.path})`))
+      assert.ok(page.includes(image.caption[locale]))
     }
   }
 })
@@ -121,6 +143,23 @@ test('sample validation rejects digest, provenance, locale and strict coverage f
     await assert.rejects(validateCatalogue({ ...input, coverage: { mode: 'strict' } }), /Coverage mismatch/)
     await assert.rejects(validateCatalogue({ ...input, coverage: undefined }), /Explicit coverage/)
   } finally { await rm(root, { recursive: true, force: true }) }
+})
+
+test('gestures bind distinct initial, proposal and applied captures per locale', async () => {
+  const media = JSON.parse(await readFile('data/media.json', 'utf8'))
+  const captures = media.records.filter(record => record.section === 'gestures')
+  assert.equal(captures.length, 6)
+  assert.equal(new Set(captures.map(record => `${record.revision} ${record.isdIdentity}`)).size, 1)
+  for (const locale of ['en', 'ru']) {
+    const states = captures.filter(record => record.uiLocale === locale)
+    assert.deepEqual(states.map(record => record.id), [`gestures-${locale}-initial`, `gestures-${locale}-proposal`, `gestures-${locale}-applied`])
+    assert.equal(new Set(states.map(record => record.sha256)).size, 3)
+    assert.ok(states[1].state.includes('mouse button is down'))
+    assert.ok(states[2].state.includes('after release'))
+    const page = await readFile(`${locale}/capabilities/gestures.md`, 'utf8')
+    assert.ok(page.includes(locale === 'en' ? 'Drop: accepted' : 'Перенос: разрешён'))
+    assert.ok(page.includes(`--section gestures --locale ${locale}`))
+  }
 })
 
 test('atlas sample rejects a missing reload capture even when locale coverage remains', async () => {

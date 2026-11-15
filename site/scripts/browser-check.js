@@ -77,9 +77,14 @@ try {
     assert.ok((await page.title()).includes(title))
     assert.ok(await page.locator('main').innerText())
   }
+  const sectionOf = path => path === 'lab/menu.html' ? 'lab-menu' : path === 'lab/hud.html' ? 'lab-hud' : path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|transitions|text-input|atlas|scroll-table|collections|text|rich-text|gestures)\.html$/)?.[1]
   const checkImages = async (activePage, path, lang) => {
-    const section = path === 'lab/menu.html' ? 'lab-menu' : path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|transitions|text-input|atlas|scroll-table|collections|text|rich-text|gestures)\.html$/)?.[1]
-    if (!section) { assert.ok(['catalogue.html', 'recipes/menu.html'].includes(path), path); return }
+    const section = sectionOf(path)
+    if (!section) {
+      assert.ok(['catalogue.html', 'recipes/menu.html', 'recipes/hud.html'].includes(path), `${path}: unexpected page`)
+      assert.equal(await activePage.locator('main p > img').count(), 0, `${path} ${lang}: unexpected image`)
+      return
+    }
     const ids = {
       layout: [`layout-${lang}`, `layout-small-${lang}`],
       controls: [`controls-${lang}-initial`, `controls-${lang}-changed`],
@@ -88,6 +93,7 @@ try {
       layers: [`layers-popup-tooltip-${lang}`, `layers-modal-${lang}`],
       hud: [`hud-idle-${lang}`, `hud-completed-${lang}`],
       transitions: [`transitions-${lang}-initial`, `transitions-${lang}-after-b`],
+      'lab-hud': [`lab-hud-initial-${lang}`, `lab-hud-popup-${lang}`, `lab-hud-hold-${lang}`, `lab-hud-completed-${lang}`],
       'text-input': [`text-input-${lang}`],
       atlas: [`atlas-${lang}-initial`, `atlas-${lang}-alternate`, `atlas-${lang}-reload`],
       'scroll-table': [`scroll-table-${lang}`],
@@ -212,9 +218,11 @@ try {
     ['capabilities/text-input.html', 'Text input', 'Ввод текста', 'boundaries'],
     ['capabilities/gestures.html', 'Gestures', 'Жесты', 'boundaries'],
     ['lab/menu.html', 'Lab menu', 'Меню лаборатории', 'boundaries'],
-    ['recipes/menu.html', 'Basic menu recipe', 'Рецепт меню', 'build-and-run']
+    ['recipes/menu.html', 'Basic menu recipe', 'Рецепт меню', 'build-and-run'],
+    ['lab/hud.html', 'Lab HUD', 'Лаборатория HUD', 'distinctions'],
+    ['recipes/hud.html', 'HUD recipe', 'Рецепт HUD', 'dependency-closure']
   ]
-  const sampleName = path => path === 'lab/menu.html' ? 'lab-menu' : path === 'recipes/menu.html' ? 'recipes-menu' : path.startsWith('capabilities/') ? path.split('/')[1].replace('.html', '') : 'catalogue'
+  const sampleName = path => path === 'lab/menu.html' ? 'lab-menu' : path === 'recipes/menu.html' ? 'recipes-menu' : path === 'lab/hud.html' ? 'lab-hud' : path === 'recipes/hud.html' ? 'recipes-hud' : path.startsWith('capabilities/') ? path.split('/')[1].replace('.html', '') : 'catalogue'
   for (const width of [360, 1280]) {
     await page.setViewportSize({ width, height: 900 })
     for (const [lang, term, expected, empty, reset, category] of [
@@ -491,9 +499,12 @@ try {
               assert.ok(await link.isVisible())
               assert.equal(await link.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/capabilities/${id}.html`)
             }
-            const lab = p.locator('main a[href="./lab/menu.html"]')
-            assert.ok(await lab.isVisible())
-            assert.equal(await lab.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/lab/menu.html`)
+            const labMenu = p.locator('main a[href="./lab/menu.html"]')
+            assert.ok(await labMenu.isVisible())
+            assert.equal(await labMenu.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/lab/menu.html`)
+            const labHud = p.locator('main a[href="./lab/hud.html"]')
+            assert.ok(await labHud.isVisible())
+            assert.equal(await labHud.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/lab/hud.html`)
           }
           assert.equal(await p.evaluate(() => typeof window.__VP_SITE_DATA__), 'undefined')
           await checkImages(p, path, lang)

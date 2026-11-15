@@ -8,12 +8,13 @@ menu recipe/Lab menu `oui-3no.20` — интеграционные кандид�
 Библиотека и native consumers не изменены; сайт описывает существующие возможности,
 а не реализует их в браузере.
 
-- `site/en/` и `site/ru/` содержат `catalogue` и `capabilities/layout`,
+- `site/en/` и `site/ru/` содержат `catalogue`, `capabilities/layout`,
   `capabilities/controls`, `capabilities/styling`, `capabilities/profiles`,
   `capabilities/layers`, `capabilities/hud`, `capabilities/transitions`,
   `capabilities/text-input`, `capabilities/atlas`,
   `capabilities/scroll-table`, `capabilities/collections`, `capabilities/text`, `capabilities/rich-text`,
-  `capabilities/gestures`.
+  `capabilities/gestures`, а также рецепты и экраны Lab — опубликованные
+  `recipes/menu` и `lab/menu` (`oui-3no.20`) и `recipes/hud`/`lab/hud` этого кандидата.
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
   полный showcase, с pinned source links и native build/run command.
   Кандидат `oui-3no.20` добавляет `recipes/menu` (узкий standalone-menu рецепт
@@ -21,7 +22,7 @@ menu recipe/Lab menu `oui-3no.20` — интеграционные кандид�
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
   Каталог объявляет sample coverage `layout`, `controls`, `styling`, `profiles`,
   `layers`, `hud`, `transitions`, `text-input`, `atlas`, `scroll-table`, `collections`, `text`,
-  `rich-text`, `gestures` и первый Lab ID `lab-menu`. Native source catalogue
+  `rich-text`, `gestures`, `lab-menu` и `lab-hud`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -79,7 +80,7 @@ EN/RU страниц controls/styling и прежних foundation/layout/catalo
 `npm run check:http`, затем `npm run preview -- --port 0` и выданный локальный
 URL с `/oui/en/capabilities/layout` либо `/oui/ru/capabilities/layout`.
 Для других страниц заменить `layout` на `controls`, `styling`, `profiles`, `layers`, `hud`,
-`text-input`, `atlas`, `scroll-table` или `collections`; переключение
+`text-input`, `atlas`, `scroll-table`, `collections`, `recipes/hud` или `lab/hud`; переключение
 языка сохраняет страницу. `npm run check:browser` запускает разрешённую
 изолированную браузерную приёмку (Linux Chromium с sandbox).
 Остановить свой preview — Ctrl-C. Подробнее: [site README](../../site/README.md).
@@ -533,3 +534,79 @@ Slyx, extraction inventory и notices не менялись. Полная ква
 Native сценарий — командами со страницы lab/menu (для агентов — только через
 wrapper `scripts/ui_isd.py`). Это проверено в локальном HTTP/browser
 и native ISD runs; публикация и Pages deploy не выполнялись.
+
+## Рецепт HUD и Lab HUD (`oui-3no.22`)
+
+Кандидат `oui-3no.22`, следующий recipe+Lab срез после опубликованного menu-среза `oui-3no.20`:
+библиотека и native consumers не изменены, `kit/`, `consumer/`, `tests/`
+и корневые `scripts/` байтово идентичны базовой ревизии; в `docs/` изменён
+только этот spec-файл.
+
+- `site/en/recipes/hud.md` и RU-зеркало описывают узкий рецепт HUD: прямые
+  выбранные импорты `ui_layers`, `ui_hold`, `ui_hold/sdl` плюс `ui_base`,
+  `ui_layout`, `ui_interaction`, `ui_style`, `ui_text`, `ui_sdl`, `ui_sdl_text`,
+  транзитивно только Unicode; без controls/editor/collections/gestures/rich/
+  custom/transitions/translations/inspect/wire/debug и без atlas loader, поэтому
+  сам рецепт не линкует libpng/zlib. Страница документирует владение (приложение
+  владеет HP, счётчиком и эффектом), сборку/запуск существующего complete compile
+  fixture `tests/ui_recipes/hud/native` (F11 — bounded verification scenario,
+  F12 — graceful quit) и проверки, реально выполненные на этом кандидате.
+- `site/en/lab/hud.md` и RU-зеркало описывают экран `lab-hud`: учебный HP 60/100
+  с clamp −10/+10, восстановление удержанием Space 1000 мс, панель Popup с Close
+  и неинтерактивная подсказка Explain; ограничение native catalogue
+  «Учебные данные; состояние только до завершения процесса». Различия
+  порога (999 мс без эффекта), plain Activate, отмены панелью/потерей фокуса
+  и отсутствия повтора восстановления описаны со ссылкой на contract test.
+- `catalogue.json` получил запись группы `lab` (`lab-hud`, source
+  `consumer/ui_showcase/app/lab_hud.odin`, runnable `consumer/ui_showcase`),
+  в интегрированном дереве sample coverage составляет 15 IDs (включая опубликованные `gestures` и `lab-menu`); strict-проверка по-прежнему ожидаемо
+  требует полного покрытия 19 gallery + 4 Lab. Site test fixtures
+  (`routes.test.js`, `catalogue.test.js`, `catalogue-filter.test.js`) обновлены
+  под расширенный sample, а `http-check.js` и `browser-check.js` расширены
+  четырьмя маршрутами/страницами рецепта и Lab (включая image-проверки lab-hud,
+  no-JS и 360/1280) — та же механика, что в предыдущих site-задачах
+  (прецедент `ac0c111`).
+
+Получены восемь настоящих PNG 1280×960, scale 1, на clean source
+`8bc09cff358aa629410437996520283ff98d77d9` (зафиксировано в артефактах runs:
+`dirty=false`), EN/RU по четыре состояния: initial (HP 60, Idle, count 0),
+popup open, hold in progress (683/698 мс, полоса прогресса частично заполнена),
+completed (HP 100, count 1). Выбранная ISD
+`f8204c61615406ce5628b15692628e146476a008` прошла whole-source verification;
+create/status подтвердили `linux-abstract-v1`, явный focus перед вводом,
+собственные runs остановлены (`phase=stopped`, `owned=[]`). Private prefix
+libpng 1.6.59/zlib 1.4 собран из digest-проверенных archives. Все восемь PNG
+просмотрены (автором и отдельным независимым контекстом), содержат только
+IHDR/cHRM/bKGD/IDAT/IEND, без приватных путей/имён/метаданных; digests, captions и alt в `media.json` сверены валидатором.
+
+На этом кандидате прошли: `git diff --check`; `npm run check` (9/9, включая
+обновлённые fixtures), `npm run build`, `npm run check:http` (включая новые
+маршруты `en/ru/recipes/hud.html` и `en/ru/lab/hud.html`), изолированный
+sandboxed Chromium `npm run check:browser` (135 PASS; новые страницы рецепта и
+Lab проверены в hydrated/no-JS циклах на 360/1280 с клавиатурой, локалью и
+image-проверками; собственные артефакты);
+native: `odin test tests/ui_recipes/hud/native` (1), `kit/ui_hold` (20),
+`kit/ui_hold/sdl` (4), `kit/ui_layers` (24); headless fixture
+`tests/ui_recipes/hud` собран и запущен (`recipe-hud effects=1 conflicts=1
+live=0`); native recipe запущен через обёртку в обоих локалях (EN и RU:
+F11 → вывод `native-hud=ok threshold=999+1 loss=cancel failure=not-ready
+recovery=no-replay input=native-synthetic`, F12, `app_exit=0`, runs
+остановлены); свежий portable export + `test-ui-kit.py` (5) +
+`scripts/test-ui-showcase --portable-check` прошли из export. Static build
+по-прежнему не запускает Odin/ISD; native snippet проверки выполнены отдельно
+от статической сборки. Независимое review (advanced, read-only) подтвердило
+фактуру страниц против исходников, провенанс и неизменность kit/consumer;
+его medium-находка о непокрытых маршрутах закрыта расширением http/browser
+проверок, low-находки — правкой формулировок и RU-прогоном. После объединения
+с опубликованными menu/gestures-задачами повторены site checks на
+интегрированном дереве: `npm run check` 11/11, build, `check:http` и
+sandboxed Chromium `check:browser` 159 PASS (включая 16 строк HUD-страниц);
+native-часть дерева байт-идентична базовой ревизии, поэтому прежние
+native/portable доказательства применимы без повтора.
+
+Как увидеть локальный кандидат: команды README из `site/`, затем
+`npm run preview -- --port 0`; открыть `/oui/en/recipes/hud`, `/oui/en/lab/hud`
+или RU-зеркала, либо перейти из каталога. Native команды страниц выполняются из
+подготовленного checkout по документации. Это проверено локально и не означает
+публикацию, Pages deploy или полную приёмку: остальные три рецепта/Lab,
+полное покрытие IDs, другие браузеры и доступность не проверены.

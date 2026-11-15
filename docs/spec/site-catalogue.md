@@ -566,7 +566,8 @@ native/portable доказательства применимы без повт�
 ## Композиция и custom primitives — локальный кандидат oui-3no.13
 
 Локальный кандидат добавляет EN/RU страницы `capabilities/composition` и
-`capabilities/custom` и расширяет declared sample coverage до четырнадцати IDs.
+`capabilities/custom`; после объединения с опубликованными жестами, menu recipe
+и HUD recipe declared sample coverage составляет шестнадцать IDs.
 Composition описывает владеемые панели с фиксированным порядком слотов,
 вложенную дочернюю кнопку в составной родительской и запись намерения в
 родительском маршруте при выключенном Stop. Custom описывает два рецепта
@@ -591,13 +592,15 @@ Pinned пара libpng 1.6.59/zlib 1.4 пересобрана по разреш�
 (zlib 64-bit OK, libpng 36/36) и фактической linkage (ldd показывает transitive
 zlib из prefix), без изменений системных библиотек.
 
-Unit/parity/schema/filter tests (9), catalogue validation с 14 sample IDs,
-static build, loopback HTTP всех новых маршрутов и свежий portable export +
-portable-check + `test-ui-kit` прошли. После отдельного разрешения владельца
+Unit/parity/schema/filter tests, catalogue validation, static build и loopback
+HTTP всех новых маршрутов прошли; свежий portable export + portable-check +
+`test-ui-kit` (5) прошли на исходном дереве задач, а native-часть
+интегрированного дерева побайтово равна базовой ревизии `8bc09cf`, поэтому
+portable/native доказательства применимы без повтора. После отдельного разрешения владельца
 для `oui-3no.13` пройдена браузерная приёмка в изолированном headless
 Chromium с sandbox, собственным временным профилем и loopback-only static
-preview: 135 PASS, включая EN/RU composition/custom и сохранённые сценарии
-на ширинах 360/1280 — prose без page overflow, изображения загружены с
+preview: 175 PASS на интегрированном дереве, включая EN/RU composition/custom
+и сохранённые сценарии на ширинах 360/1280 — prose без page overflow, изображения загружены с
 локализованным alt, клавиатурная навигация из каталога, смена языка с
 valid/missing anchors, no-JS content/images/links и reduced motion.
 Скриншоты новых страниц (16) просмотрены через image-capable контекст;

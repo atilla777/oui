@@ -142,6 +142,9 @@ test('sample validation rejects digest, provenance, locale and strict coverage f
     await assert.rejects(validateCatalogue(wrongSize), /Viewer state mismatch/)
     await assert.rejects(validateCatalogue({ ...input, coverage: { mode: 'strict' } }), /Coverage mismatch/)
     await assert.rejects(validateCatalogue({ ...input, coverage: undefined }), /Explicit coverage/)
+    const unknown = structuredClone(input)
+    unknown.catalogue.records[0].id = 'not-a-native-section'
+    await assert.rejects(validateCatalogue(unknown), /Unknown or duplicate section/)
   } finally { await rm(root, { recursive: true, force: true }) }
 })
 

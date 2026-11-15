@@ -1978,7 +1978,7 @@
       "section": "lab-menu",
       "state": "initial menu",
       "uiLocale": "en",
-      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "revision": "b4c8be17b81125f4d1ef44b97de99d8c327825fb",
       "sourceState": "clean",
       "sourcePaths": [
         "consumer/ui_showcase/app/lab_menu.odin",

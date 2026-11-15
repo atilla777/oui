@@ -2,8 +2,9 @@
 
 Контракт введён `oui-3no.2`; опубликованные расширения включают `oui-3no.5`,
 `oui-3no.6`, Atlas `oui-3no.7`, text-input `oui-3no.9`, прокрутку/коллекции
-`oui-3no.10` и layers/HUD `oui-3no.11`. Text/rich-text `oui-3no.8` и
-menu recipe/Lab menu `oui-3no.20` — интеграционные кандидаты.
+`oui-3no.10` и layers/HUD `oui-3no.11`. Text/rich-text `oui-3no.8`,
+menu recipe/Lab menu `oui-3no.20` и обязательные site-проверки/CI
+`oui-3no.24` — интеграционные кандидаты.
 Библиотека и native consumers не изменены; сайт описывает существующие возможности,
 а не реализует их в браузере.
 
@@ -429,3 +430,74 @@ Slyx, extraction inventory и notices не менялись. Полная ква
 Native сценарий — командами со страницы lab/menu (для агентов — только через
 wrapper `scripts/ui_isd.py`). Это проверено в локальном HTTP/browser
 и native ISD runs; публикация и Pages deploy не выполнялись.
+
+## Обязательные site-проверки и процедура обновления (`oui-3no.24`)
+
+`.github/workflows/pr-site.yml` вводит least-privilege PR CI: три обязательные
+jobs без `continue-on-error` и скрытых пропусков, `pull_request` (не
+`pull_request_target`), `permissions: contents: read`, без secrets/deploy/Pages
+(у сайта нет deployment). Триггер ограничен путями `site/**`, `consumer/**`,
+`kit/**`, `resources/**` и самим workflow; runner закреплён `ubuntu-24.04`.
+Lane `static` доказуемо работает без native-среды: `npm ci`, `npm run check`,
+`npm run build`, `npm run check:http` — Odin/captures/native-сниппеты
+не запускаются. Lane `browser` пересобирает и выполняет `npm run
+check:browser` (нужен Linux Chromium в `/usr/bin/chromium` с sandbox).
+Lane `native` — отдельный обязательный native gate: `npm run check:native`
+без `npm ci` (скрипт использует только встроенные модули Node), выполняет
+опубликованные на страницах `odin build`/`odin test` команды из корня репо
+(с дедупликацией EN/RU), сначала сверяет версию компилятора с pin
+`dev-2026-10-nightly:84bc3fc`, а строки запуска (`build/menu`,
+`build/showcase`) проверяет структурно: собранный binary существует и
+исполняем, указанные font/fallback/assets файлы существуют, `--section`
+является native ID из `consumer/ui_showcase/model/catalogue.odin`; запуск
+native window в CI не выполняется (графическая сессия/ISD — вне lane).
+`npm run check:catalogue:strict` в CI намеренно не подключён: он обязан
+падать до полного покрытия 23 IDs и не заменяется выборкой.
+
+Статическая цепочка `npm run check` расширена внутренним link/asset-контролем
+(`site/scripts/links.js`): относительные ссылки страниц сверяются с
+существующими `.md` (clean-URL маппинг VitePress), корневые `/media/...`
+— с `site/public/`; внешние URL не загружаются. Negative fixtures теперь
+покрывают broken internal link, отсутствующий `/media` asset, неизвестный
+native section ID (в `catalogue.test.js`) и native-сниппеты: падающая или
+зависшая команда, неверная pinned-версия Odin, отсутствующий binary/ресурс
+и неизвестный `--section` в launch-строке. Существующие digest/provenance/
+locale/counterpart negative fixtures сохранены.
+
+Процедура обновления page/media пары документирована в `site/README.md`
+и отрепетирована на записи `lab-menu-initial-en`: настоящий re-capture из
+clean worktree `b4c8be17b81125f4d1ef44b97de99d8c327825fb` через
+`scripts/ui_isd.py` с верифицированной ISD `f8204c61615406ce5628b15692628e146476a008`
+(`linux-abstract-v1`, собственный run, явный focus, screenshot, stop в
+finally; state log `page=Lab_Menu ... focus=lab/submenu ready=true`;
+app/supervisor/Xvfb после stop не живы). Вывод байтово совпал с
+опубликованным PNG (sha256 `1d0d0a6e4d3235d9015501696de231562347ab2a51b1d0c986f200442fecd17c`):
+рендер детерминирован при неизменных capture-входах, поэтому digest
+пересчитан и не изменился, а в `data/media.json` обновлена только
+`revision` (`8bc09cf…` → `b4c8be1…`); runtime-sources pin на EN/RU lab/menu
+страницах обновлён на новую ревизию (эти ссылки фиксируют источник capture,
+не каждую ссылку документа — recipes/resources/isd ссылки остались на
+`8bc09cf…`). Изменение байтов изображения требует явного обновления digest.
+
+Наблюдённые проверки кандидата: `npm run check` 22/22 (включая все новые
+negative fixtures; 94 ссылки в 34 страницах), `build`, `check:http`,
+разрешённая browser-проверка с собственными артефактами, `check:native`
+(7 дедуплицированных команд: сборка showcase с pinned codec prefix,
+standalone-menu build, 2 model + 4 consumer + 17 ui_sdl + 1 ui_sdl_text
+tests; 28 launch-строк проверены структурно; guide acquisition-блоки не
+исполняются и сообщаются явно), `git diff --check`, свежий portable export
+и portable-check. Пределы: исполнение jobs на GitHub-hosted runners не
+наблюдалось из этой задачи (нет push-полномочий; в образе ubuntu-24.04
+заявлен Chromium 157, путь не проверен); верифицированного native CI runner
+нет — это открытый environment blocker, обязательный native gate не
+заменяется успехом static lane. Kit/native API, Slyx, extraction inventory
+и notices не менялись; Node остаётся только site tooling. Заявление
+`docs/rules/checks.md` об отсутствии версионированных CI теперь историческое
+и требует отдельного решения владельца.
+
+Как увидеть локальный кандидат: из `site/` с Node из `.nvmrc` —
+`npm ci`, `npm run check`, `npm run build`, `npm run check:http`,
+`npm run check:browser`; для native lane — `PKG_CONFIG_PATH`/`LD_LIBRARY_PATH`
+на private codec prefix из `docs/resources.md` и `npm run check:native`.
+CI-файл — `.github/workflows/pr-site.yml`. Это кандидат pending
+integration, не факт публикации основной ветки.

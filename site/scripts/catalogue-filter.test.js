@@ -51,6 +51,6 @@ test('sample records filter independently and share categories', () => {
   assert.deepEqual(ids('en', 'pure circle hit', 'custom'), ['custom'])
   assert.deepEqual(ids('ru', 'проверкой попадания', 'custom'), ['custom'])
   assert.deepEqual(ids('en', 'owned panels'), ['composition'])
-  assert.deepEqual(ids('ru', 'круг'), ['custom'])
+  assert.deepEqual(ids('ru', 'узлы-круги'), ['custom'])
   assert.deepEqual(ids('en', ''), ['layout', 'profiles', 'controls', 'styling', 'layers', 'hud', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text', 'gestures', 'lab-menu', 'lab-hud', 'diagnostics-performance', 'composition', 'custom'])
 })

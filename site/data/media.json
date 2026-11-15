@@ -4468,6 +4468,178 @@
         "en": "Showcase world page after three Camera +X steps: A shifted left and two edge indicators for B and C under Direction policy.",
         "ru": "Страница world после трёх шагов Camera +X: A смещён влево, у краёв два индикатора B и C при политике Direction."
       }
+    },
+    {
+      "id": "accessibility-initial-en",
+      "section": "accessibility",
+      "state": "initial assessment samples idle",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/accessibility.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "consumer/ui_showcase/app/accessibility_runtime.odin",
+        "kit/ui_accessibility"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "options": "Normal mode; pixel-perfect off; section accessibility; supplied fonts and atlases.",
+      "path": "media/accessibility-initial-en.png",
+      "sha256": "627647aa1ab44e93972e40da50d8622ad600b38ff129d0463bffe58a6e637698",
+      "caption": {
+        "en": "Native accessibility: initial assessment samples and idle status, EN UI.",
+        "ru": "Нативная доступность: исходные образцы оценки и состояние покоя, интерфейс EN."
+      },
+      "alt": {
+        "en": "Accessibility showcase: Good, Bad and Unassessed assessment samples, a 24x24 target and a clipped 40x40 target, the C08 assessment-only panel, the reduced-motion sample and a status line with zero counter and requests.",
+        "ru": "Раздел доступности: образцы Pass, Warning и Unassessed, цель 24x24 и обрезанная цель 40x40, панель оценки C08, образец движения и строка состояния с нулевыми счётчиком и запросами."
+      }
+    },
+    {
+      "id": "accessibility-initial-ru",
+      "section": "accessibility",
+      "state": "initial assessment samples idle",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/accessibility.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "consumer/ui_showcase/app/accessibility_runtime.odin",
+        "kit/ui_accessibility"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "options": "Normal mode; pixel-perfect off; section accessibility; supplied fonts and atlases.",
+      "path": "media/accessibility-initial-ru.png",
+      "sha256": "db69429dd1ed6e39085657c72a337faea91e9c34fa1b7da3547a10ac9e31ce5d",
+      "caption": {
+        "en": "Native accessibility: initial assessment samples and idle status, RU UI.",
+        "ru": "Нативная доступность: исходные образцы оценки и состояние покоя, интерфейс RU."
+      },
+      "alt": {
+        "en": "Accessibility showcase: Good, Bad and Unassessed assessment samples, a 24x24 target and a clipped 40x40 target, the C08 assessment-only panel, the reduced-motion sample and a status line with zero counter and requests.",
+        "ru": "Раздел доступности: образцы Pass, Warning и Unassessed, цель 24x24 и обрезанная цель 40x40, панель оценки C08, образец движения и строка состояния с нулевыми счётчиком и запросами."
+      }
+    },
+    {
+      "id": "accessibility-dialog-en",
+      "section": "accessibility",
+      "state": "dialog mode pending confirm",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/accessibility.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "consumer/ui_showcase/app/accessibility_runtime.odin",
+        "kit/ui_accessibility"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "options": "Normal mode; pixel-perfect off; section accessibility; supplied fonts and atlases.",
+      "path": "media/accessibility-dialog-en.png",
+      "sha256": "468a4cdb831e99e4b57940a28fe56ee039004ef5c1b59392357b7b1877da9915",
+      "caption": {
+        "en": "Native accessibility: Dialog mode with the pending confirmation dialog open, EN UI.",
+        "ru": "Нативная доступность: режим Dialog с открытым диалогом подтверждения, интерфейс EN."
+      },
+      "alt": {
+        "en": "Accessibility showcase in Dialog mode: the confirmation dialog with Confirm and Cancel is open over the samples, and the status line still reports zero counter and requests while confirmation is pending.",
+        "ru": "Раздел доступности в режиме Dialog: поверх образцов открыт диалог подтверждения с кнопками подтверждения и отмены; до подтверждения счётчик и запросы в строке состояния нулевые."
+      }
+    },
+    {
+      "id": "accessibility-dialog-ru",
+      "section": "accessibility",
+      "state": "dialog mode pending confirm",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/accessibility.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "consumer/ui_showcase/app/accessibility_runtime.odin",
+        "kit/ui_accessibility"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "options": "Normal mode; pixel-perfect off; section accessibility; supplied fonts and atlases.",
+      "path": "media/accessibility-dialog-ru.png",
+      "sha256": "06a2583486c556a398690b4e5f0444f7d3422916d385de5804e61a569de28436",
+      "caption": {
+        "en": "Native accessibility: Dialog mode with the pending confirmation dialog open, RU UI.",
+        "ru": "Нативная доступность: режим Dialog с открытым диалогом подтверждения, интерфейс RU."
+      },
+      "alt": {
+        "en": "Accessibility showcase in Dialog mode: the confirmation dialog with Confirm and Cancel is open over the samples, and the status line still reports zero counter and requests while confirmation is pending.",
+        "ru": "Раздел доступности в режиме Dialog: поверх образцов открыт диалог подтверждения с кнопками подтверждения и отмены; до подтверждения счётчик и запросы в строке состояния нулевые."
+      }
     }
   ]
 }

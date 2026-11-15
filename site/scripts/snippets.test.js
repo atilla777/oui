@@ -31,7 +31,7 @@ test('real pages deduplicate commands and keep every source page', async () => {
   const { commands, launches, skipped } = await collectSnippets(process.cwd())
   const showcase = 'odin build consumer/ui_showcase -collection:ui=kit -extra-linker-flags:"$(pkg-config --libs libpng zlib)" -out:build/showcase'
   assert.ok(commands.has(showcase))
-  assert.equal(commands.get(showcase).length, 42)
+  assert.equal(commands.get(showcase).length, 44)
   assert.deepEqual(commands.get('odin test kit/ui_sdl -define:ODIN_TEST_THREADS=1 -out:build/ui-sdl-tests'), ['en/recipes/menu.md', 'ru/recipes/menu.md'])
   assert.deepEqual(commands.get('odin build tests/ui_recipes/hud/native -collection:ui=kit -vet -vet-style -vet-tabs -vet-semicolon -out:build/hud-recipe'), ['en/recipes/hud.md', 'ru/recipes/hud.md'])
   assert.deepEqual(launches.get('build/hud-recipe-headless'), ['en/recipes/hud.md', 'ru/recipes/hud.md'])

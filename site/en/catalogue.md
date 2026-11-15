@@ -1,7 +1,7 @@
 # Capability catalogue {#catalogue}
 
 This is an explicitly limited sample, not the complete showcase catalogue. It
-currently covers eighteen of the 19 gallery sections and three of the four Integration
+currently covers nineteen of the 19 gallery sections and three of the four Integration
 Lab screens. The captures show the native application, not a browser port.
 
 <CatalogueFilter locale="en">
@@ -178,6 +178,15 @@ App-owned circle nodes with a pure circle hit predicate in two namespaced recipe
 
 </CatalogueItem>
 
+<CatalogueItem id="accessibility">
+
+## Accessibility assessment {#accessibility}
+
+Assess contrast, target size and reduced motion on published frames, with explicit
+confirmation by hold or dialog. [Explore accessibility assessment](./capabilities/accessibility).
+
+</CatalogueItem>
+
 <CatalogueItem id="world">
 
 ## World anchors {#world}
@@ -187,5 +196,6 @@ Hide, Clamp and Direction for off-screen anchors.
 [Explore world anchors and the native example](./capabilities/world).
 
 </CatalogueItem>
+
 
 </CatalogueFilter>

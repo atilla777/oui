@@ -1,7 +1,7 @@
 # Каталог возможностей {#catalogue}
 
 Это явно ограниченная выборка, а не полный каталог showcase. Сейчас она охватывает
-восемнадцать из 19 разделов галереи и три из четырёх экранов Integration Lab.
+девятнадцать из 19 разделов галереи и три из четырёх экранов Integration Lab.
 На снимках показано нативное приложение, а не браузерный порт.
 
 <CatalogueFilter locale="ru">
@@ -178,6 +178,15 @@
 
 </CatalogueItem>
 
+<CatalogueItem id="accessibility">
+
+## Оценка доступности {#accessibility}
+
+Оценка контраста, размера цели и reduced motion на опубликованных кадрах с явным
+подтверждением удержанием или диалогом. [Подробнее и нативный пример](./capabilities/accessibility).
+
+</CatalogueItem>
+
 <CatalogueItem id="world">
 
 ## Якоря мира {#world}
@@ -187,5 +196,6 @@
 [Подробнее о якорях мира и нативном примере](./capabilities/world).
 
 </CatalogueItem>
+
 
 </CatalogueFilter>

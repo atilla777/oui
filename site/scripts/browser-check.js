@@ -77,7 +77,7 @@ try {
     assert.ok((await page.title()).includes(title))
     assert.ok(await page.locator('main').innerText())
   }
-  const sectionOf = path => path === 'lab/menu.html' ? 'lab-menu' : path === 'lab/hud.html' ? 'lab-hud' : path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|transitions|text-input|atlas|scroll-table|collections|text|rich-text|gestures)\.html$/)?.[1]
+  const sectionOf = path => path === 'lab/menu.html' ? 'lab-menu' : path === 'lab/hud.html' ? 'lab-hud' : path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|transitions|text-input|atlas|scroll-table|collections|text|rich-text|gestures|diagnostics-performance)\.html$/)?.[1]
   const checkImages = async (activePage, path, lang) => {
     const section = sectionOf(path)
     if (!section) {
@@ -101,7 +101,8 @@ try {
       text: [`text-${lang}-initial`, `text-${lang}-alternate`],
       'rich-text': [`rich-text-${lang}-initial`, `rich-text-${lang}-alternate`],
       gestures: [`gestures-${lang}-initial`, `gestures-${lang}-proposal`, `gestures-${lang}-applied`],
-      'lab-menu': [`lab-menu-initial-${lang}`, `lab-menu-submenu-${lang}`, `lab-menu-settings-${lang}`, `lab-menu-confirm-${lang}`]
+      'lab-menu': [`lab-menu-initial-${lang}`, `lab-menu-submenu-${lang}`, `lab-menu-settings-${lang}`, `lab-menu-confirm-${lang}`],
+      'diagnostics-performance': [`diagnostics-performance-${lang}-initial`, `diagnostics-performance-${lang}-diagnostic`]
     }[section]
     const images = activePage.locator('main p > img')
     assert.equal(await images.count(), ids.length, `${section} ${lang}: image count`)
@@ -220,7 +221,8 @@ try {
     ['lab/menu.html', 'Lab menu', 'Меню лаборатории', 'boundaries'],
     ['recipes/menu.html', 'Basic menu recipe', 'Рецепт меню', 'build-and-run'],
     ['lab/hud.html', 'Lab HUD', 'Лаборатория HUD', 'distinctions'],
-    ['recipes/hud.html', 'HUD recipe', 'Рецепт HUD', 'dependency-closure']
+    ['recipes/hud.html', 'HUD recipe', 'Рецепт HUD', 'dependency-closure'],
+    ['capabilities/diagnostics-performance.html', 'Diagnostics and performance', 'Диагностика и производительность', 'boundaries']
   ]
   const sampleName = path => path === 'lab/menu.html' ? 'lab-menu' : path === 'recipes/menu.html' ? 'recipes-menu' : path === 'lab/hud.html' ? 'lab-hud' : path === 'recipes/hud.html' ? 'recipes-hud' : path.startsWith('capabilities/') ? path.split('/')[1].replace('.html', '') : 'catalogue'
   for (const width of [360, 1280]) {
@@ -494,7 +496,7 @@ try {
           const dimensions = await p.evaluate(() => ({ scroll: document.documentElement.scrollWidth, client: document.documentElement.clientWidth, font: parseFloat(getComputedStyle(document.querySelector('main p')).fontSize) }))
           assert.ok(dimensions.scroll <= dimensions.client && dimensions.font >= 14, `${path} ${lang} ${width}: ${JSON.stringify(dimensions)}`)
           if (path === 'catalogue.html') {
-            for (const id of ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'transitions', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text', 'gestures']) {
+            for (const id of ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'transitions', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text', 'gestures', 'diagnostics-performance']) {
               const link = p.locator(`main a[href="./capabilities/${id}.html"]`)
               assert.ok(await link.isVisible())
               assert.equal(await link.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/capabilities/${id}.html`)

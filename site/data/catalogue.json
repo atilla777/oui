@@ -14,7 +14,8 @@
       "scroll-table",
       "collections",
       "text",
-      "rich-text"
+      "rich-text",
+      "lab-inventory"
     ]
   },
   "records": [
@@ -430,6 +431,49 @@
         "rich-text-en-alternate",
         "rich-text-ru-initial",
         "rich-text-ru-alternate"
+      ]
+    },
+    {
+      "id": "lab-inventory",
+      "group": "lab",
+      "categories": [
+        "collections",
+        "state",
+        "input"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_collections",
+        "ui_gestures",
+        "ui_gestures/sdl",
+        "ui_interaction",
+        "ui_layout"
+      ],
+      "source": "consumer/ui_showcase/app/lab_inventory.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Lab inventory",
+        "ru": "Инвентарь лаборатории"
+      },
+      "summary": {
+        "en": "Select a row in two uniform lists, propose a transfer and confirm or refuse it.",
+        "ru": "Выбрать строку в двух однородных списках, предложить перенос и подтвердить или отклонить его."
+      },
+      "limitations": {
+        "en": "Experimental; two uniform lists; no row drag-reorder; process-local teaching data.",
+        "ru": "Экспериментально; два однородных списка; без перетаскивания строк для переупорядочивания; учебные данные, состояние только до завершения процесса."
+      },
+      "media": [
+        "lab-inventory-initial-en",
+        "lab-inventory-selected-en",
+        "lab-inventory-refused-en",
+        "lab-inventory-pending-en",
+        "lab-inventory-confirmed-en",
+        "lab-inventory-initial-ru",
+        "lab-inventory-selected-ru",
+        "lab-inventory-refused-ru",
+        "lab-inventory-pending-ru",
+        "lab-inventory-confirmed-ru"
       ]
     }
   ]

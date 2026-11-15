@@ -78,8 +78,8 @@ try {
     assert.ok(await page.locator('main').innerText())
   }
   const checkImages = async (activePage, path, lang) => {
-    const section = path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|text-input|atlas|scroll-table|collections|text|rich-text)\.html$/)?.[1]
-    if (!section) { assert.equal(path, 'catalogue.html'); return }
+    const section = path === 'lab/inventory.html' ? 'lab-inventory' : path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|text-input|atlas|scroll-table|collections|text|rich-text)\.html$/)?.[1]
+    if (!section) { assert.ok(['catalogue.html', 'recipes/inventory.html'].includes(path), path); return }
     const ids = {
       layout: [`layout-${lang}`, `layout-small-${lang}`],
       controls: [`controls-${lang}-initial`, `controls-${lang}-changed`],
@@ -92,7 +92,8 @@ try {
       'scroll-table': [`scroll-table-${lang}`],
       collections: [`collections-${lang}`],
       text: [`text-${lang}-initial`, `text-${lang}-alternate`],
-      'rich-text': [`rich-text-${lang}-initial`, `rich-text-${lang}-alternate`]
+      'rich-text': [`rich-text-${lang}-initial`, `rich-text-${lang}-alternate`],
+      'lab-inventory': [`lab-inventory-initial-${lang}`, `lab-inventory-selected-${lang}`, `lab-inventory-refused-${lang}`, `lab-inventory-pending-${lang}`, `lab-inventory-confirmed-${lang}`]
     }[section]
     const images = activePage.locator('main p > img')
     assert.equal(await images.count(), ids.length, `${section} ${lang}: image count`)
@@ -205,9 +206,11 @@ try {
     ['capabilities/profiles.html', 'Profiles', 'Профили', 'workflow'],
     ['capabilities/layers.html', 'Layers', 'Слои', 'boundaries'],
     ['capabilities/hud.html', 'HUD hold', 'HUD и удержание', 'boundaries'],
-    ['capabilities/text-input.html', 'Text input', 'Ввод текста', 'boundaries']
+    ['capabilities/text-input.html', 'Text input', 'Ввод текста', 'boundaries'],
+    ['lab/inventory.html', 'Lab inventory', 'Инвентарь лаборатории', 'boundaries'],
+    ['recipes/inventory.html', 'Inventory recipe', 'Рецепт инвентаря', 'build-and-run']
   ]
-  const sampleName = path => path.startsWith('capabilities/') ? path.split('/')[1].replace('.html', '') : 'catalogue'
+  const sampleName = path => path === 'lab/inventory.html' ? 'lab-inventory' : path === 'recipes/inventory.html' ? 'recipes-inventory' : path.startsWith('capabilities/') ? path.split('/')[1].replace('.html', '') : 'catalogue'
   for (const width of [360, 1280]) {
     await page.setViewportSize({ width, height: 900 })
     for (const [lang, term, expected, empty, reset, category] of [
@@ -484,6 +487,9 @@ try {
               assert.ok(await link.isVisible())
               assert.equal(await link.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/capabilities/${id}.html`)
             }
+            const lab = p.locator('main a[href="./lab/inventory.html"]')
+            assert.ok(await lab.isVisible())
+            assert.equal(await lab.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/lab/inventory.html`)
           }
           assert.equal(await p.evaluate(() => typeof window.__VP_SITE_DATA__), 'undefined')
           await checkImages(p, path, lang)

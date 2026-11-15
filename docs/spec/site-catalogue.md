@@ -36,7 +36,8 @@
   `rich-text`, `accessibility`, `gestures`, Lab IDs `lab-menu`/`lab-hud`/`lab-inventory`/`lab-settings`,
   `diagnostics-performance`, `composition`, `custom`, `world`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
-  полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
+  полного покрытия gallery/Lab и на итоговом объединённом дереве из 23 записей
+  (19 gallery + 4 Lab) выполняется успешно.
 - Media records связывают изображения с section/state/UI locale, полной source
   revision и clean state, source paths, window/drawable/scale, hashes ресурсов,
   sanitized ISD revision, image SHA-256 и EN/RU captions/alt. Публичные manifest
@@ -228,15 +229,16 @@ valid/missing anchors, no-JS prose/images/links, reduced motion, новый
 filter-сценарий каталога (`settings`). До интеграции: 135 PASS и 164 screenshots;
 на итоговом интегрированном дереве после объединения с опубликованными
 menu/HUD/inventory recipe+Lab, gestures, diagnostics, composition/custom,
-transitions и world: свежий запуск 231 PASS и 260 screenshots с cleanup
-собственных browser/preview (один более ранний запуск предыдущего снимка
-прервался переходящим сбоем chromium-контекста no-JS на recipes/hud 1280 под
-конкурентной нагрузкой параллельных сессий; повтор того же снимка и финальный
-запуск итогового дерева завершены полностью, exit 0).
-Strict catalogue 23 IDs, полная квалификация,
+transitions, world и accessibility: свежий запуск 239 PASS и 268 screenshots с
+cleanup собственных browser/preview (один более ранний запуск предыдущего
+снимка прервался переходящим сбоем chromium-контекста no-JS на recipes/hud 1280
+под конкурентной нагрузкой параллельных сессий; повтор того же снимка и
+финальные запуски итоговых деревьев завершены полностью, exit 0).
+Strict catalogue на объединённом дереве всех опубликованных записей
+выполняется успешно (23 записи); полная квалификация,
 аудит доступности, другие браузеры и deployment не заявляются; унаследованное
-ограничение Vite 5 сохраняется. Остальные три recipe+Lab (menu, HUD, inventory)
-этим кандидатом не покрываются.
+ограничение Vite 5 сохраняется. Страницы остальных recipe+Lab опубликованы
+другими задачами и этим кандидатом не создавались.
 
 Как увидеть локальный кандидат: из `site/` с Node `.nvmrc` выполнить
 `npm ci`, `npm run build`, `npm run check:http`, `npm run check:browser`,

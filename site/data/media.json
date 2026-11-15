@@ -1972,6 +1972,178 @@
         "en": "Native showcase rich text card with one-line ellipsis (RU UI).",
         "ru": "Нативная русская карточка после выбора одной строки с многоточием."
       }
+    },
+    {
+      "id": "transitions-en-initial",
+      "section": "transitions",
+      "state": "initial Target A, count 0",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/transitions.odin",
+        "consumer/ui_showcase/app/transition_runtime.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_transitions"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section transitions; initial focus Target A; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/transitions-en-initial.png",
+      "sha256": "7eaab6e2ddeca75ea97ff28567327a5f8300be2ffa7c45c5c21edce48abe6c2f",
+      "caption": {
+        "en": "Native transitions: initial Target A state, EN UI.",
+        "ru": "Нативные переходы: начальное состояние «Цель A», интерфейс EN."
+      },
+      "alt": {
+        "en": "Transitions showcase at Target A: a card at its base position with count zero and a short progress bar; Target A is focused.",
+        "ru": "Раздел переходов в состоянии «Цель A»: карточка в базовом положении, счётчик ноль и короткая полоса прогресса; «Цель A» в фокусе."
+      }
+    },
+    {
+      "id": "transitions-en-after-b",
+      "section": "transitions",
+      "state": "after Target B activation",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/transitions.odin",
+        "consumer/ui_showcase/app/transition_runtime.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_transitions"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section transitions; initial focus Target A; Target B activated with Return, transition settled; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/transitions-en-after-b.png",
+      "sha256": "18b5a3de81dffdff3be5c337b07b1efa4913e119bb61bc3cbfe82d02361b6140",
+      "caption": {
+        "en": "Native transitions: after Target B, EN UI.",
+        "ru": "Нативные переходы: после «Цели B», интерфейс EN."
+      },
+      "alt": {
+        "en": "Transitions showcase after Target B: the card is offset and scaled down, faded with its colours retargeted, and the progress bar is longer; Target B is focused.",
+        "ru": "Раздел переходов после «Цели B»: карточка смещена и уменьшена, полупрозрачна с другими цветами, полоса прогресса длиннее; «Цель B» в фокусе."
+      }
+    },
+    {
+      "id": "transitions-ru-initial",
+      "section": "transitions",
+      "state": "initial Target A, count 0",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/transitions.odin",
+        "consumer/ui_showcase/app/transition_runtime.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_transitions"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section transitions; initial focus Target A; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/transitions-ru-initial.png",
+      "sha256": "efaa628e6c5057b01b7666025cbcaf28025817939cf4f0e84252d8fa260b1f3e",
+      "caption": {
+        "en": "Native transitions: initial Target A state, RU UI.",
+        "ru": "Нативные переходы: начальное состояние «Цель A», интерфейс RU."
+      },
+      "alt": {
+        "en": "Transitions showcase at Target A: a card at its base position with count zero and a short progress bar; Target A is focused.",
+        "ru": "Раздел переходов в состоянии «Цель A»: карточка в базовом положении, счётчик ноль и короткая полоса прогресса; «Цель A» в фокусе."
+      }
+    },
+    {
+      "id": "transitions-ru-after-b",
+      "section": "transitions",
+      "state": "after Target B activation",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/transitions.odin",
+        "consumer/ui_showcase/app/transition_runtime.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_transitions"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section transitions; initial focus Target A; Target B activated with Return, transition settled; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/transitions-ru-after-b.png",
+      "sha256": "192ec5ec65aaa12e60c8614d1695b11f5016435ec2eecdf1e2c5bc243f746f75",
+      "caption": {
+        "en": "Native transitions: after Target B, RU UI.",
+        "ru": "Нативные переходы: после «Цели B», интерфейс RU."
+      },
+      "alt": {
+        "en": "Transitions showcase after Target B: the card is offset and scaled down, faded with its colours retargeted, and the progress bar is longer; Target B is focused.",
+        "ru": "Раздел переходов после «Цели B»: карточка смещена и уменьшена, полупрозрачна с другими цветами, полоса прогресса длиннее; «Цель B» в фокусе."
+      }
     }
   ]
 }

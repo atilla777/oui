@@ -14,7 +14,8 @@
       "scroll-table",
       "collections",
       "text",
-      "rich-text"
+      "rich-text",
+      "transitions"
     ]
   },
   "records": [
@@ -430,6 +431,46 @@
         "rich-text-en-alternate",
         "rich-text-ru-initial",
         "rich-text-ru-alternate"
+      ]
+    },
+    {
+      "id": "transitions",
+      "group": "gallery",
+      "categories": [
+        "transitions",
+        "state"
+      ],
+      "packages": [
+        "ui_transitions",
+        "ui_hold",
+        "ui_controls",
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_layers",
+        "ui_scroll",
+        "ui_style",
+        "ui_text"
+      ],
+      "source": "consumer/ui_showcase/sections/transitions.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "State transitions",
+        "ru": "Переходы состояния"
+      },
+      "summary": {
+        "en": "Retarget offset, scale, opacity, colour and progress while layout and hit projections stay frozen.",
+        "ru": "Смена смещения, масштаба, прозрачности, цвета и прогресса при замороженных проекциях компоновки и попадания."
+      },
+      "limitations": {
+        "en": "Experimental; frozen paint/hit; no layout animation.",
+        "ru": "Экспериментально: замороженные отрисовка и попадание; без анимации компоновки."
+      },
+      "media": [
+        "transitions-en-initial",
+        "transitions-en-after-b",
+        "transitions-ru-initial",
+        "transitions-ru-after-b"
       ]
     }
   ]

@@ -6,8 +6,8 @@
 переходы состояния `oui-3no.14`, composition/custom `oui-3no.13`, world anchors
 `oui-3no.15`, диагностику/производительность `oui-3no.17`, menu recipe/Lab menu
 `oui-3no.20`, HUD recipe/Lab HUD `oui-3no.22`, inventory recipe/Lab inventory
-`oui-3no.23`, оценку доступности `oui-3no.16` и обязательные
-site-проверки/CI `oui-3no.24`. Settings recipe/Lab settings
+`oui-3no.23`, оценку доступности `oui-3no.16`, обязательные site-проверки/CI
+`oui-3no.24` и полную проверку/Pages-доставку `oui-3no.25`. Settings recipe/Lab settings
 `oui-3no.21` — интеграционный кандидат.
 Библиотека и native consumers не изменены; сайт описывает существующие возможности,
 а не реализует их в браузере.
@@ -37,7 +37,8 @@ site-проверки/CI `oui-3no.24`. Settings recipe/Lab settings
   `rich-text`, `accessibility`, `gestures`, Lab IDs `lab-menu`/`lab-hud`/`lab-inventory`/`lab-settings`,
   `diagnostics-performance`, `composition`, `custom`, `world`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
-  полного покрытия gallery/Lab и на итоговом объединённом дереве из 23 записей
+  полного покрытия gallery/Lab, с `oui-3no.25` входит в `npm run check` (и тем
+  самым в build и CI) и на дереве из 23 записей
   (19 gallery + 4 Lab) выполняется успешно.
 - Media records связывают изображения с section/state/UI locale, полной source
   revision и clean state, source paths, window/drawable/scale, hashes ресурсов,
@@ -1143,3 +1144,79 @@ CI теперь историческое и требует отдельного 
 CI-файл — `.github/workflows/pr-site.yml`. Фактическое состояние
 публикации основной ветки фиксируется в результатах задачи в Beads,
 не в этом документе.
+
+## Полная проверка сайта и GitHub Pages (`oui-3no.25`)
+
+Финальная поставка: strict-проверка покрытия каталога включена в
+`npm run check` (после declared-sample проверки), поэтому `build` и CI
+(static job `pr-site.yml`, build job Pages workflow) отклоняют регрессии
+полноты 19 gallery + 4 Lab записей. Общая таблица маршрутов и media-ожиданий
+вынесена в `site/scripts/site-pages.js` — 61 строка, покрывающая все EN/RU
+страницы, включая `recipes/menu`, `recipes/inventory`, `lab/menu`,
+`lab/inventory`; локальный `check:http` и новый live read-back используют
+одну таблицу. Попутно закрыт латентный дефект точного сравнения
+`labs/settings.html` (маршруты несут locale-префикс, ветка никогда не
+срабатывала) — media lab-settings теперь реально проверяются в http/live
+проверках.
+
+Деплой выполняет новый least-privilege workflow
+`.github/workflows/pages-site.yml`: только push в `main` (paths-фильтр как
+у `pr-site.yml`) и ручной `workflow_dispatch`; ни `pull_request`, ни
+`pull_request_target` — код из fork PR никогда не деплоится. Верхний
+permission `contents: read`; только deploy job получает `pages: write` +
+`id-token: write` (Pages OIDC); concurrency group `pages` с
+`cancel-in-progress: false` сериализует деплои. Build lane native-free
+(как static job); workflow сам не включает и не переконфигурирует Pages —
+включение `build_type=workflow` отдельный шаг владельца, задокументированный
+в `site/README.md` вместе с командами preflight и наблюдения.
+
+Live read-back задеплоенного сайта выполняют `npm run check:live --
+<origin>` и `npm run check:live:browser -- <origin>` из `site/`: первый
+перепроверяет по реальному URL все 61 страницу EN/RU (lang/title/language
+link), первый `/oui/assets/` ресурс каждой страницы, каждое ожидаемое
+media-изображение (PNG magic + sha256 против `data/media.json`),
+extensionless clean URL и не-200 для отсутствующей страницы; второй
+запускает собственный sandboxed headless Chromium с чистым временным
+профилем, блокирует запросы вне origin, проверяет localized search (EN/RU),
+смену языка с сохранением page key и загрузку изображений, сохраняя
+screenshots/logs в artifacts. Разрешение на live-origin browser read-back
+записано в `docs/rules/checks.md`.
+
+Наблюдённые проверки: локально на точных опубликованных байтах — `npm run
+build` (31 unit/parity/schema тест, declared sample + strict coverage,
+202 links/60 pages), `check:http` (61 маршрут), smoke обоих live-скриптов
+против собственного loopback preview, `check:browser` и `check:native`
+(16 дедуплицированных odin-команд, 53 launch-строки, pinned Odin
+dev-2026-10-nightly:84bc3fc с private codec prefix), свежий portable
+export + portable-check, `git diff --check`; независимый read-only
+advanced review (2 раунда) PASS без high/medium. На GitHub-hosted runner:
+build job прошёл дважды (26s и 21s) — первое наблюдаемое выполнение
+static-проверок сайта на runner; первый авто-запуск run 43736680072 (push)
+дал build PASS 26s и ожидаемое падение Deploy с 404 до включения Pages;
+Pages включён владельцем (`build_type=workflow`, https enforced, без custom
+domain), деплой run 43736946697 завершился успешно (build + deploy),
+задеплоенные media-изображения сверены sha256 digest-проверками, а
+страницы и assets — content-проверками (status/lang/title/link/
+content-type) с проверенным кандидатом. Свежий live read-back
+по `https://atilla777.github.io/`: HTTP — 61 страница (включая вложенные
+EN/RU маршруты, assets, все media digest'ы), browser — search
+'Atlas'/'Атлас' (16/15 локализованных результатов), смена языка, 3
+изображения Atlas; 5 screenshots сохранены. Ссылка на URL добавлена в
+root `README.md`.
+
+Пределы: PR CI native lane на GitHub-hosted runners по-прежнему не
+наблюдался и остаётся открытым environment blocker (задеплоенный static
+build его не заменяет); no-JS/reduced-motion/360/1280 проверены локальной
+browser-проверкой того же дерева, а не отдельным прогоном против живого
+URL; custom domain нет; media-байты не менялись — применимость прежнего
+ручного просмотра изображений обоснована неизменностью digest'ов; kit/native
+API, Slyx, extraction inventory и notices не менялись; Node остаётся только
+site tooling.
+
+Как увидеть: открыть `https://atilla777.github.io/oui/` (EN по умолчанию,
+`/oui/en/`, `/oui/ru/`), пройти каталог, рецепты и Lab, поиск (Ctrl+K) и
+смену языка; либо из `site/` отдельного checkout репозитория:
+`npm run check:live -- https://atilla777.github.io` и
+`npm run check:live:browser -- https://atilla777.github.io`. Фактическое
+состояние публикации основной ветки фиксируется в результатах задачи в
+Beads, не в этом документе.

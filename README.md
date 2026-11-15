@@ -10,6 +10,9 @@ owners/errors/recovery; [compatibility](docs/compatibility.md) — границ�
 [resources](docs/resources.md) — ресурсы, инструменты подготовки и полные notices.
 [Provenance](docs/provenance.md) — необязательная история, не шаг сборки.
 
+Двуязычный сайт документации (EN/RU) с реальными native-изображениями:
+https://atilla777.github.io/oui/ .
+
 Maintained portable root: `kit/`, `consumer/`, `resources/`, `docs/`, `skills/`, `tests/`, `scripts/`, `preparation/`. Production build/run не требует Slyx checkout, истории проекта, трекера, Python, генераторов, agent client или сети. Full relocated qualification ещё не завершена.
 
 Собственный выбранный code/consumers/tests/helpers/docs/skill — MIT, полный текст

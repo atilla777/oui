@@ -13,7 +13,7 @@
 | [ISD](../isd.md) | Изолированный графический запуск агента |
 | [Qualification](../qualification.md) | История проверок и пределы применимости |
 | [Основа сайта](site-foundation.md) | Кандидат EN/RU сайта, проверенная статика и ограничения приёмки (`oui-3no.1`) |
-| [Каталог и изображения](site-catalogue.md) | Layout EN/RU, media/sample validation, кандидат локального поиска/фильтров, Settings recipe/Lab settings и обязательные site-проверки/CI/процедура обновления (`oui-3no.2`, `oui-3no.3`, `oui-3no.21`, `oui-3no.24`) |
+| [Каталог и изображения](site-catalogue.md) | Layout EN/RU, media/sample validation, кандидат локального поиска/фильтров, Settings recipe/Lab settings, обязательные site-проверки/CI/процедура обновления, полная проверка и Pages-доставка (`oui-3no.2`, `oui-3no.3`, `oui-3no.21`, `oui-3no.24`, `oui-3no.25`) |
 
 После MIS Task/Bug добавляй сюда или обновляй существующий документ по
 функциональности: устойчивое реализованное и проверенное поведение, ограничения,

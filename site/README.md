@@ -58,9 +58,10 @@ retains a hash only when that ID exists in the destination HTML. Without JS the
 ordinary link still reaches the corresponding page without a hash.
 
 The catalogue is an explicit `layout`, `controls`, `styling`, `profiles`, `layers`,
-layout, controls, styling, profiles, layers, HUD, transitions, text-input, Atlas,
-scroll-table, collections, gestures, Lab menu, basic menu recipe, Lab HUD, HUD
-recipe and diagnostics and performance pages and their localized images. Its screenshots need human
+`hud`, `transitions`, `text`, `rich-text`, `text-input`, `atlas`, `scroll-table`,
+`collections`, `gestures`, `lab-menu`, `lab-hud` and `diagnostics-performance` sample of
+fifteen gallery
+sections and two of the four Lab screens, not complete coverage. The
 schema-versioned `data/catalogue.json` and `data/media.json` are checked before
 the build against the actual native section IDs, locale media, provenance,
 PNG dimensions and digests. `npm run check:catalogue:strict` deliberately fails

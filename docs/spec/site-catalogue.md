@@ -783,10 +783,10 @@ preview listening=false), артефакты/скриншоты
 интегрированных перезапусков `integrated3-check.log`,
 `integrated3-build.log`, `integrated3-check-http.log` и portable gate
 `/tmp/opencode/oui-3no15-proof4.Ah6CKWPA/portable.log` в
-`/tmp/opencode/oui-3no15-checks/`. 8 world-скриншотов
-просмотрены исполнителем и независимыми image-capable просмотрщиками (четыре
-просмотра: до интеграции и после каждой),
-без приватного содержимого; координатор и reviewer-модели не поддерживают
+`/tmp/opencode/oui-3no15-checks/`. World-скриншоты просматривались исполнителем
+и независимыми image-capable просмотрщиками: до интеграции — все 8, после
+первой и второй — по 4 hydrated, после третьей — два 1280px-снимка; личных
+данных не обнаружено; координатор и reviewer-модели не поддерживают
 просмотр изображений (раскрытое ограничение). Проверен один браузер (Chromium);
 аудит доступности/conformance и другие браузеры не заявлены, Pages deployment
 не заявлен, strict coverage ожидаемо падает.

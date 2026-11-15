@@ -78,7 +78,7 @@ try {
     assert.ok(await page.locator('main').innerText())
   }
   const checkImages = async (activePage, path, lang) => {
-    const section = path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|text-input|atlas|scroll-table|collections|text|rich-text)\.html$/)?.[1]
+    const section = path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|text-input|atlas|scroll-table|collections|text|rich-text|world)\.html$/)?.[1]
     if (!section) { assert.equal(path, 'catalogue.html'); return }
     const ids = {
       layout: [`layout-${lang}`, `layout-small-${lang}`],
@@ -92,7 +92,8 @@ try {
       'scroll-table': [`scroll-table-${lang}`],
       collections: [`collections-${lang}`],
       text: [`text-${lang}-initial`, `text-${lang}-alternate`],
-      'rich-text': [`rich-text-${lang}-initial`, `rich-text-${lang}-alternate`]
+      'rich-text': [`rich-text-${lang}-initial`, `rich-text-${lang}-alternate`],
+      world: [`world-initial-${lang}`, `world-indicators-${lang}`]
     }[section]
     const images = activePage.locator('main p > img')
     assert.equal(await images.count(), ids.length, `${section} ${lang}: image count`)
@@ -205,7 +206,8 @@ try {
     ['capabilities/profiles.html', 'Profiles', 'Профили', 'workflow'],
     ['capabilities/layers.html', 'Layers', 'Слои', 'boundaries'],
     ['capabilities/hud.html', 'HUD hold', 'HUD и удержание', 'boundaries'],
-    ['capabilities/text-input.html', 'Text input', 'Ввод текста', 'boundaries']
+    ['capabilities/text-input.html', 'Text input', 'Ввод текста', 'boundaries'],
+    ['capabilities/world.html', 'World anchors', 'Якоря мира', 'boundaries']
   ]
   const sampleName = path => path.startsWith('capabilities/') ? path.split('/')[1].replace('.html', '') : 'catalogue'
   for (const width of [360, 1280]) {

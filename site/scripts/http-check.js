@@ -45,7 +45,9 @@ try {
     ['en/capabilities/styling.html', 'en', 'Styling', '/oui/ru/capabilities/styling.html'],
     ['ru/capabilities/styling.html', 'ru', 'Оформление', '/oui/en/capabilities/styling.html'],
     ['en/capabilities/profiles.html', 'en', 'Profiles', '/oui/ru/capabilities/profiles.html'],
-    ['ru/capabilities/profiles.html', 'ru', 'Профили', '/oui/en/capabilities/profiles.html']
+    ['ru/capabilities/profiles.html', 'ru', 'Профили', '/oui/en/capabilities/profiles.html'],
+    ['en/capabilities/world.html', 'en', 'World anchors', '/oui/ru/capabilities/world.html'],
+    ['ru/capabilities/world.html', 'ru', 'Якоря мира', '/oui/en/capabilities/world.html']
   ]) {
     const response = await get('/oui/' + path)
     assert.equal(response.status, 200, path)
@@ -56,7 +58,7 @@ try {
     assert.ok(html.includes(`href="${other}"`), path)
     if (path.includes('guide/')) assert.ok(html.includes('id="choose-a-boundary"'))
     const markup = html.split('<script>window.__VP_HASH_MAP__')[0]
-    const section = path.match(/capabilities\/(layout|layers|hud|text-input|scroll-table|collections|text|rich-text)\.html/)?.[1]
+    const section = path.match(/capabilities\/(layout|layers|hud|text-input|scroll-table|collections|text|rich-text|world)\.html/)?.[1]
     if (section) {
       const records = media.records.filter(item => item.section === section && item.uiLocale === lang)
       assert.equal(records.length, ['text-input', 'scroll-table', 'collections'].includes(section) ? 1 : 2)

@@ -3,18 +3,20 @@
 Контракт введён `oui-3no.2`; опубликованные расширения включают `oui-3no.5`,
 `oui-3no.6`, Atlas `oui-3no.7`, text-input `oui-3no.9`, прокрутку/коллекции
 `oui-3no.10` и layers/HUD `oui-3no.11`. Text/rich-text `oui-3no.8` — интеграционный кандидат.
+World anchors `oui-3no.15` — текущий кандидат этой worktree, pending integration.
 Библиотека и native consumers не изменены; сайт описывает существующие возможности,
 а не реализует их в браузере.
 
 - `site/en/` и `site/ru/` содержат `catalogue` и `capabilities/layout`,
   `capabilities/controls`, `capabilities/styling`, `capabilities/profiles`,
   `capabilities/layers`, `capabilities/hud`, `capabilities/text-input`, `capabilities/atlas`,
-  `capabilities/scroll-table`, `capabilities/collections`, `capabilities/text`, `capabilities/rich-text`.
+  `capabilities/scroll-table`, `capabilities/collections`, `capabilities/text`, `capabilities/rich-text`,
+  `capabilities/world`.
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
   полный showcase, с pinned source links и native build/run command.
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
   Каталог объявляет sample coverage `layout`, `controls`, `styling`, `profiles`,
-  `layers`, `hud`, `text-input`, `atlas`, `scroll-table`, `collections`, `text`, `rich-text`. Native source catalogue
+  `layers`, `hud`, `text-input`, `atlas`, `scroll-table`, `collections`, `text`, `rich-text`, `world`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -371,3 +373,69 @@ test прошли. Дополнительный широкий native app test r
 `/oui/en/capabilities/atlas` либо `/oui/ru/capabilities/atlas`, или перейти
 через соответствующий catalogue. Сравнить A/B и счётчик reload под изображениями.
 Это проверено в локальном HTTP/browser, не означает публикацию или Pages deploy.
+
+## World anchors (`oui-3no.15`)
+
+Кандидат `oui-3no.15`, pending integration: sample расширен до тринадцати
+разделов добавлением `world` (G19, fixture `anchors`). EN/RU страницы доступны
+из статического каталога, описывают назначение, наблюдаемое поведение, границы,
+выбранные пакеты, pinned source links и native build/run команду; kit и native
+поведение не изменялись.
+
+`world` размещает обычные карточки в мировых координатах: приложение владеет
+камерой и передаёт callback проекции, `kit/ui_world` возвращает границы,
+видимость, прижатие и нормализованное направление (stateless `place_anchor`,
+без хранения состояния и аллокаций). В showcase три якоря: A следует за кнопками
+объекта, B зафиксирован в (800, 0), C в (-800, -500); кнопки камеры сдвигают вид
+на 64 мировые единицы, Zoom переключает 1/2, политика циклирует
+Hide/Clamp/Direction, Reset восстанавливает модель. Заголовок страницы сообщает
+причину каждого якоря (Placed/Offscreen). Нет движка, графа сцены и Game Bridge.
+Выбранные пакеты: `ui_base`, `ui_layout`, `ui_interaction`, `ui_style`, `ui_world`.
+
+Получены четыре настоящих PNG 1280×960, scale 1, EN/RU: начальное состояние
+(A=Placed, B/C=Offscreen при Hide, карточка A с прогрессом в центре) и
+альтернативное после трёх Camera +X и политики Direction (A смещён влево,
+B/C показаны индикаторами у краёв, A/B/C=Placed). Снимки сделаны на clean source
+revision `8bc09cff358aa629410437996520283ff98d77d9` (native-файлы байт-идентичны
+`4da8d7a57bd2453227a4c37df6b0b4d171401681`). Явно выбранная ISD
+`f8204c61615406ce5628b15692628e146476a008` проверена целиком; create/status
+подтвердили `linux-abstract-v1`, выполнен явный focus, собственные runs
+остановлены с проверкой отсутствия живых процессов. Private prefix
+libpng 1.6.59/zlib 1.4 подготовен заново по `docs/resources.md` (архивы
+проверены по опубликованным SHA256, upstream тесты zlib OK и libpng 36/36,
+ldd подтверждает фактическую линковку libpng и transitive zlib из prefix),
+без изменения системных библиотек. Каждый PNG просмотрен исполнителем и
+независимым просмотрщиком; личных данных не обнаружено. Публичные копии
+содержат только IHDR/IDAT/IEND, пиксельно идентичны captures, sha256 в
+`site/data/media.json`.
+
+Прошли девять site unit/parity/schema tests, static build, loopback HTTP
+(маршруты world EN/RU, images/alt/digests), `git diff --check`, свежий
+portable export + portable-check, адресный `odin test kit/ui_world`
+(5 тестов, vet-флаги) и разрешённая изолированная браузерная приёмка
+(`check:browser`). В native cleanup app_exit равен 1 во всех capture-ранах:
+логи содержат X11 I/O error при остановке дисплея, без предшествующей ошибки
+рендера; снимки получены до teardown. Это не подтверждение штатного завершения
+приложения. Clamp, zoom 2, перемещение объекта и Reset описаны по исходному
+коду, не заявлены как отдельная native приёмка. Браузерная приёмка: владелец
+2026-11-15 отдельно разрешил изолированный headless Chromium маршрут для этой
+задачи (те же условия, что и для .1–.11, запись в `docs/rules/checks.md`);
+приёмка выполнена: sandboxed Chromium, собственный временный профиль,
+собственный loopback-only static preview, world EN/RU на 360/1280 в hydrated,
+no-JS и reduced motion циклах — prose без overflow, оба изображения загружены
+с локализованным alt, клавиатура, смена языка с valid/missing anchors. Log
+`/tmp/opencode/oui-3no15-checks/npm-check-browser.log` (sandbox
+renderer-seccomp=2, no-sandbox flags отсутствуют, cleanup: browser closed,
+preview listening=false), артефакты/скриншоты
+`/tmp/opencode/oui-3no15-browser/oui-browser-7nw6nC`; 8 world-скриншотов
+просмотрены исполнителем и двумя независимыми image-capable просмотрщиками,
+без приватного содержимого; координатор и reviewer-модели не поддерживают
+просмотр изображений (раскрытое ограничение). Проверен один браузер (Chromium);
+аудит доступности/conformance и другие браузеры не заявлены, Pages deployment
+не заявлен, strict coverage ожидаемо падает.
+
+Как увидеть: из `site/` с Node `.nvmrc` выполнить `npm run build`,
+`npm run check:http`, затем `npm run preview -- --port 0`; открыть выданный URL
+с `/oui/en/capabilities/world` либо `/oui/ru/capabilities/world` или перейти
+через catalogue. HTTP-проверка маршрутов/дайджестов и изолированная браузерная
+проверка отображения выполнены.

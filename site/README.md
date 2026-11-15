@@ -51,10 +51,12 @@ layout, text, rich-text, scroll-table, collections, Atlas, controls, styling,
 profiles, layers, HUD, transitions, text-input, nested composition, custom
 primitives and world anchors capability pages, the gestures page, the Lab
 settings page with its four captured states per locale, the settings recipe page,
-which has no capture, the Lab menu, menu recipe, Lab HUD, HUD recipe and
-diagnostics and performance pages and their localized images. Its screenshots
-need human inspection; automated checks do not establish accessibility
-conformance or cover other browsers and devices.
+which has no capture, the Lab inventory page with its five captured states per
+locale, the inventory recipe page, which has no capture, the Lab menu, menu
+recipe, Lab HUD and HUD recipe pages, and the diagnostics and performance pages
+with their localized images. Its screenshots need human inspection; automated
+checks do not establish accessibility conformance or cover other browsers and
+devices.
 Both locale trees must contain each page. Explicit matching heading IDs are the
 stable cross-language anchors. The language link retains the page key; with JS it
 retains a hash only when that ID exists in the destination HTML. Without JS the
@@ -64,7 +66,7 @@ The catalogue is an explicit `layout`, `controls`, `styling`, `profiles`, `layer
 `hud`, `transitions`, `text`, `rich-text`, `text-input`, `atlas`, `scroll-table`,
 `collections`, `gestures`, `composition`, `custom`, `world` and
 `diagnostics-performance` sample of eighteen gallery sections plus the `lab-menu`,
-`lab-hud` and `lab-settings` Lab entries (three of the four Lab screens);
+`lab-hud`, `lab-inventory` and `lab-settings` Lab entries (all four Lab screens);
 `lab-settings` filters under the `settings` category. It is not complete coverage. The
 schema-versioned `data/catalogue.json` and `data/media.json` are checked before
 the build against the actual native section IDs, locale media, provenance,

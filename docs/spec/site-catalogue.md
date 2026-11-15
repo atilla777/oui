@@ -3,7 +3,8 @@
 Контракт введён `oui-3no.2`; опубликованные расширения включают `oui-3no.5`,
 `oui-3no.6`, Atlas `oui-3no.7`, text-input `oui-3no.9`, прокрутку/коллекции
 `oui-3no.10` и layers/HUD `oui-3no.11`. Text/rich-text `oui-3no.8`, menu
-recipe/Lab menu `oui-3no.20` и Settings recipe/Lab settings `oui-3no.21` —
+recipe/Lab menu `oui-3no.20`, HUD recipe/Lab HUD `oui-3no.22`, inventory
+recipe/Lab inventory `oui-3no.23` и Settings recipe/Lab settings `oui-3no.21` —
 интеграционные кандидаты. Жесты `oui-3no.12` — локальный кандидат, pending
 integration. Диагностика/производительность `oui-3no.17` — интеграционный
 кандидат. Composition/custom `oui-3no.13` — локальный кандидат. Переходы
@@ -20,17 +21,22 @@ World anchors `oui-3no.15` — текущий кандидат этой worktree
   `capabilities/gestures`, `capabilities/diagnostics-performance`,
   `capabilities/composition`, `capabilities/custom`, `capabilities/world`, а также рецепты
   и экраны Lab — опубликованные `recipes/menu` и `lab/menu` (`oui-3no.20`),
-  `recipes/hud`/`lab/hud` этого кандидата, а также `recipes/settings` и
-  `labs/settings` кандидата `oui-3no.21`.
+  `recipes/hud`/`lab/hud` кандидата `oui-3no.22`,
+  `recipes/inventory`/`lab/inventory` кандидата `oui-3no.23`, а также
+  `recipes/settings` и `labs/settings` кандидата `oui-3no.21`.
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
   полный showcase, с pinned source links и native build/run command.
-  Кандидат `oui-3no.20` добавляет `recipes/menu` (узкий standalone-menu рецепт
-  без собственных изображений) и первый Lab обзор `lab/menu`.
+  Кандидаты добавляют страницы: `oui-3no.20` — `recipes/menu` (узкий
+  standalone-menu рецепт без собственных изображений) и первый Lab обзор
+  `lab/menu`; `oui-3no.23` — `recipes/inventory` (headless-рецепт с двумя
+  однородными списками) и Lab обзор `lab/inventory`; `oui-3no.13` —
+  `capabilities/composition` и `capabilities/custom` с собственными
+  изображениями.
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
   Каталог объявляет sample coverage `layout`, `controls`, `styling`, `profiles`,
   `layers`, `hud`, `transitions`, `text-input`, `atlas`, `scroll-table`, `collections`, `text`,
-  `rich-text`, `gestures`, Lab IDs `lab-menu`/`lab-hud`, `diagnostics-performance`,
-  `composition`, `custom`, `world`, `lab-settings`. Native source catalogue
+  `rich-text`, `gestures`, Lab IDs `lab-menu`/`lab-hud`/`lab-inventory`/`lab-settings`,
+  `diagnostics-performance`, `composition`, `custom`, `world`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -212,9 +218,9 @@ libpng 1.6.59/zlib 1.4 с upstream tests, ABI-проверкой и фактич
 resource hashes против трека. Media manifest сохраняет полные
 state/locale/revision/source/resource identities без локальных путей.
 
-На этом кандидате прошли 14 unit/parity/schema site tests (включая новые
-lab-покрытие и media-тесты, а также negative fixture обязательных состояний
-lab-settings), static build, loopback HTTP новых маршрутов
+На этом кандидате прошли 15 unit/parity/schema site tests (включая lab-покрытие
+menu/HUD/inventory/settings и media-тесты, а также negative fixture обязательных
+состояний lab-settings), static build, loopback HTTP новых маршрутов
 `recipes/settings` и `labs/settings` с image digests, свежий portable
 export/portable-check (site/docs в export не входят, portable байты не менялись)
 и, после отдельного разрешения владельца от 2026-11-15 для `oui-3no.21`,
@@ -682,6 +688,107 @@ native/portable доказательства применимы без повт�
 публикацию, Pages deploy или полную приёмку: остальные три рецепта/Lab,
 полное покрытие IDs, другие браузеры и доступность не проверены.
 
+## Рецепт инвентаря и Lab inventory (`oui-3no.23`)
+
+`site/en/recipes/inventory.md` и русский counterpart документируют существующий
+restricted inventory recipe (`tests/ui_recipes/inventory`): две неналоженные
+однородные списочные области и одна цепочка drag-жеста в одной публикации,
+прямое замыкание `ui_base`/`ui_layout`/`ui_interaction`/`ui_layers`/
+`ui_collections`(+`/sdl`)/`ui_gestures`(+`/sdl`)/`ui_text`/`ui_sdl_text` плюс
+транзитивные `ui_style`/`ui_scroll`/`unicode_graphemes`. Страница объясняет
+владение панелями, устойчивыми row ID и выбором, pending proposal против
+подтверждённого переноса, Cancel/stale/same-panel отказы, отсутствие обещания
+row drag-reorder и отсутствие native-ресурсов у headless fixture. Приведены
+фактические build/run команды и oracle `recipe-inventory effects=1 conflicts=1
+live=0`, отдельно отмеченный fragment для native fixture. Native fixture
+`tests/ui_recipes/inventory/native` собран и один раз выполнен через выбранную
+ISD-копию: F11 напечатал `native-inventory=ok two-regions=true drag-effect=1
+stable-membership=true recovery=no-replay input=native-synthetic`, затем F12
+завершил приложение с кодом 0, run остановлен в `finally`. Одна дополнительная
+попытка режима `check` обёртки для native fixture — уже после
+задокументированного сценария — завершилась неуспехом
+(парсер фикстуры отвергает аргумент `--window-check`); она была корректно
+остановлена без живых процессов и не влияет на задокументированный сценарий.
+
+`site/en/lab/inventory.md` и русский counterpart — обзор Lab-экрана:
+два однородных списка `Backpack`/`Chest`, строка выбора с устойчивым ID,
+именем и источником, отдельная ручка drag, модальное предложение с Cancel и
+Confirm move, same-panel/stale отказы и статус после подтверждения. Указаны
+ограничения из native catalogue («Two uniform lists; no row drag-reorder»),
+experimental-статус и process-local учебные данные без сохранения на диск,
+фактический импорт `lab_inventory.odin`, отличие от широкого union showcase и
+команды сборки/запуска с `--section lab-inventory --locale en|ru`. Каталог
+получил запись группы `lab` (`lab-inventory`, coverage 13 IDs) и десять media
+records — по пять состояний (initial/selected/refused/pending/confirmed)
+в EN и RU, снятых как настоящие PNG 1280×960, scale 1, на clean source
+`8bc09cff358aa629410437996520283ff98d77d9` через проверенную ISD
+`f8204c61615406ce5628b15692628e146476a008`; create/status подтвердили
+`linux-abstract-v1`, собственные runs остановлены (app/supervisor/Xvfb не живы).
+Публичные PNG byte-identical приватным capture-копиям и содержат только
+IHDR/cHRM/bKGD/IDAT/IEND; каждый просмотрен отдельно: состояния, локали и фокус
+соответствуют media records, приватных данных нет. Использован ранее
+подготовленный private prefix libpng 1.6.59/zlib 1.4 с проверенной linkage;
+системные библиотеки не менялись. При остановке display app exit равен 1 из-за
+X11 I/O error, без предшествующей ошибки UI; native fixture завершился 0.
+
+На этом кандидате прошли: свежий portable export (630 inventory entries,
+инвентарь покрывает все файлы) и portable-check из export; документально
+выполненные recipe build/run и native ISD run выше; десять site
+unit/schema/parity tests, `npm run build` (schema/coverage/references/digests)
+и `npm run check:http` для прежних маршрутов. Новые четыре маршрута
+дополнительно проверены отдельным loopback-only static preview: 200, lang,
+заголовок, пять локализованных изображений на lab-страницу с alt и digest,
+отсутствие изображений и наличие команд на recipe-страницах, ссылки каталога,
+отсутствие локальных путей в HTML; собственный listener остановлен.
+`npm run check:browser` выполнен на этом кандидате с разрешения владельца:
+изолированный headless Chromium 152.0.7977.82 (`/usr/bin/chromium`) с
+включённым sandbox (renderer seccomp=2), собственным временным профилем и
+loopback-only static preview на `127.0.0.1:37239`, без Vite dev server и
+подключения к рабочему столу; внешние запросы и page errors отсутствуют.
+Покрыты EN/RU при 360/1280: hydrated chrome, skip link и меню, переключение
+языка с валидным и отсутствующим anchor, sample-страницы включая
+`lab/inventory.html` и `recipes/inventory.html` (пять локализованных lab PNG
+на страницу с alt и фактической загрузкой), catalogue filter/search включая
+группу `lab-inventory`, reset, keyboard selection, layout viewer, reduced
+motion и no-JS (контент, изображения, ссылки, клавиатура). Создано 160
+browser PNG; 16 PNG новых lab/recipe страниц (JS и no-JS, EN/RU, 360/1280)
+просмотрены исполнителем — изображения загружены, приватных данных нет.
+Собственные browser и preview закрыты (listener не слушает, процессов с этим
+профилем нет). Это локальная приёмка кандидата, не deployment. Полная
+квалификация остальных IDs, другие браузеры и Pages deployment не
+проверялись. Kit/native API и поведение не менялись.
+
+После первого объединения с опубликованными menu/HUD/gestures-задачами sample
+coverage интегрированного дерева составлял 16 IDs, и site-проверки были
+повторены на нём: `npm run check` (12/12), `npm run build` и
+`npm run check:http` прошли. После второго объединения — с опубликованными
+`oui-3no.17` (diagnostics/performance) и исправлениями счётчиков README —
+sample coverage составлял 17 IDs; на том дереве прошли `npm run check` (13/13),
+`npm run build` и `npm run check:http`, а полный `npm run check:browser` дал
+175 PASS (exit 0) на предыдущем дереве и 183 PASS (exit 0, включая новые
+сценарии diagnostics/performance) на том дереве. После третьего объединения —
+с опубликованными composition/custom `oui-3no.13` — sample coverage составляет
+19 IDs (16 gallery, включая `gestures`, `diagnostics-performance`, `composition`
+и `custom`, и 3 Lab: `lab-menu`, `lab-hud`, `lab-inventory`); на том дереве
+повторены `npm run check` (13/13), `npm run build`, `npm run check:http`
+и полный `npm run check:browser` — 199 PASS (exit 0). После четвёртого
+объединения — с опубликованными переходами состояния `oui-3no.14` и world
+anchors `oui-3no.15`, а также исправлениями счётчиков README — sample coverage
+составляет 21 ID (18 gallery, включая `transitions` и `world`, и 3 Lab:
+`lab-menu`, `lab-hud`, `lab-inventory`); на этом итоговом дереве повторены
+`npm run check` (13/13), `npm run build`, `npm run check:http` и полный
+`npm run check:browser` — 215 PASS (exit 0, включая inventory, world и
+transitions). Native-часть дерева байт-идентична прежней ревизии, поэтому
+приведённые native/portable доказательства применимы без повтора.
+
+Как увидеть локальный кандидат: из `site/` с Node из `.nvmrc` выполнить
+`npm ci`, `npm run build`, `npm run check:http`, `npm run preview -- --port 0`;
+открыть выданный URL с `/oui/en/recipes/inventory`, `/oui/ru/recipes/inventory`,
+`/oui/en/lab/inventory` либо `/oui/ru/lab/inventory`, или перейти из catalogue.
+Native сценарий — командами со страницы lab/inventory (для агентов — только
+через wrapper `scripts/ui_isd.py`). Это проверено в локальном static HTTP и
+native ISD runs; публикация и Pages deploy не выполнялись.
+
 ## Диагностика и производительность (`oui-3no.17`)
 
 EN/RU страницы описывают нативную страницу G20–G21 showcase: фазы CPU
@@ -717,8 +824,8 @@ zlib проверены) без изменения системных библи
 negative fixtures), build, loopback HTTP с новыми маршрутами EN/RU и digests,
 свежий portable export (631 файл, byte-identical экспорту origin/main) и
 portable-check; `check:catalogue:strict` ожидаемо падает (после интеграции с
-опубликованными `oui-3no.12`, `oui-3no.20`, `oui-3no.22` и composition/custom
-`oui-3no.13` — 18 из 23). После
+опубликованными `oui-3no.12`, `oui-3no.20`, `oui-3no.22`, composition/custom
+`oui-3no.13` и inventory recipe/Lab inventory `oui-3no.23` — 19 из 23). После
 отдельного разрешения владельца 2026-11-15 пройдена изолированная браузерная
 приёмка Chromium 152 с sandbox: страница EN/RU при 360/1280, JS и no-JS,
 клавиатура, locale/anchors, изображения и reduced motion; существующие сценарии
@@ -728,9 +835,9 @@ portable-check; `check:catalogue:strict` ожидаемо падает (посл
 ## Композиция и custom primitives — локальный кандидат oui-3no.13
 
 Локальный кандидат добавляет EN/RU страницы `capabilities/composition` и
-`capabilities/custom`; после объединения с опубликованными жестами, menu recipe
-и HUD recipe, а также diagnostics/performance declared sample coverage
-составляет восемнадцать IDs.
+`capabilities/custom`; после объединения с опубликованными жестами, menu recipe,
+HUD recipe, diagnostics/performance и inventory recipe/Lab inventory declared
+sample coverage составляет девятнадцать IDs.
 Composition описывает владеемые панели с фиксированным порядком слотов,
 вложенную дочернюю кнопку в составной родительской и запись намерения в
 родительском маршруте при выключенном Stop. Custom описывает два рецепта
@@ -762,7 +869,7 @@ HTTP всех новых маршрутов прошли; свежий portable 
 portable/native доказательства применимы без повтора. После отдельного разрешения владельца
 для `oui-3no.13` пройдена браузерная приёмка в изолированном headless
 Chromium с sandbox, собственным временным профилем и loopback-only static
-preview: 183 PASS на финальном интегрированном дереве, включая EN/RU composition/custom
+preview: 199 PASS на этом итоговом объединённом дереве, включая EN/RU composition/custom
 и сохранённые сценарии на ширинах 360/1280 — prose без page overflow, изображения загружены с
 локализованным alt, клавиатурная навигация из каталога, смена языка с
 valid/missing anchors, no-JS content/images/links и reduced motion.

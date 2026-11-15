@@ -125,6 +125,15 @@ application move on release. [Explore gestures and their native example](./capab
 
 </CatalogueItem>
 
+<CatalogueItem id="diagnostics-performance">
+
+## Diagnostics and performance {#diagnostics-performance}
+
+CPU phase samples, text metric counters and five failing diagnostic probes.
+[Explore diagnostics and performance](./capabilities/diagnostics-performance).
+
+</CatalogueItem>
+
 <CatalogueItem id="lab-menu">
 
 ## Lab menu {#lab-menu}
@@ -143,13 +152,12 @@ Mock HP with -10 and +10, a 1000 ms hold-to-restore, a popup and a tooltip.
 
 </CatalogueItem>
 
-<CatalogueItem id="diagnostics-performance">
+<CatalogueItem id="lab-inventory">
 
-## Diagnostics and performance {#diagnostics-performance}
+## Lab inventory {#lab-inventory}
 
-CPU phase samples, text metric counters and five failing diagnostic probes.
-[Explore diagnostics and performance](./capabilities/diagnostics-performance).
-
+Select a row in two uniform lists, propose a transfer and confirm or refuse it.
+[Explore Lab inventory and its native example](./lab/inventory).
 </CatalogueItem>
 
 <CatalogueItem id="composition">

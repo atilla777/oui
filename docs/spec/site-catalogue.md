@@ -613,12 +613,17 @@ portable export + portable-check, адресный `odin test kit/ui_world`
 приёмка выполнена: sandboxed Chromium, собственный временный профиль,
 собственный loopback-only static preview, world EN/RU на 360/1280 в hydrated,
 no-JS и reduced motion циклах — prose без overflow, оба изображения загружены
-с локализованным alt, клавиатура, смена языка с valid/missing anchors. Log
-`/tmp/opencode/oui-3no15-checks/npm-check-browser.log` (sandbox
+с локализованным alt, клавиатура, смена языка с valid/missing anchors. После
+объединения с опубликованными .12/.20/.22 приёмка повторена на интегрированном
+снимке: полная suite 167 PASS, log
+`/tmp/opencode/oui-3no15-checks/integrated-check-browser.log` (sandbox
 renderer-seccomp=2, no-sandbox flags отсутствуют, cleanup: browser closed,
 preview listening=false), артефакты/скриншоты
-`/tmp/opencode/oui-3no15-browser/oui-browser-7nw6nC`; 8 world-скриншотов
-просмотрены исполнителем и двумя независимыми image-capable просмотрщиками,
+`/tmp/opencode/oui-3no15-browser/oui-browser-1hsNdl`; также сохранены логи
+интегрированных перезапусков `integrated-check.log`, `integrated-build.log`,
+`integrated-check-http.log` в `/tmp/opencode/oui-3no15-checks/`. 8 world-скриншотов
+просмотрены исполнителем и независимыми image-capable просмотрщиками (два
+просмотра до и после интеграции),
 без приватного содержимого; координатор и reviewer-модели не поддерживают
 просмотр изображений (раскрытое ограничение). Проверен один браузер (Chromium);
 аудит доступности/conformance и другие браузеры не заявлены, Pages deployment

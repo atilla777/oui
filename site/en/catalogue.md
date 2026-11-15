@@ -1,7 +1,7 @@
 # Capability catalogue {#catalogue}
 
 This is an explicitly limited sample, not the complete showcase catalogue. It
-currently covers sixteen of the 19 gallery sections and three of the four Integration
+currently covers eighteen of the 19 gallery sections and three of the four Integration
 Lab screens. The captures show the native application, not a browser port.
 
 <CatalogueFilter locale="en">
@@ -107,6 +107,15 @@ Load image regions, switch atlas resources and reload the selected set.
 
 </CatalogueItem>
 
+<CatalogueItem id="transitions">
+
+## State transitions {#transitions}
+
+Retarget paint offset, scale, opacity, colour and progress without animating layout.
+[Explore transitions and their native example](./capabilities/transitions).
+
+</CatalogueItem>
+
 <CatalogueItem id="gestures">
 
 ## Gestures {#gestures}
@@ -158,6 +167,16 @@ Compose owned panels with nested nodes where child activation records a parent i
 
 App-owned circle nodes with a pure circle hit predicate in two namespaced recipes.
 [Explore custom primitives and their native example](./capabilities/custom).
+
+</CatalogueItem>
+
+<CatalogueItem id="world">
+
+## World anchors {#world}
+
+Place world-space cards through an application-owned camera and projection, with
+Hide, Clamp and Direction for off-screen anchors.
+[Explore world anchors and the native example](./capabilities/world).
 
 </CatalogueItem>
 

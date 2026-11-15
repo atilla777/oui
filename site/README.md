@@ -48,7 +48,8 @@ The browser check observes local site search and catalogue query/filter/reset,
 keyboard interaction, locale switching, no-JS content,
 reduced motion and layout at 360 and 1280 pixels, including the catalogue, the
 layout, text, rich-text, scroll-table, collections, Atlas, controls, styling,
-profiles, layers, HUD and text-input capability pages, the gestures page, the Lab
+profiles, layers, HUD, transitions, text-input, nested composition, custom
+primitives and world anchors capability pages, the gestures page, the Lab
 settings page with its four captured states per locale, the settings recipe page,
 which has no capture, the Lab menu, menu recipe, Lab HUD, HUD recipe and
 diagnostics and performance pages and their localized images. Its screenshots
@@ -60,11 +61,12 @@ retains a hash only when that ID exists in the destination HTML. Without JS the
 ordinary link still reaches the corresponding page without a hash.
 
 The catalogue is an explicit `layout`, `controls`, `styling`, `profiles`, `layers`,
-`hud`, `text`, `rich-text`, `text-input`, `atlas`, `scroll-table`, `collections`,
-`gestures` and `diagnostics-performance` sample of fourteen gallery sections plus
-the `lab-menu`, `lab-hud` and `lab-settings` Lab entries (three of the four Lab
-screens); `lab-settings` filters under the `settings` category. It is not complete
-coverage. The schema-versioned `data/catalogue.json` and `data/media.json` are checked before
+`hud`, `transitions`, `text`, `rich-text`, `text-input`, `atlas`, `scroll-table`,
+`collections`, `gestures`, `composition`, `custom`, `world` and
+`diagnostics-performance` sample of eighteen gallery sections plus the `lab-menu`,
+`lab-hud` and `lab-settings` Lab entries (three of the four Lab screens);
+`lab-settings` filters under the `settings` category. It is not complete coverage. The
+schema-versioned `data/catalogue.json` and `data/media.json` are checked before
 the build against the actual native section IDs, locale media, provenance,
 PNG dimensions and digests. `npm run check:catalogue:strict` deliberately fails
 until all 19 gallery and four Lab IDs have records and media. Do not change the

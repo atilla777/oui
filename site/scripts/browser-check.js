@@ -77,7 +77,7 @@ try {
     assert.ok((await page.title()).includes(title))
     assert.ok(await page.locator('main').innerText())
   }
-  const sectionOf = path => path === 'lab/menu.html' ? 'lab-menu' : path === 'lab/hud.html' ? 'lab-hud' : path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|text-input|atlas|scroll-table|collections|text|rich-text|gestures|diagnostics-performance|composition|custom)\.html$/)?.[1]
+  const sectionOf = path => path === 'lab/menu.html' ? 'lab-menu' : path === 'lab/hud.html' ? 'lab-hud' : path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|transitions|text-input|atlas|scroll-table|collections|text|rich-text|gestures|diagnostics-performance|composition|custom|world)\.html$/)?.[1]
   const checkImages = async (activePage, path, lang) => {
     if (path === 'recipes/settings.html') {
       assert.equal(await activePage.locator('main p > img').count(), 0, 'recipe has no capture')
@@ -96,6 +96,7 @@ try {
       profiles: [`profiles-${lang}-initial`, `profiles-${lang}-dialog`, `profiles-${lang}-applied`],
       layers: [`layers-popup-tooltip-${lang}`, `layers-modal-${lang}`],
       hud: [`hud-idle-${lang}`, `hud-completed-${lang}`],
+      transitions: [`transitions-${lang}-initial`, `transitions-${lang}-after-b`],
       'lab-hud': [`lab-hud-initial-${lang}`, `lab-hud-popup-${lang}`, `lab-hud-hold-${lang}`, `lab-hud-completed-${lang}`],
       'text-input': [`text-input-${lang}`],
       atlas: [`atlas-${lang}-initial`, `atlas-${lang}-alternate`, `atlas-${lang}-reload`],
@@ -103,6 +104,7 @@ try {
       collections: [`collections-${lang}`],
       text: [`text-${lang}-initial`, `text-${lang}-alternate`],
       'rich-text': [`rich-text-${lang}-initial`, `rich-text-${lang}-alternate`],
+      world: [`world-initial-${lang}`, `world-indicators-${lang}`],
       gestures: [`gestures-${lang}-initial`, `gestures-${lang}-proposal`, `gestures-${lang}-applied`],
       'lab-menu': [`lab-menu-initial-${lang}`, `lab-menu-submenu-${lang}`, `lab-menu-settings-${lang}`, `lab-menu-confirm-${lang}`],
       'diagnostics-performance': [`diagnostics-performance-${lang}-initial`, `diagnostics-performance-${lang}-diagnostic`],
@@ -221,9 +223,11 @@ composition: [`composition-${lang}-initial`, `composition-${lang}-propagated`],
     ['capabilities/profiles.html', 'Profiles', 'Профили', 'workflow'],
     ['capabilities/layers.html', 'Layers', 'Слои', 'boundaries'],
     ['capabilities/hud.html', 'HUD hold', 'HUD и удержание', 'boundaries'],
+    ['capabilities/transitions.html', 'State transitions', 'Переходы состояния', 'boundaries'],
     ['capabilities/text-input.html', 'Text input', 'Ввод текста', 'boundaries'],
     ['capabilities/composition.html', 'Nested composition', 'Вложенная композиция', 'boundaries'],
     ['capabilities/custom.html', 'Custom primitives', 'Свои примитивы', 'boundaries'],
+    ['capabilities/world.html', 'World anchors', 'Якоря мира', 'boundaries'],
     ['capabilities/gestures.html', 'Gestures', 'Жесты', 'boundaries'],
     ['lab/menu.html', 'Lab menu', 'Меню лаборатории', 'boundaries'],
     ['recipes/menu.html', 'Basic menu recipe', 'Рецепт меню', 'build-and-run'],
@@ -387,7 +391,7 @@ composition: [`composition-${lang}-initial`, `composition-${lang}-propagated`],
         await page.keyboard.press('Enter')
         assert.equal(new URL(page.url()).hash, '#VPContent')
         if (path === 'catalogue.html') {
-          for (const [target, targetTitle] of [['layers', lang === 'en' ? 'Layers' : 'Слои'], ['hud', lang === 'en' ? 'HUD hold' : 'HUD и удержание'], ['gestures', lang === 'en' ? 'Gestures' : 'Жесты']]) {
+          for (const [target, targetTitle] of [['layers', lang === 'en' ? 'Layers' : 'Слои'], ['hud', lang === 'en' ? 'HUD hold' : 'HUD и удержание'], ['transitions', lang === 'en' ? 'State transitions' : 'Переходы состояния'], ['gestures', lang === 'en' ? 'Gestures' : 'Жесты']]) {
             await go(`/oui/${lang}/catalogue.html`)
             await focusByTab(`main a[href="./capabilities/${target}.html"]`)
             await page.keyboard.press('Enter')
@@ -512,7 +516,7 @@ composition: [`composition-${lang}-initial`, `composition-${lang}-propagated`],
           const dimensions = await p.evaluate(() => ({ scroll: document.documentElement.scrollWidth, client: document.documentElement.clientWidth, font: parseFloat(getComputedStyle(document.querySelector('main p')).fontSize) }))
           assert.ok(dimensions.scroll <= dimensions.client && dimensions.font >= 14, `${path} ${lang} ${width}: ${JSON.stringify(dimensions)}`)
           if (path === 'catalogue.html') {
-            for (const id of ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text', 'gestures', 'diagnostics-performance']) {
+            for (const id of ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'transitions', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text', 'gestures', 'diagnostics-performance']) {
               const link = p.locator(`main a[href="./capabilities/${id}.html"]`)
               assert.ok(await link.isVisible())
               assert.equal(await link.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/capabilities/${id}.html`)
@@ -543,7 +547,7 @@ composition: [`composition-${lang}-initial`, `composition-${lang}-propagated`],
           await p.waitForURL(`**/oui/${other}/${path}`)
           assert.equal(await p.locator('html').getAttribute('lang'), other)
           if (path === 'catalogue.html') {
-            for (const target of ['layers', 'hud', 'gestures']) {
+            for (const target of ['layers', 'hud', 'transitions', 'gestures']) {
               assert.equal((await p.goto(`${origin}/oui/${lang}/catalogue.html`)).status(), 200)
               await focusByTab(`main a[href="./capabilities/${target}.html"]`, p)
               await p.keyboard.press('Enter')

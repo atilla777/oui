@@ -20,7 +20,7 @@ test('published sample binds localized prose, media and selected resource hashes
   const media = JSON.parse(await readFile('data/media.json', 'utf8'))
   const source = await readFile('../consumer/ui_showcase/model/catalogue.odin', 'utf8')
   await validateCatalogue({ catalogue, media, source, publicRoot: 'public', coverage: catalogue.coverage })
-assert.deepEqual(catalogue.coverage.ids, ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text', 'lab-menu', 'gestures', 'lab-hud', 'diagnostics-performance', 'composition', 'custom', 'lab-settings'])
+assert.deepEqual(catalogue.coverage.ids, ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text', 'transitions', 'lab-menu', 'gestures', 'lab-hud', 'diagnostics-performance', 'composition', 'custom', 'world', 'lab-settings'])
   // Lab settings publishes on labs pages; menu/HUD Lab screens keep their lab pages; gallery sections keep capability pages.
   const pageFor = section => section === 'lab-settings' ? 'labs/settings' : section.startsWith('lab-') ? `lab/${section.slice(4)}` : `capabilities/${section}`
   for (const locale of ['en', 'ru']) {
@@ -61,7 +61,7 @@ test('controls and styling bind both locale pages and genuine state records', as
   const catalogue = JSON.parse(await readFile('data/catalogue.json', 'utf8'))
   const media = JSON.parse(await readFile('data/media.json', 'utf8'))
   const source = await readFile('../consumer/ui_showcase/model/catalogue.odin', 'utf8')
-assert.deepEqual(catalogue.coverage.ids, ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text', 'lab-menu', 'gestures', 'lab-hud', 'diagnostics-performance', 'composition', 'custom', 'lab-settings'])
+assert.deepEqual(catalogue.coverage.ids, ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text', 'transitions', 'lab-menu', 'gestures', 'lab-hud', 'diagnostics-performance', 'composition', 'custom', 'world', 'lab-settings'])
   await validateCatalogue({ catalogue, media, source, publicRoot: 'public', coverage: catalogue.coverage })
   for (const id of ['controls', 'styling']) {
     assert.ok(sourceIds(source).gallery.includes(id))

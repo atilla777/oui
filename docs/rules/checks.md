@@ -70,8 +70,9 @@ UI_KIT_ROOT="$PROOF/kit" TMPDIR="$PROOF" python3 -B "$PROOF/kit/scripts/test-ui-
 поиска/фильтра `oui-3no.3`, viewer `oui-3no.4`, controls/styling `oui-3no.5`,
 profiles `oui-3no.6`, Atlas `oui-3no.7`, text/rich-text `oui-3no.8`, text-input `oui-3no.9`,
 scroll-table/collections `oui-3no.10` и layers/HUD `oui-3no.11` (2026-11-12),
-жестов `oui-3no.12`, diagnostics/performance `oui-3no.17`, composition/custom
-`oui-3no.13` (2026-11-15) и Lab settings с settings recipe `oui-3no.21` (2026-11-15) владелец
+жестов `oui-3no.12`, transitions `oui-3no.14`, diagnostics/performance `oui-3no.17`,
+composition/custom `oui-3no.13` и world `oui-3no.15` (2026-11-15), а также
+Lab settings с settings recipe `oui-3no.21` (2026-11-15) владелец
 отдельно разрешил headless Chromium: без подключения к рабочему столу, с собственным
 временным профилем и собственным loopback-only HTTP static preview. Этот
 ограниченный путь не использует native-only ISD wrapper и не распространяется

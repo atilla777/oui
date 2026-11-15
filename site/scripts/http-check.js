@@ -36,6 +36,8 @@ try {
     ['ru/capabilities/layers.html', 'ru', 'Слои', '/oui/en/capabilities/layers.html'],
     ['en/capabilities/hud.html', 'en', 'HUD hold', '/oui/ru/capabilities/hud.html'],
     ['ru/capabilities/hud.html', 'ru', 'HUD и удержание', '/oui/en/capabilities/hud.html'],
+    ['en/capabilities/transitions.html', 'en', 'State transitions', '/oui/ru/capabilities/transitions.html'],
+    ['ru/capabilities/transitions.html', 'ru', 'Переходы состояния', '/oui/en/capabilities/transitions.html'],
     ['en/capabilities/atlas.html', 'en', 'Atlas', '/oui/ru/capabilities/atlas.html'],
     ['ru/capabilities/atlas.html', 'ru', 'Атлас', '/oui/en/capabilities/atlas.html'],
     ['en/capabilities/composition.html', 'en', 'Nested composition', '/oui/ru/capabilities/composition.html'],
@@ -57,7 +59,9 @@ try {
     ['en/lab/hud.html', 'en', 'Lab HUD', '/oui/ru/lab/hud.html'],
     ['ru/lab/hud.html', 'ru', 'Лаборатория HUD', '/oui/en/lab/hud.html'],
     ['en/capabilities/diagnostics-performance.html', 'en', 'Diagnostics and performance', '/oui/ru/capabilities/diagnostics-performance.html'],
-    ['ru/capabilities/diagnostics-performance.html', 'ru', 'Диагностика и производительность', '/oui/en/capabilities/diagnostics-performance.html']
+    ['ru/capabilities/diagnostics-performance.html', 'ru', 'Диагностика и производительность', '/oui/en/capabilities/diagnostics-performance.html'],
+    ['en/capabilities/world.html', 'en', 'World anchors', '/oui/ru/capabilities/world.html'],
+    ['ru/capabilities/world.html', 'ru', 'Якоря мира', '/oui/en/capabilities/world.html']
   ]) {
     const response = await get('/oui/' + path)
     assert.equal(response.status, 200, path)
@@ -68,7 +72,7 @@ try {
     assert.ok(html.includes(`href="${other}"`), path)
     if (path.includes('guide/')) assert.ok(html.includes('id="choose-a-boundary"'))
     const markup = html.split('<script>window.__VP_HASH_MAP__')[0]
-    const section = path.match(/capabilities\/(layout|layers|hud|text-input|scroll-table|collections|text|rich-text|gestures|diagnostics-performance)\.html/)?.[1] ?? (path.endsWith('lab/hud.html') ? 'lab-hud' : undefined)
+    const section = path.match(/capabilities\/(layout|layers|hud|transitions|text-input|scroll-table|collections|text|rich-text|gestures|diagnostics-performance|world)\.html/)?.[1] ?? (path.endsWith('lab/hud.html') ? 'lab-hud' : undefined)
     if (section) {
       const records = media.records.filter(item => item.section === section && item.uiLocale === lang)
       assert.equal(records.length, ['profiles', 'atlas', 'gestures'].includes(section) ? 3 : ['text-input', 'scroll-table', 'collections'].includes(section) ? 1 : section === 'lab-hud' ? 4 : 2)

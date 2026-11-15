@@ -6,7 +6,7 @@ import { join } from 'node:path'
 import { validateParity } from './routes.js'
 
 test('real routes have locale and explicit anchor parity', async () => {
-  assert.deepEqual(await validateParity(process.cwd()), ['capabilities/atlas.md', 'capabilities/collections.md', 'capabilities/composition.md', 'capabilities/controls.md', 'capabilities/custom.md', 'capabilities/diagnostics-performance.md', 'capabilities/gestures.md', 'capabilities/hud.md', 'capabilities/layers.md', 'capabilities/layout.md', 'capabilities/profiles.md', 'capabilities/rich-text.md', 'capabilities/scroll-table.md', 'capabilities/styling.md', 'capabilities/text-input.md', 'capabilities/text.md', 'catalogue.md', 'guide/using-oui.md', 'index.md', 'lab/hud.md', 'lab/menu.md', 'recipes/hud.md', 'recipes/menu.md'])
+  assert.deepEqual(await validateParity(process.cwd()), ['capabilities/atlas.md', 'capabilities/collections.md', 'capabilities/composition.md', 'capabilities/controls.md', 'capabilities/custom.md', 'capabilities/diagnostics-performance.md', 'capabilities/gestures.md', 'capabilities/hud.md', 'capabilities/layers.md', 'capabilities/layout.md', 'capabilities/profiles.md', 'capabilities/rich-text.md', 'capabilities/scroll-table.md', 'capabilities/styling.md', 'capabilities/text-input.md', 'capabilities/text.md', 'capabilities/transitions.md', 'capabilities/world.md', 'catalogue.md', 'guide/using-oui.md', 'index.md', 'lab/hud.md', 'lab/menu.md', 'recipes/hud.md', 'recipes/menu.md'])
 })
 test('a missing counterpart is an error, not a home fallback', async () => {
   const root = await mkdtemp(join(tmpdir(), 'oui-parity-'))

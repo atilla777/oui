@@ -108,9 +108,10 @@ Their execution on GitHub-hosted runners (the ubuntu-24.04 image lists Chromium
 exists yet. That is an open environment blocker: a successful native-free
 `static` lane does not replace the required native gate.
 
-`npm run check:catalogue:strict` is deliberately not in CI. It fails until all 19
-gallery and four Lab IDs have records and media; CI validates the declared sample
-and does not hide the coverage gap by changing it.
+`npm run check:catalogue:strict` is deliberately not in CI. On the current
+merged tree all 19 gallery and four Lab IDs have records and media, so the
+strict check passes locally; CI still validates the declared sample and does
+not hide coverage gaps by changing it.
 
 To update a capture, choose a clean pinned source and verify its native inputs;
 use the isolated wrapper and retain its private logs and stop evidence as described

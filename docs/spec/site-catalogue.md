@@ -229,11 +229,12 @@ loopback preview: EN/RU новые страницы на 360/1280, клавиа�
 valid/missing anchors, no-JS prose/images/links, reduced motion, новый
 filter-сценарий каталога (`settings`). До интеграции: 135 PASS и 164 screenshots;
 на итоговом интегрированном дереве после объединения с опубликованными
-menu/HUD recipe+Lab, gestures, diagnostics, composition/custom, transitions и
-world: свежий запуск 215 PASS и 244 screenshots с cleanup
-собственных browser/preview (первый запуск того же снимка прервался переходящим
-сбоем chromium-контекста no-JS на recipes/hud 1280 под конкурентной нагрузкой
-параллельных сессий; повтор на том же дереве завершён полностью, exit 0).
+menu/HUD/inventory recipe+Lab, gestures, diagnostics, composition/custom,
+transitions и world: свежий запуск 231 PASS и 260 screenshots с cleanup
+собственных browser/preview (один более ранний запуск предыдущего снимка
+прервался переходящим сбоем chromium-контекста no-JS на recipes/hud 1280 под
+конкурентной нагрузкой параллельных сессий; повтор того же снимка и финальный
+запуск итогового дерева завершены полностью, exit 0).
 Strict catalogue 23 IDs, полная квалификация,
 аудит доступности, другие браузеры и deployment не заявляются; унаследованное
 ограничение Vite 5 сохраняется. Остальные три recipe+Lab (menu, HUD, inventory)

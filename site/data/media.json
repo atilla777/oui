@@ -1972,6 +1972,270 @@
         "en": "Native showcase rich text card with one-line ellipsis (RU UI).",
         "ru": "Нативная русская карточка после выбора одной строки с многоточием."
       }
+    },
+    {
+      "id": "gestures-en-initial",
+      "section": "gestures",
+      "state": "initial two panels of six cards",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/gestures.odin",
+        "consumer/ui_showcase/app/gesture_runtime.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "kit/ui_gestures",
+        "kit/ui_gestures/sdl"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section gestures; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/gestures-en-initial.png",
+      "sha256": "cda9a0e552e9623390567fc4f50c2d5bea735055c0d8cbad48cc49276e72115f",
+      "caption": {
+        "en": "Native gestures: both panels at six cards, EN UI.",
+        "ru": "Нативные жесты: обе панели по шесть карточек, интерфейс EN."
+      },
+      "alt": {
+        "en": "Two panels with six cards each, repeat buttons, pan handles and the focused name draft.",
+        "ru": "Две панели по шесть карточек, кнопки повторной прокрутки, ручки прокрутки и черновик имени в фокусе."
+      }
+    },
+    {
+      "id": "gestures-en-proposal",
+      "section": "gestures",
+      "state": "proposal while the mouse button is down over the target panel title",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/gestures.odin",
+        "consumer/ui_showcase/app/gesture_runtime.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "kit/ui_gestures",
+        "kit/ui_gestures/sdl"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section gestures; card-01 held over the panel-right title with the button down.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/gestures-en-proposal.png",
+      "sha256": "0322ed28ad859cc648d57789bb4ef7e6a25da7de850ac1afa8098cafa2e16f1d",
+      "caption": {
+        "en": "Native gestures: proposal with the mouse button still down, EN UI.",
+        "ru": "Нативные жесты: предложение при ещё нажатой кнопке мыши, интерфейс EN."
+      },
+      "alt": {
+        "en": "A card held over the right panel title, which reads Drop: accepted, while the card stays in the left panel.",
+        "ru": "Карточка удерживается над заголовком правой панели с надписью «Перенос: разрешён», но остаётся в левой панели."
+      }
+    },
+    {
+      "id": "gestures-en-applied",
+      "section": "gestures",
+      "state": "after release the application moved card-01 to panel-right",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/gestures.odin",
+        "consumer/ui_showcase/app/gesture_runtime.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "kit/ui_gestures",
+        "kit/ui_gestures/sdl"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section gestures; card-01 released over the panel-right title.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/gestures-en-applied.png",
+      "sha256": "213cfa863389958cd6d9bb87da86bc365e45202901607bac606fcdb9dbed5b72",
+      "caption": {
+        "en": "Native gestures: the application applied the move after release, EN UI.",
+        "ru": "Нативные жесты: приложение применило перенос после отпускания, интерфейс EN."
+      },
+      "alt": {
+        "en": "After release the left panel begins with card-02 and the right panel holds the moved card.",
+        "ru": "После отпускания левая панель начинается с card-02, а правая панель содержит перенесённую карточку."
+      }
+    },
+    {
+      "id": "gestures-ru-initial",
+      "section": "gestures",
+      "state": "initial two panels of six cards",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/gestures.odin",
+        "consumer/ui_showcase/app/gesture_runtime.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "kit/ui_gestures",
+        "kit/ui_gestures/sdl"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section gestures; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/gestures-ru-initial.png",
+      "sha256": "712c3b37a13aa98447307c239b51934d1004f629c67d7e5afb04d036ab495ff8",
+      "caption": {
+        "en": "Native gestures: both panels at six cards, RU UI.",
+        "ru": "Нативные жесты: обе панели по шесть карточек, интерфейс RU."
+      },
+      "alt": {
+        "en": "Two panels with six cards each, repeat buttons, pan handles and the focused name draft.",
+        "ru": "Две панели по шесть карточек, кнопки повторной прокрутки, ручки прокрутки и черновик имени в фокусе."
+      }
+    },
+    {
+      "id": "gestures-ru-proposal",
+      "section": "gestures",
+      "state": "proposal while the mouse button is down over the target panel title",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/gestures.odin",
+        "consumer/ui_showcase/app/gesture_runtime.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "kit/ui_gestures",
+        "kit/ui_gestures/sdl"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section gestures; card-01 held over the panel-right title with the button down.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/gestures-ru-proposal.png",
+      "sha256": "e52e8ee945dc4aca280d11a2de2c82b34a4298d8ec057b2684a4cff8664780f2",
+      "caption": {
+        "en": "Native gestures: proposal with the mouse button still down, RU UI.",
+        "ru": "Нативные жесты: предложение при ещё нажатой кнопке мыши, интерфейс RU."
+      },
+      "alt": {
+        "en": "A card held over the right panel title, which reads Drop: accepted, while the card stays in the left panel.",
+        "ru": "Карточка удерживается над заголовком правой панели с надписью «Перенос: разрешён», но остаётся в левой панели."
+      }
+    },
+    {
+      "id": "gestures-ru-applied",
+      "section": "gestures",
+      "state": "after release the application moved card-01 to panel-right",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/gestures.odin",
+        "consumer/ui_showcase/app/gesture_runtime.odin",
+        "consumer/gestures_demo/model/model.odin",
+        "kit/ui_gestures",
+        "kit/ui_gestures/sdl"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section gestures; card-01 released over the panel-right title.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/gestures-ru-applied.png",
+      "sha256": "56b06602363498dfb18c3e4fdb39f127fa302f168e56195ad7d4416293488a40",
+      "caption": {
+        "en": "Native gestures: the application applied the move after release, RU UI.",
+        "ru": "Нативные жесты: приложение применило перенос после отпускания, интерфейс RU."
+      },
+      "alt": {
+        "en": "After release the left panel begins with card-02 and the right panel holds the moved card.",
+        "ru": "После отпускания левая панель начинается с card-02, а правая панель содержит перенесённую карточку."
+      }
     }
   ]
 }

@@ -3,6 +3,7 @@
 Контракт введён `oui-3no.2`; опубликованные расширения включают `oui-3no.5`,
 `oui-3no.6`, Atlas `oui-3no.7`, text-input `oui-3no.9`, прокрутку/коллекции
 `oui-3no.10` и layers/HUD `oui-3no.11`. Text/rich-text `oui-3no.8` — интеграционный кандидат.
+Жесты `oui-3no.12` — локальный кандидат, pending integration.
 Библиотека и native consumers не изменены; сайт описывает существующие возможности,
 а не реализует их в браузере.
 
@@ -201,6 +202,58 @@ portable source остался побайтово неизменным. Изоб
 Браузерные проверки воспроизводятся командой `npm run check:browser` из `site/`
 в разрешённой sandboxed Chromium-среде; другие браузеры и полный аудит доступности
 не проверены.
+
+## Галерея жестов — oui-3no.12
+
+Локальный кандидат, pending integration. EN/RU страницы `capabilities/gestures`
+описывают существующий native fixture `cards-repeat-pan`: две панели карточек,
+кнопки повторной прокрутки ±24, обрезанные строки по 48 px, ручка прокрутки и
+заголовок-цель на каждой панели. Нажатие на карточку начинает перетаскивание;
+пока кнопка мыши удерживается, UI сообщает предложение и помечает заголовок
+панели «Drop: accepted»/«Перенос: разрешён», карточка остаётся в исходной панели.
+Приложение применяет ровно один перенос после отпускания; запросы из той же
+панели, устаревшие, повторные или недоступные отклоняются; инерции нет. Узкие
+пакеты `ui_base`, `ui_layout`, `ui_interaction`, `ui_scroll`, `ui_sdl`,
+`ui_gestures` отделены от полного showcase; pinned source links и native
+build/run команды закреплены на ревизии кандидата.
+
+Для каждого языка сняты три настоящих состояния PNG 1280×960, scale 1:
+начальное (по шесть карточек), предложение при нажатой кнопке и применённый
+перенос (5/7 карточек). Снимки выполнены на clean source revision
+`8bc09cff358aa629410437996520283ff98d77d9`; app log независимо подтверждает
+`phase=Active target="panel-right" accepted=true` с revision 0 и effects 0 при
+предложении, затем revision 1 effects 1 после отпускания. Выбранная ISD
+`f8204c61615406ce5628b15692628e146476a008` проверена целиком; create/status
+подтвердили `linux-abstract-v1`, выполнен явный focus, собственные runs
+остановлены. Private prefix libpng 1.6.59/zlib 1.4 пересобран для этого запуска
+по документированной процедуре из опубликованных archives: digest, upstream
+tests, C ABI и фактическая `ldd` linkage (включая transitive zlib) проверены,
+системные библиотеки не менялись. Все шесть PNG просмотрены исполнителем;
+координатор проверил структуру чанков (только
+IHDR/cHRM/bKGD/IDAT/IEND, без text-метаданных), digest и попиксельные отличия
+состояний; личных данных не обнаружено. Media manifest сохраняет полные state/locale/resource/image
+identities по контракту версии 1.
+
+Для этого кандидата прошли unit/parity/schema tests (включая новые привязки
+gestures: три состояния на язык, уникальные digest, публично безопасные state
+тексты), static build, loopback HTTP новых EN/RU маршрутов с image digests и
+свежий portable export/portable-check. После отдельного разрешения владельца
+для `oui-3no.12` (записано в rules) пройдена изолированная headless
+браузерная приёмка: Chromium 152 с sandbox (renderer seccomp 2, без
+no-sandbox флагов), собственный временный профиль и loopback-only static
+preview. EN/RU страницы жестов и сохранённые прежние сценарии (catalogue,
+guide, поиск/фильтры, viewer, reduced motion, no-JS) проверены на ширинах
+360/1280: prose без overflow, ровно три изображения на страницу с
+локализованным alt и натуральными размерами 1280×960, клавиатурный переход из
+каталога, смена языка с valid/missing anchors, no-JS prose/images/links.
+Исполнитель просмотрел 14 screenshots жестов/каталога; все 152 browser PNG
+сохранены в артефактах, собственные браузер и preview остановлены (cleanup
+подтверждён). Это ограниченная приёмка sample, не полная квалификация 23 IDs,
+не аудит доступности и не Pages deployment. Как увидеть локальный кандидат:
+из `site/` с Node из `.nvmrc` выполнить `npm run build`, `npm run check:http`,
+`npm run check:browser`, затем `npm run preview -- --port 0`; открыть выданный
+URL с `/oui/en/capabilities/gestures` либо `/oui/ru/capabilities/gestures` или
+перейти через каталог. Публикация и deployment не выполнены.
 
 ## Однострочный ввод текста
 

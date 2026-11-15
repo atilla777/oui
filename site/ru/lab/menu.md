@@ -28,12 +28,12 @@ Native Lab menu: подтверждение применения неизмен�
 
 ## Исходники и нативный пример {#source}
 
-Закреплено за `8bc09cff358aa629410437996520283ff98d77d9`:
-[экран lab-menu](https://github.com/atilla777/oui/blob/8bc09cff358aa629410437996520283ff98d77d9/consumer/ui_showcase/app/lab_menu.odin),
-[строки Lab](https://github.com/atilla777/oui/blob/8bc09cff358aa629410437996520283ff98d77d9/consumer/ui_showcase/app/lab_strings.odin),
-[редактор имени](https://github.com/atilla777/oui/blob/8bc09cff358aa629410437996520283ff98d77d9/consumer/ui_showcase/sections/name.odin),
-[модель](https://github.com/atilla777/oui/blob/8bc09cff358aa629410437996520283ff98d77d9/consumer/ui_showcase/model/model.odin),
-[ID и ограничения каталога](https://github.com/atilla777/oui/blob/8bc09cff358aa629410437996520283ff98d77d9/consumer/ui_showcase/model/catalogue.odin),
+Закреплено за `b4c8be17b81125f4d1ef44b97de99d8c327825fb`:
+[экран lab-menu](https://github.com/atilla777/oui/blob/b4c8be17b81125f4d1ef44b97de99d8c327825fb/consumer/ui_showcase/app/lab_menu.odin),
+[строки Lab](https://github.com/atilla777/oui/blob/b4c8be17b81125f4d1ef44b97de99d8c327825fb/consumer/ui_showcase/app/lab_strings.odin),
+[редактор имени](https://github.com/atilla777/oui/blob/b4c8be17b81125f4d1ef44b97de99d8c327825fb/consumer/ui_showcase/sections/name.odin),
+[модель](https://github.com/atilla777/oui/blob/b4c8be17b81125f4d1ef44b97de99d8c327825fb/consumer/ui_showcase/model/model.odin),
+[ID и ограничения каталога](https://github.com/atilla777/oui/blob/b4c8be17b81125f4d1ef44b97de99d8c327825fb/consumer/ui_showcase/model/catalogue.odin),
 [граница рецепта](https://github.com/atilla777/oui/blob/8bc09cff358aa629410437996520283ff98d77d9/docs/recipes.md#4-settings) и
 [ресурсы](https://github.com/atilla777/oui/blob/8bc09cff358aa629410437996520283ff98d77d9/docs/resources.md).
 

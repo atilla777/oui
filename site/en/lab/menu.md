@@ -28,12 +28,12 @@ This is experimental. The screen demonstrates a modal layer, checkbox and slider
 
 ## Source and native example {#source}
 
-Pinned to `8bc09cff358aa629410437996520283ff98d77d9`:
-[lab-menu screen](https://github.com/atilla777/oui/blob/8bc09cff358aa629410437996520283ff98d77d9/consumer/ui_showcase/app/lab_menu.odin),
-[Lab strings](https://github.com/atilla777/oui/blob/8bc09cff358aa629410437996520283ff98d77d9/consumer/ui_showcase/app/lab_strings.odin),
-[name editor](https://github.com/atilla777/oui/blob/8bc09cff358aa629410437996520283ff98d77d9/consumer/ui_showcase/sections/name.odin),
-[model](https://github.com/atilla777/oui/blob/8bc09cff358aa629410437996520283ff98d77d9/consumer/ui_showcase/model/model.odin),
-[catalogue IDs and limits](https://github.com/atilla777/oui/blob/8bc09cff358aa629410437996520283ff98d77d9/consumer/ui_showcase/model/catalogue.odin),
+Pinned to `b4c8be17b81125f4d1ef44b97de99d8c327825fb`:
+[lab-menu screen](https://github.com/atilla777/oui/blob/b4c8be17b81125f4d1ef44b97de99d8c327825fb/consumer/ui_showcase/app/lab_menu.odin),
+[Lab strings](https://github.com/atilla777/oui/blob/b4c8be17b81125f4d1ef44b97de99d8c327825fb/consumer/ui_showcase/app/lab_strings.odin),
+[name editor](https://github.com/atilla777/oui/blob/b4c8be17b81125f4d1ef44b97de99d8c327825fb/consumer/ui_showcase/sections/name.odin),
+[model](https://github.com/atilla777/oui/blob/b4c8be17b81125f4d1ef44b97de99d8c327825fb/consumer/ui_showcase/model/model.odin),
+[catalogue IDs and limits](https://github.com/atilla777/oui/blob/b4c8be17b81125f4d1ef44b97de99d8c327825fb/consumer/ui_showcase/model/catalogue.odin),
 [recipe boundary](https://github.com/atilla777/oui/blob/8bc09cff358aa629410437996520283ff98d77d9/docs/recipes.md#4-settings), and
 [resources](https://github.com/atilla777/oui/blob/8bc09cff358aa629410437996520283ff98d77d9/docs/resources.md).
 

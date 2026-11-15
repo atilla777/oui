@@ -26,8 +26,10 @@ npm run preview -- --port 4173
 
 Open `http://127.0.0.1:4173/oui/`; stop the preview with Ctrl-C. Choose another
 free port if needed. The preview binds only to `127.0.0.1`; it never accepts a
-host option. `check` validates page-key and explicit anchor parity and includes
-a missing-counterpart negative fixture; `build` runs `check` before compiling.
+host option. `check` validates page-key and explicit anchor parity, internal page
+links and published `/media` assets, and includes negative fixtures for a missing
+counterpart, a broken link and a digest mismatch; `build` runs `check` before
+compiling.
 Run `check:http` separately after the build: it starts and stops an isolated
 preview on a dynamically allocated port and checks routes, chrome and assets.
 `check:browser` requires Linux Chromium at `/usr/bin/chromium`, a working Chromium
@@ -75,13 +77,63 @@ until all 19 gallery and four Lab IDs have records and media. Do not change the
 declared sample merely to hide missing coverage. Validation does not replace
 image inspection, privacy review, or native qualification.
 
+## Continuous integration
+
+`.github/workflows/pr-site.yml` defines one pull-request workflow with three
+required jobs. It runs only for pull requests that touch `site/**`,
+`consumer/**`, `kit/**`, `resources/**` or the workflow itself. Permissions are
+`contents: read`; there are no secrets, deploy steps, Pages configuration or
+`pull_request_target` trigger, because the site has no deployment. The `static`
+job installs from the lockfile and runs `npm run check`, `npm run build` and
+`npm run check:http`; it never runs Odin, native snippets, captures or graphics.
+The `browser` job rebuilds and runs `npm run check:browser`; it needs Linux
+Chromium at `/usr/bin/chromium` with a working sandbox. The `native` job runs
+`npm run check:native` without `npm ci` (those scripts use Node builtins only):
+it executes the `odin` build/test commands published by the recipe, Lab and
+capability pages from the repository root and verifies their launch lines
+structurally. It requires the pinned toolchain and fails loudly when any part is
+missing; it does not skip. The guide pages' acquisition and portable-root shell
+blocks are not executed, but they are reported explicitly and their launch lines
+are still verified; the no-skip guarantee applies to the pinned toolchain,
+command failures and timeouts.
+
+The pinned native environment is Odin `dev-2026-10-nightly:84bc3fc`, SDL3
+`3.4.16`, SDL3_ttf `3.2.2` and libpng `1.6.59` with zlib `1.4` in a private
+prefix, as recorded in `docs/resources.md`. On this machine the commands of all
+three lanes were verified with Node 24.22.3, Chromium 152 and the pinned Odin.
+Their execution on GitHub-hosted runners (the ubuntu-24.04 image lists Chromium
+157) has not been observed from this work, and no verified native CI runner
+exists yet. That is an open environment blocker: a successful native-free
+`static` lane does not replace the required native gate.
+
+`npm run check:catalogue:strict` is deliberately not in CI. It fails until all 19
+gallery and four Lab IDs have records and media; CI validates the declared sample
+and does not hide the coverage gap by changing it.
+
 To update a capture, choose a clean pinned source and verify its native inputs;
 use the isolated wrapper and retain its private logs and stop evidence as described
 in `docs/isd.md`. Inspect each original image. Publish only a sanitized PNG and
 relative, public-safe provenance; update its digest, locale, revision, source,
 geometry, selected resource hashes, options, caption and alt in `data/media.json`,
-and the corresponding localized pages. Run `npm run check`, `npm run build`,
-and `npm run check:http`. The site build never launches Odin or captures images.
+and the corresponding localized pages. The site build never launches Odin or
+captures images. Run `npm run check && npm run build && npm run check:http &&
+npm run check:browser`. A stale digest is rejected by the
+digest negative fixture, and broken internal pages or `/media` assets are rejected
+by the link check.
+
+The Lab menu initial English capture rehearsed this flow for `oui-3no.24`: the
+coordinator re-captured from the clean `b4c8be17b81125f4d1ef44b97de99d8c327825fb`
+worktree through the ISD wrapper, confirmed the state log (Lab menu page,
+`lab/submenu` focus, ready) and recomputed the SHA-256. The render was
+byte-identical to the committed PNG
+(`1d0d0a6e4d3235d9015501696de231562347ab2a51b1d0c986f200442fecd17c`), so the
+digest was unchanged and only `revision` in `data/media.json` plus the page's
+runtime-sources pin changed; the runtime-sources pin records where the shown
+image was captured, not every document the page references. A capture whose bytes
+differ must update its digest explicitly. To run `npm run check:native` locally,
+point `PKG_CONFIG_PATH` and `LD_LIBRARY_PATH` at the private codec prefix described
+in `docs/resources.md` (`pkg-config --libs libpng zlib` and the matching loader
+path).
 The private evidence is not part of the website. The layout viewer is a progressive
 enhancement: both native initial viewport captures (1280×960 and 960×720) and
 direct image links remain available without JavaScript. Open the viewer by pointer

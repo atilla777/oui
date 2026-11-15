@@ -6,7 +6,8 @@
 переходы состояния `oui-3no.14`, composition/custom `oui-3no.13`, world anchors
 `oui-3no.15`, диагностику/производительность `oui-3no.17`, menu recipe/Lab menu
 `oui-3no.20`, HUD recipe/Lab HUD `oui-3no.22`, inventory recipe/Lab inventory
-`oui-3no.23` и оценку доступности `oui-3no.16`. Settings recipe/Lab settings
+`oui-3no.23`, оценку доступности `oui-3no.16` и обязательные
+site-проверки/CI `oui-3no.24`. Settings recipe/Lab settings
 `oui-3no.21` — интеграционный кандидат.
 Библиотека и native consumers не изменены; сайт описывает существующие возможности,
 а не реализует их в браузере.
@@ -219,7 +220,10 @@ state/locale/revision/source/resource identities без локальных пу�
 
 На этом кандидате прошли 16 unit/parity/schema site tests (включая lab-покрытие
 menu/HUD/inventory/settings и media-тесты, а также negative fixture обязательных
-состояний lab-settings), static build, loopback HTTP новых маршрутов
+состояний lab-settings). После объединения с обязательными site-проверками
+`oui-3no.24` полный `npm run check` на итоговом дереве содержит 29 тестов
+(те же 16 плюс 5 link и 8 native-snippet) и проходит 29/29 (202 ссылки
+в 60 страницах); повторно прошли static build, loopback HTTP новых маршрутов
 `recipes/settings` и `labs/settings` с image digests, свежий portable
 export/portable-check (site/docs в export не входят, portable байты не менялись)
 и, после отдельного разрешения владельца от 2026-11-15 для `oui-3no.21`,
@@ -1053,3 +1057,89 @@ gallery IDs), media — 106 records; JSON-сериализация выровн�
 начальное состояние и открытый подтверждающий диалог. Проверено в
 локальном HTTP и собственном изолированном браузере; Pages deploy не
 заявляется.
+
+
+## Обязательные site-проверки и процедура обновления (`oui-3no.24`)
+
+`.github/workflows/pr-site.yml` вводит least-privilege PR CI: три обязательные
+jobs без `continue-on-error` и скрытых пропусков, `pull_request` (не
+`pull_request_target`), `permissions: contents: read`, без secrets/deploy/Pages
+(у сайта нет deployment). Триггер ограничен путями `site/**`, `consumer/**`,
+`kit/**`, `resources/**` и самим workflow; runner закреплён `ubuntu-24.04`.
+Lane `static` доказуемо работает без native-среды: `npm ci`, `npm run check`,
+`npm run build`, `npm run check:http` — Odin/captures/native-сниппеты
+не запускаются. Lane `browser` пересобирает и выполняет `npm run
+check:browser` (нужен Linux Chromium в `/usr/bin/chromium` с sandbox).
+Lane `native` — отдельный обязательный native gate: `npm run check:native`
+без `npm ci` (скрипт использует только встроенные модули Node), выполняет
+опубликованные на страницах `odin build`/`odin test` команды из корня репо
+(с дедупликацией EN/RU), сначала сверяет версию компилятора с pin
+`dev-2026-10-nightly:84bc3fc`, а строки запуска (`build/menu`,
+`build/showcase`) проверяет структурно: собранный binary существует и
+исполняем, указанные font/fallback/assets файлы существуют, `--section`
+является native ID из `consumer/ui_showcase/model/catalogue.odin`; запуск
+native window в CI не выполняется (графическая сессия/ISD — вне lane).
+`npm run check:catalogue:strict` в CI намеренно не подключён: он обязан
+падать до полного покрытия 23 IDs и не заменяется выборкой.
+
+Статическая цепочка `npm run check` расширена внутренним link/asset-контролем
+(`site/scripts/links.js`): относительные ссылки страниц сверяются с
+существующими `.md` (clean-URL маппинг VitePress), корневые `/media/...`
+— с `site/public/`; внешние URL не загружаются. Negative fixtures теперь
+покрывают broken internal link, отсутствующий `/media` asset, неизвестный
+native section ID (в `catalogue.test.js`) и native-сниппеты: падающая или
+зависшая команда, неверная pinned-версия Odin, отсутствующий binary/ресурс
+и неизвестный `--section` в launch-строке. Существующие digest/provenance/
+locale/counterpart negative fixtures сохранены.
+
+Процедура обновления page/media пары документирована в `site/README.md`
+и отрепетирована на записи `lab-menu-initial-en`: настоящий re-capture из
+clean worktree `b4c8be17b81125f4d1ef44b97de99d8c327825fb` через
+`scripts/ui_isd.py` с верифицированной ISD `f8204c61615406ce5628b15692628e146476a008`
+(`linux-abstract-v1`, собственный run, явный focus, screenshot, stop в
+finally; state log `page=Lab_Menu ... focus=lab/submenu ready=true`;
+app/supervisor/Xvfb после stop не живы). Вывод байтово совпал с
+опубликованным PNG (sha256 `1d0d0a6e4d3235d9015501696de231562347ab2a51b1d0c986f200442fecd17c`):
+рендер детерминирован при неизменных capture-входах, поэтому digest
+пересчитан и не изменился, а в `data/media.json` обновлена только
+`revision` (`8bc09cf…` → `b4c8be1…`); runtime-sources pin на EN/RU lab/menu
+страницах обновлён на новую ревизию (эти ссылки фиксируют источник capture,
+не каждую ссылку документа — recipes/resources/isd ссылки остались на
+`8bc09cf…`). Изменение байтов изображения требует явного обновления digest.
+
+Наблюдённые проверки кандидата (после интеграции свежего primary с
+конкурентными публикациями `oui-3no.12`/`oui-3no.13`/`oui-3no.14`/
+`oui-3no.15`/`oui-3no.16`/`oui-3no.17`/`oui-3no.22`/`oui-3no.23`,
+включая повторные интеграции composition/custom, transitions, world,
+inventory и accessibility):
+`npm run check` 27/27 (включая все новые negative fixtures; 186 ссылок
+в 56 страницах), `build`, `check:http`, разрешённая browser-проверка
+с собственными артефактами, `check:native` (15 дедуплицированных команд:
+сборка showcase с pinned codec prefix, standalone-menu build, fixtures
+`tests/ui_recipes/hud/native`, headless fixture HUD, `tests/ui_recipes/inventory`
+и `tests/ui_recipes/inventory/native`, 2 model +
+4 consumer + 17 ui_sdl + 1 ui_sdl_text + 20 ui_hold + 4 ui_hold/sdl tests;
+50 launch-строк проверены структурно; guide acquisition-блоки не
+исполняются и сообщаются явно). Интеграционные правки классификации: launch-строкой считается любой
+`build/<binary>` (включая префикс `./`), команды классифицируются построчно
+в каждом блоке, а страницы guide исключены из исполнения команд — их блоки
+описывают consumer-side acquisition/vendoring с другим рабочим каталогом
+(например `cd vendor/odin-ui`); ISD-вызовы python3 и прочие не-odin строки
+не исполняются и сообщаются явно. Ожидаемые счётчики страниц обновлены. `git diff --check`,
+свежий portable export и portable-check (входы экспорта между b4c8be1
+и интегрированным primary не менялись). Пределы: исполнение jobs на
+GitHub-hosted runners не наблюдалось из этой задачи (нет push-полномочий;
+в образе ubuntu-24.04 заявлен Chromium 157, путь не проверен);
+верифицированного native CI runner нет — это открытый environment blocker,
+обязательный native gate не заменяется успехом static lane. Kit/native API,
+Slyx, extraction inventory и notices не менялись; Node остаётся только
+site tooling. Заявление `docs/rules/checks.md` об отсутствии версионированных
+CI теперь историческое и требует отдельного решения владельца.
+
+Как увидеть локальный кандидат: из `site/` с Node из `.nvmrc` —
+`npm ci`, `npm run check`, `npm run build`, `npm run check:http`,
+`npm run check:browser`; для native lane — `PKG_CONFIG_PATH`/`LD_LIBRARY_PATH`
+на private codec prefix из `docs/resources.md` и `npm run check:native`.
+CI-файл — `.github/workflows/pr-site.yml`. Фактическое состояние
+публикации основной ветки фиксируется в результатах задачи в Beads,
+не в этом документе.

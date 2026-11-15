@@ -7,8 +7,9 @@
     "npm": ">=11 <12"
   },
   "scripts": {
-    "check": "node --test scripts/*.test.js && node scripts/check-catalogue.js",
+    "check": "node --test scripts/*.test.js && node scripts/check-catalogue.js && node scripts/check-links.js",
     "check:catalogue:strict": "node scripts/check-catalogue.js --strict",
+    "check:native": "node scripts/check-snippets.js",
     "build": "npm run check && vitepress build",
     "preview": "node scripts/preview.js",
     "check:http": "node scripts/http-check.js",

@@ -77,11 +77,11 @@ try {
     assert.ok((await page.title()).includes(title))
     assert.ok(await page.locator('main').innerText())
   }
-  const sectionOf = path => path === 'lab/menu.html' ? 'lab-menu' : path === 'lab/hud.html' ? 'lab-hud' : path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|transitions|text-input|atlas|scroll-table|collections|text|rich-text|gestures|diagnostics-performance|composition|custom|world|accessibility)\.html$/)?.[1]
+const sectionOf = path => path === 'lab/menu.html' ? 'lab-menu' : path === 'lab/hud.html' ? 'lab-hud' : path === 'lab/inventory.html' ? 'lab-inventory' : path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|transitions|text-input|atlas|scroll-table|collections|text|rich-text|gestures|diagnostics-performance|composition|custom|world|accessibility)\.html/)?.[1]
   const checkImages = async (activePage, path, lang) => {
     const section = sectionOf(path)
     if (!section) {
-      assert.ok(['catalogue.html', 'recipes/menu.html', 'recipes/hud.html'].includes(path), `${path}: unexpected page`)
+      assert.ok(['catalogue.html', 'recipes/menu.html', 'recipes/hud.html', 'recipes/inventory.html'].includes(path), `${path}: unexpected page`)
       assert.equal(await activePage.locator('main p > img').count(), 0, `${path} ${lang}: unexpected image`)
       return
     }
@@ -104,6 +104,7 @@ try {
       world: [`world-initial-${lang}`, `world-indicators-${lang}`],
       gestures: [`gestures-${lang}-initial`, `gestures-${lang}-proposal`, `gestures-${lang}-applied`],
       'lab-menu': [`lab-menu-initial-${lang}`, `lab-menu-submenu-${lang}`, `lab-menu-settings-${lang}`, `lab-menu-confirm-${lang}`],
+      'lab-inventory': [`lab-inventory-initial-${lang}`, `lab-inventory-selected-${lang}`, `lab-inventory-refused-${lang}`, `lab-inventory-pending-${lang}`, `lab-inventory-confirmed-${lang}`],
       'diagnostics-performance': [`diagnostics-performance-${lang}-initial`, `diagnostics-performance-${lang}-diagnostic`],
       composition: [`composition-${lang}-initial`, `composition-${lang}-propagated`],
       custom: [`custom-${lang}-initial`, `custom-${lang}-activated`, `custom-${lang}-styled`, `custom-${lang}-popup-tooltip`]
@@ -230,9 +231,11 @@ try {
     ['recipes/menu.html', 'Basic menu recipe', 'Рецепт меню', 'build-and-run'],
     ['lab/hud.html', 'Lab HUD', 'Лаборатория HUD', 'distinctions'],
     ['recipes/hud.html', 'HUD recipe', 'Рецепт HUD', 'dependency-closure'],
+    ['lab/inventory.html', 'Lab inventory', 'Инвентарь лаборатории', 'boundaries'],
+    ['recipes/inventory.html', 'Inventory recipe', 'Рецепт инвентаря', 'build-and-run'],
     ['capabilities/diagnostics-performance.html', 'Diagnostics and performance', 'Диагностика и производительность', 'boundaries']
   ]
-  const sampleName = path => path === 'lab/menu.html' ? 'lab-menu' : path === 'recipes/menu.html' ? 'recipes-menu' : path === 'lab/hud.html' ? 'lab-hud' : path === 'recipes/hud.html' ? 'recipes-hud' : path.startsWith('capabilities/') ? path.split('/')[1].replace('.html', '') : 'catalogue'
+  const sampleName = path => path === 'lab/menu.html' ? 'lab-menu' : path === 'recipes/menu.html' ? 'recipes-menu' : path === 'lab/hud.html' ? 'lab-hud' : path === 'recipes/hud.html' ? 'recipes-hud' : path === 'lab/inventory.html' ? 'lab-inventory' : path === 'recipes/inventory.html' ? 'recipes-inventory' : path.startsWith('capabilities/') ? path.split('/')[1].replace('.html', '') : 'catalogue'
   for (const width of [360, 1280]) {
     await page.setViewportSize({ width, height: 900 })
     for (const [lang, term, expected, empty, reset, category] of [
@@ -515,6 +518,9 @@ try {
             const labHud = p.locator('main a[href="./lab/hud.html"]')
             assert.ok(await labHud.isVisible())
             assert.equal(await labHud.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/lab/hud.html`)
+            const lab = p.locator('main a[href="./lab/inventory.html"]')
+            assert.ok(await lab.isVisible())
+            assert.equal(await lab.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/lab/inventory.html`)
           }
           assert.equal(await p.evaluate(() => typeof window.__VP_SITE_DATA__), 'undefined')
           await checkImages(p, path, lang)

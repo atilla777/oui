@@ -1,785 +1,829 @@
 {
- "schemaVersion": 1,
- "coverage": {
-  "mode": "sample",
-  "ids": [
-   "layout",
-   "controls",
-   "styling",
-   "profiles",
-   "layers",
-   "hud",
-   "text-input",
-   "atlas",
-   "scroll-table",
-   "collections",
-   "text",
-   "rich-text",
-   "transitions",
-   "lab-menu",
-   "gestures",
-   "lab-hud",
-   "diagnostics-performance",
-   "composition",
-   "custom",
-   "world",
-   "accessibility"
-  ]
- },
- "records": [
-  {
-   "id": "layout",
-   "group": "gallery",
-   "categories": [
-    "layout",
-    "geometry"
-   ],
-   "packages": [
-    "ui_base",
-    "ui_layout"
-   ],
-   "source": "consumer/ui_showcase/app/pages.odin",
-   "runnable": "consumer/ui_showcase",
-   "title": {
-    "en": "Layout",
-    "ru": "Компоновка"
-   },
-   "summary": {
-    "en": "Arrange UI geometry with rows, columns, stacks, grids, absolute placement and clipping.",
-    "ru": "Компоновка интерфейса: строки, столбцы, стеки, сетки, абсолютное размещение и обрезание."
-   },
-   "limitations": {
-    "en": "Experimental; no wrap, span or auto-placement.",
-    "ru": "Экспериментально; нет wrap, span и auto-placement."
-   },
-   "media": [
-    "layout-en",
-    "layout-ru",
-    "layout-small-en",
-    "layout-small-ru"
-   ],
-   "viewerStates": [
+  "schemaVersion": 1,
+  "coverage": {
+    "mode": "sample",
+    "ids": [
+      "layout",
+      "controls",
+      "styling",
+      "profiles",
+      "layers",
+      "hud",
+      "text-input",
+      "atlas",
+      "scroll-table",
+      "collections",
+      "text",
+      "rich-text",
+      "transitions",
+      "lab-menu",
+      "gestures",
+      "diagnostics-performance",
+      "lab-hud",
+      "lab-inventory",
+      "composition",
+      "custom",
+      "world",
+      "accessibility"
+    ]
+  },
+  "records": [
     {
-     "id": "large",
-     "width": 1280,
-     "height": 960,
-     "media": {
-      "en": "layout-en",
-      "ru": "layout-ru"
-     }
+      "id": "layout",
+      "group": "gallery",
+      "categories": [
+        "layout",
+        "geometry"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout"
+      ],
+      "source": "consumer/ui_showcase/app/pages.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Layout",
+        "ru": "Компоновка"
+      },
+      "summary": {
+        "en": "Arrange UI geometry with rows, columns, stacks, grids, absolute placement and clipping.",
+        "ru": "Компоновка интерфейса: строки, столбцы, стеки, сетки, абсолютное размещение и обрезание."
+      },
+      "limitations": {
+        "en": "Experimental; no wrap, span or auto-placement.",
+        "ru": "Экспериментально; нет wrap, span и auto-placement."
+      },
+      "media": [
+        "layout-en",
+        "layout-ru",
+        "layout-small-en",
+        "layout-small-ru"
+      ],
+      "viewerStates": [
+        {
+          "id": "large",
+          "width": 1280,
+          "height": 960,
+          "media": {
+            "en": "layout-en",
+            "ru": "layout-ru"
+          }
+        },
+        {
+          "id": "small",
+          "width": 960,
+          "height": 720,
+          "media": {
+            "en": "layout-small-en",
+            "ru": "layout-small-ru"
+          }
+        }
+      ]
     },
     {
-     "id": "small",
-     "width": 960,
-     "height": 720,
-     "media": {
-      "en": "layout-small-en",
-      "ru": "layout-small-ru"
-     }
+      "id": "profiles",
+      "group": "gallery",
+      "categories": [
+        "controls",
+        "state"
+      ],
+      "packages": [
+        "ui_controls",
+        "ui_interaction",
+        "ui_layout"
+      ],
+      "source": "consumer/ui_showcase/sections/profiles.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Profiles",
+        "ru": "Профили"
+      },
+      "summary": {
+        "en": "Edit a draft, apply or cancel it, and resolve unsaved changes when switching profiles.",
+        "ru": "Изменяйте черновик, применяйте или отменяйте его и разрешайте неприменённые изменения при смене профиля."
+      },
+      "limitations": {
+        "en": "Three fixed fixtures; applied state is in memory only, not persisted to disk.",
+        "ru": "Три фиксированных примера; применённое состояние хранится только в памяти, не на диске."
+      },
+      "media": [
+        "profiles-en-initial",
+        "profiles-en-dialog",
+        "profiles-ru-initial",
+        "profiles-ru-dialog",
+        "profiles-en-applied",
+        "profiles-ru-applied"
+      ]
+    },
+    {
+      "id": "controls",
+      "group": "gallery",
+      "categories": [
+        "controls"
+      ],
+      "packages": [
+        "ui_controls"
+      ],
+      "source": "consumer/ui_showcase/app/pages.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Controls",
+        "ru": "Элементы управления"
+      },
+      "summary": {
+        "en": "Compose application-controlled checkbox, toggle and slider values.",
+        "ru": "Флажок, переключатель и ползунок со значениями приложения."
+      },
+      "limitations": {
+        "en": "Experimental; controlled values and proposals; slider 0–100, step 1.",
+        "ru": "Экспериментально; управляемые значения и предложения; ползунок 0–100, шаг 1."
+      },
+      "media": [
+        "controls-en-initial",
+        "controls-en-changed",
+        "controls-ru-initial",
+        "controls-ru-changed"
+      ]
+    },
+    {
+      "id": "styling",
+      "group": "gallery",
+      "categories": [
+        "styling"
+      ],
+      "packages": [
+        "ui_style"
+      ],
+      "source": "consumer/ui_showcase/sections/content.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Styling",
+        "ru": "Оформление"
+      },
+      "summary": {
+        "en": "Existing primitives, theme cascade and visual states.",
+        "ru": "Существующие примитивы, каскад темы и визуальные состояния."
+      },
+      "limitations": {
+        "en": "Experimental; existing primitives and theme cascade only.",
+        "ru": "Экспериментально; только существующие примитивы и каскад темы."
+      },
+      "media": [
+        "styling-en-initial",
+        "styling-en-changed",
+        "styling-ru-initial",
+        "styling-ru-changed"
+      ]
+    },
+    {
+      "title": {
+        "en": "Layers",
+        "ru": "Слои"
+      },
+      "summary": {
+        "en": "Explicit modal and popup scopes with noninteractive tooltips.",
+        "ru": "Явные модальные области и панели с неинтерактивными подсказками."
+      },
+      "limitations": {
+        "en": "Experimental; explicit scopes and ownership, tooltip is noninteractive.",
+        "ru": "Экспериментально: явные области и владение, подсказка не принимает ввод."
+      },
+      "categories": [
+        "layers",
+        "interaction"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_interaction",
+        "ui_layers"
+      ],
+      "source": "consumer/ui_showcase/sections/layers.odin",
+      "id": "layers",
+      "group": "gallery",
+      "runnable": "consumer/ui_showcase",
+      "media": [
+        "layers-popup-tooltip-en",
+        "layers-popup-tooltip-ru",
+        "layers-modal-en",
+        "layers-modal-ru"
+      ]
+    },
+    {
+      "title": {
+        "en": "HUD hold",
+        "ru": "HUD и удержание"
+      },
+      "summary": {
+        "en": "A hold gesture reports progress before the application restores HP.",
+        "ru": "Удержание показывает прогресс до восстановления HP приложением."
+      },
+      "limitations": {
+        "en": "Experimental; 1000 ms hold required, Activate cannot bypass it.",
+        "ru": "Экспериментально: требуется удержание 1000 мс, Activate его не обходит."
+      },
+      "categories": [
+        "hud",
+        "hold"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_layers",
+        "ui_hold"
+      ],
+      "source": "consumer/ui_showcase/sections/hud.odin",
+      "id": "hud",
+      "group": "gallery",
+      "runnable": "consumer/ui_showcase",
+      "media": [
+        "hud-idle-en",
+        "hud-idle-ru",
+        "hud-completed-en",
+        "hud-completed-ru"
+      ]
+    },
+    {
+      "id": "text-input",
+      "group": "gallery",
+      "categories": [
+        "text",
+        "input"
+      ],
+      "packages": [
+        "ui_editor",
+        "ui_text",
+        "unicode_graphemes"
+      ],
+      "source": "consumer/ui_showcase/sections/name.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Text input",
+        "ru": "Ввод текста"
+      },
+      "summary": {
+        "en": "Edit a focused single-line name draft and apply or cancel it.",
+        "ru": "Редактирование однострочного имени в фокусе с применением или отменой."
+      },
+      "limitations": {
+        "en": "Experimental; single line; Unicode 15.1 EGC; no IME, undo or normalization.",
+        "ru": "Экспериментально; одна строка; EGC Unicode 15.1; нет IME, undo и нормализации."
+      },
+      "media": [
+        "text-input-en",
+        "text-input-ru"
+      ]
+    },
+    {
+      "id": "atlas",
+      "group": "gallery",
+      "categories": [
+        "resources",
+        "images"
+      ],
+      "packages": [
+        "ui_style",
+        "ui_sdl"
+      ],
+      "source": "consumer/ui_showcase/sections/content.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Atlas",
+        "ru": "Атлас"
+      },
+      "summary": {
+        "en": "Load atlas pages and regions, switch resources and reload the selected set.",
+        "ru": "Загрузка страниц и областей атласа, смена ресурсов и перезагрузка выбранного набора."
+      },
+      "limitations": {
+        "en": "Manifest v1 and bounded non-interlaced RGB8/RGBA8 PNG only.",
+        "ru": "Только manifest v1 и ограниченный нечересстрочный PNG RGB8/RGBA8."
+      },
+      "media": [
+        "atlas-en-initial",
+        "atlas-en-alternate",
+        "atlas-en-reload",
+        "atlas-ru-initial",
+        "atlas-ru-alternate",
+        "atlas-ru-reload"
+      ]
+    },
+    {
+      "id": "scroll-table",
+      "group": "gallery",
+      "categories": [
+        "scrolling"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_scroll"
+      ],
+      "source": "consumer/ui_showcase/app/pages.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Scroll and table",
+        "ru": "Прокрутка и таблица"
+      },
+      "summary": {
+        "en": "Scroll an ordinary table through a vertical viewport.",
+        "ru": "Вертикальная прокрутка обычной таблицы в области просмотра."
+      },
+      "limitations": {
+        "en": "Experimental; vertical non-nested scrolling and three fixed tracks.",
+        "ru": "Экспериментально; вертикальная невложенная прокрутка и три фиксированные колонки."
+      },
+      "media": [
+        "scroll-table-en",
+        "scroll-table-ru"
+      ]
+    },
+    {
+      "id": "collections",
+      "group": "gallery",
+      "categories": [
+        "scrolling",
+        "collections"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_collections"
+      ],
+      "source": "consumer/ui_showcase/app/collection_runtime.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Virtual collections",
+        "ru": "Виртуальные коллекции"
+      },
+      "summary": {
+        "en": "Materialize the visible portion of a uniform list or grid.",
+        "ru": "Материализация видимой части однородного списка или сетки."
+      },
+      "limitations": {
+        "en": "Experimental; uniform geometry and one offset owner per region.",
+        "ru": "Экспериментально; однородная геометрия и один владелец смещения на область."
+      },
+      "media": [
+        "collections-en",
+        "collections-ru"
+      ]
+    },
+    {
+      "id": "text",
+      "group": "gallery",
+      "categories": [
+        "text",
+        "typography"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_text",
+        "translations",
+        "unicode_graphemes"
+      ],
+      "source": "consumer/ui_showcase/sections/content.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Text",
+        "ru": "Текст"
+      },
+      "summary": {
+        "en": "Localized paragraphs, wrapping and overflow.",
+        "ru": "Локализованные абзацы, перенос и переполнение."
+      },
+      "limitations": {
+        "en": "Experimental; 65536 bytes / 4096 lines; no shaping or bidi.",
+        "ru": "Экспериментально; 65536 байт / 4096 строк; нет shaping и bidi."
+      },
+      "media": [
+        "text-en-initial",
+        "text-en-alternate",
+        "text-ru-initial",
+        "text-ru-alternate"
+      ]
+    },
+    {
+      "id": "rich-text",
+      "group": "gallery",
+      "categories": [
+        "text",
+        "typography"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_style",
+        "ui_text",
+        "ui_rich",
+        "unicode_graphemes"
+      ],
+      "source": "consumer/ui_showcase/sections/content.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Rich text",
+        "ru": "Форматированный текст"
+      },
+      "summary": {
+        "en": "Styled localized text and inline images.",
+        "ru": "Локализованный текст со стилями и встроенными изображениями."
+      },
+      "limitations": {
+        "en": "Experimental bounded grammar; not HTML or an editor.",
+        "ru": "Экспериментальная ограниченная грамматика; не HTML и не редактор."
+      },
+      "media": [
+        "rich-text-en-initial",
+        "rich-text-en-alternate",
+        "rich-text-ru-initial",
+        "rich-text-ru-alternate"
+      ]
+    },
+    {
+      "id": "transitions",
+      "group": "gallery",
+      "categories": [
+        "transitions",
+        "state"
+      ],
+      "packages": [
+        "ui_transitions",
+        "ui_hold",
+        "ui_controls",
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_layers",
+        "ui_scroll",
+        "ui_style",
+        "ui_text"
+      ],
+      "source": "consumer/ui_showcase/sections/transitions.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "State transitions",
+        "ru": "Переходы состояния"
+      },
+      "summary": {
+        "en": "Retarget offset, scale, opacity, colour and progress while layout and hit projections stay frozen.",
+        "ru": "Смена смещения, масштаба, прозрачности, цвета и прогресса при замороженных проекциях компоновки и попадания."
+      },
+      "limitations": {
+        "en": "Experimental; frozen paint/hit; no layout animation.",
+        "ru": "Экспериментально: замороженные отрисовка и попадание; без анимации компоновки."
+      },
+      "media": [
+        "transitions-en-initial",
+        "transitions-en-after-b",
+        "transitions-ru-initial",
+        "transitions-ru-after-b"
+      ]
+    },
+    {
+      "id": "diagnostics-performance",
+      "group": "gallery",
+      "categories": [
+        "state"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_text",
+        "ui_editor",
+        "ui_collections",
+        "ui_sdl_text"
+      ],
+      "source": "consumer/ui_showcase/sections/performance.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Diagnostics and performance",
+        "ru": "Диагностика и производительность"
+      },
+      "summary": {
+        "en": "Inspect CPU phase samples and run five failing probes around an editor and collection fixture.",
+        "ru": "Наблюдайте фазы CPU и запускайте пять сбойных проб вокруг примера с редактором и коллекцией."
+      },
+      "limitations": {
+        "en": "Experimental; no debugger transport, GPU time or numerical SLA.",
+        "ru": "Экспериментально; нет транспорта отладчика, времени GPU и числовых SLA."
+      },
+      "media": [
+        "diagnostics-performance-en-initial",
+        "diagnostics-performance-en-diagnostic",
+        "diagnostics-performance-ru-initial",
+        "diagnostics-performance-ru-diagnostic"
+      ]
+    },
+    {
+      "id": "lab-menu",
+      "group": "lab",
+      "categories": [
+        "menu",
+        "settings"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_interaction",
+        "ui_layers",
+        "ui_controls",
+        "ui_editor",
+        "ui_sdl_text"
+      ],
+      "source": "consumer/ui_showcase/app/lab_menu.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Lab menu",
+        "ru": "Меню лаборатории"
+      },
+      "summary": {
+        "en": "Open a submenu, edit mock settings in a modal and confirm the shown draft.",
+        "ru": "Открыть подменю, изменить учебные настройки в модальном окне и подтвердить показанный черновик."
+      },
+      "limitations": {
+        "en": "Experimental; mock settings; process-local state, no persistence.",
+        "ru": "Экспериментально; учебные настройки; состояние только до завершения процесса, без сохранения."
+      },
+      "media": [
+        "lab-menu-initial-en",
+        "lab-menu-submenu-en",
+        "lab-menu-settings-en",
+        "lab-menu-confirm-en",
+        "lab-menu-initial-ru",
+        "lab-menu-submenu-ru",
+        "lab-menu-settings-ru",
+        "lab-menu-confirm-ru"
+      ]
+    },
+    {
+      "id": "gestures",
+      "group": "gallery",
+      "categories": [
+        "gestures",
+        "interaction"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_scroll",
+        "ui_sdl",
+        "ui_gestures"
+      ],
+      "source": "consumer/ui_showcase/sections/gestures.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Gestures",
+        "ru": "Жесты"
+      },
+      "summary": {
+        "en": "Drag a card between panels and scroll clipped rows with repeat buttons or a pan handle.",
+        "ru": "Перетаскивание карточки между панелями и прокрутка обрезанных строк кнопками повтора или ручкой прокрутки."
+      },
+      "limitations": {
+        "en": "Experimental; a proposal is not an application move and there is no inertia.",
+        "ru": "Экспериментально; предложение не является применённым переносом, инерции нет."
+      },
+      "media": [
+        "gestures-en-initial",
+        "gestures-en-proposal",
+        "gestures-en-applied",
+        "gestures-ru-initial",
+        "gestures-ru-proposal",
+        "gestures-ru-applied"
+      ]
+    },
+    {
+      "id": "lab-hud",
+      "group": "lab",
+      "categories": [
+        "hud",
+        "hold"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_layers",
+        "ui_hold"
+      ],
+      "source": "consumer/ui_showcase/app/lab_hud.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Lab HUD",
+        "ru": "Лаборатория HUD"
+      },
+      "summary": {
+        "en": "The Integration Lab HUD: mock HP with -10 and +10, a 1000 ms hold-to-restore, a popup and a noninteractive tooltip.",
+        "ru": "HUD Integration Lab: учебный HP с -10 и +10, восстановление удержанием 1000 мс, панель и неинтерактивная подсказка."
+      },
+      "limitations": {
+        "en": "Experimental; mock HP; hold 1000 ms.",
+        "ru": "Экспериментально: учебный HP; удержание 1000 мс."
+      },
+      "media": [
+        "lab-hud-initial-en",
+        "lab-hud-popup-en",
+        "lab-hud-hold-en",
+        "lab-hud-completed-en",
+        "lab-hud-initial-ru",
+        "lab-hud-popup-ru",
+        "lab-hud-hold-ru",
+        "lab-hud-completed-ru"
+      ]
+    },
+    {
+      "id": "lab-inventory",
+      "group": "lab",
+      "categories": [
+        "collections",
+        "state",
+        "input"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_collections",
+        "ui_gestures",
+        "ui_gestures/sdl",
+        "ui_interaction",
+        "ui_layout"
+      ],
+      "source": "consumer/ui_showcase/app/lab_inventory.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Lab inventory",
+        "ru": "Инвентарь лаборатории"
+      },
+      "summary": {
+        "en": "Select a row in two uniform lists, propose a transfer and confirm or refuse it.",
+        "ru": "Выбрать строку в двух однородных списках, предложить перенос и подтвердить или отклонить его."
+      },
+      "limitations": {
+        "en": "Experimental; two uniform lists; no row drag-reorder; process-local teaching data.",
+        "ru": "Экспериментально; два однородных списка; без перетаскивания строк для переупорядочивания; учебные данные, состояние только до завершения процесса."
+      },
+      "media": [
+        "lab-inventory-initial-en",
+        "lab-inventory-selected-en",
+        "lab-inventory-refused-en",
+        "lab-inventory-pending-en",
+        "lab-inventory-confirmed-en",
+        "lab-inventory-initial-ru",
+        "lab-inventory-selected-ru",
+        "lab-inventory-refused-ru",
+        "lab-inventory-pending-ru",
+        "lab-inventory-confirmed-ru"
+      ]
+    },
+    {
+      "id": "composition",
+      "group": "gallery",
+      "categories": [
+        "composition",
+        "structure"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_composition",
+        "ui_style"
+      ],
+      "source": "consumer/ui_showcase/sections/composition.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Nested composition",
+        "ru": "Вложенная композиция"
+      },
+      "summary": {
+        "en": "Compose owned panels and nested nodes; a child activation records an intention on the parent route.",
+        "ru": "Композиция из владеемых панелей и вложенных узлов; активация дочернего элемента записывает намерение в родительском маршруте."
+      },
+      "limitations": {
+        "en": "Experimental; callbacks record intentions, no reentry; a pre-layout description without its own dispatch or focus.",
+        "ru": "Экспериментально; callbacks записывают намерения, нет reentry; описание до layout без собственного dispatch и фокуса."
+      },
+      "media": [
+        "composition-en-initial",
+        "composition-en-propagated",
+        "composition-ru-initial",
+        "composition-ru-propagated"
+      ]
+    },
+    {
+      "id": "custom",
+      "group": "gallery",
+      "categories": [
+        "custom",
+        "hit-testing"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_custom",
+        "ui_composition",
+        "ui_style"
+      ],
+      "source": "consumer/ui_showcase/sections/custom.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Custom primitives",
+        "ru": "Свои примитивы"
+      },
+      "summary": {
+        "en": "Two namespaced recipes with app-owned circle nodes and a pure circle hit predicate.",
+        "ru": "Два рецепта с namespace и владеемые приложением узлы-круги с чистой проверкой попадания."
+      },
+      "limitations": {
+        "en": "Experimental; two namespaces; pure circle hit; trusted process-lifetime callbacks, not a plugin ABI.",
+        "ru": "Экспериментально; два namespace; чистая проверка круга; callbacks доверенные на время процесса, не plugin ABI."
+      },
+      "media": [
+        "custom-en-initial",
+        "custom-en-activated",
+        "custom-en-styled",
+        "custom-en-popup-tooltip",
+        "custom-ru-initial",
+        "custom-ru-activated",
+        "custom-ru-styled",
+        "custom-ru-popup-tooltip"
+      ]
+    },
+    {
+      "id": "world",
+      "group": "gallery",
+      "categories": [
+        "world",
+        "positioning"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_style",
+        "ui_world"
+      ],
+      "source": "consumer/ui_showcase/sections/world.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "World anchors",
+        "ru": "Якоря мира"
+      },
+      "summary": {
+        "en": "Place application-owned cards at world-space points through a camera and projection callback, with Hide, Clamp or Direction for anchors outside the viewport.",
+        "ru": "Размещайте карточки приложения в мировых координатах через камеру и callback проекции; для якорей за пределами области просмотра доступны Hide, Clamp или Direction."
+      },
+      "limitations": {
+        "en": "Experimental; the application owns the camera and the projection callback; no engine, no Game Bridge.",
+        "ru": "Экспериментально; камерой и callback проекции владеет приложение; нет движка и Game Bridge."
+      },
+      "media": [
+        "world-initial-en",
+        "world-initial-ru",
+        "world-indicators-en",
+        "world-indicators-ru"
+      ]
+    },
+    {
+      "id": "accessibility",
+      "group": "gallery",
+      "categories": [
+        "accessibility",
+        "assessment"
+      ],
+      "packages": [
+        "ui_accessibility/inspect",
+        "ui_accessibility/projection",
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_style",
+        "ui_text"
+      ],
+      "source": "consumer/ui_showcase/sections/accessibility.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Accessibility assessment",
+        "ru": "Оценка доступности"
+      },
+      "summary": {
+        "en": "Assess contrast, minimum target size and reduced motion while ordinary actions keep working.",
+        "ru": "Оценка контраста, минимального размера цели и reduced motion; обычные действия продолжают работать."
+      },
+      "limitations": {
+        "en": "Experimental; the assessment is advisory. Warning/Unassessed are not conformance.",
+        "ru": "Экспериментально; оценка носит рекомендательный характер. Warning/Unassessed не означают conformance."
+      },
+      "media": [
+        "accessibility-initial-en",
+        "accessibility-initial-ru",
+        "accessibility-dialog-en",
+        "accessibility-dialog-ru"
+      ]
     }
-   ]
-  },
-  {
-   "id": "profiles",
-   "group": "gallery",
-   "categories": [
-    "controls",
-    "state"
-   ],
-   "packages": [
-    "ui_controls",
-    "ui_interaction",
-    "ui_layout"
-   ],
-   "source": "consumer/ui_showcase/sections/profiles.odin",
-   "runnable": "consumer/ui_showcase",
-   "title": {
-    "en": "Profiles",
-    "ru": "Профили"
-   },
-   "summary": {
-    "en": "Edit a draft, apply or cancel it, and resolve unsaved changes when switching profiles.",
-    "ru": "Изменяйте черновик, применяйте или отменяйте его и разрешайте неприменённые изменения при смене профиля."
-   },
-   "limitations": {
-    "en": "Three fixed fixtures; applied state is in memory only, not persisted to disk.",
-    "ru": "Три фиксированных примера; применённое состояние хранится только в памяти, не на диске."
-   },
-   "media": [
-    "profiles-en-initial",
-    "profiles-en-dialog",
-    "profiles-ru-initial",
-    "profiles-ru-dialog",
-    "profiles-en-applied",
-    "profiles-ru-applied"
-   ]
-  },
-  {
-   "id": "controls",
-   "group": "gallery",
-   "categories": [
-    "controls"
-   ],
-   "packages": [
-    "ui_controls"
-   ],
-   "source": "consumer/ui_showcase/app/pages.odin",
-   "runnable": "consumer/ui_showcase",
-   "title": {
-    "en": "Controls",
-    "ru": "Элементы управления"
-   },
-   "summary": {
-    "en": "Compose application-controlled checkbox, toggle and slider values.",
-    "ru": "Флажок, переключатель и ползунок со значениями приложения."
-   },
-   "limitations": {
-    "en": "Experimental; controlled values and proposals; slider 0–100, step 1.",
-    "ru": "Экспериментально; управляемые значения и предложения; ползунок 0–100, шаг 1."
-   },
-   "media": [
-    "controls-en-initial",
-    "controls-en-changed",
-    "controls-ru-initial",
-    "controls-ru-changed"
-   ]
-  },
-  {
-   "id": "styling",
-   "group": "gallery",
-   "categories": [
-    "styling"
-   ],
-   "packages": [
-    "ui_style"
-   ],
-   "source": "consumer/ui_showcase/sections/content.odin",
-   "runnable": "consumer/ui_showcase",
-   "title": {
-    "en": "Styling",
-    "ru": "Оформление"
-   },
-   "summary": {
-    "en": "Existing primitives, theme cascade and visual states.",
-    "ru": "Существующие примитивы, каскад темы и визуальные состояния."
-   },
-   "limitations": {
-    "en": "Experimental; existing primitives and theme cascade only.",
-    "ru": "Экспериментально; только существующие примитивы и каскад темы."
-   },
-   "media": [
-    "styling-en-initial",
-    "styling-en-changed",
-    "styling-ru-initial",
-    "styling-ru-changed"
-   ]
-  },
-  {
-   "title": {
-    "en": "Layers",
-    "ru": "Слои"
-   },
-   "summary": {
-    "en": "Explicit modal and popup scopes with noninteractive tooltips.",
-    "ru": "Явные модальные области и панели с неинтерактивными подсказками."
-   },
-   "limitations": {
-    "en": "Experimental; explicit scopes and ownership, tooltip is noninteractive.",
-    "ru": "Экспериментально: явные области и владение, подсказка не принимает ввод."
-   },
-   "categories": [
-    "layers",
-    "interaction"
-   ],
-   "packages": [
-    "ui_base",
-    "ui_interaction",
-    "ui_layers"
-   ],
-   "source": "consumer/ui_showcase/sections/layers.odin",
-   "id": "layers",
-   "group": "gallery",
-   "runnable": "consumer/ui_showcase",
-   "media": [
-    "layers-popup-tooltip-en",
-    "layers-popup-tooltip-ru",
-    "layers-modal-en",
-    "layers-modal-ru"
-   ]
-  },
-  {
-   "title": {
-    "en": "HUD hold",
-    "ru": "HUD и удержание"
-   },
-   "summary": {
-    "en": "A hold gesture reports progress before the application restores HP.",
-    "ru": "Удержание показывает прогресс до восстановления HP приложением."
-   },
-   "limitations": {
-    "en": "Experimental; 1000 ms hold required, Activate cannot bypass it.",
-    "ru": "Экспериментально: требуется удержание 1000 мс, Activate его не обходит."
-   },
-   "categories": [
-    "hud",
-    "hold"
-   ],
-   "packages": [
-    "ui_base",
-    "ui_layout",
-    "ui_interaction",
-    "ui_layers",
-    "ui_hold"
-   ],
-   "source": "consumer/ui_showcase/sections/hud.odin",
-   "id": "hud",
-   "group": "gallery",
-   "runnable": "consumer/ui_showcase",
-   "media": [
-    "hud-idle-en",
-    "hud-idle-ru",
-    "hud-completed-en",
-    "hud-completed-ru"
-   ]
-  },
-  {
-   "id": "text-input",
-   "group": "gallery",
-   "categories": [
-    "text",
-    "input"
-   ],
-   "packages": [
-    "ui_editor",
-    "ui_text",
-    "unicode_graphemes"
-   ],
-   "source": "consumer/ui_showcase/sections/name.odin",
-   "runnable": "consumer/ui_showcase",
-   "title": {
-    "en": "Text input",
-    "ru": "Ввод текста"
-   },
-   "summary": {
-    "en": "Edit a focused single-line name draft and apply or cancel it.",
-    "ru": "Редактирование однострочного имени в фокусе с применением или отменой."
-   },
-   "limitations": {
-    "en": "Experimental; single line; Unicode 15.1 EGC; no IME, undo or normalization.",
-    "ru": "Экспериментально; одна строка; EGC Unicode 15.1; нет IME, undo и нормализации."
-   },
-   "media": [
-    "text-input-en",
-    "text-input-ru"
-   ]
-  },
-  {
-   "id": "atlas",
-   "group": "gallery",
-   "categories": [
-    "resources",
-    "images"
-   ],
-   "packages": [
-    "ui_style",
-    "ui_sdl"
-   ],
-   "source": "consumer/ui_showcase/sections/content.odin",
-   "runnable": "consumer/ui_showcase",
-   "title": {
-    "en": "Atlas",
-    "ru": "Атлас"
-   },
-   "summary": {
-    "en": "Load atlas pages and regions, switch resources and reload the selected set.",
-    "ru": "Загрузка страниц и областей атласа, смена ресурсов и перезагрузка выбранного набора."
-   },
-   "limitations": {
-    "en": "Manifest v1 and bounded non-interlaced RGB8/RGBA8 PNG only.",
-    "ru": "Только manifest v1 и ограниченный нечересстрочный PNG RGB8/RGBA8."
-   },
-   "media": [
-    "atlas-en-initial",
-    "atlas-en-alternate",
-    "atlas-en-reload",
-    "atlas-ru-initial",
-    "atlas-ru-alternate",
-    "atlas-ru-reload"
-   ]
-  },
-  {
-   "id": "scroll-table",
-   "group": "gallery",
-   "categories": [
-    "scrolling"
-   ],
-   "packages": [
-    "ui_base",
-    "ui_layout",
-    "ui_interaction",
-    "ui_scroll"
-   ],
-   "source": "consumer/ui_showcase/app/pages.odin",
-   "runnable": "consumer/ui_showcase",
-   "title": {
-    "en": "Scroll and table",
-    "ru": "Прокрутка и таблица"
-   },
-   "summary": {
-    "en": "Scroll an ordinary table through a vertical viewport.",
-    "ru": "Вертикальная прокрутка обычной таблицы в области просмотра."
-   },
-   "limitations": {
-    "en": "Experimental; vertical non-nested scrolling and three fixed tracks.",
-    "ru": "Экспериментально; вертикальная невложенная прокрутка и три фиксированные колонки."
-   },
-   "media": [
-    "scroll-table-en",
-    "scroll-table-ru"
-   ]
-  },
-  {
-   "id": "collections",
-   "group": "gallery",
-   "categories": [
-    "scrolling",
-    "collections"
-   ],
-   "packages": [
-    "ui_base",
-    "ui_layout",
-    "ui_interaction",
-    "ui_collections"
-   ],
-   "source": "consumer/ui_showcase/app/collection_runtime.odin",
-   "runnable": "consumer/ui_showcase",
-   "title": {
-    "en": "Virtual collections",
-    "ru": "Виртуальные коллекции"
-   },
-   "summary": {
-    "en": "Materialize the visible portion of a uniform list or grid.",
-    "ru": "Материализация видимой части однородного списка или сетки."
-   },
-   "limitations": {
-    "en": "Experimental; uniform geometry and one offset owner per region.",
-    "ru": "Экспериментально; однородная геометрия и один владелец смещения на область."
-   },
-   "media": [
-    "collections-en",
-    "collections-ru"
-   ]
-  },
-  {
-   "id": "text",
-   "group": "gallery",
-   "categories": [
-    "text",
-    "typography"
-   ],
-   "packages": [
-    "ui_base",
-    "ui_layout",
-    "ui_text",
-    "translations",
-    "unicode_graphemes"
-   ],
-   "source": "consumer/ui_showcase/sections/content.odin",
-   "runnable": "consumer/ui_showcase",
-   "title": {
-    "en": "Text",
-    "ru": "Текст"
-   },
-   "summary": {
-    "en": "Localized paragraphs, wrapping and overflow.",
-    "ru": "Локализованные абзацы, перенос и переполнение."
-   },
-   "limitations": {
-    "en": "Experimental; 65536 bytes / 4096 lines; no shaping or bidi.",
-    "ru": "Экспериментально; 65536 байт / 4096 строк; нет shaping и bidi."
-   },
-   "media": [
-    "text-en-initial",
-    "text-en-alternate",
-    "text-ru-initial",
-    "text-ru-alternate"
-   ]
-  },
-  {
-   "id": "rich-text",
-   "group": "gallery",
-   "categories": [
-    "text",
-    "typography"
-   ],
-   "packages": [
-    "ui_base",
-    "ui_layout",
-    "ui_style",
-    "ui_text",
-    "ui_rich",
-    "unicode_graphemes"
-   ],
-   "source": "consumer/ui_showcase/sections/content.odin",
-   "runnable": "consumer/ui_showcase",
-   "title": {
-    "en": "Rich text",
-    "ru": "Форматированный текст"
-   },
-   "summary": {
-    "en": "Styled localized text and inline images.",
-    "ru": "Локализованный текст со стилями и встроенными изображениями."
-   },
-   "limitations": {
-    "en": "Experimental bounded grammar; not HTML or an editor.",
-    "ru": "Экспериментальная ограниченная грамматика; не HTML и не редактор."
-   },
-   "media": [
-    "rich-text-en-initial",
-    "rich-text-en-alternate",
-    "rich-text-ru-initial",
-    "rich-text-ru-alternate"
-   ]
-  },
-  {
-   "id": "transitions",
-   "group": "gallery",
-   "categories": [
-    "transitions",
-    "state"
-   ],
-   "packages": [
-    "ui_transitions",
-    "ui_hold",
-    "ui_controls",
-    "ui_base",
-    "ui_layout",
-    "ui_interaction",
-    "ui_layers",
-    "ui_scroll",
-    "ui_style",
-    "ui_text"
-   ],
-   "source": "consumer/ui_showcase/sections/transitions.odin",
-   "runnable": "consumer/ui_showcase",
-   "title": {
-    "en": "State transitions",
-    "ru": "Переходы состояния"
-   },
-   "summary": {
-    "en": "Retarget offset, scale, opacity, colour and progress while layout and hit projections stay frozen.",
-    "ru": "Смена смещения, масштаба, прозрачности, цвета и прогресса при замороженных проекциях компоновки и попадания."
-   },
-   "limitations": {
-    "en": "Experimental; frozen paint/hit; no layout animation.",
-    "ru": "Экспериментально: замороженные отрисовка и попадание; без анимации компоновки."
-   },
-   "media": [
-    "transitions-en-initial",
-    "transitions-en-after-b",
-    "transitions-ru-initial",
-    "transitions-ru-after-b"
-   ]
-  },
-  {
-   "id": "lab-menu",
-   "group": "lab",
-   "categories": [
-    "menu",
-    "settings"
-   ],
-   "packages": [
-    "ui_base",
-    "ui_interaction",
-    "ui_layers",
-    "ui_controls",
-    "ui_editor",
-    "ui_sdl_text"
-   ],
-   "source": "consumer/ui_showcase/app/lab_menu.odin",
-   "runnable": "consumer/ui_showcase",
-   "title": {
-    "en": "Lab menu",
-    "ru": "Меню лаборатории"
-   },
-   "summary": {
-    "en": "Open a submenu, edit mock settings in a modal and confirm the shown draft.",
-    "ru": "Открыть подменю, изменить учебные настройки в модальном окне и подтвердить показанный черновик."
-   },
-   "limitations": {
-    "en": "Experimental; mock settings; process-local state, no persistence.",
-    "ru": "Экспериментально; учебные настройки; состояние только до завершения процесса, без сохранения."
-   },
-   "media": [
-    "lab-menu-initial-en",
-    "lab-menu-submenu-en",
-    "lab-menu-settings-en",
-    "lab-menu-confirm-en",
-    "lab-menu-initial-ru",
-    "lab-menu-submenu-ru",
-    "lab-menu-settings-ru",
-    "lab-menu-confirm-ru"
-   ]
-  },
-  {
-   "id": "gestures",
-   "group": "gallery",
-   "categories": [
-    "gestures",
-    "interaction"
-   ],
-   "packages": [
-    "ui_base",
-    "ui_layout",
-    "ui_interaction",
-    "ui_scroll",
-    "ui_sdl",
-    "ui_gestures"
-   ],
-   "source": "consumer/ui_showcase/sections/gestures.odin",
-   "runnable": "consumer/ui_showcase",
-   "title": {
-    "en": "Gestures",
-    "ru": "Жесты"
-   },
-   "summary": {
-    "en": "Drag a card between panels and scroll clipped rows with repeat buttons or a pan handle.",
-    "ru": "Перетаскивание карточки между панелями и прокрутка обрезанных строк кнопками повтора или ручкой прокрутки."
-   },
-   "limitations": {
-    "en": "Experimental; a proposal is not an application move and there is no inertia.",
-    "ru": "Экспериментально; предложение не является применённым переносом, инерции нет."
-   },
-   "media": [
-    "gestures-en-initial",
-    "gestures-en-proposal",
-    "gestures-en-applied",
-    "gestures-ru-initial",
-    "gestures-ru-proposal",
-    "gestures-ru-applied"
-   ]
-  },
-  {
-   "id": "lab-hud",
-   "group": "lab",
-   "categories": [
-    "hud",
-    "hold"
-   ],
-   "packages": [
-    "ui_base",
-    "ui_layout",
-    "ui_interaction",
-    "ui_layers",
-    "ui_hold"
-   ],
-   "source": "consumer/ui_showcase/app/lab_hud.odin",
-   "runnable": "consumer/ui_showcase",
-   "title": {
-    "en": "Lab HUD",
-    "ru": "Лаборатория HUD"
-   },
-   "summary": {
-    "en": "The Integration Lab HUD: mock HP with -10 and +10, a 1000 ms hold-to-restore, a popup and a noninteractive tooltip.",
-    "ru": "HUD Integration Lab: учебный HP с -10 и +10, восстановление удержанием 1000 мс, панель и неинтерактивная подсказка."
-   },
-   "limitations": {
-    "en": "Experimental; mock HP; hold 1000 ms.",
-    "ru": "Экспериментально: учебный HP; удержание 1000 мс."
-   },
-   "media": [
-    "lab-hud-initial-en",
-    "lab-hud-popup-en",
-    "lab-hud-hold-en",
-    "lab-hud-completed-en",
-    "lab-hud-initial-ru",
-    "lab-hud-popup-ru",
-    "lab-hud-hold-ru",
-    "lab-hud-completed-ru"
-   ]
-  },
-  {
-   "id": "diagnostics-performance",
-   "group": "gallery",
-   "categories": [
-    "state"
-   ],
-   "packages": [
-    "ui_base",
-    "ui_layout",
-    "ui_interaction",
-    "ui_text",
-    "ui_editor",
-    "ui_collections",
-    "ui_sdl_text"
-   ],
-   "source": "consumer/ui_showcase/sections/performance.odin",
-   "runnable": "consumer/ui_showcase",
-   "title": {
-    "en": "Diagnostics and performance",
-    "ru": "Диагностика и производительность"
-   },
-   "summary": {
-    "en": "Inspect CPU phase samples and run five failing probes around an editor and collection fixture.",
-    "ru": "Наблюдайте фазы CPU и запускайте пять сбойных проб вокруг примера с редактором и коллекцией."
-   },
-   "limitations": {
-    "en": "Experimental; no debugger transport, GPU time or numerical SLA.",
-    "ru": "Экспериментально; нет транспорта отладчика, времени GPU и числовых SLA."
-   },
-   "media": [
-    "diagnostics-performance-en-initial",
-    "diagnostics-performance-en-diagnostic",
-    "diagnostics-performance-ru-initial",
-    "diagnostics-performance-ru-diagnostic"
-   ]
-  },
-  {
-   "id": "composition",
-   "group": "gallery",
-   "categories": [
-    "composition",
-    "structure"
-   ],
-   "packages": [
-    "ui_base",
-    "ui_layout",
-    "ui_interaction",
-    "ui_composition",
-    "ui_style"
-   ],
-   "source": "consumer/ui_showcase/sections/composition.odin",
-   "runnable": "consumer/ui_showcase",
-   "title": {
-    "en": "Nested composition",
-    "ru": "Вложенная композиция"
-   },
-   "summary": {
-    "en": "Compose owned panels and nested nodes; a child activation records an intention on the parent route.",
-    "ru": "Композиция из владеемых панелей и вложенных узлов; активация дочернего элемента записывает намерение в родительском маршруте."
-   },
-   "limitations": {
-    "en": "Experimental; callbacks record intentions, no reentry; a pre-layout description without its own dispatch or focus.",
-    "ru": "Экспериментально; callbacks записывают намерения, нет reentry; описание до layout без собственного dispatch и фокуса."
-   },
-   "media": [
-    "composition-en-initial",
-    "composition-en-propagated",
-    "composition-ru-initial",
-    "composition-ru-propagated"
-   ]
-  },
-  {
-   "id": "custom",
-   "group": "gallery",
-   "categories": [
-    "custom",
-    "hit-testing"
-   ],
-   "packages": [
-    "ui_base",
-    "ui_layout",
-    "ui_interaction",
-    "ui_custom",
-    "ui_composition",
-    "ui_style"
-   ],
-   "source": "consumer/ui_showcase/sections/custom.odin",
-   "runnable": "consumer/ui_showcase",
-   "title": {
-    "en": "Custom primitives",
-    "ru": "Свои примитивы"
-   },
-   "summary": {
-    "en": "Two namespaced recipes with app-owned circle nodes and a pure circle hit predicate.",
-    "ru": "Два рецепта с namespace и владеемые приложением узлы-круги с чистой проверкой попадания."
-   },
-   "limitations": {
-    "en": "Experimental; two namespaces; pure circle hit; trusted process-lifetime callbacks, not a plugin ABI.",
-    "ru": "Экспериментально; два namespace; чистая проверка круга; callbacks доверенные на время процесса, не plugin ABI."
-   },
-   "media": [
-    "custom-en-initial",
-    "custom-en-activated",
-    "custom-en-styled",
-    "custom-en-popup-tooltip",
-    "custom-ru-initial",
-    "custom-ru-activated",
-    "custom-ru-styled",
-    "custom-ru-popup-tooltip"
-   ]
-  },
-  {
-   "id": "world",
-   "group": "gallery",
-   "categories": [
-    "world",
-    "positioning"
-   ],
-   "packages": [
-    "ui_base",
-    "ui_layout",
-    "ui_interaction",
-    "ui_style",
-    "ui_world"
-   ],
-   "source": "consumer/ui_showcase/sections/world.odin",
-   "runnable": "consumer/ui_showcase",
-   "title": {
-    "en": "World anchors",
-    "ru": "Якоря мира"
-   },
-   "summary": {
-    "en": "Place application-owned cards at world-space points through a camera and projection callback, with Hide, Clamp or Direction for anchors outside the viewport.",
-    "ru": "Размещайте карточки приложения в мировых координатах через камеру и callback проекции; для якорей за пределами области просмотра доступны Hide, Clamp или Direction."
-   },
-   "limitations": {
-    "en": "Experimental; the application owns the camera and the projection callback; no engine, no Game Bridge.",
-    "ru": "Экспериментально; камерой и callback проекции владеет приложение; нет движка и Game Bridge."
-   },
-   "media": [
-    "world-initial-en",
-    "world-initial-ru",
-    "world-indicators-en",
-    "world-indicators-ru"
-   ]
-  },
-  {
-   "id": "accessibility",
-   "group": "gallery",
-   "categories": [
-    "accessibility",
-    "assessment"
-   ],
-   "packages": [
-    "ui_accessibility/inspect",
-    "ui_accessibility/projection",
-    "ui_base",
-    "ui_layout",
-    "ui_interaction",
-    "ui_style",
-    "ui_text"
-   ],
-   "source": "consumer/ui_showcase/sections/accessibility.odin",
-   "runnable": "consumer/ui_showcase",
-   "title": {
-    "en": "Accessibility assessment",
-    "ru": "Оценка доступности"
-   },
-   "summary": {
-    "en": "Assess contrast, minimum target size and reduced motion while ordinary actions keep working.",
-    "ru": "Оценка контраста, минимального размера цели и reduced motion; обычные действия продолжают работать."
-   },
-   "limitations": {
-    "en": "Experimental; the assessment is advisory. Warning/Unassessed are not conformance.",
-    "ru": "Экспериментально; оценка носит рекомендательный характер. Warning/Unassessed не означают conformance."
-   },
-   "media": [
-    "accessibility-initial-en",
-    "accessibility-initial-ru",
-    "accessibility-dialog-en",
-    "accessibility-dialog-ru"
-   ]
-  }
- ]
+  ]
 }

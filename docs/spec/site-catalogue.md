@@ -1,15 +1,13 @@
 # Статический каталог и изображения сайта
 
 Контракт введён `oui-3no.2`; опубликованные расширения включают `oui-3no.5`,
-`oui-3no.6`, Atlas `oui-3no.7`, text-input `oui-3no.9`, прокрутку/коллекции
-`oui-3no.10` и layers/HUD `oui-3no.11`. Text/rich-text `oui-3no.8`, menu
-recipe/Lab menu `oui-3no.20`, HUD recipe/Lab HUD `oui-3no.22`, inventory
-recipe/Lab inventory `oui-3no.23` и Settings recipe/Lab settings `oui-3no.21` —
-интеграционные кандидаты. Жесты `oui-3no.12` — локальный кандидат, pending
-integration. Диагностика/производительность `oui-3no.17` — интеграционный
-кандидат. Composition/custom `oui-3no.13` — локальный кандидат. Переходы
-состояния `oui-3no.14` — локальный кандидат, pending integration.
-World anchors `oui-3no.15` — текущий кандидат этой worktree, pending integration.
+`oui-3no.6`, Atlas `oui-3no.7`, text/rich-text `oui-3no.8`, text-input `oui-3no.9`,
+прокрутку/коллекции `oui-3no.10`, layers/HUD `oui-3no.11`, жесты `oui-3no.12`,
+переходы состояния `oui-3no.14`, composition/custom `oui-3no.13`, world anchors
+`oui-3no.15`, диагностику/производительность `oui-3no.17`, menu recipe/Lab menu
+`oui-3no.20`, HUD recipe/Lab HUD `oui-3no.22`, inventory recipe/Lab inventory
+`oui-3no.23` и оценку доступности `oui-3no.16`. Settings recipe/Lab settings
+`oui-3no.21` — интеграционный кандидат.
 Библиотека и native consumers не изменены; сайт описывает существующие возможности,
 а не реализует их в браузере.
 
@@ -18,7 +16,7 @@ World anchors `oui-3no.15` — текущий кандидат этой worktree
   `capabilities/layers`, `capabilities/hud`, `capabilities/transitions`,
   `capabilities/text-input`, `capabilities/atlas`,
   `capabilities/scroll-table`, `capabilities/collections`, `capabilities/text`, `capabilities/rich-text`,
-  `capabilities/gestures`, `capabilities/diagnostics-performance`,
+  `capabilities/accessibility`, `capabilities/gestures`, `capabilities/diagnostics-performance`,
   `capabilities/composition`, `capabilities/custom`, `capabilities/world`, а также рецепты
   и экраны Lab — опубликованные `recipes/menu` и `lab/menu` (`oui-3no.20`),
   `recipes/hud`/`lab/hud` кандидата `oui-3no.22`,
@@ -35,7 +33,7 @@ World anchors `oui-3no.15` — текущий кандидат этой worktree
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
   Каталог объявляет sample coverage `layout`, `controls`, `styling`, `profiles`,
   `layers`, `hud`, `transitions`, `text-input`, `atlas`, `scroll-table`, `collections`, `text`,
-  `rich-text`, `gestures`, Lab IDs `lab-menu`/`lab-hud`/`lab-inventory`/`lab-settings`,
+  `rich-text`, `accessibility`, `gestures`, Lab IDs `lab-menu`/`lab-hud`/`lab-inventory`/`lab-settings`,
   `diagnostics-performance`, `composition`, `custom`, `world`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
@@ -218,7 +216,7 @@ libpng 1.6.59/zlib 1.4 с upstream tests, ABI-проверкой и фактич
 resource hashes против трека. Media manifest сохраняет полные
 state/locale/revision/source/resource identities без локальных путей.
 
-На этом кандидате прошли 15 unit/parity/schema site tests (включая lab-покрытие
+На этом кандидате прошли 16 unit/parity/schema site tests (включая lab-покрытие
 menu/HUD/inventory/settings и media-тесты, а также negative fixture обязательных
 состояний lab-settings), static build, loopback HTTP новых маршрутов
 `recipes/settings` и `labs/settings` с image digests, свежий portable
@@ -833,7 +831,7 @@ portable-check; `check:catalogue:strict` ожидаемо падает (посл
 (включая опубликованные жесты, Lab menu и Lab HUD) сохранены; browser screenshot
 сохранены в артефактах проверки. Другие
 браузеры, полная доступность, остальные gallery IDs и deploy не проверены.
-## Композиция и custom primitives — локальный кандидат oui-3no.13
+## Композиция и custom primitives (`oui-3no.13`)
 
 Локальный кандидат добавляет EN/RU страницы `capabilities/composition` и
 `capabilities/custom`; после объединения с опубликованными жестами, menu recipe,
@@ -889,11 +887,11 @@ composition/custom не вводился, полная квалификация 
 `/oui/en/capabilities/composition`, `/oui/en/capabilities/custom`
 или соответствующие `/ru/` страницы, или перейти через каталог.
 `npm run check:browser` воспроизводит разрешённую изолированную браузерную
-проверку. Это локальный кандидат, не интеграция в основную ветку.
+проверку. Работа опубликована в основной ветке до интеграции `oui-3no.16`.
 
 ## World anchors (`oui-3no.15`)
 
-Кандидат `oui-3no.15`, pending integration: после объединения с опубликованными
+Работа `oui-3no.15` опубликована; после объединения с опубликованными
 жестами (`oui-3no.12`), menu recipe/Lab menu (`oui-3no.20`), HUD recipe/Lab HUD
 (`oui-3no.22`), диагностикой/производительностью (`oui-3no.17`),
 composition/custom (`oui-3no.13`) и переходами состояний (`oui-3no.14`) sample
@@ -968,3 +966,88 @@ preview listening=false), артефакты/скриншоты
 с `/oui/en/capabilities/world` либо `/oui/ru/capabilities/world` или перейти
 через catalogue. HTTP-проверка маршрутов/дайджестов и изолированная браузерная
 проверка отображения выполнены.
+
+## Оценка доступности (accessibility) — кандидат oui-3no.16
+
+`site/en/capabilities/accessibility.md` и русский counterpart описывают
+существующий native assessment-раздел G18 «assessment-confirm»: цель (оценка
+опубликованных кадров по контрасту, минимальному размеру цели и reduced
+motion), наблюдаемое поведение (фиксированные образцы Pass/Warning/Unassessed,
+цели 24x24 и обрезанная 40x40→20x40, подтверждение удержанием 1000 мс либо
+диалогом с отменой, предупреждения не отключают обычные действия, панель C08 —
+проекция только для оценки), ограничения (Warning/Unassessed не conformance,
+нет screen-reader вывода, платформенного моста или WCAG заявления, покрытие
+может оставаться неполным), выбранные пакеты (`ui_accessibility/inspect`,
+`ui_accessibility/projection`, оцениваемые кадры `ui_base`, `ui_layout`,
+`ui_interaction`, `ui_style`, `ui_text`; проекция транзитивно ссылается на
+`ui_custom`, `ui_editor`, `ui_gestures`, `ui_hold`, `ui_layers`, `ui_rich`,
+`ui_scroll`, `ui_transitions`, `ui_wire`), pinned source links и native
+build/run команды. Kit/native поведение не меняется; другие gallery IDs,
+Lab-экраны и видео не добавлены.
+
+Для каждого языка опубликованы два настоящих состояния: начальное (режим
+Hold, состояние покоя) и диалог (режим Dialog с открытым подтверждающим
+диалогом поверх затемнённого фона). Все четыре PNG сняты на clean source
+`8bc09cff358aa629410437996520283ff98d77d9`, 1280×960, scale 1, через выбранную
+явно и полностью проверенную ISD `f8204c61615406ce5628b15692628e146476a008`;
+create/status подтвердили `linux-abstract-v1`, собственные runs остановлены
+в finally. Private prefix libpng 1.6.59/zlib 1.4 собран заново из архивов с
+проверенными SHA256 (не переиспользован параллельный соседний артефакт),
+upstream `make check` обеих библиотек пройден, фактическая `ldd` linkage
+проверена. Каждый PNG просмотрен исполнителем (правильные locale/state,
+диалог действительно открыт, нет private-содержимого и unintended clipping);
+координатор подтвердил структуру чанков (только IHDR/IDAT/IEND), размеры
+1280×960 и реальные пиксельные отличия состояний (модальное затемнение);
+public-копии pixel-identical без ancillary metadata. Media manifest сохраняет
+полные state/locale/resource/image identities, включая обязательные hashes
+шести ресурсов.
+
+На исходном кандидате (до интеграции) прошли десять site
+unit/parity/schema/filter tests (включая новый accessibility-тест), build,
+loopback HTTP (33 маршрута, включая оба новых, и media digests) и свежий
+portable-check из нового export. Адресные
+native accessibility fixture-тесты (12 g18/c08 из
+`consumer/ui_showcase/app`) прошли с документированными кодеками. Полный
+app-suite прогон остановлен по таймауту: 8 failures воспроизведены на
+неизменённых базовых native байтах (g06/g09/g20/g21/lab lifecycle/fault
+тесты, в т.ч. с системными кодеками) и не связаны со site-only диффом; 34
+теста не выполнены; полной квалификации это не доказывает. После отдельного
+разрешения владельца 2026-11-15 (правило в `docs/rules/checks.md` расширено
+на `oui-3no.16`) пройдена браузерная приёмка новых страниц: изолированный
+sandboxed headless Chromium 152.0.7977.82 с собственным временным профилем и
+loopback-only static preview, 127 проверок 0 отказов на исходных байтах
+кандидата (логи `/tmp/opencode/oui-3no16-browser*.log`, артефакты сохранены);
+EN/RU страницы
+accessibility проверены на ширинах 360/1280, клавиатура, смена языка с
+valid/missing anchors, no-JS prose/images/links, reduced motion, оба
+изображения загружены с локализованным alt; sandbox-флаги и Seccomp
+проверены на фактическом дереве процессов, собственные browser/preview
+остановлены. Это не аудит доступности и не проверка других браузеров.
+Другие gallery IDs и deploy не проверены.
+
+Интеграция свежего primary выполнена пять раз по мере публикации соседних
+задач: `6267f79` (жесты `oui-3no.12`, menu recipe/Lab menu `oui-3no.20`, HUD
+recipe/Lab HUD `oui-3no.22`, диагностика `oui-3no.17`; 13 tests, 40 маршрутов,
+175 браузерных проверок, portable-check
+/tmp/opencode/oui-3no16-integrated.wO8CgxCH — все PASS), `7db4347`
+(composition/custom `oui-3no.13`), `40dcd54` (transitions `oui-3no.14`; 13
+tests, build, HTTP, 199 браузерных проверок, свежий portable-check
+/tmp/opencode/oui-3no16-final2.XRoTLVPW) и `66380f8` (world `oui-3no.15`;
+207 браузерных проверок, portable-check
+/tmp/opencode/oui-3no16-final3.fcUm5flV) и `b667ba8` (inventory recipe/Lab
+inventory `oui-3no.23`; финальные цифры см. ниже).
+Конфликтующие списки coverage/records/тестов каждый раз объединялись без
+ослабления assertions; финальный sample — 22 ID (19 gallery + 3 Lab, все
+gallery IDs), media — 106 records; JSON-сериализация выровнена с primary
+(2-space). На дереве после каждой интеграции
+повторялись затронутые проверки (см. журналы финальных прогонов). Native
+байты не менялись.
+
+Как увидеть локальный кандидат: из `site/` с Node из `.nvmrc` выполнить
+`npm ci`, `npm run check`, `npm run build`, `npm run check:http`, затем
+`npm run preview -- --port 0`; открыть выданный URL с
+`/oui/en/capabilities/accessibility` либо
+`/oui/ru/capabilities/accessibility` или перейти из каталога. Сравнить
+начальное состояние и открытый подтверждающий диалог. Проверено в
+локальном HTTP и собственном изолированном браузере; Pages deploy не
+заявляется.

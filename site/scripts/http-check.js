@@ -22,6 +22,8 @@ try {
     ['ru/guide/using-oui.html', 'ru', 'Использование oui', '/oui/en/guide/using-oui.html'],
     ['en/catalogue.html', 'en', 'Capability catalogue', '/oui/ru/catalogue.html'],
     ['ru/catalogue.html', 'ru', 'Каталог возможностей', '/oui/en/catalogue.html'],
+    ['en/capabilities/accessibility.html', 'en', 'Accessibility assessment', '/oui/ru/capabilities/accessibility.html'],
+    ['ru/capabilities/accessibility.html', 'ru', 'Оценка доступности', '/oui/en/capabilities/accessibility.html'],
     ['en/capabilities/layout.html', 'en', 'Layout', '/oui/ru/capabilities/layout.html'],
     ['ru/capabilities/layout.html', 'ru', 'Компоновка', '/oui/en/capabilities/layout.html'],
     ['en/capabilities/text.html', 'en', 'Text', '/oui/ru/capabilities/text.html'],

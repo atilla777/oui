@@ -48,6 +48,10 @@ try {
     ['ru/capabilities/styling.html', 'ru', 'Оформление', '/oui/en/capabilities/styling.html'],
     ['en/capabilities/profiles.html', 'en', 'Profiles', '/oui/ru/capabilities/profiles.html'],
     ['ru/capabilities/profiles.html', 'ru', 'Профили', '/oui/en/capabilities/profiles.html'],
+    ['en/recipes/hud.html', 'en', 'HUD recipe', '/oui/ru/recipes/hud.html'],
+    ['ru/recipes/hud.html', 'ru', 'Рецепт HUD', '/oui/en/recipes/hud.html'],
+    ['en/lab/hud.html', 'en', 'Lab HUD', '/oui/ru/lab/hud.html'],
+    ['ru/lab/hud.html', 'ru', 'Лаборатория HUD', '/oui/en/lab/hud.html'],
     ['en/capabilities/diagnostics-performance.html', 'en', 'Diagnostics and performance', '/oui/ru/capabilities/diagnostics-performance.html'],
     ['ru/capabilities/diagnostics-performance.html', 'ru', 'Диагностика и производительность', '/oui/en/capabilities/diagnostics-performance.html']
   ]) {
@@ -60,10 +64,10 @@ try {
     assert.ok(html.includes(`href="${other}"`), path)
     if (path.includes('guide/')) assert.ok(html.includes('id="choose-a-boundary"'))
     const markup = html.split('<script>window.__VP_HASH_MAP__')[0]
-    const section = path.match(/capabilities\/(layout|layers|hud|text-input|scroll-table|collections|text|rich-text|gestures|diagnostics-performance)\.html/)?.[1]
+    const section = path.match(/capabilities\/(layout|layers|hud|text-input|scroll-table|collections|text|rich-text|gestures|diagnostics-performance)\.html/)?.[1] ?? (path.endsWith('lab/hud.html') ? 'lab-hud' : undefined)
     if (section) {
       const records = media.records.filter(item => item.section === section && item.uiLocale === lang)
-      assert.equal(records.length, ['profiles', 'atlas', 'gestures'].includes(section) ? 3 : ['text-input', 'scroll-table', 'collections'].includes(section) ? 1 : 2)
+      assert.equal(records.length, ['profiles', 'atlas', 'gestures'].includes(section) ? 3 : ['text-input', 'scroll-table', 'collections'].includes(section) ? 1 : section === 'lab-hud' ? 4 : 2)
       for (const record of records) {
         const image = `/oui/${record.path}`
         assert.ok(markup.includes(`src="${image}"`), `missing no-JS image ${path}`)

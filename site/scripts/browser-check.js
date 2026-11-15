@@ -78,7 +78,7 @@ try {
     assert.ok(await page.locator('main').innerText())
   }
   const checkImages = async (activePage, path, lang) => {
-    const section = path === 'lab/menu.html' ? 'lab-menu' : path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|transitions|text-input|atlas|scroll-table|collections|text|rich-text)\.html$/)?.[1]
+    const section = path === 'lab/menu.html' ? 'lab-menu' : path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|transitions|text-input|atlas|scroll-table|collections|text|rich-text|gestures)\.html$/)?.[1]
     if (!section) { assert.ok(['catalogue.html', 'recipes/menu.html'].includes(path), path); return }
     const ids = {
       layout: [`layout-${lang}`, `layout-small-${lang}`],
@@ -94,6 +94,7 @@ try {
       collections: [`collections-${lang}`],
       text: [`text-${lang}-initial`, `text-${lang}-alternate`],
       'rich-text': [`rich-text-${lang}-initial`, `rich-text-${lang}-alternate`],
+      gestures: [`gestures-${lang}-initial`, `gestures-${lang}-proposal`, `gestures-${lang}-applied`],
       'lab-menu': [`lab-menu-initial-${lang}`, `lab-menu-submenu-${lang}`, `lab-menu-settings-${lang}`, `lab-menu-confirm-${lang}`]
     }[section]
     const images = activePage.locator('main p > img')
@@ -209,6 +210,7 @@ try {
     ['capabilities/hud.html', 'HUD hold', 'HUD и удержание', 'boundaries'],
     ['capabilities/transitions.html', 'State transitions', 'Переходы состояния', 'boundaries'],
     ['capabilities/text-input.html', 'Text input', 'Ввод текста', 'boundaries'],
+    ['capabilities/gestures.html', 'Gestures', 'Жесты', 'boundaries'],
     ['lab/menu.html', 'Lab menu', 'Меню лаборатории', 'boundaries'],
     ['recipes/menu.html', 'Basic menu recipe', 'Рецепт меню', 'build-and-run']
   ]
@@ -359,7 +361,7 @@ try {
         await page.keyboard.press('Enter')
         assert.equal(new URL(page.url()).hash, '#VPContent')
         if (path === 'catalogue.html') {
-          for (const [target, targetTitle] of [['layers', lang === 'en' ? 'Layers' : 'Слои'], ['hud', lang === 'en' ? 'HUD hold' : 'HUD и удержание'], ['transitions', lang === 'en' ? 'State transitions' : 'Переходы состояния']]) {
+          for (const [target, targetTitle] of [['layers', lang === 'en' ? 'Layers' : 'Слои'], ['hud', lang === 'en' ? 'HUD hold' : 'HUD и удержание'], ['transitions', lang === 'en' ? 'State transitions' : 'Переходы состояния'], ['gestures', lang === 'en' ? 'Gestures' : 'Жесты']]) {
             await go(`/oui/${lang}/catalogue.html`)
             await focusByTab(`main a[href="./capabilities/${target}.html"]`)
             await page.keyboard.press('Enter')
@@ -484,7 +486,7 @@ try {
           const dimensions = await p.evaluate(() => ({ scroll: document.documentElement.scrollWidth, client: document.documentElement.clientWidth, font: parseFloat(getComputedStyle(document.querySelector('main p')).fontSize) }))
           assert.ok(dimensions.scroll <= dimensions.client && dimensions.font >= 14, `${path} ${lang} ${width}: ${JSON.stringify(dimensions)}`)
           if (path === 'catalogue.html') {
-            for (const id of ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'transitions', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text']) {
+            for (const id of ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'transitions', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text', 'gestures']) {
               const link = p.locator(`main a[href="./capabilities/${id}.html"]`)
               assert.ok(await link.isVisible())
               assert.equal(await link.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/capabilities/${id}.html`)
@@ -509,7 +511,7 @@ try {
           await p.waitForURL(`**/oui/${other}/${path}`)
           assert.equal(await p.locator('html').getAttribute('lang'), other)
           if (path === 'catalogue.html') {
-            for (const target of ['layers', 'hud', 'transitions']) {
+            for (const target of ['layers', 'hud', 'transitions', 'gestures']) {
               assert.equal((await p.goto(`${origin}/oui/${lang}/catalogue.html`)).status(), 200)
               await focusByTab(`main a[href="./capabilities/${target}.html"]`, p)
               await p.keyboard.press('Enter')

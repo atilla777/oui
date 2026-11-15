@@ -116,6 +116,15 @@
 
 </CatalogueItem>
 
+<CatalogueItem id="gestures">
+
+## Жесты {#gestures}
+
+Перенос карточек между панелями: предложение при нажатой кнопке и одно применение
+при отпускании. [Подробнее о жестах и нативном примере](./capabilities/gestures).
+
+</CatalogueItem>
+
 <CatalogueItem id="lab-menu">
 
 ## Меню лаборатории {#lab-menu}

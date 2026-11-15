@@ -16,7 +16,8 @@
       "text",
       "rich-text",
       "transitions",
-      "lab-menu"
+      "lab-menu",
+      "gestures"
     ]
   },
   "records": [
@@ -512,6 +513,44 @@
         "lab-menu-submenu-ru",
         "lab-menu-settings-ru",
         "lab-menu-confirm-ru"
+      ]
+    },
+    {
+      "id": "gestures",
+      "group": "gallery",
+      "categories": [
+        "gestures",
+        "interaction"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_scroll",
+        "ui_sdl",
+        "ui_gestures"
+      ],
+      "source": "consumer/ui_showcase/sections/gestures.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Gestures",
+        "ru": "Жесты"
+      },
+      "summary": {
+        "en": "Drag a card between panels and scroll clipped rows with repeat buttons or a pan handle.",
+        "ru": "Перетаскивание карточки между панелями и прокрутка обрезанных строк кнопками повтора или ручкой прокрутки."
+      },
+      "limitations": {
+        "en": "Experimental; a proposal is not an application move and there is no inertia.",
+        "ru": "Экспериментально; предложение не является применённым переносом, инерции нет."
+      },
+      "media": [
+        "gestures-en-initial",
+        "gestures-en-proposal",
+        "gestures-en-applied",
+        "gestures-ru-initial",
+        "gestures-ru-proposal",
+        "gestures-ru-applied"
       ]
     }
   ]

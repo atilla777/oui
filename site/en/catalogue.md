@@ -116,6 +116,15 @@ Retarget paint offset, scale, opacity, colour and progress without animating lay
 
 </CatalogueItem>
 
+<CatalogueItem id="gestures">
+
+## Gestures {#gestures}
+
+Drag cards between two panels: a proposal while the button is down, then one
+application move on release. [Explore gestures and their native example](./capabilities/gestures).
+
+</CatalogueItem>
+
 <CatalogueItem id="lab-menu">
 
 ## Lab menu {#lab-menu}

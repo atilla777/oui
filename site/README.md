@@ -58,7 +58,7 @@ ordinary link still reaches the corresponding page without a hash.
 
 The catalogue is an explicit `layout`, `controls`, `styling`, `profiles`, `layers`,
 `hud`, `transitions`, `text`, `rich-text`, `text-input`, `atlas`, `scroll-table`,
-`collections` and `lab-menu` sample of thirteen gallery sections and one of the four Lab screens, not complete coverage. The
+`collections`, `gestures` and `lab-menu` sample of fourteen gallery sections and one of the four Lab screens, not complete coverage. The
 schema-versioned `data/catalogue.json` and `data/media.json` are checked before
 the build against the actual native section IDs, locale media, provenance,
 PNG dimensions and digests. `npm run check:catalogue:strict` deliberately fails

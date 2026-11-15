@@ -22,6 +22,8 @@ try {
     ['ru/guide/using-oui.html', 'ru', 'Использование oui', '/oui/en/guide/using-oui.html'],
     ['en/catalogue.html', 'en', 'Capability catalogue', '/oui/ru/catalogue.html'],
     ['ru/catalogue.html', 'ru', 'Каталог возможностей', '/oui/en/catalogue.html'],
+    ['en/capabilities/accessibility.html', 'en', 'Accessibility assessment', '/oui/ru/capabilities/accessibility.html'],
+    ['ru/capabilities/accessibility.html', 'ru', 'Оценка доступности', '/oui/en/capabilities/accessibility.html'],
     ['en/capabilities/layout.html', 'en', 'Layout', '/oui/ru/capabilities/layout.html'],
     ['ru/capabilities/layout.html', 'ru', 'Компоновка', '/oui/en/capabilities/layout.html'],
     ['en/capabilities/text.html', 'en', 'Text', '/oui/ru/capabilities/text.html'],
@@ -56,7 +58,7 @@ try {
     assert.ok(html.includes(`href="${other}"`), path)
     if (path.includes('guide/')) assert.ok(html.includes('id="choose-a-boundary"'))
     const markup = html.split('<script>window.__VP_HASH_MAP__')[0]
-    const section = path.match(/capabilities\/(layout|layers|hud|text-input|scroll-table|collections|text|rich-text)\.html/)?.[1]
+    const section = path.match(/capabilities\/(accessibility|layout|layers|hud|text-input|scroll-table|collections|text|rich-text)\.html/)?.[1]
     if (section) {
       const records = media.records.filter(item => item.section === section && item.uiLocale === lang)
       assert.equal(records.length, ['text-input', 'scroll-table', 'collections'].includes(section) ? 1 : 2)

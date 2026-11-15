@@ -14,7 +14,8 @@
       "scroll-table",
       "collections",
       "text",
-      "rich-text"
+      "rich-text",
+      "accessibility"
     ]
   },
   "records": [
@@ -430,6 +431,43 @@
         "rich-text-en-alternate",
         "rich-text-ru-initial",
         "rich-text-ru-alternate"
+      ]
+    },
+    {
+      "id": "accessibility",
+      "group": "gallery",
+      "categories": [
+        "accessibility",
+        "assessment"
+      ],
+      "packages": [
+        "ui_accessibility/inspect",
+        "ui_accessibility/projection",
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_style",
+        "ui_text"
+      ],
+      "source": "consumer/ui_showcase/sections/accessibility.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Accessibility assessment",
+        "ru": "Оценка доступности"
+      },
+      "summary": {
+        "en": "Assess contrast, minimum target size and reduced motion while ordinary actions keep working.",
+        "ru": "Оценка контраста, минимального размера цели и reduced motion; обычные действия продолжают работать."
+      },
+      "limitations": {
+        "en": "Experimental; the assessment is advisory. Warning/Unassessed are not conformance.",
+        "ru": "Экспериментально; оценка носит рекомендательный характер. Warning/Unassessed не означают conformance."
+      },
+      "media": [
+        "accessibility-initial-en",
+        "accessibility-initial-ru",
+        "accessibility-dialog-en",
+        "accessibility-dialog-ru"
       ]
     }
   ]

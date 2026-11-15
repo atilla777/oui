@@ -78,9 +78,10 @@ try {
     assert.ok(await page.locator('main').innerText())
   }
   const checkImages = async (activePage, path, lang) => {
-    const section = path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|text-input|atlas|scroll-table|collections|text|rich-text)\.html$/)?.[1]
+    const section = path.match(/^capabilities\/(accessibility|layout|controls|styling|profiles|layers|hud|text-input|atlas|scroll-table|collections|text|rich-text)\.html$/)?.[1]
     if (!section) { assert.equal(path, 'catalogue.html'); return }
     const ids = {
+      accessibility: [`accessibility-initial-${lang}`, `accessibility-dialog-${lang}`],
       layout: [`layout-${lang}`, `layout-small-${lang}`],
       controls: [`controls-${lang}-initial`, `controls-${lang}-changed`],
       styling: [`styling-${lang}-initial`, `styling-${lang}-changed`],
@@ -194,6 +195,7 @@ try {
   }
   const samplePages = [
     ['catalogue.html', 'Capability catalogue', 'Каталог возможностей', 'layout'],
+    ['capabilities/accessibility.html', 'Accessibility assessment', 'Оценка доступности', 'boundaries'],
     ['capabilities/layout.html', 'Layout', 'Компоновка', 'boundaries'],
     ['capabilities/text.html', 'Text', 'Текст', 'boundaries'],
     ['capabilities/rich-text.html', 'Rich text', 'Форматированный текст', 'boundaries'],
@@ -479,7 +481,7 @@ try {
           const dimensions = await p.evaluate(() => ({ scroll: document.documentElement.scrollWidth, client: document.documentElement.clientWidth, font: parseFloat(getComputedStyle(document.querySelector('main p')).fontSize) }))
           assert.ok(dimensions.scroll <= dimensions.client && dimensions.font >= 14, `${path} ${lang} ${width}: ${JSON.stringify(dimensions)}`)
           if (path === 'catalogue.html') {
-            for (const id of ['layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text']) {
+            for (const id of ['accessibility', 'layout', 'controls', 'styling', 'profiles', 'layers', 'hud', 'text-input', 'atlas', 'scroll-table', 'collections', 'text', 'rich-text']) {
               const link = p.locator(`main a[href="./capabilities/${id}.html"]`)
               assert.ok(await link.isVisible())
               assert.equal(await link.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/capabilities/${id}.html`)

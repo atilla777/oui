@@ -1,20 +1,23 @@
 # Статический каталог и изображения сайта
 
 Контракт введён `oui-3no.2`; опубликованные расширения включают `oui-3no.5`,
-`oui-3no.6`, Atlas `oui-3no.7`, text-input `oui-3no.9`, прокрутку/коллекции
-`oui-3no.10` и layers/HUD `oui-3no.11`. Text/rich-text `oui-3no.8` — интеграционный кандидат.
+`oui-3no.6`, Atlas `oui-3no.7`, text/rich-text `oui-3no.8`, text-input `oui-3no.9`,
+прокрутку/коллекции `oui-3no.10` и layers/HUD `oui-3no.11`. Оценка доступности
+`oui-3no.16` — интеграционный кандидат.
 Библиотека и native consumers не изменены; сайт описывает существующие возможности,
 а не реализует их в браузере.
 
 - `site/en/` и `site/ru/` содержат `catalogue` и `capabilities/layout`,
   `capabilities/controls`, `capabilities/styling`, `capabilities/profiles`,
   `capabilities/layers`, `capabilities/hud`, `capabilities/text-input`, `capabilities/atlas`,
-  `capabilities/scroll-table`, `capabilities/collections`, `capabilities/text`, `capabilities/rich-text`.
+  `capabilities/scroll-table`, `capabilities/collections`, `capabilities/text`,
+  `capabilities/rich-text`, `capabilities/accessibility`.
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
   полный showcase, с pinned source links и native build/run command.
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
   Каталог объявляет sample coverage `layout`, `controls`, `styling`, `profiles`,
-  `layers`, `hud`, `text-input`, `atlas`, `scroll-table`, `collections`, `text`, `rich-text`. Native source catalogue
+  `layers`, `hud`, `text-input`, `atlas`, `scroll-table`, `collections`, `text`,
+  `rich-text`, `accessibility`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -371,3 +374,68 @@ test прошли. Дополнительный широкий native app test r
 `/oui/en/capabilities/atlas` либо `/oui/ru/capabilities/atlas`, или перейти
 через соответствующий catalogue. Сравнить A/B и счётчик reload под изображениями.
 Это проверено в локальном HTTP/browser, не означает публикацию или Pages deploy.
+
+## Оценка доступности (accessibility) — кандидат oui-3no.16
+
+`site/en/capabilities/accessibility.md` и русский counterpart описывают
+существующий native assessment-раздел G18 «assessment-confirm»: цель (оценка
+опубликованных кадров по контрасту, минимальному размеру цели и reduced
+motion), наблюдаемое поведение (фиксированные образцы Pass/Warning/Unassessed,
+цели 24x24 и обрезанная 40x40→20x40, подтверждение удержанием 1000 мс либо
+диалогом с отменой, предупреждения не отключают обычные действия, панель C08 —
+проекция только для оценки), ограничения (Warning/Unassessed не conformance,
+нет screen-reader вывода, платформенного моста или WCAG заявления, покрытие
+может оставаться неполным), выбранные пакеты (`ui_accessibility/inspect`,
+`ui_accessibility/projection`, оцениваемые кадры `ui_base`, `ui_layout`,
+`ui_interaction`, `ui_style`, `ui_text`; проекция транзитивно ссылается на
+`ui_custom`, `ui_editor`, `ui_gestures`, `ui_hold`, `ui_layers`, `ui_rich`,
+`ui_scroll`, `ui_transitions`, `ui_wire`), pinned source links и native
+build/run команды. Kit/native поведение не меняется; другие gallery IDs,
+Lab-экраны и видео не добавлены.
+
+Для каждого языка опубликованы два настоящих состояния: начальное (режим
+Hold, состояние покоя) и диалог (режим Dialog с открытым подтверждающим
+диалогом поверх затемнённого фона). Все четыре PNG сняты на clean source
+`8bc09cff358aa629410437996520283ff98d77d9`, 1280×960, scale 1, через выбранную
+явно и полностью проверенную ISD `f8204c61615406ce5628b15692628e146476a008`;
+create/status подтвердили `linux-abstract-v1`, собственные runs остановлены
+в finally. Private prefix libpng 1.6.59/zlib 1.4 собран заново из архивов с
+проверенными SHA256 (не переиспользован параллельный соседний артефакт),
+upstream `make check` обеих библиотек пройден, фактическая `ldd` linkage
+проверена. Каждый PNG просмотрен исполнителем (правильные locale/state,
+диалог действительно открыт, нет private-содержимого и unintended clipping);
+координатор подтвердил структуру чанков (только IHDR/IDAT/IEND), размеры
+1280×960 и реальные пиксельные отличия состояний (модальное затемнение);
+public-копии pixel-identical без ancillary metadata. Media manifest сохраняет
+полные state/locale/resource/image identities, включая обязательные hashes
+шести ресурсов.
+
+На этом кандидате прошли десять site unit/parity/schema/filter tests (включая
+новый accessibility-тест), build, loopback HTTP (33 маршрута, включая оба
+новых, и media digests) и свежий portable-check из нового export. Адресные
+native accessibility fixture-тесты (12 g18/c08 из
+`consumer/ui_showcase/app`) прошли с документированными кодеками. Полный
+app-suite прогон остановлен по таймауту: 8 failures воспроизведены на
+неизменённых базовых native байтах (g06/g09/g20/g21/lab lifecycle/fault
+тесты, в т.ч. с системными кодеками) и не связаны со site-only диффом; 34
+теста не выполнены; полной квалификации это не доказывает. После отдельного
+разрешения владельца 2026-11-15 (правило в `docs/rules/checks.md` расширено
+на `oui-3no.16`) пройдена браузерная приёмка новых страниц: изолированный
+sandboxed headless Chromium 152.0.7977.82 с собственным временным профилем и
+loopback-only static preview, 127 проверок 0 отказов, лог
+`/tmp/opencode/oui-3no16-browser.log` и артефакты сохранены; EN/RU страницы
+accessibility проверены на ширинах 360/1280, клавиатура, смена языка с
+valid/missing anchors, no-JS prose/images/links, reduced motion, оба
+изображения загружены с локализованным alt; sandbox-флаги и Seccomp
+проверены на фактическом дереве процессов, собственные browser/preview
+остановлены. Это не аудит доступности и не проверка других браузеров.
+Другие gallery IDs и deploy не проверены.
+
+Как увидеть локальный кандидат: из `site/` с Node из `.nvmrc` выполнить
+`npm ci`, `npm run check`, `npm run build`, `npm run check:http`, затем
+`npm run preview -- --port 0`; открыть выданный URL с
+`/oui/en/capabilities/accessibility` либо
+`/oui/ru/capabilities/accessibility` или перейти из каталога. Сравнить
+начальное состояние и открытый подтверждающий диалог. Проверено в
+локальном HTTP и собственном изолированном браузере; Pages deploy не
+заявляется.

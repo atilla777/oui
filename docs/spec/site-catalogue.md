@@ -859,8 +859,10 @@ recipe/Lab HUD `oui-3no.22`, диагностика `oui-3no.17`; 13 tests, 40 �
 175 браузерных проверок, portable-check
 /tmp/opencode/oui-3no16-integrated.wO8CgxCH — все PASS), `7db4347`
 (composition/custom `oui-3no.13`), `40dcd54` (transitions `oui-3no.14`; 13
-tests, build, HTTP, 191 браузерная проверка, свежий portable-check
-/tmp/opencode/oui-3no16-final2.XRoTLVPW) и `66380f8` (world `oui-3no.15`).
+tests, build, HTTP, 199 браузерных проверок, свежий portable-check
+/tmp/opencode/oui-3no16-final2.XRoTLVPW) и `66380f8` (world `oui-3no.15`;
+207 браузерных проверок, portable-check
+/tmp/opencode/oui-3no16-final3.fcUm5flV).
 Конфликтующие списки coverage/records/тестов каждый раз объединялись без
 ослабления assertions; финальный sample — 21 ID (19 gallery + 2 Lab, все
 gallery IDs), media — 96 records. На дереве после каждой интеграции

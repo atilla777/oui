@@ -1,7 +1,7 @@
 # Capability catalogue {#catalogue}
 
 This is an explicitly limited sample, not the complete showcase catalogue. It
-currently covers thirteen of the 19 gallery sections and none of the four Integration
+currently covers thirteen of the 19 gallery sections and one of the four Integration
 Lab screens. The captures show the native application, not a browser port.
 
 <CatalogueFilter locale="en">
@@ -113,6 +113,15 @@ Load image regions, switch atlas resources and reload the selected set.
 
 Retarget paint offset, scale, opacity, colour and progress without animating layout.
 [Explore transitions and their native example](./capabilities/transitions).
+
+</CatalogueItem>
+
+<CatalogueItem id="lab-menu">
+
+## Lab menu {#lab-menu}
+
+Open a submenu, edit mock settings in a modal and confirm the shown draft.
+[Explore the Lab menu and its native example](./lab/menu).
 
 </CatalogueItem>
 

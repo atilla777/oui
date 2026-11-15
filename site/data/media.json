@@ -3162,6 +3162,510 @@
       }
     },
     {
+      "id": "composition-en-initial",
+      "section": "composition",
+      "state": "initial nested route; stop on; child present; parent and child counts zero",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/composition.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_composition"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section composition; initial stop on and child present; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/composition-en-initial.png",
+      "sha256": "981bffff19cd80e1f011b5cdf7139813723db4babf2d154f69f5615bc30c57a4",
+      "caption": {
+        "en": "Native showcase composition, EN UI; initial state with stop on.",
+        "ru": "Native showcase: композиция, интерфейс EN; начальное состояние, Stop включён."
+      },
+      "alt": {
+        "en": "Showcase page with a composite parent button containing a nested child button, counts parent zero and child zero, Stop on.",
+        "ru": "Страница showcase: составная родительская кнопка с вложенной дочерней, счётчики parent=0 и child=0, Stop включён."
+      }
+    },
+    {
+      "id": "composition-en-propagated",
+      "section": "composition",
+      "state": "stop off; child activated once; activation recorded on the parent route; counts parent one and child one",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/composition.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_composition"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section composition; Stop toggled off then child activated once; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/composition-en-propagated.png",
+      "sha256": "0458489c6bcf91f9b2407a1438b047ba9d505fd13d10f007f147f561cf56a652",
+      "caption": {
+        "en": "Native showcase composition, EN UI; child activation propagated to the parent.",
+        "ru": "Native showcase: композиция, интерфейс EN; активация дочерней кнопки распространена на родительскую."
+      },
+      "alt": {
+        "en": "Same page with Stop off after one child activation; counts parent one and child one.",
+        "ru": "Та же страница при выключенном Stop после одной активации дочерней кнопки; счётчики parent=1 и child=1."
+      }
+    },
+    {
+      "id": "custom-en-initial",
+      "section": "custom",
+      "state": "initial state; default two panels; both circle counts zero",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/custom.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_custom"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section custom; initial state; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/custom-en-initial.png",
+      "sha256": "b6397b818b1a7b502ba4ff5c77b5da07deb13bb575d1c7084633462cbb3e4423",
+      "caption": {
+        "en": "Native showcase custom primitives, EN UI; initial state.",
+        "ru": "Native showcase: свои примитивы, интерфейс EN; начальное состояние."
+      },
+      "alt": {
+        "en": "Showcase page with Style, Footer, Disabled, Popup shield and Tooltip actions above two panels, each with a circle and footer count zero.",
+        "ru": "Страница showcase с действиями Стиль, Подвал, Недоступность, Щит popup и Подсказка над двумя панелями с кругами и счётчиком ноль."
+      }
+    },
+    {
+      "id": "custom-en-activated",
+      "section": "custom",
+      "state": "left circle activated once; left count one; right count zero",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/custom.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_custom"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section custom; left circle activated once; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/custom-en-activated.png",
+      "sha256": "e9b5d05e2da90939f6af0e46b21eb019a3e4a68a81ec3e67dc199f232c7e5ce1",
+      "caption": {
+        "en": "Native showcase custom primitives, EN UI; left circle activated once.",
+        "ru": "Native showcase: свои примитивы, интерфейс EN; левый круг активирован один раз."
+      },
+      "alt": {
+        "en": "Same page with the left panel footer count changed to one by a single circle activation.",
+        "ru": "Та же страница: счётчик в подвале левой панели стал равен одному после активации круга."
+      }
+    },
+    {
+      "id": "custom-en-styled",
+      "section": "custom",
+      "state": "style recipe applied and left footer slot removed; right panel unchanged",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/custom.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_custom"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section custom; Style applied and footer slot removed; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/custom-en-styled.png",
+      "sha256": "51dd5fd46bf25a0066c45e0a3459d99b85e0d72116ae9371efcd0f968c58f562",
+      "caption": {
+        "en": "Native showcase custom primitives, EN UI; style applied and footer slot removed.",
+        "ru": "Native showcase: свои примитивы, интерфейс EN; применён стиль и удалён подвал."
+      },
+      "alt": {
+        "en": "Same page with the left panel restyled and its footer note removed; the right panel is unchanged.",
+        "ru": "Та же страница: левая панель переоформлена, её подвал удалён; правая панель не изменилась."
+      }
+    },
+    {
+      "id": "custom-en-popup-tooltip",
+      "section": "custom",
+      "state": "style applied, footer slot removed, popup shield open and noninteractive tooltip shown",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/custom.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_custom"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section custom; tooltip shown then popup shield; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/custom-en-popup-tooltip.png",
+      "sha256": "98b07bd2bf902485854bb833c3a8dd7e4f470613c60edc19bcdfe2a0faedb23b",
+      "caption": {
+        "en": "Native showcase custom primitives, EN UI; popup shield and tooltip shown.",
+        "ru": "Native showcase: свои примитивы, интерфейс EN; показаны щит popup и подсказка."
+      },
+      "alt": {
+        "en": "Same page with a popup overlay containing a Close popup button and a reserved-position tooltip label.",
+        "ru": "Та же страница: поверх панелей открыт popup с кнопкой закрытия и подсказка в зарезервированной позиции."
+      }
+    },
+    {
+      "id": "composition-ru-initial",
+      "section": "composition",
+      "state": "initial nested route; stop on; child present; parent and child counts zero",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/composition.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_composition"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section composition; initial stop on and child present; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/composition-ru-initial.png",
+      "sha256": "1d451d0966c6655ed60719af94aa1149776e96fde23496eefe30844ab82c3e12",
+      "caption": {
+        "en": "Native showcase composition, RU UI; initial state with stop on.",
+        "ru": "Native showcase: композиция, интерфейс RU; начальное состояние, Stop включён."
+      },
+      "alt": {
+        "en": "Showcase page with a composite parent button containing a nested child button, counts parent zero and child zero, Stop on.",
+        "ru": "Страница showcase: составная родительская кнопка с вложенной дочерней, счётчики parent=0 и child=0, Stop включён."
+      }
+    },
+    {
+      "id": "composition-ru-propagated",
+      "section": "composition",
+      "state": "stop off; child activated once; activation recorded on the parent route; counts parent one and child one",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/composition.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_composition"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section composition; Stop toggled off then child activated once; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/composition-ru-propagated.png",
+      "sha256": "2f4377da9974f02125660b39c5ee8cefcd6c9f189850d4b25b8a78d99e522956",
+      "caption": {
+        "en": "Native showcase composition, RU UI; child activation propagated to the parent.",
+        "ru": "Native showcase: композиция, интерфейс RU; активация дочерней кнопки распространена на родительскую."
+      },
+      "alt": {
+        "en": "Same page with Stop off after one child activation; counts parent one and child one.",
+        "ru": "Та же страница при выключенном Stop после одной активации дочерней кнопки; счётчики parent=1 и child=1."
+      }
+    },
+    {
+      "id": "custom-ru-initial",
+      "section": "custom",
+      "state": "initial state; default two panels; both circle counts zero",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/custom.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_custom"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section custom; initial state; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/custom-ru-initial.png",
+      "sha256": "fbd200b03a949cec3cec15a8ade41f022dc0b9cb2fb12d064e682ecedd28ef33",
+      "caption": {
+        "en": "Native showcase custom primitives, RU UI; initial state.",
+        "ru": "Native showcase: свои примитивы, интерфейс RU; начальное состояние."
+      },
+      "alt": {
+        "en": "Showcase page with Style, Footer, Disabled, Popup shield and Tooltip actions above two panels, each with a circle and footer count zero.",
+        "ru": "Страница showcase с действиями Стиль, Подвал, Недоступность, Щит popup и Подсказка над двумя панелями с кругами и счётчиком ноль."
+      }
+    },
+    {
+      "id": "custom-ru-activated",
+      "section": "custom",
+      "state": "left circle activated once; left count one; right count zero",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/custom.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_custom"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section custom; left circle activated once; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/custom-ru-activated.png",
+      "sha256": "0c8ad8e0e4c9cbd756317e18be8cad6cbff54e31461ac6da3edc71f0776a4dad",
+      "caption": {
+        "en": "Native showcase custom primitives, RU UI; left circle activated once.",
+        "ru": "Native showcase: свои примитивы, интерфейс RU; левый круг активирован один раз."
+      },
+      "alt": {
+        "en": "Same page with the left panel footer count changed to one by a single circle activation.",
+        "ru": "Та же страница: счётчик в подвале левой панели стал равен одному после активации круга."
+      }
+    },
+    {
+      "id": "custom-ru-styled",
+      "section": "custom",
+      "state": "style recipe applied and left footer slot removed; right panel unchanged",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/custom.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_custom"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section custom; Style applied and footer slot removed; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/custom-ru-styled.png",
+      "sha256": "84b503d524b80aaca15a23f8a23864d2c54b27ae40d9a44a4a8b3ebcef5d3df9",
+      "caption": {
+        "en": "Native showcase custom primitives, RU UI; style applied and footer slot removed.",
+        "ru": "Native showcase: свои примитивы, интерфейс RU; применён стиль и удалён подвал."
+      },
+      "alt": {
+        "en": "Same page with the left panel restyled and its footer note removed; the right panel is unchanged.",
+        "ru": "Та же страница: левая панель переоформлена, её подвал удалён; правая панель не изменилась."
+      }
+    },
+    {
+      "id": "custom-ru-popup-tooltip",
+      "section": "custom",
+      "state": "style applied, footer slot removed, popup shield open and noninteractive tooltip shown",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/sections/custom.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_custom"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section custom; tooltip shown then popup shield; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/custom-ru-popup-tooltip.png",
+      "sha256": "ac818a87f72362b34af6d2ab05b167924865dc6cbd022ccca445fa7195821704",
+      "caption": {
+        "en": "Native showcase custom primitives, RU UI; popup shield and tooltip shown.",
+        "ru": "Native showcase: свои примитивы, интерфейс RU; показаны щит popup и подсказка."
+      },
+      "alt": {
+        "en": "Same page with a popup overlay containing a Close popup button and a reserved-position tooltip label.",
+        "ru": "Та же страница: поверх панелей открыт popup с кнопкой закрытия и подсказка в зарезервированной позиции."
+      }
+    },
+    {
       "id": "lab-settings-en-initial",
       "section": "lab-settings",
       "state": "initial settings dialog with default draft",

@@ -15,6 +15,9 @@
       "collections",
       "text",
       "rich-text",
+      "lab-menu",
+      "gestures",
+      "lab-hud",
       "world"
     ]
   },
@@ -431,6 +434,123 @@
         "rich-text-en-alternate",
         "rich-text-ru-initial",
         "rich-text-ru-alternate"
+      ]
+    },
+    {
+      "id": "gestures",
+      "group": "gallery",
+      "categories": [
+        "gestures",
+        "interaction"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_scroll",
+        "ui_sdl",
+        "ui_gestures"
+      ],
+      "source": "consumer/ui_showcase/sections/gestures.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Gestures",
+        "ru": "Жесты"
+      },
+      "summary": {
+        "en": "Drag a card between panels and scroll clipped rows with repeat buttons or a pan handle.",
+        "ru": "Перетаскивание карточки между панелями и прокрутка обрезанных строк кнопками повтора или ручкой прокрутки."
+      },
+      "limitations": {
+        "en": "Experimental; a proposal is not an application move and there is no inertia.",
+        "ru": "Экспериментально; предложение не является применённым переносом, инерции нет."
+      },
+      "media": [
+        "gestures-en-initial",
+        "gestures-en-proposal",
+        "gestures-en-applied",
+        "gestures-ru-initial",
+        "gestures-ru-proposal",
+        "gestures-ru-applied"
+      ]
+    },
+    {
+      "id": "lab-menu",
+      "group": "lab",
+      "categories": [
+        "menu",
+        "settings"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_interaction",
+        "ui_layers",
+        "ui_controls",
+        "ui_editor",
+        "ui_sdl_text"
+      ],
+      "source": "consumer/ui_showcase/app/lab_menu.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Lab menu",
+        "ru": "Меню лаборатории"
+      },
+      "summary": {
+        "en": "Open a submenu, edit mock settings in a modal and confirm the shown draft.",
+        "ru": "Открыть подменю, изменить учебные настройки в модальном окне и подтвердить показанный черновик."
+      },
+      "limitations": {
+        "en": "Experimental; mock settings; process-local state, no persistence.",
+        "ru": "Экспериментально; учебные настройки; состояние только до завершения процесса, без сохранения."
+      },
+      "media": [
+        "lab-menu-initial-en",
+        "lab-menu-submenu-en",
+        "lab-menu-settings-en",
+        "lab-menu-confirm-en",
+        "lab-menu-initial-ru",
+        "lab-menu-submenu-ru",
+        "lab-menu-settings-ru",
+        "lab-menu-confirm-ru"
+      ]
+    },
+    {
+      "id": "lab-hud",
+      "group": "lab",
+      "categories": [
+        "hud",
+        "hold"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_layers",
+        "ui_hold"
+      ],
+      "source": "consumer/ui_showcase/app/lab_hud.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Lab HUD",
+        "ru": "Лаборатория HUD"
+      },
+      "summary": {
+        "en": "The Integration Lab HUD: mock HP with -10 and +10, a 1000 ms hold-to-restore, a popup and a noninteractive tooltip.",
+        "ru": "HUD Integration Lab: учебный HP с -10 и +10, восстановление удержанием 1000 мс, панель и неинтерактивная подсказка."
+      },
+      "limitations": {
+        "en": "Experimental; mock HP; hold 1000 ms.",
+        "ru": "Экспериментально: учебный HP; удержание 1000 мс."
+      },
+      "media": [
+        "lab-hud-initial-en",
+        "lab-hud-popup-en",
+        "lab-hud-hold-en",
+        "lab-hud-completed-en",
+        "lab-hud-initial-ru",
+        "lab-hud-popup-ru",
+        "lab-hud-hold-ru",
+        "lab-hud-completed-ru"
       ]
     },
     {

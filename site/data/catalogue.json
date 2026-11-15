@@ -22,6 +22,7 @@
    "diagnostics-performance",
    "composition",
    "custom",
+   "world",
    "accessibility"
   ]
  },
@@ -706,6 +707,41 @@
     "custom-ru-activated",
     "custom-ru-styled",
     "custom-ru-popup-tooltip"
+   ]
+  },
+  {
+   "id": "world",
+   "group": "gallery",
+   "categories": [
+    "world",
+    "positioning"
+   ],
+   "packages": [
+    "ui_base",
+    "ui_layout",
+    "ui_interaction",
+    "ui_style",
+    "ui_world"
+   ],
+   "source": "consumer/ui_showcase/sections/world.odin",
+   "runnable": "consumer/ui_showcase",
+   "title": {
+    "en": "World anchors",
+    "ru": "Якоря мира"
+   },
+   "summary": {
+    "en": "Place application-owned cards at world-space points through a camera and projection callback, with Hide, Clamp or Direction for anchors outside the viewport.",
+    "ru": "Размещайте карточки приложения в мировых координатах через камеру и callback проекции; для якорей за пределами области просмотра доступны Hide, Clamp или Direction."
+   },
+   "limitations": {
+    "en": "Experimental; the application owns the camera and the projection callback; no engine, no Game Bridge.",
+    "ru": "Экспериментально; камерой и callback проекции владеет приложение; нет движка и Game Bridge."
+   },
+   "media": [
+    "world-initial-en",
+    "world-initial-ru",
+    "world-indicators-en",
+    "world-indicators-ru"
    ]
   },
   {

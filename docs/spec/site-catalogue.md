@@ -3,9 +3,9 @@
 Контракт введён `oui-3no.2`; опубликованные расширения включают `oui-3no.5`,
 `oui-3no.6`, Atlas `oui-3no.7`, text/rich-text `oui-3no.8`, text-input `oui-3no.9`,
 прокрутку/коллекции `oui-3no.10`, layers/HUD `oui-3no.11`, жесты `oui-3no.12`,
-переходы состояния `oui-3no.14`, composition/custom `oui-3no.13`,
-диагностику/производительность `oui-3no.17`, menu recipe/Lab menu `oui-3no.20`
-и HUD recipe/Lab HUD `oui-3no.22`. Оценка доступности
+переходы состояния `oui-3no.14`, composition/custom `oui-3no.13`, world anchors
+`oui-3no.15`, диагностику/производительность `oui-3no.17`, menu recipe/Lab menu
+`oui-3no.20` и HUD recipe/Lab HUD `oui-3no.22`. Оценка доступности
 `oui-3no.16` — интеграционный кандидат.
 Библиотека и native consumers не изменены; сайт описывает существующие возможности,
 а не реализует их в браузере.
@@ -16,7 +16,7 @@
   `capabilities/text-input`, `capabilities/atlas`,
   `capabilities/scroll-table`, `capabilities/collections`, `capabilities/text`, `capabilities/rich-text`,
   `capabilities/accessibility`, `capabilities/gestures`, `capabilities/diagnostics-performance`,
-  `capabilities/composition`, `capabilities/custom`, а также рецепты
+  `capabilities/composition`, `capabilities/custom`, `capabilities/world`, а также рецепты
   и экраны Lab — опубликованные `recipes/menu` и `lab/menu` (`oui-3no.20`) и
   `recipes/hud`/`lab/hud` этого кандидата.
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
@@ -27,7 +27,7 @@
   Каталог объявляет sample coverage `layout`, `controls`, `styling`, `profiles`,
   `layers`, `hud`, `transitions`, `text-input`, `atlas`, `scroll-table`, `collections`, `text`,
   `rich-text`, `accessibility`, `gestures`, Lab IDs `lab-menu`/`lab-hud`, `diagnostics-performance`,
-  `composition`, `custom`. Native source catalogue
+  `composition`, `custom`, `world`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -717,6 +717,84 @@ composition/custom не вводился, полная квалификация 
 `npm run check:browser` воспроизводит разрешённую изолированную браузерную
 проверку. Работа опубликована в основной ветке до интеграции `oui-3no.16`.
 
+## World anchors (`oui-3no.15`)
+
+Работа `oui-3no.15` опубликована; после объединения с опубликованными
+жестами (`oui-3no.12`), menu recipe/Lab menu (`oui-3no.20`), HUD recipe/Lab HUD
+(`oui-3no.22`), диагностикой/производительностью (`oui-3no.17`),
+composition/custom (`oui-3no.13`) и переходами состояний (`oui-3no.14`) sample
+вырос до двадцати записей — восемнадцать gallery-разделов (включая новый `world`,
+G19, fixture `anchors`) и два Lab-экрана. EN/RU страницы
+доступны из статического каталога, описывают назначение, наблюдаемое поведение,
+границы, выбранные пакеты, pinned source links и native build/run команду; kit и
+native поведение не изменялись.
+
+`world` размещает обычные карточки в мировых координатах: приложение владеет
+камерой и передаёт callback проекции, `kit/ui_world` возвращает границы,
+видимость, прижатие и нормализованное направление (stateless `place_anchor`,
+без хранения состояния и аллокаций). В showcase три якоря: A следует за кнопками
+объекта, B зафиксирован в (800, 0), C в (-800, -500); кнопки камеры сдвигают вид
+на 64 мировые единицы, Zoom переключает 1/2, политика циклирует
+Hide/Clamp/Direction, Reset восстанавливает модель. Заголовок страницы сообщает
+причину каждого якоря (Placed/Offscreen). Нет движка, графа сцены и Game Bridge.
+Выбранные пакеты: `ui_base`, `ui_layout`, `ui_interaction`, `ui_style`, `ui_world`.
+
+Получены четыре настоящих PNG 1280×960, scale 1, EN/RU: начальное состояние
+(A=Placed, B/C=Offscreen при Hide, карточка A с прогрессом в центре) и
+альтернативное после трёх Camera +X и политики Direction (A смещён влево,
+B/C показаны индикаторами у краёв, A/B/C=Placed). Снимки сделаны на clean source
+revision `8bc09cff358aa629410437996520283ff98d77d9` (native-файлы байт-идентичны
+`4da8d7a57bd2453227a4c37df6b0b4d171401681`). Явно выбранная ISD
+`f8204c61615406ce5628b15692628e146476a008` проверена целиком; create/status
+подтвердили `linux-abstract-v1`, выполнен явный focus, собственные runs
+остановлены с проверкой отсутствия живых процессов. Private prefix
+libpng 1.6.59/zlib 1.4 подготовен заново по `docs/resources.md` (архивы
+проверены по опубликованным SHA256, upstream тесты zlib OK и libpng 36/36,
+ldd подтверждает фактическую линковку libpng и transitive zlib из prefix),
+без изменения системных библиотек. Каждый PNG просмотрен исполнителем и
+независимым просмотрщиком; личных данных не обнаружено. Публичные копии
+содержат только IHDR/IDAT/IEND, пиксельно идентичны captures, sha256 в
+`site/data/media.json`.
+
+Прошли девять site unit/parity/schema tests, static build, loopback HTTP
+(маршруты world EN/RU, images/alt/digests), `git diff --check`, свежий
+portable export + portable-check, адресный `odin test kit/ui_world`
+(5 тестов, vet-флаги) и разрешённая изолированная браузерная приёмка
+(`check:browser`). В native cleanup app_exit равен 1 во всех capture-ранах:
+логи содержат X11 I/O error при остановке дисплея, без предшествующей ошибки
+рендера; снимки получены до teardown. Это не подтверждение штатного завершения
+приложения. Clamp, zoom 2, перемещение объекта и Reset описаны по исходному
+коду, не заявлены как отдельная native приёмка. Браузерная приёмка: владелец
+2026-11-15 отдельно разрешил изолированный headless Chromium маршрут для этой
+задачи (те же условия, что и для .1–.11, запись в `docs/rules/checks.md`);
+приёмка выполнена: sandboxed Chromium, собственный временный профиль,
+собственный loopback-only static preview, world EN/RU на 360/1280 в hydrated,
+no-JS и reduced motion циклах — prose без overflow, оба изображения загружены
+с локализованным alt, клавиатура, смена языка с valid/missing anchors. После
+объединения с опубликованными задачами (сначала .12/.20/.22, затем .17/.13,
+затем .14) приёмка повторена на каждом интегрированном снимке; итоговая полная
+suite 199 PASS, log
+`/tmp/opencode/oui-3no15-checks/integrated3-check-browser.log` (sandbox
+renderer-seccomp=2, no-sandbox flags отсутствуют, cleanup: browser closed,
+preview listening=false), артефакты/скриншоты
+`/tmp/opencode/oui-3no15-browser/oui-browser-3ruI9L`; также сохранены логи
+интегрированных перезапусков `integrated3-check.log`,
+`integrated3-build.log`, `integrated3-check-http.log` и portable gate
+`/tmp/opencode/oui-3no15-proof4.Ah6CKWPA/portable.log` в
+`/tmp/opencode/oui-3no15-checks/`. World-скриншоты просматривались исполнителем
+и независимыми image-capable просмотрщиками: до интеграции — все 8, после
+первой и второй — по 4 hydrated, после третьей — два 1280px-снимка; личных
+данных не обнаружено; координатор и reviewer-модели не поддерживают
+просмотр изображений (раскрытое ограничение). Проверен один браузер (Chromium);
+аудит доступности/conformance и другие браузеры не заявлены, Pages deployment
+не заявлен, strict coverage ожидаемо падает.
+
+Как увидеть: из `site/` с Node `.nvmrc` выполнить `npm run build`,
+`npm run check:http`, затем `npm run preview -- --port 0`; открыть выданный URL
+с `/oui/en/capabilities/world` либо `/oui/ru/capabilities/world` или перейти
+через catalogue. HTTP-проверка маршрутов/дайджестов и изолированная браузерная
+проверка отображения выполнены.
+
 ## Оценка доступности (accessibility) — кандидат oui-3no.16
 
 `site/en/capabilities/accessibility.md` и русский counterpart описывают
@@ -775,16 +853,19 @@ valid/missing anchors, no-JS prose/images/links, reduced motion, оба
 остановлены. Это не аудит доступности и не проверка других браузеров.
 Другие gallery IDs и deploy не проверены.
 
-Дважды выполнена интеграция свежего primary: сначала `6267f79` (жесты
-`oui-3no.12`, menu recipe/Lab menu `oui-3no.20`, HUD recipe/Lab HUD
-`oui-3no.22`, диагностика `oui-3no.17`; 13 tests, 40 маршрутов, 175 браузерных
-проверок, свежий portable-check
-/tmp/opencode/oui-3no16-integrated.wO8CgxCH — все PASS), затем `7db4347`
-(composition/custom `oui-3no.13`). Конфликтующие списки
-coverage/records/тестов объединены без ослабления assertions; sample вырос до
-19 IDs (17 gallery + 2 Lab), media — до 88 records. На дереве после второй
-интеграции повторно выполнены затронутые проверки (см. журналы финального
-прогона). Native байты не менялись.
+Интеграция свежего primary выполнена четыре раза по мере публикации соседних
+задач: `6267f79` (жесты `oui-3no.12`, menu recipe/Lab menu `oui-3no.20`, HUD
+recipe/Lab HUD `oui-3no.22`, диагностика `oui-3no.17`; 13 tests, 40 маршрутов,
+175 браузерных проверок, portable-check
+/tmp/opencode/oui-3no16-integrated.wO8CgxCH — все PASS), `7db4347`
+(composition/custom `oui-3no.13`), `40dcd54` (transitions `oui-3no.14`; 13
+tests, build, HTTP, 191 браузерная проверка, свежий portable-check
+/tmp/opencode/oui-3no16-final2.XRoTLVPW) и `66380f8` (world `oui-3no.15`).
+Конфликтующие списки coverage/records/тестов каждый раз объединялись без
+ослабления assertions; финальный sample — 21 ID (19 gallery + 2 Lab, все
+gallery IDs), media — 96 records. На дереве после каждой интеграции
+повторялись затронутые проверки (см. журналы финальных прогонов). Native
+байты не менялись.
 
 Как увидеть локальный кандидат: из `site/` с Node из `.nvmrc` выполнить
 `npm ci`, `npm run check`, `npm run build`, `npm run check:http`, затем

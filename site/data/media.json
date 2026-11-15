@@ -3838,6 +3838,178 @@
    }
   },
   {
+   "id": "world-initial-en",
+   "section": "world",
+   "state": "initial world fixture; A placed, B and C offscreen under Hide",
+   "uiLocale": "en",
+   "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+   "sourceState": "clean",
+   "sourcePaths": [
+    "consumer/ui_showcase/sections/world.odin",
+    "consumer/ui_showcase/model/catalogue.odin",
+    "consumer/ui_showcase/app/runtime.odin",
+    "kit/ui_world"
+   ],
+   "window": {
+    "width": 1280,
+    "height": 960
+   },
+   "drawable": {
+    "width": 1280,
+    "height": 960
+   },
+   "scale": 1,
+   "resources": {
+    "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+    "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+    "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+    "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+    "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+    "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+   },
+   "options": "Normal mode; pixel-perfect off; section world; initial focus world/object-left; supplied fonts and atlases.",
+   "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+   "path": "media/world-initial-en.png",
+   "sha256": "5c704fcd517706ec58640b97394775fc847540f87447cbf6387a2f5b4b749cca",
+   "caption": {
+    "en": "Native world anchors, EN UI; initial state with A placed and B/C offscreen under Hide.",
+    "ru": "Нативные якоря мира, интерфейс EN; начальное состояние: A размещён, B и C за экраном (политика Hide)."
+   },
+   "alt": {
+    "en": "Showcase world page with the A card at the centre, A/B/C reasons and Hide policy.",
+    "ru": "Страница world: карточка A в центре, причины A/B/C и политика Hide."
+   }
+  },
+  {
+   "id": "world-initial-ru",
+   "section": "world",
+   "state": "initial world fixture; A placed, B and C offscreen under Hide",
+   "uiLocale": "ru",
+   "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+   "sourceState": "clean",
+   "sourcePaths": [
+    "consumer/ui_showcase/sections/world.odin",
+    "consumer/ui_showcase/model/catalogue.odin",
+    "consumer/ui_showcase/app/runtime.odin",
+    "kit/ui_world"
+   ],
+   "window": {
+    "width": 1280,
+    "height": 960
+   },
+   "drawable": {
+    "width": 1280,
+    "height": 960
+   },
+   "scale": 1,
+   "resources": {
+    "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+    "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+    "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+    "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+    "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+    "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+   },
+   "options": "Normal mode; pixel-perfect off; section world; initial focus world/object-left; supplied fonts and atlases.",
+   "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+   "path": "media/world-initial-ru.png",
+   "sha256": "96d83adac480faf1df3f037c5f75878460e7c3604fdc8bcb1b8e76a9722980c1",
+   "caption": {
+    "en": "Native world anchors, RU UI; initial state with A placed and B/C offscreen under Hide.",
+    "ru": "Нативные якоря мира, интерфейс RU; начальное состояние: A размещён, B и C за экраном (политика Hide)."
+   },
+   "alt": {
+    "en": "Showcase world page with the A card at the centre, A/B/C reasons and Hide policy.",
+    "ru": "Страница world: карточка A в центре, причины A/B/C и политика Hide."
+   }
+  },
+  {
+   "id": "world-indicators-en",
+   "section": "world",
+   "state": "after three Camera +X steps and Direction policy; A shifted left, B and C at edge indicators",
+   "uiLocale": "en",
+   "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+   "sourceState": "clean",
+   "sourcePaths": [
+    "consumer/ui_showcase/sections/world.odin",
+    "consumer/ui_showcase/model/catalogue.odin",
+    "consumer/ui_showcase/app/runtime.odin",
+    "kit/ui_world"
+   ],
+   "window": {
+    "width": 1280,
+    "height": 960
+   },
+   "drawable": {
+    "width": 1280,
+    "height": 960
+   },
+   "scale": 1,
+   "resources": {
+    "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+    "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+    "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+    "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+    "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+    "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+   },
+   "options": "Normal mode; pixel-perfect off; section world; three Camera +X activations, policy switched to Direction; supplied fonts and atlases.",
+   "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+   "path": "media/world-indicators-en.png",
+   "sha256": "863cc62827e0f0326b32116a465faaaea31f5146a00720726b2751ef2d2c09be",
+   "caption": {
+    "en": "Native world anchors, EN UI; after three Camera +X steps and Direction policy.",
+    "ru": "Нативные якоря мира, интерфейс EN; после трёх шагов Camera +X и политики Direction."
+   },
+   "alt": {
+    "en": "Showcase world page after three Camera +X steps: A shifted left and two edge indicators for B and C under Direction policy.",
+    "ru": "Страница world после трёх шагов Camera +X: A смещён влево, у краёв два индикатора B и C при политике Direction."
+   }
+  },
+  {
+   "id": "world-indicators-ru",
+   "section": "world",
+   "state": "after three Camera +X steps and Direction policy; A shifted left, B and C at edge indicators",
+   "uiLocale": "ru",
+   "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+   "sourceState": "clean",
+   "sourcePaths": [
+    "consumer/ui_showcase/sections/world.odin",
+    "consumer/ui_showcase/model/catalogue.odin",
+    "consumer/ui_showcase/app/runtime.odin",
+    "kit/ui_world"
+   ],
+   "window": {
+    "width": 1280,
+    "height": 960
+   },
+   "drawable": {
+    "width": 1280,
+    "height": 960
+   },
+   "scale": 1,
+   "resources": {
+    "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+    "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+    "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+    "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+    "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+    "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+   },
+   "options": "Normal mode; pixel-perfect off; section world; three Camera +X activations, policy switched to Direction; supplied fonts and atlases.",
+   "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+   "path": "media/world-indicators-ru.png",
+   "sha256": "a2e13b557809adecb043a27298aeea76a7fb076ff5b3a009b9ae7d55e66f5cfa",
+   "caption": {
+    "en": "Native world anchors, RU UI; after three Camera +X steps and Direction policy.",
+    "ru": "Нативные якоря мира, интерфейс RU; после трёх шагов Camera +X и политики Direction."
+   },
+   "alt": {
+    "en": "Showcase world page after three Camera +X steps: A shifted left and two edge indicators for B and C under Direction policy.",
+    "ru": "Страница world после трёх шагов Camera +X: A смещён влево, у краёв два индикатора B и C при политике Direction."
+   }
+  },
+  {
    "id": "accessibility-initial-en",
    "section": "accessibility",
    "state": "initial assessment samples idle",

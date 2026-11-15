@@ -61,8 +61,8 @@ ordinary link still reaches the corresponding page without a hash.
 The catalogue is an explicit `layout`, `controls`, `styling`, `profiles`, `layers`,
 `hud`, `transitions`, `text`, `rich-text`, `text-input`, `atlas`, `scroll-table`,
 `collections`, `gestures`, `lab-menu`, `lab-hud`, `diagnostics-performance`,
-`composition` and `custom` sample of
-seventeen gallery
+`composition`, `custom` and `world` sample of
+eighteen gallery
 sections and two of the four Lab screens, not complete coverage. The
 schema-versioned `data/catalogue.json` and `data/media.json` are checked before
 the build against the actual native section IDs, locale media, provenance,

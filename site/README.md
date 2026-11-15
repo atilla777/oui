@@ -66,16 +66,18 @@ ordinary link still reaches the corresponding page without a hash.
 
 The catalogue is an explicit `layout`, `controls`, `styling`, `profiles`, `layers`,
 `hud`, `transitions`, `text`, `rich-text`, `text-input`, `atlas`, `scroll-table`,
-`collections`, `gestures`, `composition`, `custom`, `world` and
-`diagnostics-performance` sample of eighteen gallery sections plus the `lab-menu`,
-`lab-hud`, `lab-inventory` and `lab-settings` Lab entries (all four Lab screens);
-`lab-settings` filters under the `settings` category. It is not complete coverage. The
+`collections`, `accessibility`, `gestures`, `composition`, `custom`, `world` and
+`diagnostics-performance` sample of nineteen gallery sections plus the
+`lab-menu`, `lab-hud`, `lab-inventory` and `lab-settings` Lab entries (all four
+Lab screens); `lab-settings` filters under the `settings` category. It is a
+declared sample of per-section media states, not complete state coverage. The
 schema-versioned `data/catalogue.json` and `data/media.json` are checked before
 the build against the actual native section IDs, locale media, provenance,
-PNG dimensions and digests. `npm run check:catalogue:strict` deliberately fails
-until all 19 gallery and four Lab IDs have records and media. Do not change the
-declared sample merely to hide missing coverage. Validation does not replace
-image inspection, privacy review, or native qualification.
+PNG dimensions and digests. On the current merged tree
+`npm run check:catalogue:strict` passes, because all 19 gallery and four Lab IDs
+have records (23 in total) and media. Do not change the declared sample merely
+to hide missing coverage. Validation does not replace image inspection, privacy
+review, or native qualification.
 
 ## Continuous integration
 

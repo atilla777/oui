@@ -646,7 +646,7 @@ HTTP всех новых маршрутов прошли; свежий portable 
 portable/native доказательства применимы без повтора. После отдельного разрешения владельца
 для `oui-3no.13` пройдена браузерная приёмка в изолированном headless
 Chromium с sandbox, собственным временным профилем и loopback-only static
-preview: 175 PASS на интегрированном дереве, включая EN/RU composition/custom
+preview: 183 PASS на финальном интегрированном дереве, включая EN/RU composition/custom
 и сохранённые сценарии на ширинах 360/1280 — prose без page overflow, изображения загружены с
 локализованным alt, клавиатурная навигация из каталога, смена языка с
 valid/missing anchors, no-JS content/images/links и reduced motion.

@@ -78,7 +78,11 @@ try {
     assert.ok(await page.locator('main').innerText())
   }
   const checkImages = async (activePage, path, lang) => {
-    const section = path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|text-input|atlas|scroll-table|collections|text|rich-text)\.html$/)?.[1]
+    if (path === 'recipes/settings.html') {
+      assert.equal(await activePage.locator('main p > img').count(), 0, 'recipe has no capture')
+      return
+    }
+    const section = path === 'labs/settings.html' ? 'lab-settings' : path.match(/^capabilities\/(layout|controls|styling|profiles|layers|hud|text-input|atlas|scroll-table|collections|text|rich-text)\.html$/)?.[1]
     if (!section) { assert.equal(path, 'catalogue.html'); return }
     const ids = {
       layout: [`layout-${lang}`, `layout-small-${lang}`],
@@ -92,7 +96,8 @@ try {
       'scroll-table': [`scroll-table-${lang}`],
       collections: [`collections-${lang}`],
       text: [`text-${lang}-initial`, `text-${lang}-alternate`],
-      'rich-text': [`rich-text-${lang}-initial`, `rich-text-${lang}-alternate`]
+      'rich-text': [`rich-text-${lang}-initial`, `rich-text-${lang}-alternate`],
+      'lab-settings': [`lab-settings-${lang}-initial`, `lab-settings-${lang}-apply`, `lab-settings-${lang}-applied`, `lab-settings-${lang}-discard`]
     }[section]
     const images = activePage.locator('main p > img')
     assert.equal(await images.count(), ids.length, `${section} ${lang}: image count`)
@@ -205,9 +210,11 @@ try {
     ['capabilities/profiles.html', 'Profiles', 'Профили', 'workflow'],
     ['capabilities/layers.html', 'Layers', 'Слои', 'boundaries'],
     ['capabilities/hud.html', 'HUD hold', 'HUD и удержание', 'boundaries'],
-    ['capabilities/text-input.html', 'Text input', 'Ввод текста', 'boundaries']
+    ['capabilities/text-input.html', 'Text input', 'Ввод текста', 'boundaries'],
+    ['labs/settings.html', 'Lab settings', 'Лаборатория: настройки', 'editor-limits'],
+    ['recipes/settings.html', 'Settings recipe', 'Рецепт: настройки', 'fixture']
   ]
-  const sampleName = path => path.startsWith('capabilities/') ? path.split('/')[1].replace('.html', '') : 'catalogue'
+  const sampleName = path => path.startsWith('capabilities/') ? path.split('/')[1].replace('.html', '') : path === 'catalogue.html' ? 'catalogue' : path.replace(/\.html$/, '').replace(/\//g, '-')
   for (const width of [360, 1280]) {
     await page.setViewportSize({ width, height: 900 })
     for (const [lang, term, expected, empty, reset, category] of [
@@ -289,6 +296,13 @@ try {
       assert.ok(await page.locator('#collections').isVisible())
       assert.equal(await page.locator('#atlas').isVisible(), false)
       await page.screenshot({ path: join(artifacts, `filter-scrolling-${lang}-${width}.png`), fullPage: true })
+      await page.getByRole('button', { name: reset }).click()
+      await select.selectOption('settings')
+      assert.equal(await select.locator('option:checked').innerText(), lang === 'en' ? 'Settings' : 'Настройки')
+      assert.ok(await page.locator('#lab-settings').isVisible())
+      assert.equal(await page.locator('#layout').isVisible(), false)
+      assert.equal(await page.locator('#controls').isVisible(), false)
+      await page.screenshot({ path: join(artifacts, `filter-settings-${lang}-${width}.png`), fullPage: true })
       await page.getByRole('button', { name: reset }).click()
       for (const [value, enLabel, ruLabel] of [['resources', 'Resources', 'Ресурсы'], ['images', 'Images', 'Изображения']]) {
         await select.selectOption(value)
@@ -484,6 +498,9 @@ try {
               assert.ok(await link.isVisible())
               assert.equal(await link.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/capabilities/${id}.html`)
             }
+            const lab = p.locator('main a[href="./labs/settings.html"]')
+            assert.ok(await lab.isVisible())
+            assert.equal(await lab.evaluate(el => new URL(el.href).pathname), `/oui/${lang}/labs/settings.html`)
           }
           assert.equal(await p.evaluate(() => typeof window.__VP_SITE_DATA__), 'undefined')
           await checkImages(p, path, lang)

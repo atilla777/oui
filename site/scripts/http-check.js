@@ -45,7 +45,11 @@ try {
     ['en/capabilities/styling.html', 'en', 'Styling', '/oui/ru/capabilities/styling.html'],
     ['ru/capabilities/styling.html', 'ru', 'Оформление', '/oui/en/capabilities/styling.html'],
     ['en/capabilities/profiles.html', 'en', 'Profiles', '/oui/ru/capabilities/profiles.html'],
-    ['ru/capabilities/profiles.html', 'ru', 'Профили', '/oui/en/capabilities/profiles.html']
+    ['ru/capabilities/profiles.html', 'ru', 'Профили', '/oui/en/capabilities/profiles.html'],
+    ['en/labs/settings.html', 'en', 'Lab settings', '/oui/ru/labs/settings.html'],
+    ['ru/labs/settings.html', 'ru', 'Лаборатория: настройки', '/oui/en/labs/settings.html'],
+    ['en/recipes/settings.html', 'en', 'Settings recipe', '/oui/ru/recipes/settings.html'],
+    ['ru/recipes/settings.html', 'ru', 'Рецепт: настройки', '/oui/en/recipes/settings.html']
   ]) {
     const response = await get('/oui/' + path)
     assert.equal(response.status, 200, path)
@@ -56,10 +60,10 @@ try {
     assert.ok(html.includes(`href="${other}"`), path)
     if (path.includes('guide/')) assert.ok(html.includes('id="choose-a-boundary"'))
     const markup = html.split('<script>window.__VP_HASH_MAP__')[0]
-    const section = path.match(/capabilities\/(layout|layers|hud|text-input|scroll-table|collections|text|rich-text)\.html/)?.[1]
+    const section = path === 'labs/settings.html' ? 'lab-settings' : path.match(/capabilities\/(layout|layers|hud|text-input|scroll-table|collections|text|rich-text)\.html/)?.[1]
     if (section) {
       const records = media.records.filter(item => item.section === section && item.uiLocale === lang)
-      assert.equal(records.length, ['text-input', 'scroll-table', 'collections'].includes(section) ? 1 : 2)
+      assert.equal(records.length, section === 'lab-settings' ? 4 : ['text-input', 'scroll-table', 'collections'].includes(section) ? 1 : 2)
       for (const record of records) {
         const image = `/oui/${record.path}`
         assert.ok(markup.includes(`src="${image}"`), `missing no-JS image ${path}`)

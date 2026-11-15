@@ -1972,6 +1972,398 @@
         "en": "Native showcase rich text card with one-line ellipsis (RU UI).",
         "ru": "Нативная русская карточка после выбора одной строки с многоточием."
       }
+    },
+    {
+      "id": "lab-settings-en-initial",
+      "section": "lab-settings",
+      "state": "initial settings dialog with default draft",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_menu.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/ui_showcase/app/runtime.odin",
+        "consumer/ui_showcase/sections/name.odin",
+        "consumer/ui_showcase/model/lab.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_controls",
+        "kit/ui_editor",
+        "kit/ui_layers"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-settings; initial focus name/field; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-settings-en-initial.png",
+      "sha256": "ba42e6a4ce3eb834c75c99327836b36871006d6e7d76b12e3dcd6df35fa1149a",
+      "caption": {
+        "en": "Native Lab settings dialog, EN UI; initial state with the default draft and applied values.",
+        "ru": "Нативный диалог настроек Lab, интерфейс EN; начальное состояние с исходными черновиком и применёнными значениями."
+      },
+      "alt": {
+        "en": "Settings dialog with a focused name editor showing Алексей, Apply and Cancel, applied Алексей, an unchecked Enabled checkbox, Amount 50 and Back to catalogue.",
+        "ru": "Диалог настроек: редактор имени в фокусе со значением «Алексей», кнопки «Apply» и «Cancel», применённое «Алексей», снятый флажок «Enabled», «Amount: 50» и «Back to catalogue»."
+      }
+    },
+    {
+      "id": "lab-settings-en-apply",
+      "section": "lab-settings",
+      "state": "Apply confirmation for the edited draft",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_menu.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/ui_showcase/app/runtime.odin",
+        "consumer/ui_showcase/sections/name.odin",
+        "consumer/ui_showcase/model/lab.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_controls",
+        "kit/ui_editor",
+        "kit/ui_layers"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-settings; initial focus name/field; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-settings-en-apply.png",
+      "sha256": "8af6fc903ebaad0d5c3f48587d0206c53b44ee5c7c7804529c217619d98c243c",
+      "caption": {
+        "en": "Native Lab settings dialog, EN UI; Apply opened the confirmation for the edited draft.",
+        "ru": "Нативный диалог настроек Lab, интерфейс EN; «Apply» открыл подтверждение для изменённого черновика."
+      },
+      "alt": {
+        "en": "Confirmation dialog titled Apply this draft? showing Алексей test, Enabled: true, Amount: 55, Keep editing and Confirm.",
+        "ru": "Диалог подтверждения «Apply this draft?» со значениями «Алексей test», «Enabled: true», «Amount: 55» и кнопками «Keep editing» и «Confirm»."
+      }
+    },
+    {
+      "id": "lab-settings-en-applied",
+      "section": "lab-settings",
+      "state": "applied values after Confirm",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_menu.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/ui_showcase/app/runtime.odin",
+        "consumer/ui_showcase/sections/name.odin",
+        "consumer/ui_showcase/model/lab.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_controls",
+        "kit/ui_editor",
+        "kit/ui_layers"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-settings; initial focus name/field; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-settings-en-applied.png",
+      "sha256": "5c25d9f21291861df1dabfa51ae7be644ceab413d3aa728be8ac5dba80a6c8a0",
+      "caption": {
+        "en": "Native Lab settings dialog, EN UI; Confirm applied the shown draft once.",
+        "ru": "Нативный диалог настроек Lab, интерфейс EN; «Confirm» применил показанный черновик один раз."
+      },
+      "alt": {
+        "en": "Settings dialog after Confirm: the Applied line reads Алексей test, Enabled is checked, Amount is 55 and the confirmation is closed.",
+        "ru": "Диалог настроек после «Confirm»: в строке «Applied» — «Алексей test», флажок «Enabled» включён, «Amount: 55», подтверждение закрыто."
+      }
+    },
+    {
+      "id": "lab-settings-en-discard",
+      "section": "lab-settings",
+      "state": "Discard confirmation after Cancel on a dirty draft",
+      "uiLocale": "en",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_menu.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/ui_showcase/app/runtime.odin",
+        "consumer/ui_showcase/sections/name.odin",
+        "consumer/ui_showcase/model/lab.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_controls",
+        "kit/ui_editor",
+        "kit/ui_layers"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-settings; initial focus name/field; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-settings-en-discard.png",
+      "sha256": "b41979f2c486b8d04c33f4d1e721645727184c84b8dc6574cd265c0e36ee0732",
+      "caption": {
+        "en": "Native Lab settings dialog, EN UI; Cancel with pending edits asks before discarding them.",
+        "ru": "Нативный диалог настроек Lab, интерфейс EN; «Cancel» при неприменённых изменениях спрашивает перед их отбрасыванием."
+      },
+      "alt": {
+        "en": "Confirmation dialog titled Discard changes? showing Алексей test, Enabled: false, Amount: 55, Stay and Discard changes.",
+        "ru": "Диалог подтверждения «Discard changes?» со значениями «Алексей test», «Enabled: false», «Amount: 55» и кнопками «Stay» и «Discard changes»."
+      }
+    },
+    {
+      "id": "lab-settings-ru-initial",
+      "section": "lab-settings",
+      "state": "initial settings dialog with default draft",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_menu.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/ui_showcase/app/runtime.odin",
+        "consumer/ui_showcase/sections/name.odin",
+        "consumer/ui_showcase/model/lab.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_controls",
+        "kit/ui_editor",
+        "kit/ui_layers"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-settings; initial focus name/field; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-settings-ru-initial.png",
+      "sha256": "d76b6ed71a743a68bc81af063819f7d9d4bfd79a04f6b926e2846016dd8339f7",
+      "caption": {
+        "en": "Native Lab settings dialog, RU UI; initial state with the default draft and applied values.",
+        "ru": "Нативный диалог настроек Lab, интерфейс RU; начальное состояние с исходными черновиком и применёнными значениями."
+      },
+      "alt": {
+        "en": "Settings dialog with a focused name editor showing Алексей, Применить and Отмена, applied Алексей, an unchecked Включено checkbox, Количество 50 and Вернуться в каталог.",
+        "ru": "Диалог настроек: редактор имени в фокусе со значением «Алексей», кнопки «Применить» и «Отмена», применённое «Алексей», снятый флажок «Включено», «Количество: 50» и «Вернуться в каталог»."
+      }
+    },
+    {
+      "id": "lab-settings-ru-apply",
+      "section": "lab-settings",
+      "state": "Apply confirmation for the edited draft",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_menu.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/ui_showcase/app/runtime.odin",
+        "consumer/ui_showcase/sections/name.odin",
+        "consumer/ui_showcase/model/lab.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_controls",
+        "kit/ui_editor",
+        "kit/ui_layers"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-settings; initial focus name/field; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-settings-ru-apply.png",
+      "sha256": "6f3ac9c42b17442abec21856492abc2a5d20ce11aaa42dca0ba737960586be76",
+      "caption": {
+        "en": "Native Lab settings dialog, RU UI; Apply opened the confirmation for the edited draft.",
+        "ru": "Нативный диалог настроек Lab, интерфейс RU; «Применить» открыл подтверждение для изменённого черновика."
+      },
+      "alt": {
+        "en": "Confirmation dialog titled Применить этот черновик? showing Алексей test, Включено: true, Количество: 55, Продолжить редактирование and Подтвердить.",
+        "ru": "Диалог подтверждения «Применить этот черновик?» со значениями «Алексей test», «Включено: true», «Количество: 55» и кнопками «Продолжить редактирование» и «Подтвердить»."
+      }
+    },
+    {
+      "id": "lab-settings-ru-applied",
+      "section": "lab-settings",
+      "state": "applied values after Confirm",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_menu.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/ui_showcase/app/runtime.odin",
+        "consumer/ui_showcase/sections/name.odin",
+        "consumer/ui_showcase/model/lab.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_controls",
+        "kit/ui_editor",
+        "kit/ui_layers"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-settings; initial focus name/field; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-settings-ru-applied.png",
+      "sha256": "5352d1af75604dac24bcb6f4b58f48701d70f26fd7ab49ec925268a6171cc95b",
+      "caption": {
+        "en": "Native Lab settings dialog, RU UI; Confirm applied the shown draft once.",
+        "ru": "Нативный диалог настроек Lab, интерфейс RU; «Подтвердить» применил показанный черновик один раз."
+      },
+      "alt": {
+        "en": "Settings dialog after Confirm: the applied line reads Алексей test, Включено is checked, Количество is 55 and the confirmation is closed.",
+        "ru": "Диалог настроек после «Подтвердить»: в строке «Применено» — «Алексей test», флажок «Включено» включён, «Количество: 55», подтверждение закрыто."
+      }
+    },
+    {
+      "id": "lab-settings-ru-discard",
+      "section": "lab-settings",
+      "state": "Discard confirmation after Cancel on a dirty draft",
+      "uiLocale": "ru",
+      "revision": "8bc09cff358aa629410437996520283ff98d77d9",
+      "sourceState": "clean",
+      "sourcePaths": [
+        "consumer/ui_showcase/app/lab_menu.odin",
+        "consumer/ui_showcase/app/lab_strings.odin",
+        "consumer/ui_showcase/app/runtime.odin",
+        "consumer/ui_showcase/sections/name.odin",
+        "consumer/ui_showcase/model/lab.odin",
+        "consumer/ui_showcase/model/model.odin",
+        "consumer/ui_showcase/model/catalogue.odin",
+        "kit/ui_controls",
+        "kit/ui_editor",
+        "kit/ui_layers"
+      ],
+      "window": {
+        "width": 1280,
+        "height": 960
+      },
+      "drawable": {
+        "width": 1280,
+        "height": 960
+      },
+      "scale": 1,
+      "resources": {
+        "resources/font.ttf": "79d18f401240df12bf89a4f49dfaa377d51b36323611b184fd871e533613a3bf",
+        "resources/fallback.ttf": "8c829904b3b02b481c55633206576181562355cf20ae7fe73040e44da5c055bf",
+        "resources/atlas/a/manifest.json": "994f8243b2e9ba446e42112f844f624f8c10cfe8e0602bb9dc3c73041844ba15",
+        "resources/atlas/a/geometry.png": "d32d562d851df316106806b1232ab89399e9f08b528a2cf1de0bba8c2ddabe94",
+        "resources/atlas/b/manifest.json": "3f4638eebe4cb59915abbdd8e707aa6ba928c993af44f971df3b787c738e81b4",
+        "resources/atlas/b/geometry.png": "8242f10d55d97307f2ae362a8bb96bd75c0653b0dd1fb6e582190937e3abf3b8"
+      },
+      "options": "Normal mode; pixel-perfect off; section lab-settings; initial focus name/field; supplied fonts and atlases.",
+      "isdIdentity": "f8204c61615406ce5628b15692628e146476a008",
+      "path": "media/lab-settings-ru-discard.png",
+      "sha256": "ed5b5a01b94ab899b6d6a5bf7f8035bcfccf23f3fd36b02f73b9e438f6b46cb9",
+      "caption": {
+        "en": "Native Lab settings dialog, RU UI; Cancel with pending edits asks before discarding them.",
+        "ru": "Нативный диалог настроек Lab, интерфейс RU; «Отмена» при неприменённых изменениях спрашивает перед их отбрасыванием."
+      },
+      "alt": {
+        "en": "Confirmation dialog titled Отбросить изменения? showing Алексей test, Включено: false, Количество: 55, Остаться and Отбросить изменения.",
+        "ru": "Диалог подтверждения «Отбросить изменения?» со значениями «Алексей test», «Включено: false», «Количество: 55» и кнопками «Остаться» и «Отбросить изменения»."
+      }
     }
   ]
 }

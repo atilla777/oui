@@ -14,7 +14,8 @@
       "scroll-table",
       "collections",
       "text",
-      "rich-text"
+      "rich-text",
+      "lab-settings"
     ]
   },
   "records": [
@@ -430,6 +431,47 @@
         "rich-text-en-alternate",
         "rich-text-ru-initial",
         "rich-text-ru-alternate"
+      ]
+    },
+    {
+      "id": "lab-settings",
+      "group": "lab",
+      "categories": [
+        "settings"
+      ],
+      "packages": [
+        "ui_base",
+        "ui_layout",
+        "ui_interaction",
+        "ui_layers",
+        "ui_controls",
+        "ui_editor",
+        "ui_text",
+        "unicode_graphemes"
+      ],
+      "source": "consumer/ui_showcase/app/lab_menu.odin",
+      "runnable": "consumer/ui_showcase",
+      "title": {
+        "en": "Lab settings",
+        "ru": "Лаборатория: настройки"
+      },
+      "summary": {
+        "en": "Edit a name draft, a checkbox and a numeric amount, confirm with Apply and discard unsaved edits.",
+        "ru": "Изменяйте черновик имени, флажок и числовое количество, применяйте кнопкой «Применить» и отбрасывайте неприменённые правки."
+      },
+      "limitations": {
+        "en": "Experimental Lab fixture; single-line name without IME; values live only until the process exits.",
+        "ru": "Экспериментальный пример Lab; однострочное имя без IME; значения живут только до завершения процесса."
+      },
+      "media": [
+        "lab-settings-en-initial",
+        "lab-settings-en-apply",
+        "lab-settings-en-applied",
+        "lab-settings-en-discard",
+        "lab-settings-ru-initial",
+        "lab-settings-ru-apply",
+        "lab-settings-ru-applied",
+        "lab-settings-ru-discard"
       ]
     }
   ]

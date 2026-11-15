@@ -2,19 +2,22 @@
 
 Контракт введён `oui-3no.2`; опубликованные расширения включают `oui-3no.5`,
 `oui-3no.6`, Atlas `oui-3no.7`, text-input `oui-3no.9`, прокрутку/коллекции
-`oui-3no.10` и layers/HUD `oui-3no.11`. Text/rich-text `oui-3no.8` — интеграционный кандидат.
+`oui-3no.10` и layers/HUD `oui-3no.11`. Text/rich-text `oui-3no.8` и
+Settings recipe/Lab settings `oui-3no.21` — интеграционные кандидаты.
 Библиотека и native consumers не изменены; сайт описывает существующие возможности,
 а не реализует их в браузере.
 
 - `site/en/` и `site/ru/` содержат `catalogue` и `capabilities/layout`,
   `capabilities/controls`, `capabilities/styling`, `capabilities/profiles`,
   `capabilities/layers`, `capabilities/hud`, `capabilities/text-input`, `capabilities/atlas`,
-  `capabilities/scroll-table`, `capabilities/collections`, `capabilities/text`, `capabilities/rich-text`.
+  `capabilities/scroll-table`, `capabilities/collections`, `capabilities/text`, `capabilities/rich-text`,
+  а также `recipes/settings` и `labs/settings` кандидата `oui-3no.21`.
   Страницы объясняют назначение, поведение, ограничения, узкие пакеты и отдельно
   полный showcase, с pinned source links и native build/run command.
 - `site/data/catalogue.json` и `media.json` имеют `schemaVersion: 1`.
   Каталог объявляет sample coverage `layout`, `controls`, `styling`, `profiles`,
-  `layers`, `hud`, `text-input`, `atlas`, `scroll-table`, `collections`, `text`, `rich-text`. Native source catalogue
+  `layers`, `hud`, `text-input`, `atlas`, `scroll-table`, `collections`, `text`, `rich-text`,
+  `lab-settings`. Native source catalogue
   остаётся владельцем допустимых IDs; `npm run check:catalogue:strict` требует
   полного покрытия gallery/Lab и на этом sample ожидаемо завершается ошибкой.
 - Media records связывают изображения с section/state/UI locale, полной source
@@ -160,6 +163,62 @@ PNG просмотрены либо совпали с ранее просмот�
 `npm run build`, `npm run check:http`, `npm run check:browser`, затем
 `npm run preview -- --port 0`; открыть выданный URL с `/oui/en/catalogue`
 или `/oui/ru/catalogue` и перейти к новым примерам. Остановить свой preview.
+
+## Рецепт Settings и Lab settings — кандидат `oui-3no.21`
+
+EN/RU страницы `recipes/settings` документируют действующий Settings recipe
+(`docs/recipes.md` §4): узкие прямые импорты и полный compile closure restricted
+fixture, границы «не вторая реализация», ownership draft/applied значений и
+одноразовое применение подтверждённой ревизии. Runnable snippet полный —
+сборка `tests/ui_recipes/settings` точными флагами и запуск бинарника; ожидаемый
+stdout `recipe-settings effects=1 conflicts=1 live=0` получен фактически в
+задокументированной native среде (Odin `dev-2026-10-nightly:84bc3fc`).
+Страницы `labs/settings` описывают существующий экран Lab settings: draft и
+applied раздельны, Apply → подтверждение, Keep editing сохраняет черновик,
+dirty-отмена/уход спрашивают Stay/Discard, подтверждённая ревизия применяется
+один раз; редактор однострочный, bound 1–64 EGC принадлежит потребителю,
+IME/undo/нормализации нет, значения process-local без записи на диск.
+Каталог получил первую Lab-запись (`lab-settings`, group `lab`, категория
+`settings` в обоих языках) и ссылку на страницу Lab.
+
+Восемь настоящих PNG 1280×960, scale 1, на clean source revision
+`8bc09cff358aa629410437996520283ff98d77d9`: для каждого языка начальный диалог,
+подтверждение Apply с показанной сводкой `Enabled/Amount`, применённое состояние
+после Confirm и вопрос Discard после грязной отмены. Снимки получены явно выбранной
+whole-source verified ISD `f8204c61615406ce5628b15692628e146476a008`
+(native-input, физические keycodes без подстановки keysym), `linux-abstract-v1`
+в create/status, явным focus и остановкой собственных runs в `finally`
+(stop-артефакты обоих прогонов сохранены). Использован собственный private prefix
+libpng 1.6.59/zlib 1.4 с upstream tests, ABI-проверкой и фактической linkage,
+без системных изменений. Набор текста в изолированном Xvfb — латиница US-layout
+в обоих языках (wrapper ограничивает `--keyboard-layout` другими секциями), черновик
+в снимках буквально «Алексей test». Все восемь PNG просмотрены исполнителем;
+координатор независимо проверил digests, размеры 1280×960, chunk layout
+публичных копий (только IHDR/IDAT/IEND, пиксели идентичны captures) и
+resource hashes против трека. Media manifest сохраняет полные
+state/locale/revision/source/resource identities без локальных путей.
+
+На этом кандидате прошли 11 unit/parity/schema site tests (включая новые
+lab-покрытие и media-тесты, а также negative fixture обязательных состояний
+lab-settings), static build, loopback HTTP новых маршрутов
+`recipes/settings` и `labs/settings` с image digests, свежий portable
+export/portable-check (site/docs в export не входят, portable байты не менялись)
+и, после отдельного разрешения владельца от 2026-11-15 для `oui-3no.21`,
+изолированная headless Chromium 152 приёмка с sandbox, собственным профилем и
+loopback preview: EN/RU новые страницы на 360/1280, клавиатура, смена языка с
+valid/missing anchors, no-JS prose/images/links, reduced motion, новый
+filter-сценарий каталога (`settings`), 135 PASS и 164 screenshots с cleanup
+собственных browser/preview. Strict catalogue 23 IDs, полная квалификация,
+аудит доступности, другие браузеры и deployment не заявляются; унаследованное
+ограничение Vite 5 сохраняется. Остальные три recipe+Lab (menu, HUD, inventory)
+этим кандидатом не покрываются.
+
+Как увидеть локальный кандидат: из `site/` с Node `.nvmrc` выполнить
+`npm ci`, `npm run build`, `npm run check:http`, `npm run check:browser`,
+затем `npm run preview -- --port 0`; открыть выданный URL с
+`/oui/en/recipes/settings`, `/oui/en/labs/settings` либо русскими
+counterparts, или перейти из каталога по записи Lab. Native snippet — командами
+со страницы рецепта в подготовленном окружении. Остановить свой preview.
 
 ## Расширение layers/HUD — oui-3no.11
 

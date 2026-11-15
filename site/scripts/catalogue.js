@@ -84,6 +84,9 @@ export async function validateCatalogue({ catalogue, media, source, publicRoot, 
     if (record.id === 'atlas') for (const locale of locales) for (const state of ['initial', 'alternate', 'reload']) {
       if (!selected.some(image => image.id === `atlas-${locale}-${state}` && image.uiLocale === locale)) fail(`Missing atlas ${locale} ${state} media`)
     }
+    if (record.id === 'lab-settings') for (const locale of locales) for (const state of ['initial', 'apply', 'applied', 'discard']) {
+      if (!selected.some(image => image.id === `lab-settings-${locale}-${state}` && image.uiLocale === locale)) fail(`Missing lab-settings ${locale} ${state} media`)
+    }
     if (record.id === 'layout') {
       const expectedStates = [['large', 1280, 960, 'initial layout geometry'], ['small', 960, 720, 'initial layout geometry at 960x720']]
       if (!Array.isArray(record.viewerStates) || record.viewerStates.length !== expectedStates.length) fail('Invalid viewer states')
